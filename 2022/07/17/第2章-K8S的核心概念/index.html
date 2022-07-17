@@ -1,0 +1,743 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="容器有效管理需要考虑：  组件复制； 自动缩放； 负载均衡； 滚动更新； 组件记录； 监测和健康检查； 服务发现； 认证。  由Google内部的Brog演变而来的Kubernetes完美地解决了这一问题  2.1 Kubernetes的设计架构Master和NodeK8S集群之中，由Master和Node两种角色，Master管理Node，Node管理容器 MasterMaster主要负责整个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第2章 K8S的核心概念">
+<meta property="og:url" content="http://example.com/2022/07/17/%E7%AC%AC2%E7%AB%A0-K8S%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="容器有效管理需要考虑：  组件复制； 自动缩放； 负载均衡； 滚动更新； 组件记录； 监测和健康检查； 服务发现； 认证。  由Google内部的Brog演变而来的Kubernetes完美地解决了这一问题  2.1 Kubernetes的设计架构Master和NodeK8S集群之中，由Master和Node两种角色，Master管理Node，Node管理容器 MasterMaster主要负责整个">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717070231850.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717070601701.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717072049811.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717072958350.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717073401326.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717073548873.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717081533254.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717084013464.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717084449753.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717085104634.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717092408558.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717092719027.png">
+<meta property="article:published_time" content="2022-07-16T22:55:17.000Z">
+<meta property="article:modified_time" content="2022-07-17T01:30:36.762Z">
+<meta property="article:author" content="WYX ">
+<meta property="article:tag" content="K8S">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717070231850.png">
+  
+  
+  
+  <title>第2章 K8S的核心概念 - WYX同学的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第2章 K8S的核心概念"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-17 06:55" pubdate>
+          July 17, 2022 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          69 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">第2章 K8S的核心概念</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>容器有效管理需要考虑：</p>
+<ul>
+<li>组件复制；</li>
+<li>自动缩放；</li>
+<li>负载均衡；</li>
+<li>滚动更新；</li>
+<li>组件记录；</li>
+<li>监测和健康检查；</li>
+<li>服务发现；</li>
+<li>认证。</li>
+</ul>
+<p>由Google内部的Brog演变而来的Kubernetes完美地解决了这一问题</p>
+</blockquote>
+<h1 id="2-1-Kubernetes的设计架构"><a href="#2-1-Kubernetes的设计架构" class="headerlink" title="2.1 Kubernetes的设计架构"></a>2.1 Kubernetes的设计架构</h1><h2 id="Master和Node"><a href="#Master和Node" class="headerlink" title="Master和Node"></a>Master和Node</h2><p>K8S集群之中，由Master和Node两种角色，Master管理Node，Node管理容器</p>
+<h3 id="Master"><a href="#Master" class="headerlink" title="Master"></a>Master</h3><p>Master主要负责整个集群的管理控制，相当于整个Kubernetes集 群的首脑。它用于监控、编排、调度集群中的各个工作节点。通常 Master会占用一台独立的服务器，基于高可用原因，也有可能是多台。</p>
+<h3 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h3><p>Node则是Kubernetes集群中的各个工作节点。Node由Master管理，提供运行容器所需的各种环境，对容器进行实际的控制，而这些容器会提供实际的应用服务。</p>
+<h4 id="Kubernetes的整体架构"><a href="#Kubernetes的整体架构" class="headerlink" title="Kubernetes的整体架构"></a>Kubernetes的整体架构</h4><p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717070231850.png" srcset="/img/loading.gif" lazyload alt="Kubernetes的整体架构"></p>
+<h2 id="2-1-1-Master"><a href="#2-1-1-Master" class="headerlink" title="2.1.1 Master"></a>2.1.1 Master</h2><h3 id="1-API-Server进程"><a href="#1-API-Server进程" class="headerlink" title="1.API Server进程"></a>1.API Server进程</h3><p>API Server（kube-apiserver）进程为Kubernetes中各类资源对象提供了&#x3D;&#x3D;增删改查等HTTP REST接口&#x3D;&#x3D;。对于资源的任何操作，都需要经过API Server进程来处理。除此之外，API Server进程还提供了一系列&#x3D;&#x3D;认证授权机制&#x3D;&#x3D;。</p>
+<h4 id="访问API-Server进程"><a href="#访问API-Server进程" class="headerlink" title="访问API Server进程"></a>访问API Server进程</h4><h4 id="Master组成"><a href="#Master组成" class="headerlink" title="Master组成"></a>Master组成</h4><p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717070601701.png" srcset="/img/loading.gif" lazyload alt="image-20220717070601701"></p>
+<h4 id="三种访问API-Server进程的方式"><a href="#三种访问API-Server进程的方式" class="headerlink" title="三种访问API Server进程的方式"></a>三种访问API Server进程的方式</h4><ul>
+<li><p>直接通过REST Request</p>
+</li>
+<li><p>通过官方提供的客户端库文件来访问，本质上，通过编程方式，转换为对API Server进程的REST API调用。</p>
+</li>
+<li><p>通过命令行工具kubectl客户端来访问。kubectl客户端将把命令</p>
+<p>行转换为对API Server进程的REST API调用。</p>
+</li>
+</ul>
+<h3 id="2-etcd"><a href="#2-etcd" class="headerlink" title="2.etcd"></a>2.etcd</h3><p>etcd项目是一种轻量级的分布式键值存储，由CoreOS团队开发，可以在单台Master服务器上配置，也可以配置到多台服务器。</p>
+<p>可以将etcd理解为Kubernetes的“&#x3D;&#x3D;数据库&#x3D;&#x3D;”，用于保存集群中所有的配置和各个对象的状态信息。</p>
+<p>只有API Server进程才能直接访问和操作etcd。</p>
+<h3 id="3-调度器"><a href="#3-调度器" class="headerlink" title="3.调度器"></a>3.调度器</h3><p>调度器（kube-scheduler）是Pod资源的调度器。它用于监听最近创建但还未分配Node的Pod资源，会为Pod自动分配相应的Node。</p>
+<p>调度器所执行的各项操作均是&#x3D;&#x3D;基于API Server进程&#x3D;&#x3D;的。如调度器会通过API Server进程的Watch接口监听新建的Pod，并搜索所有满足Pod需求的Node列表，再执行Pod调度逻辑。调度成功后会将Pod绑定到目标Node上。</p>
+<h3 id="4-控制器管理器（kube-controller-manager）"><a href="#4-控制器管理器（kube-controller-manager）" class="headerlink" title="4.控制器管理器（kube-controller-manager）"></a>4.控制器管理器（kube-controller-manager）</h3><p>Kubernetes集群的大部分功能是由控制器执行的。</p>
+<p>每个控制器都是一个独立进程，为了降低复杂度，都被编译、合并到单个文件夹中，并在单个进程中进行。</p>
+<ul>
+<li>Node 控制器：负责在Node出现故障时做出响应。</li>
+<li>Replication控制器：负责对系统中的每个</li>
+<li>ReplicationController对象维护正确数量的Pod。</li>
+<li>Endpoint 控制器：负责生成和维护所有Endpoint对象的控制器。</li>
+<li>Endpoint控制器用于监听Service和对应的Pod副本的变化。</li>
+<li>ServiceAccount及Token 控制器：为新的命名空间创建默认账户和API访问令牌。</li>
+</ul>
+<p>kube-controller-manager所执行的各项操作也是基于API Server进程的。例如，Node控制器会通过API Server进程提供的Watch接口，实时监控Node的信息并进行相应处理。</p>
+<h2 id="2-1-2-Node"><a href="#2-1-2-Node" class="headerlink" title="2.1.2 Node"></a>2.1.2 Node</h2><p>Node主要由3个部分组成，分别是kubelet、kube-proxy和容器运行时（container runtime）</p>
+<h3 id="Node的组成"><a href="#Node的组成" class="headerlink" title="Node的组成"></a>Node的组成</h3><p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717072049811.png" srcset="/img/loading.gif" lazyload alt="image-20220717072049811"></p>
+<h3 id="1-kubelet"><a href="#1-kubelet" class="headerlink" title="1.kubelet"></a>1.kubelet</h3><p>​	kubelet是在每个Node上都运行的&#x3D;&#x3D;主要代理进程&#x3D;&#x3D;。kubelet以<strong>PodSpec</strong>为单位来运行任务，<strong>PodSpec是一种描述Pod的YAML或JSON对象。</strong><u>kubelet会运行由各种机制提供（主要通过API Server）的一系列PodSpec，并确保这些PodSpec中描述的容器健康运行。</u>不是Kubernetes创建的容器将不属于kubelet的管理范围。<strong>kubelet负责维护容器的生命周期，同时也负责存储卷（volume）等资源的管理。</strong></p>
+<p>​	每个Node上的kubelet会<strong>定期调用</strong>Master节点上API Server进程的<strong>REST接口</strong>，报告自身状态。API Server进程接收这些信息后，<u>会将Node的状态信息更新到etcd中</u>。kubelet也通过API Server进程的<strong>Watch接口</strong>监听Pod信息，从而对Node上的Pod进行管理。</p>
+<h3 id="2-kube-proxy"><a href="#2-kube-proxy" class="headerlink" title="2.kube-proxy"></a>2.kube-proxy</h3><p>kube-proxy主要用于<u>管理Service的访问入口</u>，包括从集群内的其他Pod到Service的访问，以及从集群外访问Service。</p>
+<h3 id="3-容器运行时"><a href="#3-容器运行时" class="headerlink" title="3.容器运行时"></a>3.容器运行时</h3><p>容器运行时是负责运行容器的软件。Kubernetes支持多种运行时，包括Docker、containerd、cri-o、rktlet以及任何基于<strong>Kubernetes CRI（容器运行时接口）</strong>的实现。</p>
+<h2 id="2-1-3-组件间的基本交互流程"><a href="#2-1-3-组件间的基本交互流程" class="headerlink" title="2.1.3 组件间的基本交互流程"></a>2.1.3 组件间的基本交互流程</h2><h3 id="kubectl创建Pod"><a href="#kubectl创建Pod" class="headerlink" title="kubectl创建Pod"></a>kubectl创建Pod</h3><p>当使用kubectl创建Pod时，会相继发生以下事件。</p>
+<p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717072958350.png" srcset="/img/loading.gif" lazyload alt="image-20220717072958350"></p>
+<h4 id="具体发生事件"><a href="#具体发生事件" class="headerlink" title="具体发生事件"></a>具体发生事件</h4><p>（1）kubectl命令将转换为对API Server的调用。</p>
+<p>（2）API Server验证请求并将其保存到etcd中。</p>
+<p>（3）etcd通知API Server。</p>
+<p>（4）API Server调用调度器。</p>
+<p>（5）调度器决定在哪个节点运行Pod，并将其返回给APIServer。</p>
+<p>（6）API Server将对应节点保存到etcd中。</p>
+<p>（7）etcd通知API Server。</p>
+<p>（8）API Server在相应的节点中调用kubelet。</p>
+<p>（9）kubelet与容器运行时API发生交互，与容器守护进程通信以创建容器。</p>
+<p>（10）kubelet将Pod状态更新到API Server中。</p>
+<p>（11）API Server把最新的状态保存到etcd中。</p>
+<h1 id="2-2-Kubernetes的核心对象"><a href="#2-2-Kubernetes的核心对象" class="headerlink" title="2.2 Kubernetes的核心对象"></a>2.2 Kubernetes的核心对象</h1><p>虽然应用程序部署的底层机制是容器，但Kubernetes在容器接口上使用了<strong>额外的抽象层</strong>，以支持<strong>弹性伸缩和生命周期管理的功能</strong>。用户并不是直接管理容器的，而是<u>定义由Kubernetes对象模型提供的各种基本类型的实例</u>，并与这些实例进行交互。</p>
+<p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717073401326.png" srcset="/img/loading.gif" lazyload alt="image-20220717073401326"></p>
+<h2 id="2-2-1-Pod"><a href="#2-2-1-Pod" class="headerlink" title="2.2.1 Pod"></a>2.2.1 Pod</h2><blockquote>
+<p> Pod是Kubernetes处理的最基本单元。容器本身并不会直接分配到主机上，而是会封装到名为Pod的对象中。</p>
+</blockquote>
+<p>​	Pod通常表示单个应用程序，由一个或多个关系紧密的容器构成。</p>
+<p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717073548873.png" srcset="/img/loading.gif" lazyload alt="image-20220717073548873"></p>
+<p>​	<u>这些容器拥有同样的生命周期，作为一个整体一起编排到Node上。</u>这些容器共享环境、存储卷和IP空间。尽管Pod基于一个或多个容器，但应将Pod视作<strong>单一的整体、单独的应用程序</strong>。<u>Kubernetes以Pod为最小单位进行调度、伸缩并共享资源、管理生命周期。</u></p>
+<p>​	一般来说，用户不应自行管理Pod，因为Pod并没有提供应用程序通常会用到的一些特性，如复杂的生命周期管理及动态伸缩。建议用户使用将Pod或Pod模板作为基本组件的更高级别对象，这些对象会拥有更多的特性。</p>
+<h2 id="2-2-2-控制器"><a href="#2-2-2-控制器" class="headerlink" title="2.2.2 控制器"></a>2.2.2 控制器</h2><p>​	一般来说，用户不会直接创建Pod，而是<strong>创建控制器</strong>，<u>让控制器来管理Pod</u>。在控制器中定义Pod的部署方式（如有多少个副本、需要在哪种Node上运行等），根据不同的业务场景，Kubernetes提供了多种控制器。</p>
+<h3 id="1．ReplicationController和ReplicaSet控制器"><a href="#1．ReplicationController和ReplicaSet控制器" class="headerlink" title="1．ReplicationController和ReplicaSet控制器"></a>1．ReplicationController和ReplicaSet控制器</h3><p>​	在使用Kubernetes时，<u>通常要管理的是由多个相同Pod组成的Pod集合，而不是单个Pod。</u></p>
+<p>例如，ReplicationController或ReplicaSet控制器基于Pod模板进行创建，能够很好地支持<strong>水平伸缩</strong>。</p>
+<p>​	<strong>ReplicationController可定义Pod模板</strong>，<u>并可以设置相应控制参数以实现水平伸缩</u>，以调节正在运行的相同的Pod数。这是在Kubernetes中<strong>调节负载并增强可用性</strong>的简单方式。</p>
+<p>​	ReplicationController能根据需要自动创建新的Pod，在ReplicationController的配置中<strong>拥有和Pod定义非常相似的模板。</strong></p>
+<p>​	ReplicationController<u>负责保证在集群中部署的Pod数量与配置中的Pod数量一致</u>。如果Pod或主机出现故障，ReplicationController会自动<strong>启用新的Pod进行补充</strong>。如果ReplicationController<u>配置中的副本数量发生改变</u>，则会<strong>启动或终止一些Pod来匹配设定好的数量</strong>。ReplicationController还可以<strong>执行滚动更新</strong>，将一组Pod逐个切换到</p>
+<p>最新版本，从而最大限度地减少对应用程序可用性的影响。</p>
+<p>​	<strong>ReplicaSet控制器</strong>可以看作ReplicationController的另一种版本，其Pod识别功能使它在Pod管理上更具灵活性。由于ReplicaSet控制器具有<strong>副本筛选功能</strong>，因此ReplicaSet控制器才有逐渐取代ReplicationController的趋势，但ReplicaSet控制器<strong>无法实现滚动更新</strong>，无法像ReplicationController那样在后端轮流切换到最新版本。</p>
+<p>​	与Pod一样，ReplicationController和ReplicaSet控制器都是很少直接使用的对象。虽然它们都是基于Pod而设计的，增加了水平伸缩功能，提高了可靠性，但它们缺少一些在其他复杂对象中具有的更细粒度的生命周期管理功能。</p>
+<h3 id="2-Deployment控制器"><a href="#2-Deployment控制器" class="headerlink" title="2.Deployment控制器"></a>2.Deployment控制器</h3><p>​	<strong>Deployment控制器可能是最常用的工作负载对象之一。</strong>Deployment控制器以<u><strong>ReplicaSet控制器</strong>为基础</u>，是更高级的概念，<u>增加了更灵活的生命周期管理功能</u>。</p>
+<p>​	虽然Deployment控制器是<strong>基于ReplicaSet控制器</strong>的，<u>但仍有部分功能和ReplicationController相似</u>Deployment控制器解决了之前在滚动更新上存在的诸多难点。如果用ReplicationController来更新应用程序，用户需要提交一个<u>新的ReplicationController计划，以替换当前的控制器</u>。因此，对于历史记录跟踪、更新出现网络故障时的恢复以及回滚错误修改等任务，ReplicationController要么做起来非常艰难，要么需要用户自理。</p>
+<p>​	<strong>Deployment控制器是一种高级对象</strong>，<strong>旨在简化Pod的生命周期管理</strong>。<u>只要简单更改Deployment控制器的配置文件，Kubernetes就会自动调节ReplicaSet控制器，管理应用程序不同版本之间的切换，还可以实现自动维护事件历史记录及自动撤销功能</u>，如图所示。正是由于这些强大的功能，Deployment控制器可能是使用频率最高的对象。</p>
+<p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717081533254.png" srcset="/img/loading.gif" lazyload alt="image-20220717081533254"></p>
+<h3 id="3-StatefulSet控制器"><a href="#3-StatefulSet控制器" class="headerlink" title="3. StatefulSet控制器"></a>3. StatefulSet控制器</h3><p>​	<strong>StatefulSet控制器是一种提供了排序和唯一性保证的特殊Pod控制器。</strong>当有与部署顺序、持久数据或固定网络等相关的特殊需求时，可以使用StatefulSet控制器来进行更细粒度的控制。StatefulSet控制器主要用于有状态的应用，例如，StatefulSet控制器通常与面向数据的应用程序（比如数据库）相关联。即使StatefulSet控制器被重新分配到一个新的节点上，还需要访问同一个存储卷。</p>
+<p>​	<strong>StatefulSet控制器为每个Pod创建唯一的、基于数字的名称，从而提供稳定的网络标识符。</strong>即使要将Pod转移到另一个节点，该名称也将持续存在。同样，<strong>当需要重新调度时，可以通过Pod转移持久性数据卷</strong>。即使删除了Pod，这些卷也依然存在，以防止数据意外丢失。</p>
+<p>​	每当部署或进行伸缩调节时，StatefulSet控制器会根据名称中的<strong>标识符</strong>执行操作，这使得对执行顺序有了更大的<strong>可预测性和控制能力</strong>，它在某些情况下很有用。</p>
+<p>​	Deployment控制器下的每一个Pod都毫无区别地提供服务，但StatefulSet控制器下的Pod则不同。虽然各个Pod的定义是一样的，但是因为其数据的不同，所以<strong>提供的服务是有差异的</strong>。比如分布式存储系统适合使用StatefulSet控制器，由Pod A存储一部分数据并提供相关服务，Pod B又存储另一部分数据并提供相关服务。又比如有些服务会临时保存客户请求的数据，例如，使用服务端会话方式存放部分信息的业务网站，由于会话的不同，Pod A和Pod B能提供的服务也不尽相同，这种场景也适合使用StatefulSet控制器。</p>
+<h3 id="4-DaemonSet"><a href="#4-DaemonSet" class="headerlink" title="4.DaemonSet"></a>4.DaemonSet</h3><p>​	<strong>DaemonSet控制器是另一种特殊的Pod控制器，它会在集群的各个节点上运行单一的Pod副本</strong>。<strong>DaemonSet控制器非常适合部署那些为节点本身提供服务或执行维护的Pod。</strong></p>
+<p>​	例如，日志收集和转发、监控以及运行以增加节点本身功能为目的的服务，常设置为DaemonSet控制器。因为DaemonSet控制器通常是用于提供基本服务的，并且每个节点都需要，所以它们可以绕过某些用于阻止控制器将Pod分配给某些主机的调度限制。<u>因为DaemonSet控制器独特的职责，原本Master服务器不可用于常规的Pod调度，但DaemonSet控制器可以越过基于Pod的限制，确保基础服务的运行。</u></p>
+<h3 id="5-Job控制器和CronJob控制器"><a href="#5-Job控制器和CronJob控制器" class="headerlink" title="5.Job控制器和CronJob控制器"></a>5.Job控制器和CronJob控制器</h3><p>​	上述的各类工作负载对象都是长期运行的，拥有服务级的生命周期。Kubernetes中还有一种叫作Job控制器的工作负载对象，它基于特定任务而运行。当运行任务的容器完成工作后，Job就会成功退出。<strong>如果需要执行一次性的任务，而非提供连续的服务，Job控制器非常适合。</strong></p>
+<p>​	CronJob控制器其实在Job控制器的基础上增加了<strong>时间调度</strong>，可以在给定的时间点运行一个任务，也可以周期性地在给定时间点运行一个任务。CronJob控制器实际上和Linux系统中的Crontab控制器非常类似。</p>
+<h2 id="2-2-3-服务与存储"><a href="#2-2-3-服务与存储" class="headerlink" title="2.2.3 服务与存储"></a>2.2.3 服务与存储</h2><h3 id="1-Service组件和Ingress"><a href="#1-Service组件和Ingress" class="headerlink" title="1. Service组件和Ingress"></a>1. Service组件和Ingress</h3><p>​	在Kubernetes中，<strong>Service是内部负载均衡器中的一种组件</strong>，<strong>会将相同功能的Pod在逻辑上组合到一起，让它们表现得如同一个单一的实体。</strong></p>
+<p>​	之前介绍的各个工作负载对象只保证了支撑服务的微服务Pod的数量，但是没有解决如何访问这些服务的问题。Pod只是一个运行的应用示例，随时可能在一个节点上停止，并在另一个节点使用新的IP地址启动新的Pod，因此<strong>Pod根本无法以固定的IP地址和端口号提供服务</strong>。</p>
+<p>​	<strong>通过Service组件可以发布服务，可以跟踪并路由到所有指定类型的后端容器。</strong><u>内部使用者只需要知道Service组件提供的稳定端点即可进行访问。</u>另外，Service组件抽象可以根据需要来伸缩或替换后端的工作单元，无论Service组件具体路由到哪个Pod，其IP地址都保持稳定。通过Service组件，可以轻松获得服务发现的能力，如图。</p>
+<p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717084013464.png" srcset="/img/loading.gif" lazyload alt="image-20220717084013464"></p>
+<p>​	<u>每当需要给另一个应用程序或外部用户提供某些Pod的访问权限时，就可以配置一个Service组件。</u>比如，假设需要从外网访问Pod上运行的应用程序，就需要提供必要的Service组件抽象。同样，如果应用程序需要存储或查询数据，则可能还需要配置一个内部Service组件抽象，使应用程序能访问数据库Pod。</p>
+<p>​	<u>虽然在默认情况下只有Kubernetes集群内的机器（Master和Node）以及Pod应用可以访问Service组件，但通过某些策略，可以在集群之外使用Service组件。</u>例如，通过配置NodePort，可以在各个节点的外部网络接口上打开一个静态端口。该外部端口的流量将会通过内部集群IP服务自动路由到相应的Pod。</p>
+<p>​	还可以<strong>通过Ingress来整合Service组件</strong>。Ingress并不是某种服务类型，可以充当多个Service组件的统一入口。Ingress支持将路由规则合并到单个资源中，可以通过同一域名或IP地址下不同的路径来访问不同的Service组件，如图所示，实现在同一域名或IP地址下发布多个服务。</p>
+<p>​	<img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717084449753.png" srcset="/img/loading.gif" lazyload alt="image-20220717084449753"></p>
+<h3 id="2-存储卷和持久存储卷"><a href="#2-存储卷和持久存储卷" class="headerlink" title="2.存储卷和持久存储卷"></a>2.存储卷和持久存储卷</h3><p>​	容器运行时通常会提供一些机制来将存储附加到容器上，以此实现共享数据并保证这些数据在容器重启的间隙始终是可用的，这类容器的存留时间超过其他容器的生命周期，但实现起来通常缺乏灵活性</p>
+<p>​	为了解决这些问题，<strong>Kubernetes定义了自己的存储卷（volume）抽象，允许Pod中的所有容器共享数据，并在Pod终止之前一直保持可用</strong>，如图所示。</p>
+<p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717085104634.png" srcset="/img/loading.gif" lazyload alt="image-20220717085104634"></p>
+<p>​	这意味着紧密耦合的Pod可以轻松共享文件而不需要复杂的外部机制，Pod中的容器故障不会影响对共享文件的访问。Pod终止后，共享的存储卷会被销毁，因此对于真正需要持久化的数据来说，这并非一个好的解决方案。</p>
+<p>​	<strong>持久存储卷（persistent volume）是一种更健壮的抽象机制</strong>，<strong>不依赖于Pod的生命周期</strong>。<u>持久存储卷允许管理员为集群配置存储资源，用户可以为正在运行的Pod请求和声明存储资源。</u>带有持久存储卷的Pod一旦使用完毕，存储卷的回收策略将决定是保留存储卷（直到手动删除），还是立即删除数据。持久性数据可预防节点级的故障，并分配比本地更多的可用存储空间。</p>
+<h2 id="2-2-4-资源划分"><a href="#2-2-4-资源划分" class="headerlink" title="2.2.4 资源划分"></a>2.2.4 资源划分</h2><h3 id="1-命名空间"><a href="#1-命名空间" class="headerlink" title="1. 命名空间"></a>1. 命名空间</h3><p>​	命名空间（namespace）的主要作用是对Kubernetes集群资源进行划分。这种划分并非物理划分而是逻辑划分，用于实现多租户的资源隔离。</p>
+<p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717092408558.png" srcset="/img/loading.gif" lazyload alt="image-20220717092408558"></p>
+<h3 id="2-标签和注解"><a href="#2-标签和注解" class="headerlink" title="2. 标签和注解"></a>2. 标签和注解</h3><p>​	Kubernetes中的标签（label）是一种<strong>语义化标记</strong>，<u>可以附加到Kubernetes对象上，对它们进行标记或划</u>分。如果要针对不同的实例进行管理或路由，可以用标签来进行选择。例如，每种基于控制器的对象都可以使用标签来识别需要操作的Pod。Service组件也可以使用标签来确定应该将请求路由到哪些后端Pod，如图所示。</p>
+<p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/image-20220717092719027.png" srcset="/img/loading.gif" lazyload alt="image-20220717092719027"></p>
+<p>​	<strong>标签的形式是键值对，每个单元可以拥有多个标签，但每个单元对于每个键只能拥有一个值。</strong>通常来说，相对于当作标识符的name属性，标签的使用更像是对资源进行划分细类，可以用开发阶段、可访问性级别、应用程序版本等标准对各个对象进行分类。</p>
+<p>​	<strong>注解（annotation）也是一种类似的机制，用于将任意键值信息附加到某一对象中。</strong>相对于标签，注解更灵活，可以包含少量结构化数据。一般来说，注解只是向对象添加更多元数据的一种方式，但并不用于筛选。</p>
+<h1 id="本章小结"><a href="#本章小结" class="headerlink" title="本章小结"></a>本章小结</h1><h2 id="要点如下："><a href="#要点如下：" class="headerlink" title="要点如下："></a>要点如下：</h2><ul>
+<li>Kubernetes集群主要由Master和Node组成。Master管理Node，Node管理容器。</li>
+<li>Master的主要组件分别为kube-apiserver（负责实际操作）、etcd（负责存储）、kube-scheduler（负责Pod调度）、kubecontroller-manager（负责对象管理）。</li>
+<li>Node的主要组件分别为kubelet（值守进程）、kube-proxy（负责服务发现）和容器运行时（负责操作容器）。</li>
+<li>Kubernetes以Pod为最小单位进行调度、伸缩并共享资源、管理生命周期。</li>
+<li>控制器中定义了Pod的部署方式，如有多少个副本、需要在哪种Node上运行等。根据不同的业务场景，Kubernetes提供了多种控制器，如ReplicationController、ReplicaSet控制器、Deployment控制器、StatefulSet控制器、DaemonSet控制器、Job控制器和CronJob控制器。</li>
+<li>Service是内部负载均衡器中的一种组件，会将相同功能的Pod在逻辑上组合到一起，让它们表现得如同一个单一的实体。</li>
+<li>Kubernetes定义了自己的存储卷抽象，允许Pod中的所有容器共享数据，在Pod终止之前一直保持可用。而持久存储卷是一种更健壮的抽象机制，不依赖于Pod的生命周期。</li>
+<li>Label是一种语义化标签，可以附加到Kubernetes对象上，对它们进行标记或划分。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Kubernetes/" class="category-chain-item">Kubernetes</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/K8S/">#K8S</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>第2章 K8S的核心概念</div>
+      <div>http://example.com/2022/07/17/第2章-K8S的核心概念/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 17, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/13/Docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="Docker快速入门">
+                        <span class="hidden-mobile">Docker快速入门</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
