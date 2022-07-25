@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>第3章 Kubernetes的安装与部署</title>
+    <link href="/2022/07/17/%E7%AC%AC3%E7%AB%A0-Kubernetes%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/"/>
+    <url>/2022/07/17/%E7%AC%AC3%E7%AB%A0-Kubernetes%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/</url>
+    
+    <content type="html"><![CDATA[<p>在虚拟机上部署Kubernetes运行环境，集群构成如下</p><table><thead><tr><th>节点类型</th><th>节点名称</th><th>IP地址</th></tr></thead><tbody><tr><td>Master</td><td>k8smaster</td><td>192.168.100.100</td></tr><tr><td>Node</td><td>k8snode1</td><td>192.168.100.101</td></tr><tr><td>Node</td><td>k8snode2</td><td>192.168.100.102</td></tr><tr><td>Node</td><td>k8snode3</td><td>192.168.100.103</td></tr></tbody></table><p>​给Master分配更多的内存和CPU，以减少异常的产生。</p><p>​在开始安装之前，请先在各台机器上配置好相应的主机，以便各台机器之间可通过机器名称相互访问。可通过如下命令编辑hosts文件。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">vi <span class="hljs-regexp">/etc/</span>hosts<br></code></pre></td></tr></table></figure><p>​hosts的配置如下。</p><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">192.168.100.100</span> k8smaster<br><span class="hljs-number">192.168.100.101</span> k8snode1<br><span class="hljs-number">192.168.100.102</span> k8snode2<br><span class="hljs-number">192.168.100.103</span> k8snode3<br></code></pre></td></tr></table></figure><h1 id="1-Master与Node都要安装的基础组件"><a href="#1-Master与Node都要安装的基础组件" class="headerlink" title="1. Master与Node都要安装的基础组件"></a>1. Master与Node都要安装的基础组件</h1><h2 id="1-在Debian"><a href="#1-在Debian" class="headerlink" title="1. 在Debian"></a>1. 在Debian</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>Kubernetes</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>第2章 K8S的核心概念</title>
     <link href="/2022/07/17/%E7%AC%AC2%E7%AB%A0-K8S%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/"/>
     <url>/2022/07/17/%E7%AC%AC2%E7%AB%A0-K8S%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/</url>
