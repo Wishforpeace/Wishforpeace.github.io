@@ -1,0 +1,820 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Swaggo 1.1.1关于Swaggo目前swaggo主要实现了swagger 2.0 的以下部分功能：  基本结构（Basic Structure） API 地址与基本路径（API Host and Base Path） 路径与操作 （Paths and Operations） 参数描述（Describing Parameters） 请求参数描述（Describing Request Body">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swag">
+<meta property="og:url" content="http://example.com/2022/07/27/Swag/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="Swaggo 1.1.1关于Swaggo目前swaggo主要实现了swagger 2.0 的以下部分功能：  基本结构（Basic Structure） API 地址与基本路径（API Host and Base Path） 路径与操作 （Paths and Operations） 参数描述（Describing Parameters） 请求参数描述（Describing Request Body">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/1-20220727141857667.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/2-20220727141858552.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/3-20220727141859223.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/4-20220727141859903.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/5-20220727141901469.png">
+<meta property="article:published_time" content="2022-07-27T06:16:34.000Z">
+<meta property="article:modified_time" content="2022-07-27T06:19:15.537Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/1-20220727141857667.png">
+  
+  
+  
+  <title>Swag - WYX同学的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Swag"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-27 14:16" pubdate>
+          July 27, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          70 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Swag</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Swaggo"><a href="#Swaggo" class="headerlink" title="Swaggo"></a>Swaggo</h1><p><img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/1-20220727141857667.png" srcset="/img/loading.gif" lazyload alt="swaggo"></p>
+<h2 id="1-1-1关于Swaggo"><a href="#1-1-1关于Swaggo" class="headerlink" title="1.1.1关于Swaggo"></a>1.1.1关于Swaggo</h2><p>目前swaggo主要实现了swagger 2.0 的以下部分功能：</p>
+<ul>
+<li>基本结构（Basic Structure）</li>
+<li>API 地址与基本路径（API Host and Base Path）</li>
+<li>路径与操作 （Paths and Operations）</li>
+<li>参数描述（Describing Parameters）</li>
+<li>请求参数描述（Describing Request Body）</li>
+<li>返回描述（Describing Responses）</li>
+<li>MIME 类型（MIME Types）</li>
+<li>认证（Authentication）<ul>
+<li>Basic Authentication</li>
+<li>API Keys</li>
+</ul>
+</li>
+<li>添加实例（Adding Examples）</li>
+<li>文件上传（File Upload）</li>
+<li>枚举（Enums）</li>
+<li>按标签分组（Grouping Operations With Tags）</li>
+<li>扩展（Swagger Extensions）</li>
+</ul>
+<p>下文内容均以gin-swaggo为例 <a target="_blank" rel="noopener" href="https://github.com/razeencheng/demo-go/tree/master/swaggo-gin">这里是demo地址</a></p>
+<h2 id="1-1-2-使用"><a href="#1-1-2-使用" class="headerlink" title="1.1.2. 使用"></a>1.1.2. 使用</h2><p>安装swag cli 及下载相关包</p>
+<p>要使用swaggo,首先需要安装swag cli。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">go get -u github.com<span class="hljs-regexp">/swaggo/</span>swag<span class="hljs-regexp">/cmd/</span>swag<br></code></pre></td></tr></table></figure>
+
+<p>然后我们还需要两个包。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># gin-swagger 中间件</span><br>go get github.com<span class="hljs-regexp">/swaggo/gi</span>n-swagger<br><span class="hljs-comment"># swagger 内置文件</span><br>go get github.com<span class="hljs-regexp">/swaggo/gi</span>n-swagger/swaggerFiles<br></code></pre></td></tr></table></figure>
+
+<p>在main.go内添加注释</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;net/http&quot;</span><br><br>    <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br>    _ <span class="hljs-string">&quot;github.com/student/0509/docs&quot;</span><br>    ginSwagger <span class="hljs-string">&quot;github.com/swaggo/gin-swagger&quot;</span><br>    <span class="hljs-string">&quot;github.com/swaggo/gin-swagger/swaggerFiles&quot;</span><br>)<br><br><span class="hljs-comment">// @title Swagger Example API</span><br><span class="hljs-comment">// @version 1.0</span><br><span class="hljs-comment">// @description This is a sample server celler server.</span><br><span class="hljs-comment">// @termsOfService https://www.topgoer.com</span><br><br><span class="hljs-comment">// @contact.name www.topgoer.com</span><br><span class="hljs-comment">// @contact.url https://www.topgoer.com</span><br><span class="hljs-comment">// @contact.email me@razeen.me</span><br><br><span class="hljs-comment">// @license.name Apache 2.0</span><br><span class="hljs-comment">// @license.url http://www.apache.org/licenses/LICENSE-2.0.html</span><br><br><span class="hljs-comment">// @host 127.0.0.1:8080</span><br><span class="hljs-comment">// @BasePath /api/v1</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br><br>    r := gin.Default()<br><br>    r.GET(<span class="hljs-string">&quot;/swagger/*any&quot;</span>, ginSwagger.WrapHandler(swaggerFiles.Handler))<br><br>    v1 := r.Group(<span class="hljs-string">&quot;/api/v1&quot;</span>)<br>    &#123;<br>        v1.GET(<span class="hljs-string">&quot;/hello&quot;</span>, HandleHello)<br>        <span class="hljs-comment">// v1.POST(&quot;/login&quot;, HandleLogin)</span><br>        <span class="hljs-comment">// v1Auth := r.Use(HandleAuth)</span><br>        <span class="hljs-comment">// &#123;</span><br>        <span class="hljs-comment">//     v1Auth.POST(&quot;/upload&quot;, HandleUpload)</span><br>        <span class="hljs-comment">//     v1Auth.GET(&quot;/list&quot;, HandleList)</span><br>        <span class="hljs-comment">// &#125;</span><br>    &#125;<br><br>    r.Run(<span class="hljs-string">&quot;:8080&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如上所示，我们需要导入</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">ginSwagger</span> <span class="hljs-string">&quot;github.com/swaggo/gin-swagger&quot;</span><br><span class="hljs-string">&quot;github.com/swaggo/gin-swagger/swaggerFiles&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>添加注释：</p>
+<ul>
+<li><code>title</code>：文档标题</li>
+<li><code>version</code>：版本</li>
+<li><code>description,termsOfService,contact...</code>这些都是一些声明，可以不写</li>
+<li><code>license.name</code>：必须</li>
+<li><code>host</code>,<code>BasePath</code>:</li>
+<li><code>securityDefinitions.basic</code>,<code>securityDefinitions.apikey</code>等</li>
+</ul>
+<p>到这里，我们在<code>mian.go</code>同目录下执行<code>swag init</code>就可以自动生成文档，如下：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">E</span>:\goproject\src\github.com\topgoer&gt;swag init<br><span class="hljs-attribute">2020</span>/<span class="hljs-number">05</span>/<span class="hljs-number">13</span> <span class="hljs-number">16</span>:<span class="hljs-number">28</span>:<span class="hljs-number">02</span> Generate swagger docs....<br><span class="hljs-attribute">2020</span>/<span class="hljs-number">05</span>/<span class="hljs-number">13</span> <span class="hljs-number">16</span>:<span class="hljs-number">28</span>:<span class="hljs-number">02</span> Generate general API Info, search dir:./<br><span class="hljs-attribute">2020</span>/<span class="hljs-number">05</span>/<span class="hljs-number">13</span> <span class="hljs-number">16</span>:<span class="hljs-number">28</span>:<span class="hljs-number">02</span> create docs.go at  docs/docs.go<br><span class="hljs-attribute">2020</span>/<span class="hljs-number">05</span>/<span class="hljs-number">13</span> <span class="hljs-number">16</span>:<span class="hljs-number">28</span>:<span class="hljs-number">02</span> create swagger.json at  docs/swagger.json<br><span class="hljs-attribute">2020</span>/<span class="hljs-number">05</span>/<span class="hljs-number">13</span> <span class="hljs-number">16</span>:<span class="hljs-number">28</span>:<span class="hljs-number">02</span> create swagger.yaml at  docs/swagger.yaml<br></code></pre></td></tr></table></figure>
+
+<p>然后我们在<code>main.go</code>导入这个自动生成的<code>docs</code>包，运行：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br>    ginSwagger <span class="hljs-string">&quot;github.com/swaggo/gin-swagger&quot;</span><br>    <span class="hljs-string">&quot;github.com/swaggo/gin-swagger/swaggerFiles&quot;</span><br><br>    _ <span class="hljs-string">&quot;github.com/razeencheng/demo-go/swaggo-gin/docs&quot;</span><br>)<br><br><span class="hljs-comment">// @title Swagger Example API</span><br><span class="hljs-comment">// @version 1.0</span><br><span class="hljs-comment">// ...</span><br>E:\goproject\src\github.com\topgoer&gt;<span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span><br>[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.<br><br>[GIN-debug] [WARNING] Running in <span class="hljs-string">&quot;debug&quot;</span> mode. Switch to <span class="hljs-string">&quot;release&quot;</span> mode in production.<br> - using env:   export GIN_MODE=release<br> - using code:  gin.SetMode(gin.ReleaseMode)<br><br>[GIN-debug] GET    /swagger<span class="hljs-comment">/*any             --&gt; github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)</span><br><span class="hljs-comment">[GIN-debug] GET    /api/v1/hello             --&gt; main.HandleHello (3 handlers)</span><br><span class="hljs-comment">[GIN-debug] Listening and serving HTTP on :8080</span><br></code></pre></td></tr></table></figure>
+
+<p>浏览器打开<a target="_blank" rel="noopener" href="http://127.0.0.1:8080/swagger/index.html">http://127.0.0.1:8080/swagger/index.html</a>, 我们可以看到如下文档标题已经生成。<img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/2-20220727141858552.png" srcset="/img/loading.gif" lazyload alt="swaggo"></p>
+<h3 id="1-1-3-在Handle函数上添加注释"><a href="#1-1-3-在Handle函数上添加注释" class="headerlink" title="1.1.3. 在Handle函数上添加注释"></a>1.1.3. 在Handle函数上添加注释</h3><p>接下来，我们需要在每个路由处理函数上加上注释，如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;net/http&quot;</span><br><br>    <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br>    _ <span class="hljs-string">&quot;github.com/student/0509/docs&quot;</span><br>    ginSwagger <span class="hljs-string">&quot;github.com/swaggo/gin-swagger&quot;</span><br>    <span class="hljs-string">&quot;github.com/swaggo/gin-swagger/swaggerFiles&quot;</span><br>)<br><br><span class="hljs-comment">// @title Swagger Example API</span><br><span class="hljs-comment">// @version 1.0</span><br><span class="hljs-comment">// @description This is a sample server celler server.</span><br><span class="hljs-comment">// @termsOfService https://www.topgoer.com</span><br><br><span class="hljs-comment">// @contact.name www.topgoer.com</span><br><span class="hljs-comment">// @contact.url https://www.topgoer.com</span><br><span class="hljs-comment">// @contact.email me@razeen.me</span><br><br><span class="hljs-comment">// @license.name Apache 2.0</span><br><span class="hljs-comment">// @license.url http://www.apache.org/licenses/LICENSE-2.0.html</span><br><br><span class="hljs-comment">// @host 127.0.0.1:8080</span><br><span class="hljs-comment">// @BasePath /api/v1</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br><br>    r := gin.Default()<br><br>    r.GET(<span class="hljs-string">&quot;/swagger/*any&quot;</span>, ginSwagger.WrapHandler(swaggerFiles.Handler))<br><br>    v1 := r.Group(<span class="hljs-string">&quot;/api/v1&quot;</span>)<br>    &#123;<br>        v1.GET(<span class="hljs-string">&quot;/hello&quot;</span>, HandleHello)<br>        <span class="hljs-comment">// v1.POST(&quot;/login&quot;, HandleLogin)</span><br>        <span class="hljs-comment">// v1Auth := r.Use(HandleAuth)</span><br>        <span class="hljs-comment">// &#123;</span><br>        <span class="hljs-comment">//     v1Auth.POST(&quot;/upload&quot;, HandleUpload)</span><br>        <span class="hljs-comment">//     v1Auth.GET(&quot;/list&quot;, HandleList)</span><br>        <span class="hljs-comment">// &#125;</span><br>    &#125;<br><br>    r.Run(<span class="hljs-string">&quot;:8080&quot;</span>)<br>&#125;<br><br><span class="hljs-comment">// @Summary 测试SayHello</span><br><span class="hljs-comment">// @Description 向你说Hello</span><br><span class="hljs-comment">// @Tags 测试</span><br><span class="hljs-comment">// @Accept json</span><br><span class="hljs-comment">// @Param who query string true &quot;人名&quot;</span><br><span class="hljs-comment">// @Success 200 &#123;string&#125; string &quot;&#123;&quot;msg&quot;: &quot;hello Razeen&quot;&#125;&quot;</span><br><span class="hljs-comment">// @Failure 400 &#123;string&#125; string &quot;&#123;&quot;msg&quot;: &quot;who are you&quot;&#125;&quot;</span><br><span class="hljs-comment">// @Router /hello [get]</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">HandleHello</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>    who := c.Query(<span class="hljs-string">&quot;who&quot;</span>)<br><br>    <span class="hljs-keyword">if</span> who == <span class="hljs-string">&quot;&quot;</span> &#123;<br>        c.JSON(http.StatusBadRequest, gin.H&#123;<span class="hljs-string">&quot;msg&quot;</span>: <span class="hljs-string">&quot;who are u?&quot;</span>&#125;)<br>        <span class="hljs-keyword">return</span><br>    &#125;<br><br>    c.JSON(http.StatusOK, gin.H&#123;<span class="hljs-string">&quot;msg&quot;</span>: <span class="hljs-string">&quot;hello &quot;</span> + who&#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们再次<code>swag init</code>, 运行一下。<img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/3-20220727141859223.png" srcset="/img/loading.gif" lazyload alt="swaggo"></p>
+<p>此时，该API的相关描述已经生成了，我们点击<code>Try it out</code>还可以直接测试该API。<img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/4-20220727141859903.png" srcset="/img/loading.gif" lazyload alt="swaggo"></p>
+<p>是不是很好用，当然这并没有结束，这些注释字段，我们一个个解释。<img src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/picture/5-20220727141901469.png" srcset="/img/loading.gif" lazyload alt="swaggo"></p>
+<p>这些注释对应出现在API文档的位置，我在上图中已经标出，这里我们主要详细说说下面参数：</p>
+<h4 id="Tags"><a href="#Tags" class="headerlink" title="Tags"></a>Tags</h4><p>Tags 是用来给API分组的。</p>
+<h4 id="Accept"><a href="#Accept" class="headerlink" title="Accept"></a>Accept</h4><p>接收的参数类型，支持表单(<code>mpfd</code>) 和 JSON(<code>json</code>)</p>
+<h4 id="Produce"><a href="#Produce" class="headerlink" title="Produce"></a>Produce</h4><p>返回的数据结构，一般都是<code>json</code>, 其他支持如下表：</p>
+<table>
+<thead>
+<tr>
+<th>Mime Type</th>
+<th>声明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>application&#x2F;json</td>
+<td>json</td>
+</tr>
+<tr>
+<td>text&#x2F;xml</td>
+<td>xml</td>
+</tr>
+<tr>
+<td>text&#x2F;plain</td>
+<td>plain</td>
+</tr>
+<tr>
+<td>html</td>
+<td>html</td>
+</tr>
+<tr>
+<td>multipart&#x2F;form-data</td>
+<td>mpfd</td>
+</tr>
+<tr>
+<td>application&#x2F;x-www-form-urlencoded</td>
+<td>x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td>application&#x2F;vnd.api+json</td>
+<td>json-api</td>
+</tr>
+<tr>
+<td>application&#x2F;x-json-stream</td>
+<td>json-stream</td>
+</tr>
+<tr>
+<td>application&#x2F;octet-stream</td>
+<td>octet-stream</td>
+</tr>
+<tr>
+<td>image&#x2F;png</td>
+<td>png</td>
+</tr>
+<tr>
+<td>image&#x2F;jpeg</td>
+<td>jpeg</td>
+</tr>
+<tr>
+<td>image&#x2F;gif</td>
+<td>gif</td>
+</tr>
+</tbody></table>
+<h4 id="Param"><a href="#Param" class="headerlink" title="Param"></a>Param</h4><p>参数，从前往后分别是：</p>
+<blockquote>
+<p>@Param <code>1.参数名</code> <code>2.参数类型</code> <code>3.参数数据类型</code> <code>4.是否必须</code> <code>5.参数描述``6.其他属性</code></p>
+</blockquote>
+<ul>
+<li><p>1.参数名</p>
+<p>参数名就是我们解释参数的名字。</p>
+</li>
+<li><p>2.参数类型</p>
+<p>参数类型主要有三种：</p>
+<ul>
+<li><p><code>path</code> 该类型参数直接拼接在URL中，如<a target="_blank" rel="noopener" href="https://github.com/razeencheng/demo-go/blob/master/swaggo-gin/handle.go">Demo</a>中<code>HandleGetFile</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">// @Param <span class="hljs-built_in">id</span> path <span class="hljs-built_in">integer</span> <span class="hljs-literal">true</span> <span class="hljs-string">&quot;文件ID&quot;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>query</code> 该类型参数一般是组合在URL中的，如<a target="_blank" rel="noopener" href="https://github.com/razeencheng/demo-go/blob/master/swaggo-gin/handle.go">Demo</a>中<code>HandleHello</code></p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit">// <span class="hljs-symbol">@Param</span> who query <span class="hljs-built_in">string</span> <span class="hljs-literal">true</span> <span class="hljs-string">&quot;人名&quot;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>formData</code> 该类型参数一般是<code>POST,PUT</code>方法所用，如<a target="_blank" rel="noopener" href="https://github.com/razeencheng/demo-go/blob/master/swaggo-gin/handle.go">Demo</a>中<code>HandleLogin</code></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">// @Param <span class="hljs-keyword">user</span> <span class="hljs-title">formData</span> <span class="hljs-keyword">string</span> <span class="hljs-literal">true</span> <span class="hljs-string">&quot;用户名&quot;</span> default(admin)<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>3.参数数据类型</p>
+<p>数据类型主要支持一下几种：</p>
+<ul>
+<li>string (string)</li>
+<li>integer (int, uint, uint32, uint64)</li>
+<li>number (float32)</li>
+<li>boolean (bool)</li>
+</ul>
+<p>注意，如果你是上传文件可以使用<code>file</code>, 但参数类型一定是<code>formData</code>, 如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">// @Param <span class="hljs-keyword">file</span> formData <span class="hljs-keyword">file</span> <span class="hljs-keyword">true</span> <span class="hljs-string">&quot;文件&quot;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>4.是否是必须</p>
+<p>表明该参数是否是必须需要的，必须的在文档中会黑体标出，测试时必须填写。</p>
+</li>
+<li><p>5.参数描述</p>
+<p>就是参数的一些说明</p>
+</li>
+<li><p>6.其他属性</p>
+<p>除了上面这些属性外，我们还可以为该参数填写一些额外的属性，如枚举，默认值，值范围等。如下：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs autoit">枚举<br>// <span class="hljs-symbol">@Param</span> enumstring query <span class="hljs-built_in">string</span> <span class="hljs-literal">false</span> <span class="hljs-string">&quot;string enums&quot;</span> Enums(A, B, C)<br>// <span class="hljs-symbol">@Param</span> enumint query <span class="hljs-built_in">int</span> <span class="hljs-literal">false</span> <span class="hljs-string">&quot;int enums&quot;</span> Enums(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)<br>// <span class="hljs-symbol">@Param</span> enumnumber query <span class="hljs-built_in">number</span> <span class="hljs-literal">false</span> <span class="hljs-string">&quot;int enums&quot;</span> Enums(<span class="hljs-number">1.1</span>, <span class="hljs-number">1.2</span>, <span class="hljs-number">1.3</span>)<br><br>值添加范围<br>// <span class="hljs-symbol">@Param</span> <span class="hljs-built_in">string</span> query <span class="hljs-built_in">string</span> <span class="hljs-literal">false</span> <span class="hljs-string">&quot;string valid&quot;</span> minlength(<span class="hljs-number">5</span>) maxlength(<span class="hljs-number">10</span>)<br>// <span class="hljs-symbol">@Param</span> <span class="hljs-built_in">int</span> query <span class="hljs-built_in">int</span> <span class="hljs-literal">false</span> <span class="hljs-string">&quot;int valid&quot;</span> mininum(<span class="hljs-number">1</span>) maxinum(<span class="hljs-number">10</span>)<br><br>设置默认值<br>// <span class="hljs-symbol">@Param</span> <span class="hljs-literal">default</span> query <span class="hljs-built_in">string</span> <span class="hljs-literal">false</span> <span class="hljs-string">&quot;string default&quot;</span> <span class="hljs-literal">default</span>(A)<br></code></pre></td></tr></table></figure>
+
+<p>而且这些参数是可以组合使用的，如：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit">// <span class="hljs-symbol">@Param</span> enumstring query <span class="hljs-built_in">string</span> <span class="hljs-literal">false</span> <span class="hljs-string">&quot;string enums&quot;</span> Enums(A, B, C) <span class="hljs-literal">default</span>(A)<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="Success"><a href="#Success" class="headerlink" title="Success"></a>Success</h4><p>指定成功响应的数据。格式为：</p>
+<blockquote>
+<p>&#x2F;&#x2F; @Success <code>1.HTTP响应码</code> <code>&#123;2.响应参数类型&#125;</code> <code>3.响应数据类型</code> <code>4.其他描述</code></p>
+</blockquote>
+<ul>
+<li><p>1.HTTP响应码</p>
+<p>也就是200，400，500那些。</p>
+</li>
+<li><p>2.响应参数类型 &#x2F; 3.响应数据类型</p>
+<p>返回的数据类型，可以是自定义类型，可以是json。</p>
+<ul>
+<li>自定义类型</li>
+</ul>
+<p>在平常的使用中，我都会返回一些指定的模型序列化JSON的数据，这时，就可以这么写：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">// <span class="hljs-keyword">@Success</span> <span class="hljs-number">200</span> &#123;<span class="hljs-selector-tag">object</span>&#125; <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.File</span><br></code></pre></td></tr></table></figure>
+
+<p>其中，模型直接用<code>包名.模型</code>即可。你会说，假如我返回模型数组怎么办？这时你可以这么写：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> @Success <span class="hljs-number">200</span> &#123;anrry&#125; main.File<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>json</li>
+</ul>
+<p>将如你只是返回其他的json数据可如下写：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit">// <span class="hljs-symbol">@Success</span> <span class="hljs-number">200</span> &#123;<span class="hljs-built_in">string</span>&#125; json <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>4.其他描述</p>
+<p>可以添加一些说明。</p>
+</li>
+</ul>
+<h4 id="Failure"><a href="#Failure" class="headerlink" title="Failure"></a>Failure</h4><p> 同Success。</p>
+<h4 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h4><p> 指定路由与HTTP方法。格式为：</p>
+<blockquote>
+<p>&#x2F;&#x2F; @Router <code>/path/to/handle</code> [<code>HTTP方法</code>]</p>
+</blockquote>
+<p> 不用加基础路径哦。</p>
+<h3 id="1-1-4-生成文档与测试"><a href="#1-1-4-生成文档与测试" class="headerlink" title="1.1.4. 生成文档与测试"></a>1.1.4. 生成文档与测试</h3><p>其实上面已经穿插的介绍了。</p>
+<p>在<code>main.go</code>下运行<code>swag init</code>即可生成和更新文档。</p>
+<p>点击文档中的<code>Try it out</code>即可测试。 如果部分API需要登陆，可以Try登陆接口即可。</p>
+<h3 id="1-1-5-优化"><a href="#1-1-5-优化" class="headerlink" title="1.1.5. 优化"></a>1.1.5. 优化</h3><p>看到这里，基本可以使用了。但文档一般只是我们测试的时候需要，当我的产品上线后，接口文档是不应该给用户的，而且带有接口文档的包也会大很多（swaggo是直接build到二进制里的）。</p>
+<p>想要处理这种情况，我们可以在编译的时候优化一下，如利用<code>build tag</code>来控制是否编译文档。</p>
+<p>在<code>main.go</code>声明<code>swagHandler</code>,并在该参数不为空时才加入路由：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-comment">//...</span><br><br><span class="hljs-keyword">var</span> swagHandler gin.HandlerFunc<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-comment">// ...</span><br><br>        <span class="hljs-keyword">if</span> swagHandler != <span class="hljs-literal">nil</span> &#123;<br>            r.GET(<span class="hljs-string">&quot;/swagger/*any&quot;</span>, swagHandler)<br>        &#125;<br><br>    <span class="hljs-comment">//...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>同时,我们将该参数在另外加了<code>build tag</code>的包中初始化。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// +build doc</span><br><br><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    _ <span class="hljs-string">&quot;github.com/razeencheng/demo-go/swaggo-gin/docs&quot;</span><br><br>    ginSwagger <span class="hljs-string">&quot;github.com/swaggo/gin-swagger&quot;</span><br>    <span class="hljs-string">&quot;github.com/swaggo/gin-swagger/swaggerFiles&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span> &#123;<br>    swagHandler = ginSwagger.WrapHandler(swaggerFiles.Handler)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>之后我们就可以使用<code>go build -tags &quot;doc&quot;</code>来打包带文档的包，直接<code>go build</code>来打包不带文档的包。</p>
+<p>你会发现，即使我这么小的Demo,编译后的大小也要相差19M !</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">➜  <span class="hljs-keyword">swaggo-gin </span>git:(master) ✗ go <span class="hljs-keyword">build</span><br><span class="hljs-keyword"></span>➜  <span class="hljs-keyword">swaggo-gin </span>git:(master) ✗ <span class="hljs-keyword">ll </span><span class="hljs-keyword">swaggo-gin</span><br><span class="hljs-keyword"></span>-rwxr-xr-x  <span class="hljs-number">1</span> xxx  staff    <span class="hljs-number">15</span>M <span class="hljs-keyword">Jan </span><span class="hljs-number">13</span> <span class="hljs-number">00</span>:<span class="hljs-number">23</span> <span class="hljs-keyword">swaggo-gin</span><br><span class="hljs-keyword"></span>➜  <span class="hljs-keyword">swaggo-gin </span>git:(master) ✗ go <span class="hljs-keyword">build </span>-tags <span class="hljs-string">&quot;doc&quot;</span><br>➜  <span class="hljs-keyword">swaggo-gin </span>git:(master) ✗ <span class="hljs-keyword">ll </span><span class="hljs-keyword">swaggo-gin</span><br><span class="hljs-keyword"></span>-rwxr-xr-x  <span class="hljs-number">1</span> xxx  staff    <span class="hljs-number">34</span>M <span class="hljs-keyword">Jan </span><span class="hljs-number">13</span> <span class="hljs-number">00</span>:<span class="hljs-number">24</span> <span class="hljs-keyword">swaggo-gin</span><br></code></pre></td></tr></table></figure>
+
+<p>文章到这里也就结束了，完整的<a target="_blank" rel="noopener" href="https://github.com/razeencheng/demo-go/tree/master/swaggo-gin">Demo地址在这里</a>。</p>
+<h3 id="1-1-6-使用token"><a href="#1-1-6-使用token" class="headerlink" title="1.1.6. 使用token"></a>1.1.6. 使用token</h3><p>如果你的程序中使用了token中间键，只需要添加下面两行注释即可</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs llvm">// <span class="hljs-title">@Security</span> <span class="hljs-keyword">x</span>-token<br>// <span class="hljs-title">@param</span> <span class="hljs-keyword">x</span>-token header string <span class="hljs-keyword">true</span> <span class="hljs-string">&quot;Authorization&quot;</span><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Swaggo/" class="category-chain-item">Swaggo</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Swag</div>
+      <div>http://example.com/2022/07/27/Swag/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 27, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/17/%E7%AC%AC3%E7%AB%A0-Kubernetes%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/" title="第3章 Kubernetes的安装与部署">
+                        <span class="hidden-mobile">第3章 Kubernetes的安装与部署</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
