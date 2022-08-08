@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>go项目部署到linxu</title>
+    <link href="/2022/08/08/go%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0linxu/"/>
+    <url>/2022/08/08/go%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0linxu/</url>
+    
+    <content type="html"><![CDATA[<h1 id="go项目部署到linxu"><a href="#go项目部署到linxu" class="headerlink" title="go项目部署到linxu"></a>go项目部署到linxu</h1><p>2020-09-27阅读 4390</p><p>环境: 在mac上编译, 编译后上传到linux, 然后运行代码</p><p><strong>go项目打包</strong></p><p>一、直接部署到linux</p><ol><li>在mac上, 进入到项目目录, 执行以下命令CGO_ENABLED&#x3D;0 GOOS&#x3D;linux GOARCH&#x3D;amd64 go build main.go</li></ol><p>, 进行编译: , 生成一个main文件. </p><ol start="2"><li>将main文件上传到linux任意目录下, 执行 nohup .&#x2F;main &amp;运行项目. 如果出错, 则查看日志即可</li></ol><p>二. 通过nginx部署</p><p> <strong>beego项目打包</strong></p><p> 环境: 本地开发是mac, 部署到linux</p><ol><li><p>在mac上, 进入到项目目录, 执行: bee pack -be GOOS&#x3D;linux 进行打包, 打包成功后, 会生成一个****.tar.gz的文件.</p></li><li><p>在linux的某一个目录下创建一个新的文件夹(一定要创建, 否则会解压到根目录), 将***tar.gz文件上传到linux. </p></li><li><p>解压 tar -xvzf xxxx.tar.gz</p></li><li><p>分配权限: sudo chmod 777 xxxx</p></li><li><p>运行可执行文件. nohup .&#x2F;**** &amp;  成功</p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>go</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>M1 配置numpy和scipy</title>
     <link href="/2022/08/06/M1-%E9%85%8D%E7%BD%AEnumpy%E5%92%8Cscipy/"/>
     <url>/2022/08/06/M1-%E9%85%8D%E7%BD%AEnumpy%E5%92%8Cscipy/</url>

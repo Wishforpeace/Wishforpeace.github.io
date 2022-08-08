@@ -16,21 +16,31 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Categories">
-<meta property="og:url" content="http://example.com/categories/index.html">
+    <meta name="description" content="go项目部署到linxu2020-09-27阅读 4390 环境: 在mac上编译, 编译后上传到linux, 然后运行代码 go项目打包 一、直接部署到linux  在mac上, 进入到项目目录, 执行以下命令CGO_ENABLED&#x3D;0 GOOS&#x3D;linux GOARCH&#x3D;amd64 go build main.go  , 进行编译: , 生成一个main文件.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go项目部署到linxu">
+<meta property="og:url" content="http://example.com/2022/08/08/go%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0linxu/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="go项目部署到linxu2020-09-27阅读 4390 环境: 在mac上编译, 编译后上传到linux, 然后运行代码 go项目打包 一、直接部署到linux  在mac上, 进入到项目目录, 执行以下命令CGO_ENABLED&#x3D;0 GOOS&#x3D;linux GOARCH&#x3D;amd64 go build main.go  , 进行编译: , 生成一个main文件.">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-08T13:15:16.000Z">
+<meta property="article:modified_time" content="2022-08-08T13:17:41.571Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Categories - WYX同学的Blog</title>
+  <title>go项目部署到linxu - WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -80,7 +90,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -185,9 +195,49 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Categories"></span>
+            <span id="subtitle" data-typed-text="go项目部署到linxu"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-08 21:15" pubdate>
+          August 8, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          485 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          5 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -203,309 +253,198 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">go项目部署到linxu</h1>
+            
+            
+              <div class="markdown-body">
                 
+                <h1 id="go项目部署到linxu"><a href="#go项目部署到linxu" class="headerlink" title="go项目部署到linxu"></a>go项目部署到linxu</h1><p>2020-09-27阅读 4390</p>
+<p>环境: 在mac上编译, 编译后上传到linux, 然后运行代码</p>
+<p><strong>go项目打包</strong></p>
+<p>一、直接部署到linux</p>
+<ol>
+<li>在mac上, 进入到项目目录, 执行以下命令CGO_ENABLED&#x3D;0 GOOS&#x3D;linux GOARCH&#x3D;amd64 go build main.go</li>
+</ol>
+<p>, 进行编译: , 生成一个main文件. </p>
+<ol start="2">
+<li>将main文件上传到linux任意目录下, 执行 nohup .&#x2F;main &amp;运行项目. 如果出错, 则查看日志即可</li>
+</ol>
+<p>二. 通过nginx部署</p>
+<p> <strong>beego项目打包</strong></p>
+<p> 环境: 本地开发是mac, 部署到linux</p>
+<ol>
+<li><p>在mac上, 进入到项目目录, 执行: bee pack -be GOOS&#x3D;linux 进行打包, 打包成功后, 会生成一个****.tar.gz的文件.</p>
+</li>
+<li><p>在linux的某一个目录下创建一个新的文件夹(一定要创建, 否则会解压到根目录), 将***tar.gz文件上传到linux. </p>
+</li>
+<li><p>解压 tar -xvzf xxxx.tar.gz</p>
+</li>
+<li><p>分配权限: sudo chmod 777 xxxx</p>
+</li>
+<li><p>运行可执行文件. nohup .&#x2F;**** &amp;  成功</p>
+</li>
+</ol>
 
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
 
-
-
-
-<div class="category-list">
+<span class="category-chains">
   
   
     
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Kubernetes"
-        id="heading-30136395f01879792198317c11831ea4" role="tab" data-toggle="collapse" href="#collapse-30136395f01879792198317c11831ea4"
-        aria-expanded="false"
-      >
-        Kubernetes
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/Kubernetes/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>4</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-30136395f01879792198317c11831ea4"
-           role="tabpanel" aria-labelledby="heading-30136395f01879792198317c11831ea4">
+      <span class="category-chain">
         
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2022/07/30/%E7%AC%AC4%E7%AB%A0%20Pod--Kubernetes%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D/" title="第4章 Pod--Kubernetes的基本单位"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">第4章 Pod--Kubernetes的基本单位</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/07/17/%E7%AC%AC3%E7%AB%A0-Kubernetes%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/" title="第3章 Kubernetes的安装与部署"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">第3章 Kubernetes的安装与部署</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/07/17/%E7%AC%AC2%E7%AB%A0-K8S%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" title="第2章 K8S的核心概念"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">第2章 K8S的核心概念</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/07/13/K8S%E6%9E%81%E9%80%9F%E5%85%A5%E9%97%A8/" title="K8S极速入门"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">K8S极速入门</span>
-        </a>
-      
-    
-  </div>
+  <a href="/categories/go/" class="category-chain-item">go</a>
+  
+  
 
-        
-      </div>
+      </span>
+    
+  
+</span>
+
     </div>
   
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Docker"
-        id="heading-c5fd214cdd0d2b3b4272e73b022ba5c2" role="tab" data-toggle="collapse" href="#collapse-c5fd214cdd0d2b3b4272e73b022ba5c2"
-        aria-expanded="false"
-      >
-        Docker
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/Docker/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>1</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-c5fd214cdd0d2b3b4272e73b022ba5c2"
-           role="tabpanel" aria-labelledby="heading-c5fd214cdd0d2b3b4272e73b022ba5c2">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2022/07/13/Docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="Docker快速入门"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Docker快速入门</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Swaggo"
-        id="heading-5c9f23cbd27df6456077364c18e6b9af" role="tab" data-toggle="collapse" href="#collapse-5c9f23cbd27df6456077364c18e6b9af"
-        aria-expanded="false"
-      >
-        Swaggo
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/Swaggo/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>1</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-5c9f23cbd27df6456077364c18e6b9af"
-           role="tabpanel" aria-labelledby="heading-5c9f23cbd27df6456077364c18e6b9af">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2022/07/27/Swag/" title="Swag"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Swag</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="go"
-        id="heading-34d1f91fb2e514b8576fab1a75a89a6b" role="tab" data-toggle="collapse" href="#collapse-34d1f91fb2e514b8576fab1a75a89a6b"
-        aria-expanded="false"
-      >
-        go
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/go/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>1</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-34d1f91fb2e514b8576fab1a75a89a6b"
-           role="tabpanel" aria-labelledby="heading-34d1f91fb2e514b8576fab1a75a89a6b">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2022/08/08/go%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0linxu/" title="go项目部署到linxu"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">go项目部署到linxu</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Mathematical Modeling"
-        id="heading-3c8299e4e33c81b7de11b5da814662b9" role="tab" data-toggle="collapse" href="#collapse-3c8299e4e33c81b7de11b5da814662b9"
-        aria-expanded="false"
-      >
-        Mathematical Modeling
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/Mathematical-Modeling/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>1</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-3c8299e4e33c81b7de11b5da814662b9"
-           role="tabpanel" aria-labelledby="heading-3c8299e4e33c81b7de11b5da814662b9">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2022/08/05/%E6%95%B0%E5%AD%A6%E8%A7%84%E5%88%92/" title="数学规划"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">数学规划</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Python"
-        id="heading-a7f5f35426b927411fc9231b56382173" role="tab" data-toggle="collapse" href="#collapse-a7f5f35426b927411fc9231b56382173"
-        aria-expanded="false"
-      >
-        Python
-        <span class="list-group-count"></span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-        <a href="/categories/Python/" class="category-count col-2 col-md-1 col-xm-1">
-          <i class="iconfont icon-articles"></i>
-          <span>1</span>
-        </a>
-      
-      <div class="category-collapse collapse " id="collapse-a7f5f35426b927411fc9231b56382173"
-           role="tabpanel" aria-labelledby="heading-a7f5f35426b927411fc9231b56382173">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2022/08/06/M1-%E9%85%8D%E7%BD%AEnumpy%E5%92%8Cscipy/" title="M1 配置numpy和scipy"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">M1 配置numpy和scipy</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
   
 </div>
 
 
-              </div>
-            </div>
-          </div>
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>go项目部署到linxu</div>
+      <div>http://example.com/2022/08/08/go项目部署到linxu/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 8, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
         </div>
       </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/06/M1-%E9%85%8D%E7%BD%AEnumpy%E5%92%8Cscipy/" title="M1 配置numpy和scipy">
+                        <span class="hidden-mobile">M1 配置numpy和scipy</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -599,6 +538,72 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
