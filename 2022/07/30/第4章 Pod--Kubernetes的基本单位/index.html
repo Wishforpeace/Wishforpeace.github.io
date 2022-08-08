@@ -19,7 +19,7 @@
     <meta name="description" content="Pod是Kubernetes中的&#x3D;&#x3D;基本单位&#x3D;&#x3D;。容器本身并不会直接分配到主机上，而会封装到名为Pod的对象中。 Pod通常表示单个应用程序，由一个或多个关系紧密的容器构成，这些容器拥有同样的生命周期，作为一个整体一起编排到Node上。 这些容器共享环境、存储卷（volume）和IP空间。尽管Pod基于一个或多个容器，但应将Pod视作一个单一的整体、单独的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第4章 Pod--Kubernetes的基本单位">
-<meta property="og:url" content="http://example.com/2022/07/30/2022-07-17-%E7%AC%AC4%E7%AB%A0-Pod--Kubernetes%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D/index.html">
+<meta property="og:url" content="http://example.com/2022/07/30/%E7%AC%AC4%E7%AB%A0%20Pod--Kubernetes%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
 <meta property="og:description" content="Pod是Kubernetes中的&#x3D;&#x3D;基本单位&#x3D;&#x3D;。容器本身并不会直接分配到主机上，而会封装到名为Pod的对象中。 Pod通常表示单个应用程序，由一个或多个关系紧密的容器构成，这些容器拥有同样的生命周期，作为一个整体一起编排到Node上。 这些容器共享环境、存储卷（volume）和IP空间。尽管Pod基于一个或多个容器，但应将Pod视作一个单一的整体、单独的">
 <meta property="og:locale" content="en_US">
@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804222023988.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804222153635.png">
 <meta property="article:published_time" content="2022-07-30T01:36:03.000Z">
-<meta property="article:modified_time" content="2022-08-05T13:03:50.423Z">
+<meta property="article:modified_time" content="2022-08-08T07:59:14.106Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804215147389.png">
@@ -241,7 +241,7 @@
         
         
         
-          90 mins
+          93 mins
         
       </span>
     
@@ -406,6 +406,14 @@
 <hr>
 <p><em>提示：command和args设置会分别覆盖原Docker镜像中定义的EntryPoint与CMD，在使用时请务必注意以下规则。</em></p>
 <hr>
+<ul>
+<li>如果没有在模板中提供command或args，则<u>使用Docker镜像中定义的默认值运行</u>。</li>
+<li>如果在模板中提供了command，但未提供args，则仅使用提供的command。Docker镜像中定义的默认的EntryPoint和默认的命令都将被忽略。</li>
+<li>如果只提供了args，则Docker镜像中定义的默认的EntryPoint将与所提供的args组合到一起运行。</li>
+<li>如果只提供了args，则Docker镜像中定义的默认的EntryPoint将与所提供的args组合到一起运行。</li>
+<li>如果同时提供了command和args，Docker镜像中定义的默认的EntryPoint和命令都将被忽略。所提供的command和args将会组合到一起运行。</li>
+</ul>
+<p>同样，在Pod模板的Container设置中的各项信息，在运行时都会转换为类似的容器命令来执行。Container的基础信息的设置如下所示。</p>
 
                 
               </div>
@@ -445,7 +453,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>第4章 Pod--Kubernetes的基本单位</div>
-      <div>http://example.com/2022/07/30/2022-07-17-第4章-Pod--Kubernetes的基本单位/</div>
+      <div>http://example.com/2022/07/30/第4章 Pod--Kubernetes的基本单位/</div>
     </div>
     <div class="license-meta">
       
