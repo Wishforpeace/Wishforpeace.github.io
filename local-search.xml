@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>第1章 预备知识</title>
+    <link href="/2022/09/03/%E7%AC%AC1%E7%AB%A0-%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86/"/>
+    <url>/2022/09/03/%E7%AC%AC1%E7%AB%A0-%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="第1章预备知识"><a href="#第1章预备知识" class="headerlink" title="第1章预备知识"></a>第1章预备知识</h1><h2 id="1-1-机器语言与汇编语言"><a href="#1-1-机器语言与汇编语言" class="headerlink" title="1.1 机器语言与汇编语言"></a>1.1 机器语言与汇编语言</h2><h3 id="1-1-1-机器语言"><a href="#1-1-1-机器语言" class="headerlink" title="1.1.1 机器语言"></a>1.1.1 机器语言</h3><p>机器指令：操作码 + 地址码</p><p>指令的全体为计算机的<strong>指令系统</strong></p><p>指令集合为<strong>机器语言</strong></p><p><strong>机器语言程序</strong></p><h3 id="1-1-2-汇编语言"><a href="#1-1-2-汇编语言" class="headerlink" title="1.1.2 汇编语言"></a>1.1.2 汇编语言</h3><p><strong>助记符</strong>表示机器指令的<strong>操作码</strong>；用变量代替操作数的<strong>存放地址</strong>；在指令前冠以<strong>标号</strong>， 用来代表该指令的存放地址等。 </p><p><strong>指令助记符、语句标号、数据变量、伪指令</strong>及它们的使用规则构成了整个汇编语言的内容。</p><h3 id="1-2-Intel系列机"><a href="#1-2-Intel系列机" class="headerlink" title="1.2 Intel系列机"></a>1.2 Intel系列机</h3>]]></content>
+    
+    
+    <categories>
+      
+      <category>汇编语言</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title></title>
     <link href="/2022/08/12/%E5%A6%82%E4%BD%95%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E9%80%9A%E4%B8%8D%E9%80%9A/"/>
     <url>/2022/08/12/%E5%A6%82%E4%BD%95%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E9%80%9A%E4%B8%8D%E9%80%9A/</url>
