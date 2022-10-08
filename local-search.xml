@@ -4,12 +4,31 @@
   
   
   <entry>
+    <title>Colly</title>
+    <link href="/2022/10/08/Colly/"/>
+    <url>/2022/10/08/Colly/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Colly"><a href="#Colly" class="headerlink" title="Colly"></a>Colly</h1><blockquote><h2 id="Fast-and-Elegant-Scraping-Framework-for-Gophers"><a href="#Fast-and-Elegant-Scraping-Framework-for-Gophers" class="headerlink" title="Fast and Elegant Scraping Framework for Gophers"></a>Fast and Elegant Scraping Framework for Gophers</h2></blockquote><p>Colly provides a clean interface to write any kind of <strong>crawler&#x2F;scraper&#x2F;spider</strong></p><p>With Colly you can easily extract structured data from websites, which can be used for a wide range of applications, like data mining, data processing or archiving.</p><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">go</span> <span class="hljs-built_in">get</span> -<span class="hljs-keyword">u</span> github.<span class="hljs-keyword">com</span>/gocolly/colly/...<br></code></pre></td></tr></table></figure><h2 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started"></a>Getting started</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/gocolly/colly&quot;</span><br></code></pre></td></tr></table></figure><h3 id="Collector"><a href="#Collector" class="headerlink" title="Collector"></a>Collector</h3>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>第2章 寻址方式</title>
     <link href="/2022/09/12/%E7%AC%AC2%E7%AB%A0-%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F/"/>
     <url>/2022/09/12/%E7%AC%AC2%E7%AB%A0-%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h1 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h1><h2 id="1-直接寻址"><a href="#1-直接寻址" class="headerlink" title="1.直接寻址"></a>1.直接寻址</h2>]]></content>
     
+    
+    <categories>
+      
+      <category>汇编语言</category>
+      
+    </categories>
     
     
   </entry>
