@@ -24,7 +24,7 @@
 <meta property="og:description" content="验证栈序列给定 pushed 和 popped 两个序列，每个序列中的 值都不重复，只有当它们可能是在最初空栈上进行的推入 push 和弹出 pop 操作序列的结果时，返回 true；否则，返回 false 。 方法一：pushed和popped的性质：  pushed中元素互不相同 popped和pushed长度相同 popped是数组pushed的一个排列  结论：  栈内无重复元素 如果pu">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-08T15:30:57.000Z">
-<meta property="article:modified_time" content="2022-11-08T16:07:22.505Z">
+<meta property="article:modified_time" content="2022-11-12T03:53:10.832Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          230 words
+          1.3k words
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          2 mins
+          12 mins
         
       </span>
     
@@ -283,7 +283,24 @@
 <ul>
 <li>栈内无重复元素</li>
 <li>如果<code>pushed</code>和<code>poped</code>是有效的栈操作序列，则经过所有的入栈和出栈操作之后，每个元素各入栈和出栈一次，栈为空</li>
-<li></li>
+</ul>
+<p>方法：</p>
+<p>因此，可以遍历两个数组，模拟入栈和出栈操作，判断两个数组是否为有效的栈操作序列。</p>
+<p>模拟入栈操作可以通过遍历数组 <code>pushed</code>实现。由于只有栈顶的元素可以出栈，因此需要判断栈顶元素是否与<code>popped</code>的当前元素相同，如果相同则将栈顶元素出栈。由于元素互不相同，因此当前栈顶元素与<code>popped</code>的当前元素必须将栈顶元素出栈，否则出栈顺序一定不等于<code>popped</code>。</p>
+<p>验证栈序列的模拟做法：</p>
+<ol>
+<li>遍历数组<code>pushed</code>，将<code>pushed</code>的每个元素一次入栈；</li>
+<li>每次将<code>pushed</code>的元素入栈之后，如果栈不为空且栈顶元素与<code>popped</code>的当前元素相同，则将栈顶元素出栈，同时遍历数组<code>popped</code>，直到栈为空或栈顶元素与<code>popped</code>的当前元素不同。</li>
+</ol>
+<p>遍历数组<code>pushed</code>,每个元素都按照<code>pushed</code>的顺序入栈一次。如果结束以后，栈为空，则表明元素按照了<code>popped</code>顺序弹出，返回true，否则返回false。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stack&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">validateStackSequences</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;pushed, vector&lt;<span class="hljs-type">int</span>&gt; &amp;popped)</span></span><br><span class="hljs-function">    </span>&#123;<br>        stack&lt;<span class="hljs-type">int</span>&gt; st;<br>        <span class="hljs-type">int</span> n = pushed.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>; i &lt; n; i++)<br>        &#123;<br>            <span class="hljs-comment">//插入数据</span><br>            <span class="hljs-comment">//能够避免产生不必要的临时变量</span><br>            st.<span class="hljs-built_in">emplace</span>(pushed[i]);<br>            <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>() &amp;&amp; st.<span class="hljs-built_in">top</span>() == popped[j])<br>            &#123;<br>                st.<span class="hljs-built_in">pop</span>();<br>                j++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> st.<span class="hljs-built_in">empty</span>();<br>    &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    vector&lt;<span class="hljs-type">int</span>&gt; pushed = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;<br>    vector&lt;<span class="hljs-type">int</span>&gt; popped = &#123;<span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;;<br>    <span class="hljs-type">bool</span> result;<br>    Solution solution;<br>    cout &lt;&lt; solution.<span class="hljs-built_in">validateStackSequences</span>(pushed, popped) &lt;&lt; endl;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>复杂度分析:</p>
+<ul>
+<li>时间复杂度O(n)</li>
+<li>空间负责度O(n)，取决于栈的大小</li>
 </ul>
 
                 
