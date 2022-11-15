@@ -16,21 +16,21 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="验证栈序列给定 pushed 和 popped 两个序列，每个序列中的 值都不重复，只有当它们可能是在最初空栈上进行的推入 push 和弹出 pop 操作序列的结果时，返回 true；否则，返回 false 。 方法一：pushed和popped的性质：  pushed中元素互不相同 popped和pushed长度相同 popped是数组pushed的一个排列  结论：  栈内无重复元素 如果pu">
+    <meta name="description" content="最大子序和给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 子数组 是数组中的一个连续部分。 示例 1： 123输入：nums &#x3D; [-2,1,-3,4,-1,2,1,-5,4]输出：6解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。  示例 2： 12输入：nums &#x3D; [1]输出：1  示例 3： 12输入：nums &#x3D; [">
 <meta property="og:type" content="article">
-<meta property="og:title" content="验证栈序列">
-<meta property="og:url" content="http://example.com/2022/11/08/%E9%AA%8C%E8%AF%81%E6%A0%88%E5%BA%8F%E5%88%97/index.html">
+<meta property="og:title" content="最大子序和">
+<meta property="og:url" content="http://example.com/2022/11/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="验证栈序列给定 pushed 和 popped 两个序列，每个序列中的 值都不重复，只有当它们可能是在最初空栈上进行的推入 push 和弹出 pop 操作序列的结果时，返回 true；否则，返回 false 。 方法一：pushed和popped的性质：  pushed中元素互不相同 popped和pushed长度相同 popped是数组pushed的一个排列  结论：  栈内无重复元素 如果pu">
+<meta property="og:description" content="最大子序和给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 子数组 是数组中的一个连续部分。 示例 1： 123输入：nums &#x3D; [-2,1,-3,4,-1,2,1,-5,4]输出：6解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。  示例 2： 12输入：nums &#x3D; [1]输出：1  示例 3： 12输入：nums &#x3D; [">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-11-08T15:30:57.000Z">
-<meta property="article:modified_time" content="2022-11-12T05:35:06.538Z">
+<meta property="article:published_time" content="2022-11-12T05:33:56.000Z">
+<meta property="article:modified_time" content="2022-11-15T05:39:28.134Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>验证栈序列 - WYX同学的Blog</title>
+  <title>最大子序和 - WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -195,7 +195,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="验证栈序列"></span>
+            <span id="subtitle" data-typed-text="最大子序和"></span>
           
         </div>
 
@@ -206,8 +206,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-08 23:30" pubdate>
-          November 8, 2022 pm
+        <time datetime="2022-11-12 13:33" pubdate>
+          November 12, 2022 pm
         </time>
       </span>
     
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          289 words
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          12 mins
+          3 mins
         
       </span>
     
@@ -267,42 +267,29 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">验证栈序列</h1>
+            <h1 style="display: none">最大子序和</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="验证栈序列"><a href="#验证栈序列" class="headerlink" title="验证栈序列"></a>验证栈序列</h1><p>给定 <code>pushed</code> 和 <code>popped</code> 两个序列，每个序列中的 <strong>值都不重复</strong>，只有当它们可能是在最初空栈上进行的推入 push 和弹出 pop 操作序列的结果时，返回 <code>true</code>；否则，返回 <code>false</code> 。</p>
-<h2 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h2><p><code>pushed</code>和<code>popped</code>的性质：</p>
+                <h1 id="最大子序和"><a href="#最大子序和" class="headerlink" title="最大子序和"></a>最大子序和</h1><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p><strong>子数组</strong> 是数组中的一个连续部分。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs subunit">输入：nums = [<span class="hljs-string">-2</span>,1,<span class="hljs-string">-3</span>,4,<span class="hljs-string">-1</span>,2,1,<span class="hljs-string">-5</span>,4]<br>输出：6<br>解释：连续子数组 [4,<span class="hljs-string">-1</span>,2,1] 的和最大，为 6 。<br></code></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">输入：nums <span class="hljs-operator">=</span> [<span class="hljs-number">1</span>]<br>输出：<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[5,4,-1,7,8]</span><br>输出：<span class="hljs-number">23</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
 <ul>
-<li><code>pushed</code>中元素互不相同</li>
-<li><code>popped</code>和<code>pushed</code>长度相同</li>
-<li><code>popped</code>是数组<code>pushed</code>的一个排列</li>
+<li><code>1 &lt;= nums.length &lt;= 105</code></li>
+<li><code>-104 &lt;= nums[i] &lt;= 104</code></li>
 </ul>
-<p>结论：</p>
-<ul>
-<li>栈内无重复元素</li>
-<li>如果<code>pushed</code>和<code>poped</code>是有效的栈操作序列，则经过所有的入栈和出栈操作之后，每个元素各入栈和出栈一次，栈为空</li>
-</ul>
-<p>方法：</p>
-<p>因此，可以遍历两个数组，模拟入栈和出栈操作，判断两个数组是否为有效的栈操作序列。</p>
-<p>模拟入栈操作可以通过遍历数组 <code>pushed</code>实现。由于只有栈顶的元素可以出栈，因此需要判断栈顶元素是否与<code>popped</code>的当前元素相同，如果相同则将栈顶元素出栈。由于元素互不相同，因此当前栈顶元素与<code>popped</code>的当前元素必须将栈顶元素出栈，否则出栈顺序一定不等于<code>popped</code>。</p>
-<p>验证栈序列的模拟做法：</p>
-<ol>
-<li>遍历数组<code>pushed</code>，将<code>pushed</code>的每个元素一次入栈；</li>
-<li>每次将<code>pushed</code>的元素入栈之后，如果栈不为空且栈顶元素与<code>popped</code>的当前元素相同，则将栈顶元素出栈，同时遍历数组<code>popped</code>，直到栈为空或栈顶元素与<code>popped</code>的当前元素不同。</li>
-</ol>
-<p>遍历数组<code>pushed</code>,每个元素都按照<code>pushed</code>的顺序入栈一次。如果结束以后，栈为空，则表明元素按照了<code>popped</code>顺序弹出，返回true，否则返回false。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stack&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">validateStackSequences</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;pushed, vector&lt;<span class="hljs-type">int</span>&gt; &amp;popped)</span></span><br><span class="hljs-function">    </span>&#123;<br>        stack&lt;<span class="hljs-type">int</span>&gt; st;<br>        <span class="hljs-type">int</span> n = pushed.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>; i &lt; n; i++)<br>        &#123;<br>            <span class="hljs-comment">//插入数据</span><br>            <span class="hljs-comment">//能够避免产生不必要的临时变量</span><br>            st.<span class="hljs-built_in">emplace</span>(pushed[i]);<br>            <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>() &amp;&amp; st.<span class="hljs-built_in">top</span>() == popped[j])<br>            &#123;<br>                st.<span class="hljs-built_in">pop</span>();<br>                j++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> st.<span class="hljs-built_in">empty</span>();<br>    &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    vector&lt;<span class="hljs-type">int</span>&gt; pushed = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;<br>    vector&lt;<span class="hljs-type">int</span>&gt; popped = &#123;<span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;;<br>    <span class="hljs-type">bool</span> result;<br>    Solution solution;<br>    cout &lt;&lt; solution.<span class="hljs-built_in">validateStackSequences</span>(pushed, popped) &lt;&lt; endl;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-
-
-<p>复杂度分析:</p>
-<ul>
-<li>时间复杂度O(n)</li>
-<li>空间负责度O(n)，取决于栈的大小for (int x: nums)</li>
-</ul>
-
+<p><strong>进阶：</strong>如果你已经实现复杂度为 <code>O(n)</code> 的解法，尝试使用更为精妙的 <strong>分治法</strong> 求解。</p>
+<h1 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h1><h2 id="解法一：DP"><a href="#解法一：DP" class="headerlink" title="解法一：DP"></a>解法一：DP</h2>
                 
               </div>
             
@@ -340,8 +327,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>验证栈序列</div>
-      <div>http://example.com/2022/11/08/验证栈序列/</div>
+      <div>最大子序和</div>
+      <div>http://example.com/2022/11/12/最大子序和/</div>
     </div>
     <div class="license-meta">
       
@@ -353,7 +340,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 8, 2022</div>
+          <div>November 12, 2022</div>
         </div>
       
       
@@ -383,18 +370,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/" title="最大子序和">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">最大子序和</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/02/Uninformed-Search/" title="Uninformed Search">
-                        <span class="hidden-mobile">Uninformed Search</span>
+                      <a href="/2022/11/08/%E9%AA%8C%E8%AF%81%E6%A0%88%E5%BA%8F%E5%88%97/" title="验证栈序列">
+                        <span class="hidden-mobile">验证栈序列</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
