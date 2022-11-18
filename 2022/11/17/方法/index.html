@@ -16,15 +16,15 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="方法重点：面向对象编程（OOP：Object Oriented Programming）">
+    <meta name="description" content="方法重点：面向对象编程（OOP：Object Oriented Programming） 不同于C++和Java的Class类写法， 1.方法声明12345678910111213import &quot;math&quot;type Point struct &amp;#123;	X, Y float64&amp;#125;func Distance(p, q Point) float64 &amp;#123;	ret">
 <meta property="og:type" content="article">
 <meta property="og:title" content="方法">
 <meta property="og:url" content="http://example.com/2022/11/17/%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="方法重点：面向对象编程（OOP：Object Oriented Programming）">
+<meta property="og:description" content="方法重点：面向对象编程（OOP：Object Oriented Programming） 不同于C++和Java的Class类写法， 1.方法声明12345678910111213import &quot;math&quot;type Point struct &amp;#123;	X, Y float64&amp;#125;func Distance(p, q Point) float64 &amp;#123;	ret">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-17T15:30:57.000Z">
-<meta property="article:modified_time" content="2022-11-17T09:02:25.954Z">
+<meta property="article:modified_time" content="2022-11-18T12:51:53.759Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          42 words
+          1.4k words
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          1 mins
+          12 mins
         
       </span>
     
@@ -272,7 +272,33 @@
             
               <div class="markdown-body">
                 
-                <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>重点：面向对象编程（OOP：Object Oriented Programming）</p>
+                <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p><strong>重点</strong>：面向对象编程（OOP：Object Oriented Programming）</p>
+<p>不同于C++和Java的<code>Class</code>类写法，</p>
+<h1 id="1-方法声明"><a href="#1-方法声明" class="headerlink" title="1.方法声明"></a>1.方法声明</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;math&quot;</span><br><br><span class="hljs-keyword">type</span> Point <span class="hljs-keyword">struct</span> &#123;<br>	X, Y <span class="hljs-type">float64</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Distance</span><span class="hljs-params">(p, q Point)</span></span> <span class="hljs-type">float64</span> &#123;<br>	<span class="hljs-keyword">return</span> math.Hypot(q.X-p.X, q.Y-p.Y)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p Point)</span></span> Distance(q Point) <span class="hljs-type">float64</span> &#123;<br>	<span class="hljs-keyword">return</span> math.Hypot(q.X-p.X, q.Y-p.Y)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>此处11行的代码，有一个<code>Point</code>类型的变量为<code>p</code>，此处的<code>p</code>名为方法的接收器<code>receiver</code>，早期也被称为”向一个对象发送消息”。</p>
+<p>此处我们来看一下C++的写法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span><br>&#123;<br><span class="hljs-keyword">protected</span>:<br>    <span class="hljs-type">float</span> X, Y;<br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">Point</span>(<span class="hljs-type">float</span> x, <span class="hljs-type">float</span> y);<br>    <span class="hljs-function"><span class="hljs-type">float</span> <span class="hljs-title">Distance</span><span class="hljs-params">(Point q)</span></span>;<br>&#125;;<br><br>Point::<span class="hljs-built_in">Point</span>(<span class="hljs-type">float</span> x, <span class="hljs-type">float</span> y)<br>&#123;<br>    X = x;<br>    Y = y;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">float</span> <span class="hljs-title">Point::Distance</span><span class="hljs-params">(Point q)</span></span><br><span class="hljs-function"></span>&#123;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">hypot</span>(X - q.X, Y - q.Y);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-function">Point <span class="hljs-title">p</span><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)</span></span>;<br>    <span class="hljs-function">Point <span class="hljs-title">q</span><span class="hljs-params">(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>)</span></span>;<br>    cout &lt;&lt; p.<span class="hljs-built_in">Distance</span>(q) &lt;&lt; endl;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>视线回到go</p>
+<p>我们来测试一下上面的代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go">p := Point&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;<br>q := Point&#123;<span class="hljs-number">4</span>, <span class="hljs-number">6</span>&#125;<br>fmt.Println(Distance(p, q)) <span class="hljs-comment">// &quot;5&quot;, function call</span><br>fmt.Println(p.Distance(q)) <span class="hljs-comment">// &quot;5&quot;, method call</span><br></code></pre></td></tr></table></figure>
+
+<p>第三行调用的是函数，第四行调用的是方法，它俩没有产生任何冲突，仅仅是名字相同，一个是简单的函数运算，一个是Point类下的指定方法。</p>
+<p><code>p.Distance(q)</code>被称为选择器，只有对应的类型才能够使用。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Path []Point<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(path Path)</span></span> Distance() <span class="hljs-type">float64</span> &#123;<br>	sum := <span class="hljs-number">0.0</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> path &#123;<br>		<span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">0</span> &#123;<br>			sum += path[i<span class="hljs-number">-1</span>].Distance(path[i])<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> sum<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>此处<code>Point</code>是一个<code>slice</code>类型，虽然不是结构体，但是依然可以定义方法。</p>
+<p>其实任何类型都可以定义方法，只要不是指针和<code>interface&#123;&#125;</code></p>
+<p>此处的<code>Distance()</code>是特定于<code>Path</code>的方法</p>
+<p>如果是对于同一类型,内部方法必须使用唯一方法名，但是如果是不同类型，方法名可以相同</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//举例</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-基于指针对象的方法"><a href="#2-基于指针对象的方法" class="headerlink" title="2.基于指针对象的方法"></a>2.基于指针对象的方法</h2><p>调用函数时，会拷贝参数值，但是如果变量</p>
 
                 
               </div>
