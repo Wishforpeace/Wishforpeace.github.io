@@ -24,7 +24,7 @@
 <meta property="og:description" content="方法重点：面向对象编程（OOP：Object Oriented Programming） 不同于C++和Java的Class类写法， 1.方法声明12345678910111213import &quot;math&quot;type Point struct &amp;#123;	X, Y float64&amp;#125;func Distance(p, q Point) float64 &amp;#123;	ret">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-17T15:30:57.000Z">
-<meta property="article:modified_time" content="2022-11-18T12:51:53.759Z">
+<meta property="article:modified_time" content="2022-11-18T13:29:39.180Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          3.3k words
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          12 mins
+          28 mins
         
       </span>
     
@@ -274,7 +274,7 @@
                 
                 <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p><strong>重点</strong>：面向对象编程（OOP：Object Oriented Programming）</p>
 <p>不同于C++和Java的<code>Class</code>类写法，</p>
-<h1 id="1-方法声明"><a href="#1-方法声明" class="headerlink" title="1.方法声明"></a>1.方法声明</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;math&quot;</span><br><br><span class="hljs-keyword">type</span> Point <span class="hljs-keyword">struct</span> &#123;<br>	X, Y <span class="hljs-type">float64</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Distance</span><span class="hljs-params">(p, q Point)</span></span> <span class="hljs-type">float64</span> &#123;<br>	<span class="hljs-keyword">return</span> math.Hypot(q.X-p.X, q.Y-p.Y)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p Point)</span></span> Distance(q Point) <span class="hljs-type">float64</span> &#123;<br>	<span class="hljs-keyword">return</span> math.Hypot(q.X-p.X, q.Y-p.Y)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="1-方法声明"><a href="#1-方法声明" class="headerlink" title="1.方法声明"></a>1.方法声明</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;math&quot;</span><br><br><span class="hljs-keyword">type</span> Point <span class="hljs-keyword">struct</span> &#123;<br>	X, Y <span class="hljs-type">float64</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Distance</span><span class="hljs-params">(p, q Point)</span></span> <span class="hljs-type">float64</span> &#123;<br>	<span class="hljs-keyword">return</span> math.Hypot(q.X-p.X, q.Y-p.Y)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p Point)</span></span> Distance(q Point) <span class="hljs-type">float64</span> &#123;<br>	<span class="hljs-keyword">return</span> math.Hypot(q.X-p.X, q.Y-p.Y)<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>此处11行的代码，有一个<code>Point</code>类型的变量为<code>p</code>，此处的<code>p</code>名为方法的接收器<code>receiver</code>，早期也被称为”向一个对象发送消息”。</p>
 <p>此处我们来看一下C++的写法</p>
@@ -298,7 +298,47 @@
 <p>如果是对于同一类型,内部方法必须使用唯一方法名，但是如果是不同类型，方法名可以相同</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//举例</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="2-基于指针对象的方法"><a href="#2-基于指针对象的方法" class="headerlink" title="2.基于指针对象的方法"></a>2.基于指针对象的方法</h2><p>调用函数时，会拷贝参数值，但是如果变量</p>
+<h2 id="2-基于指针对象的方法"><a href="#2-基于指针对象的方法" class="headerlink" title="2.基于指针对象的方法"></a>2.基于指针对象的方法</h2><p>调用函数时，会拷贝参数值，但是如果函数需要修改一个变量或者变量太大，这个时候就需要使用指针，通过地址直接修改变量。</p>
+<p>如下:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p *Point)</span></span> ScaleBy(factor <span class="hljs-type">float64</span>) &#123;<br>	p.X *= factor<br>	p.Y *= factor<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>现实之中，如果一个<code>Point</code>的类含有一个指针作为接收器的方法，理论上其余的方法也都应该以指针作为接收器方法。</p>
+<p>特别注意，如果一个类型名本身就是一个指针，是不能够出现在接收器之中的。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> P *<span class="hljs-type">int</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(P)</span></span> f() &#123; <span class="hljs-comment">/* ... */</span> &#125;<br></code></pre></td></tr></table></figure>
+
+<p>想要使用<code>Point</code>的指针接收器，只需要提供<code>Point</code> 类型的指针即可</p>
+<p>如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go">r := &amp;Point&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;<br>r.ScaleBy(<span class="hljs-number">2</span>)<br>fmt.Println(*r)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go">p := Point&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;<br>pptr := &amp;p<br>pptr.ScaleBy(<span class="hljs-number">2</span>)<br>fmt.Println(p)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go">p := Point&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;<br>(&amp;p).ScaleBy(<span class="hljs-number">2</span>)<br>fmt.Println(p)<br></code></pre></td></tr></table></figure>
+
+<p>不过后面两种方法略显笨拙，以下为简短写法</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">p.ScaleBy(<span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<p>编译器会<strong>隐式地帮我们用&amp;p</strong> 去调用 ScaleBy 这个方法。这种简写方法只适用于“变量”，包括struct 里的字段比如 p.X，以及 array 和 slice 内的元素比如 perim[0]。我们不能通过一个无法取到地址的接收器来调用指针方法，比如<strong>临时变量的内存地址</strong>就无法获取得到：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">Point&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;.ScaleBy(<span class="hljs-number">2</span>) <br></code></pre></td></tr></table></figure>
+
+<p>但是我们可以用一个<em>Point 这样的接收器来调用 Point 的方法，因为我们可以通过地址来找到这个变量，只要用解引用符号</em>来取到该变量即可。编译器在这里也会给我们<strong>隐式地插入*这个操作符</strong>，所以下面这两种写法等价的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go">pptr.Distance(q)<br>(*pptr).Distance(q)<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-通过嵌入结构体来扩展类型"><a href="#3-通过嵌入结构体来扩展类型" class="headerlink" title="3.通过嵌入结构体来扩展类型"></a>3.通过嵌入结构体来扩展类型</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;image/color&quot;</span><br><span class="hljs-keyword">type</span> Point <span class="hljs-keyword">struct</span>&#123; X, Y <span class="hljs-type">float64</span> &#125;<br><span class="hljs-keyword">type</span> ColoredPoint <span class="hljs-keyword">struct</span> &#123;<br> Point<br> Color color.RGBA<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>本来可以将颜色点定义为含有<code>X</code>、<code>Y</code>、<code>Color</code>三个字段的结构体，但是我们可以把<code>Point</code>嵌套放入<code>ColoredPoint</code>之中。</p>
+<p>在声明的时候，我们不需要再定义<code>Point</code>，而是可以直接使用<code>ColoredPoint</code>定义<code>X</code>、<code>Y</code>，</p>
+<p>对于 Point 中的方法我们也有类似的用法，我们可以把 ColoredPoint 类型当作接收器来调用Point 里的方法，即使 ColoredPoint 里没有声明这些方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go">red := color.RGBA&#123;<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>&#125;<br><br>blue := color.RGBA&#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>&#125;<br><br><span class="hljs-keyword">var</span> p = ColoredPoint&#123;Point&#123;<span class="hljs-number">1</span>, <span class="hljs-number">1</span>&#125;, red&#125;<br><br><span class="hljs-keyword">var</span> q = ColoredPoint&#123;Point&#123;<span class="hljs-number">5</span>, <span class="hljs-number">4</span>&#125;, blue&#125;<br><br>fmt.Println(p.Distance(q.Point)) <br><br>p.ScaleBy(<span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<p>展示可以看出<code>Point</code>类的方法都被引入到了<code>ColoredPoint</code>之中</p>
+<p>此处涉及到面向对象的知识，<code>Point</code>被称之为基类，而<code>ColoredPoint</code>被称之为子类。</p>
+<p>刚刚的调用等价于</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p ColoredPoint)</span></span> Distance(q Point) <span class="hljs-type">float64</span> &#123;<br> <span class="hljs-keyword">return</span> p.Point.Distance(q)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p *ColoredPoint)</span></span> ScaleBy(factor <span class="hljs-type">float64</span>) &#123;<br> p.Point.ScaleBy(factor)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当 Point.Distance 被第一个包装方法调用时，它的接收器值是 p.Point，而不是 p，当然了，在 Point 类的方法里，你是访问不到 ColoredPoint 的任何字段的。</p>
+<p>在类型中内嵌的匿名字段也可能是一个命名类型的指针，这种情况下字段和方法会被间接地引入到当前的类型中。添加这一层间接关系让我们可以共享通用的结构并动态地改变对象之间的关系。下面这个 ColoredPoint 的声明内嵌了一个*Point 的指针。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> ColoredPoint <span class="hljs-keyword">struct</span> &#123;<br><br> *Point<br><br> Color color.RGBA<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
