@@ -16,23 +16,21 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="深入理解神经网络原理">
+    <meta name="description" content="Runtime 就是程序的运行环境 Java：Java虚拟机 JavaScript：浏览器内核  Go的Runtime特点 go没有虚拟机概念 Runtime作为程序的一部分打包进二进制产物 Runtime随用户程序一起运行 Runtime与用户程序没有明显界限，直接通过函数调用  Go的Runtime能力 内存管理能力 垃圾回收能力（GC） 超强的并发能力（协程调度）  Go的Runtime其">
 <meta property="og:type" content="article">
-<meta property="og:title" content="01深入理解神经网络原理">
-<meta property="og:url" content="http://example.com/2022/11/18/01%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="runtime">
+<meta property="og:url" content="http://example.com/2022/12/17/runtime/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="深入理解神经网络原理">
+<meta property="og:description" content="Runtime 就是程序的运行环境 Java：Java虚拟机 JavaScript：浏览器内核  Go的Runtime特点 go没有虚拟机概念 Runtime作为程序的一部分打包进二进制产物 Runtime随用户程序一起运行 Runtime与用户程序没有明显界限，直接通过函数调用  Go的Runtime能力 内存管理能力 垃圾回收能力（GC） 超强的并发能力（协程调度）  Go的Runtime其">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221119000842671.png">
-<meta property="article:published_time" content="2022-11-18T15:57:43.000Z">
-<meta property="article:modified_time" content="2022-11-18T16:12:09.322Z">
+<meta property="article:published_time" content="2022-12-17T02:07:40.000Z">
+<meta property="article:modified_time" content="2022-12-17T12:10:35.696Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221119000842671.png">
   
   
   
-  <title>01深入理解神经网络原理 - WYX同学的Blog</title>
+  <title>runtime - WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +195,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="01深入理解神经网络原理"></span>
+            <span id="subtitle" data-typed-text="runtime"></span>
           
         </div>
 
@@ -208,8 +206,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-18 23:57" pubdate>
-          November 18, 2022 pm
+        <time datetime="2022-12-17 10:07" pubdate>
+          December 17, 2022 am
         </time>
       </span>
     
@@ -220,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          10 words
+          363 words
         
       </span>
     
@@ -231,7 +229,7 @@
         
         
         
-          1 mins
+          4 mins
         
       </span>
     
@@ -269,12 +267,59 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">01深入理解神经网络原理</h1>
+            <h1 style="display: none">runtime</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="深入理解神经网络原理"><a href="#深入理解神经网络原理" class="headerlink" title="深入理解神经网络原理"></a>深入理解神经网络原理</h1><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221119000842671.png" srcset="/img/loading.gif" lazyload alt="image-20221119000842671"></p>
+                <ul>
+<li>Runtime 就是程序的运行环境</li>
+<li>Java：Java虚拟机</li>
+<li>JavaScript：浏览器内核</li>
+</ul>
+<h1 id="Go的Runtime特点"><a href="#Go的Runtime特点" class="headerlink" title="Go的Runtime特点"></a>Go的Runtime特点</h1><ul>
+<li>go没有虚拟机概念</li>
+<li>Runtime作为程序的一部分打包进二进制产物</li>
+<li>Runtime随用户程序一起运行</li>
+<li>Runtime与用户程序没有明显界限，直接通过函数调用</li>
+</ul>
+<h1 id="Go的Runtime能力"><a href="#Go的Runtime能力" class="headerlink" title="Go的Runtime能力"></a>Go的Runtime能力</h1><ul>
+<li>内存管理能力</li>
+<li>垃圾回收能力（GC）</li>
+<li>超强的并发能力（协程调度）</li>
+</ul>
+<h1 id="Go的Runtime其他特点"><a href="#Go的Runtime其他特点" class="headerlink" title="Go的Runtime其他特点"></a>Go的Runtime其他特点</h1><ul>
+<li>Runtime有一定的屏蔽系统调用能力</li>
+<li>一些go的关键字其实是Runtime下的函数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>go</td>
+<td>newproc</td>
+</tr>
+<tr>
+<td>new</td>
+<td>newobject</td>
+</tr>
+<tr>
+<td>make</td>
+<td>makeslice，makechain，makemap</td>
+</tr>
+<tr>
+<td>&lt;-</td>
+<td>chansend1,chanrecv1</td>
+</tr>
+</tbody></table>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>Go的Runtime负责内存管理、垃圾回收、协程调度</li>
+<li>Go的Runtime被编译为用户程序的一部分，一起运行</li>
+</ul>
 
                 
               </div>
@@ -282,27 +327,6 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Deep-Learning/" class="category-chain-item">Deep Learning</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
   
   
 </div>
@@ -313,8 +337,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>01深入理解神经网络原理</div>
-      <div>http://example.com/2022/11/18/01深入理解神经网络原理/</div>
+      <div>runtime</div>
+      <div>http://example.com/2022/12/17/runtime/</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +350,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 18, 2022</div>
+          <div>December 17, 2022</div>
         </div>
       
       
@@ -356,9 +380,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/30/C++%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E5%A4%9A%E7%BA%A7catch%E5%8C%B9%E9%85%8D/" title="C++异常类型以及多级catch匹配">
+                      <a href="/2022/12/17/Go%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E7%BC%96%E8%AF%91/" title="Go程序如何编译">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++异常类型以及多级catch匹配</span>
+                        <span class="hidden-mobile">Go程序如何编译</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -366,8 +390,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/17/%E6%96%B9%E6%B3%95/" title="方法">
-                        <span class="hidden-mobile">方法</span>
+                      <a href="/2022/11/30/C++%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E5%A4%9A%E7%BA%A7catch%E5%8C%B9%E9%85%8D/" title="C++异常类型以及多级catch匹配">
+                        <span class="hidden-mobile">C++异常类型以及多级catch匹配</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

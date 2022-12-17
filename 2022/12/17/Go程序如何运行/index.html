@@ -16,23 +16,23 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="深入理解神经网络原理">
+    <meta name="description" content="Go程序如何运行？Go程序的入口第一行代码在runtime包中 runtime&#x2F;rt0_XXX.s   读取命令行参数 复制参数数量argc和参数值argv到栈上  初始化g0执行栈 g0是为了调度协程而产生的协程 g0是每个go语言的第一个协程  运行时检测 检查各类型的长度 检查指针操作 检查结构体字段的偏移量 检查atomic原子操作 检查CAS操作 检查栈大小是否是2的幂次">
 <meta property="og:type" content="article">
-<meta property="og:title" content="01深入理解神经网络原理">
-<meta property="og:url" content="http://example.com/2022/11/18/01%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="Go程序如何运行">
+<meta property="og:url" content="http://example.com/2022/12/17/Go%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="深入理解神经网络原理">
+<meta property="og:description" content="Go程序如何运行？Go程序的入口第一行代码在runtime包中 runtime&#x2F;rt0_XXX.s   读取命令行参数 复制参数数量argc和参数值argv到栈上  初始化g0执行栈 g0是为了调度协程而产生的协程 g0是每个go语言的第一个协程  运行时检测 检查各类型的长度 检查指针操作 检查结构体字段的偏移量 检查atomic原子操作 检查CAS操作 检查栈大小是否是2的幂次">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221119000842671.png">
-<meta property="article:published_time" content="2022-11-18T15:57:43.000Z">
-<meta property="article:modified_time" content="2022-11-18T16:12:09.322Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221217112513003.png">
+<meta property="article:published_time" content="2022-12-17T03:14:03.000Z">
+<meta property="article:modified_time" content="2022-12-17T17:13:28.938Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221119000842671.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221217112513003.png">
   
   
   
-  <title>01深入理解神经网络原理 - WYX同学的Blog</title>
+  <title>Go程序如何运行 - WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="01深入理解神经网络原理"></span>
+            <span id="subtitle" data-typed-text="Go程序如何运行"></span>
           
         </div>
 
@@ -208,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-18 23:57" pubdate>
-          November 18, 2022 pm
+        <time datetime="2022-12-17 11:14" pubdate>
+          December 17, 2022 am
         </time>
       </span>
     
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          10 words
+          475 words
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          1 mins
+          4 mins
         
       </span>
     
@@ -269,12 +269,58 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">01深入理解神经网络原理</h1>
+            <h1 style="display: none">Go程序如何运行</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="深入理解神经网络原理"><a href="#深入理解神经网络原理" class="headerlink" title="深入理解神经网络原理"></a>深入理解神经网络原理</h1><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221119000842671.png" srcset="/img/loading.gif" lazyload alt="image-20221119000842671"></p>
+                <h1 id="Go程序如何运行？"><a href="#Go程序如何运行？" class="headerlink" title="Go程序如何运行？"></a>Go程序如何运行？</h1><h2 id="Go程序的入口"><a href="#Go程序的入口" class="headerlink" title="Go程序的入口"></a>Go程序的入口</h2><p>第一行代码在runtime包中</p>
+<p><strong>runtime&#x2F;rt0_XXX.s</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221217112513003.png" srcset="/img/loading.gif" lazyload alt="image-20221217112513003"></p>
+<p></p>
+<h2 id="读取命令行参数"><a href="#读取命令行参数" class="headerlink" title="读取命令行参数"></a>读取命令行参数</h2><ul>
+<li>复制参数数量argc和参数值argv到栈上</li>
+</ul>
+<h2 id="初始化g0执行栈"><a href="#初始化g0执行栈" class="headerlink" title="初始化g0执行栈"></a>初始化g0执行栈</h2><ul>
+<li>g0是为了调度协程而产生的协程</li>
+<li>g0是每个go语言的第一个协程</li>
+</ul>
+<h2 id="运行时检测"><a href="#运行时检测" class="headerlink" title="运行时检测"></a>运行时检测</h2><ul>
+<li>检查各类型的长度</li>
+<li>检查指针操作</li>
+<li>检查结构体字段的偏移量</li>
+<li>检查atomic原子操作</li>
+<li>检查CAS操作</li>
+<li>检查栈大小是否是2的幂次</li>
+</ul>
+<h2 id="参数初始化runtime-args"><a href="#参数初始化runtime-args" class="headerlink" title="参数初始化runtime.args"></a>参数初始化runtime.args</h2><ul>
+<li>对命令行中的参数进行处理</li>
+<li>参数数量赋值给<code>argc int32</code></li>
+<li>参数值复制给<code>argv **byte</code></li>
+</ul>
+<h2 id="调度器初始化rumtime-shedinit"><a href="#调度器初始化rumtime-shedinit" class="headerlink" title="调度器初始化rumtime.shedinit"></a>调度器初始化rumtime.shedinit</h2><ul>
+<li>全局栈空间内存分配</li>
+<li>加载命令行参数到os.Args</li>
+<li>堆内存空间的初始化</li>
+<li>加载操作系统环境变量</li>
+<li>初始化当前系统线程</li>
+<li>垃圾回收器的参数初始化</li>
+<li>算法初始化（map、hash）</li>
+<li>设置process数量</li>
+</ul>
+<h2 id="创建主协程"><a href="#创建主协程" class="headerlink" title="创建主协程"></a>创建主协程</h2><ul>
+<li>创建一个新的协程，执行runtime.main</li>
+<li>放入调度器等待调度</li>
+</ul>
+<h2 id="初始化M"><a href="#初始化M" class="headerlink" title="初始化M"></a>初始化M</h2><ul>
+<li>初始化一个M，用来调度主协程</li>
+</ul>
+<h2 id="主协程执行主函数"><a href="#主协程执行主函数" class="headerlink" title="主协程执行主函数"></a>主协程执行主函数</h2><ul>
+<li>执行runtime包中的init方法</li>
+<li>启动GC垃圾收集器</li>
+<li>执行用户包依赖的init方法</li>
+<li>执行用户主函数main.main()</li>
+</ul>
 
                 
               </div>
@@ -293,7 +339,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Deep-Learning/" class="category-chain-item">Deep Learning</a>
+  <a href="/categories/go/" class="category-chain-item">go</a>
   
   
 
@@ -313,8 +359,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>01深入理解神经网络原理</div>
-      <div>http://example.com/2022/11/18/01深入理解神经网络原理/</div>
+      <div>Go程序如何运行</div>
+      <div>http://example.com/2022/12/17/Go程序如何运行/</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +372,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 18, 2022</div>
+          <div>December 17, 2022</div>
         </div>
       
       
@@ -356,18 +402,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/30/C++%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E5%A4%9A%E7%BA%A7catch%E5%8C%B9%E9%85%8D/" title="C++异常类型以及多级catch匹配">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++异常类型以及多级catch匹配</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/17/%E6%96%B9%E6%B3%95/" title="方法">
-                        <span class="hidden-mobile">方法</span>
+                      <a href="/2022/12/17/Go%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E7%BC%96%E8%AF%91/" title="Go程序如何编译">
+                        <span class="hidden-mobile">Go程序如何编译</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
