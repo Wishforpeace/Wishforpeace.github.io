@@ -16,30 +16,33 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="02-定义字段类型整型类型包括TINYINT、SMALLINT、MEDIUMINT、INT（INTEGER）和BIGINT  商品编号一般采用INT 浮点数类型和定点数类型浮点数类型分为FLOAT、DOUBLE、REAL  FLOAT表示单精度浮点数 DOUBLE表示双精度浮点数 REAL默认是DOUBLE，如果把SQL模式设定为REAL_AS_FLOAT，那么REAL就是FLOAT类型  1SE">
+    <meta name="description" content="03-创建和修改数据表创建数据表1234567CREATE TABLE &lt;表名&gt; (   字段名1 数据类型 [字段级别约束] [默认值],  字段名2 数据类型 [字段级别约束] [默认值],  ......   [表级别约束] );  “约束”限定 了表中数据应该满足的条件。MySQL 会根据这些限定条件，对表的操作进行监控，阻止破坏约束条件的操作执行，并提示错误，从而确保表中数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="02 定义字段类型">
-<meta property="og:url" content="http://example.com/2023/01/09/02-%E5%AE%9A%E4%B9%89%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:title" content="03 创建和修改数据">
+<meta property="og:url" content="http://example.com/2023/01/09/03-%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E8%A1%A8/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="02-定义字段类型整型类型包括TINYINT、SMALLINT、MEDIUMINT、INT（INTEGER）和BIGINT  商品编号一般采用INT 浮点数类型和定点数类型浮点数类型分为FLOAT、DOUBLE、REAL  FLOAT表示单精度浮点数 DOUBLE表示双精度浮点数 REAL默认是DOUBLE，如果把SQL模式设定为REAL_AS_FLOAT，那么REAL就是FLOAT类型  1SE">
+<meta property="og:description" content="03-创建和修改数据表创建数据表1234567CREATE TABLE &lt;表名&gt; (   字段名1 数据类型 [字段级别约束] [默认值],  字段名2 数据类型 [字段级别约束] [默认值],  ......   [表级别约束] );  “约束”限定 了表中数据应该满足的条件。MySQL 会根据这些限定条件，对表的操作进行监控，阻止破坏约束条件的操作执行，并提示错误，从而确保表中数据">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109154457492.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109155028175.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161532743.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161848208.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161933516.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109162401666.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109162631852.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109163056213.png">
-<meta property="article:published_time" content="2023-01-09T07:28:34.000Z">
-<meta property="article:modified_time" content="2023-01-09T08:31:20.651Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109165330652.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109193817443.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109202520016.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109202719543.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109203105898.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109203435670.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109203640437.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109203759367.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109204013497.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109204258004.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109204502234.png">
+<meta property="article:published_time" content="2023-01-09T08:35:06.000Z">
+<meta property="article:modified_time" content="2023-01-09T12:45:13.642Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109154457492.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109165330652.png">
   
   
   
-  <title>02 定义字段类型 - WYX同学的Blog</title>
+  <title>03 创建和修改数据 - WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="02 定义字段类型"></span>
+            <span id="subtitle" data-typed-text="03 创建和修改数据"></span>
           
         </div>
 
@@ -215,7 +218,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-09 15:28" pubdate>
+        <time datetime="2023-01-09 16:35" pubdate>
           January 9, 2023 pm
         </time>
       </span>
@@ -227,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          1.9k words
         
       </span>
     
@@ -276,71 +279,70 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">02 定义字段类型</h1>
+            <h1 style="display: none">03 创建和修改数据</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="02-定义字段类型"><a href="#02-定义字段类型" class="headerlink" title="02-定义字段类型"></a>02-定义字段类型</h1><h2 id="整型类型"><a href="#整型类型" class="headerlink" title="整型类型"></a>整型类型</h2><p>包括TINYINT、SMALLINT、MEDIUMINT、INT（INTEGER）和BIGINT</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109154457492.png" srcset="/img/loading.gif" lazyload alt="image-20230109154457492"></p>
-<p>商品编号一般采用INT</p>
-<h2 id="浮点数类型和定点数类型"><a href="#浮点数类型和定点数类型" class="headerlink" title="浮点数类型和定点数类型"></a>浮点数类型和定点数类型</h2><p>浮点数类型分为FLOAT、DOUBLE、REAL</p>
-<ul>
-<li>FLOAT表示单精度浮点数</li>
-<li>DOUBLE表示双精度浮点数</li>
-<li>REAL默认是DOUBLE，如果把SQL模式设定为<code>REAL_AS_FLOAT</code>，那么REAL就是FLOAT类型</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SET sql_mode = &quot;REAL_AS_FLOAT&quot;<br></code></pre></td></tr></table></figure>
+                <h1 id="03-创建和修改数据表"><a href="#03-创建和修改数据表" class="headerlink" title="03-创建和修改数据表"></a>03-创建和修改数据表</h1><h2 id="创建数据表"><a href="#创建数据表" class="headerlink" title="创建数据表"></a>创建数据表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE &lt;表名&gt; <br>( <br>  字段名1 数据类型 [字段级别约束] [默认值],<br>  字段名2 数据类型 [字段级别约束] [默认值],<br>  ...... <br>  [表级别约束] <br>);<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109155028175.png" srcset="/img/loading.gif" lazyload alt="image-20230109155028175"></p>
-<p>Mysql按照这个格式存储浮点数的：符号(S)、尾数(M)、阶码(E)</p>
-<p>无论有没有符号，MySQL的浮点数都会存储表示符号的部分，因此，所谓的无符号数值取值范围，其实也就是有符号取值范围大于零的部分</p>
-<p><strong>浮点数类型的缺陷是不精准</strong>，对于精确度要求较高的项目，<strong>千万</strong>不能使用浮点数！！！</p>
-<h3 id="实例演示"><a href="#实例演示" class="headerlink" title="实例演示"></a>实例演示</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE demo.goodsmaster<br>( <br>  barcode TEXT, <br>  goodsname TEXT, <br>  price DOUBLE, <br>  itemnumber INT PRIMARY KEY AUTO_INCREMENT <br>);<br></code></pre></td></tr></table></figure>
+<p><strong>“约束”限定</strong></p>
+<p><strong>了表中数据应该满足的条件</strong>。MySQL 会根据这些限定条件，对表的操作进行监控，阻止破坏约束条件的操作执行，并提示错误，从而确保表中数据的唯一性、合法性和完整性。这是创建表时不可缺少的一部分</p>
+<h3 id="创建数据表-1"><a href="#创建数据表-1" class="headerlink" title="创建数据表"></a>创建数据表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE demo.importhead<br>(<br>  listnumber INT,<br>  supplierid INT,<br>  stocknumber int,<br>  importtype int default 1,<br>  quantity decimal(10,3),<br>  importvalue decimal(10,2),<br>  recorder int,<br>  recordingdate datetime<br>);<br></code></pre></td></tr></table></figure>
 
-<p>插入数据</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 第一条<br>INSERT INTO demo.goodsmaster <br>( <br>  barcode,<br>  goodsname, <br>  price <br>)<br>VALUES<br>( <br>  &#x27;0001&#x27;, <br>  &#x27;书&#x27;, <br>  0.47 <br>);<br>-- 第二条<br>INSERT INTO demo.goodsmaster <br>( <br>  barcode,<br>  goodsname,<br>  price <br>) <br>VALUES <br>( <br>  &#x27;0002&#x27;, <br>  &#x27;笔&#x27;, <br>  0.44 <br>); <br>-- 第三条<br>INSERT INTO demo.goodsmaster<br>( <br>  barcode,<br>  goodsname, <br>  price <br>) <br>VALUES <br>( <br>  &#x27;0002&#x27;, <br>  &#x27;胶水&#x27;, <br>  0.19 <br>);<br></code></pre></td></tr></table></figure>
-
-<p>查看表里情况</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * from demo.goodsmaster<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161532743.png" srcset="/img/loading.gif" lazyload alt="image-20230109161532743"></p>
-<p>将三个价格加到一起</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT SUM(price)<br>FROM demo.goodsmaster;<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161848208.png" srcset="/img/loading.gif" lazyload alt="image-20230109161848208"></p>
-<p>改成FLOAT型，误差更大</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161933516.png" srcset="/img/loading.gif" lazyload alt="image-20230109161933516"></p>
-<h3 id="精准的数据类型：定点数类型DECIMAL"><a href="#精准的数据类型：定点数类型DECIMAL" class="headerlink" title="精准的数据类型：定点数类型DECIMAL"></a>精准的数据类型：定点数类型DECIMAL</h3><p>浮点数是将十进制数转换为二进制数存储，DECIMAL是将十进制的整数部分和小数部分拆改，分别转换成十六进制数，进行存储。</p>
-<p>Mysql用DECIMAL(M,D)的方式表示高精度小数，M表示整数部分加小数部分一共有多少位，M&lt;&#x3D;65，D表示小数部分尾数，D&lt;M</p>
-<p>将price的数据类型修改为DECIMAL(5,2)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER TABLE demo.goodsmaster<br>MODIFY COLUMN price DECIMAL(5,2);<br></code></pre></td></tr></table></figure>
+<p>创建表时，字段名称要避开Mysql的系统关键字</p>
+<h3 id="插入记录"><a href="#插入记录" class="headerlink" title="插入记录"></a>插入记录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs mysql">insert into demo.importhead<br>(<br>	listnumber,<br>    supplierid,<br>    stocknumber,<br>    quantity,<br>    importvalue,<br>    recorder,<br>    recordingdate<br>)<br>values<br>(<br>	3456,<br>    1,<br>    1,<br>    10,<br>    100,<br>    1,<br>    &#x27;2023-1-9&#x27;<br>)<br></code></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109162401666.png" srcset="/img/loading.gif" lazyload alt="image-20230109162401666"></p>
-<p>再一次运行求和语句</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT SUM(price)<br>FROM demo.goodsmaster;<br></code></pre></td></tr></table></figure>
+<p>查询内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * FROM demo.importhead<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109162631852.png" srcset="/img/loading.gif" lazyload alt="image-20230109162631852"></p>
-<h2 id="文本类型"><a href="#文本类型" class="headerlink" title="文本类型"></a>文本类型</h2><ul>
-<li>CHAR(M)：固定长度字符串。CHAR(M) 类型必须预先定义字符串长度。如果太短，数据可能会超出范围；如果太长，又浪费存储空间。</li>
-<li>VARCHAR(M)： 可变长度字符串。VARCHAR(M) 也需要预先知道字符串的最大长度，不过只要不超过这个最大长度，具体存储的时候，是按照实际字符串长度存储的。</li>
-<li>TEXT：字符串。系统自动按照实际长度存储，不需要预先定义长度。</li>
-<li>ENUM： 枚举类型，取值必须是预先设定的一组字符串值范围之内的一个，必须要知道字符串所有可能的取值。</li>
-<li>SET：是一个字符串对象，取值必须是在预先设定的字符串值范围之内的 0 个或多个，也必须知道字符串所有可能的取值。</li>
-</ul>
-<p>TEXT也分4种类型：</p>
-<ul>
-<li>TINYTEXT：255 字符（这里假设字符是 ASCII 码，一个字符占用一个字节，下同）。</li>
-<li>TEXT： 65535 字符。</li>
-<li>MEDIUMTEXT：16777215 字符。</li>
-<li>LONGTEXT： 4294967295 字符（相当于 4GB）。</li>
-</ul>
-<p><strong>注意</strong>：由于实际存储的长度不确定，MySQL 不允许TEXT 类型的字段做主键。遇到这种情况，你只能采用 CHAR(M)，或者 VARCHAR(M)。</p>
-<h2 id="日期与时间类型"><a href="#日期与时间类型" class="headerlink" title="日期与时间类型"></a>日期与时间类型</h2><p>使用最多的是DATETIME</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109163056213.png" srcset="/img/loading.gif" lazyload alt="image-20230109163056213"></p>
-<p><strong>建议</strong>：为了确保数据的完整性和系统的稳定性，优先考虑使用DATETIME 类型。因为虽然 DATETIME 类型占用的存储空间最多，但是它表达的时间最为完整，取值范围也最大。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109165330652.png" srcset="/img/loading.gif" lazyload alt="image-20230109165330652"></p>
+<h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><p>给字段设置默认值的方法为默认约束，设置默认约束，插入数据时，如果不明确给字段赋值，系统会将设置的默认值自动赋给字段</p>
+<p>除了默认约束意外，还有主键约束、外键约束、非空约束、唯一性约束、自增约束</p>
+<h3 id="1-非空约束"><a href="#1-非空约束" class="headerlink" title="1.非空约束"></a>1.非空约束</h3><p>非空约束表示字段值不能为空，如果创建表的时候，指明某个字段非空，那么添加数据的时候，这个字段必须有值，否则系统就会提示错误</p>
+<h3 id="2-唯一性约束"><a href="#2-唯一性约束" class="headerlink" title="2.唯一性约束"></a>2.唯一性约束</h3><p>唯一性约束表示这个字段的值不能重复，否则系统会提示错误。跟主键约束相比，唯一性约束要更加弱一些。</p>
+<p>主键约束只能有一个，但是多个字段可以满足唯一性约束。满足主键约束的字段，自动满足非空约束，但是满足唯一性约束的字段，则可以是空值。</p>
+<h3 id="3-自增约束"><a href="#3-自增约束" class="headerlink" title="3.自增约束"></a>3.自增约束</h3><p>自增约束可以让 MySQL 自动给字段赋值，且保证不会重复，非常有用，只是不容易用好。</p>
+<p><code>demo.goodsmaster</code>中的<code>itemnumber</code>改为自增类型</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109193817443.png" srcset="/img/loading.gif" lazyload alt="image-20230109193817443"></p>
+<p>插入测试记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs mysql">insert into demo.goodsmaster<br>(<br>	itemnumber,<br>    barcode,<br>    goodsname,<br>    specification,<br>    uint,<br>    price<br>)<br>values<br>(<br>	100,<br>    &#x27;0003&#x27;,<br>    &#x27;测试1&#x27;,<br>    &#x27;&#x27;,<br>    &#x27;个&#x27;,<br>    10<br>);<br></code></pre></td></tr></table></figure>
+
+<p>此处可以看到itemnumber为100</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109202520016.png" srcset="/img/loading.gif" lazyload alt="image-20230109202520016"></p>
+<p>再新增一条数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs mysql">insert into demo.goodsmaster<br>(<br>    barcode,<br>    goodsname,<br>    specification,<br>    uint,<br>    price<br>)<br>values<br>(<br>    &#x27;0004&#x27;,<br>    &#x27;测试2&#x27;,<br>    &#x27;&#x27;,<br>    &#x27;个&#x27;,<br>    15<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>新增数据itemnumber为101</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109202719543.png" srcset="/img/loading.gif" lazyload alt="image-20230109202719543"></p>
+<h2 id="如何修改表"><a href="#如何修改表" class="headerlink" title="如何修改表"></a>如何修改表</h2><p>复制表，修改表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">create table demo.importheadhist<br>like demo.importhead;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109203105898.png" srcset="/img/loading.gif" lazyload alt="image-20230109203105898"></p>
+<h2 id="添加字段"><a href="#添加字段" class="headerlink" title="添加字段"></a>添加字段</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter table demo.importheadhist<br>add confirmer int; -- 添加一个字段confirmer，类型为INT<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109203435670.png" srcset="/img/loading.gif" lazyload alt="image-20230109203435670"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter table demo.importheadhist<br>add confirmdate DATETIME; -- 添加一个字段confrimdate，类型为DATETIME<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109203640437.png" srcset="/img/loading.gif" lazyload alt="image-20230109203640437"></p>
+<p>查看表的结构</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109203759367.png" srcset="/img/loading.gif" lazyload alt="image-20230109203759367"></p>
+<h2 id="修改字段"><a href="#修改字段" class="headerlink" title="修改字段"></a>修改字段</h2><p>将quantity改成importquantity</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter table demo.importheadhist<br>change quantity importquantity double;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109204013497.png" srcset="/img/loading.gif" lazyload alt="image-20230109204013497"></p>
+<p>将imprtquantity改为DECIMAL(10,3)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter table demo.importheadhist<br>modify importquantity decimal(10,3);<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109204258004.png" srcset="/img/loading.gif" lazyload alt="image-20230109204258004"></p>
+<p>添加suppliername，数据类型为TEXT</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter table demo.importheadhist<br>add supplierman text after supplierid;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109204502234.png" srcset="/img/loading.gif" lazyload alt="image-20230109204502234"></p>
 
                 
               </div>
@@ -379,8 +381,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>02 定义字段类型</div>
-      <div>http://example.com/2023/01/09/02-定义字段类型/</div>
+      <div>03 创建和修改数据</div>
+      <div>http://example.com/2023/01/09/03-创建和修改数据表/</div>
     </div>
     <div class="license-meta">
       
@@ -422,18 +424,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/09/03-%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E8%A1%A8/" title="03 创建和修改数据">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">03 创建和修改数据</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/09/01-%E5%AE%8C%E6%95%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" title="01 完整的数据存储过程">
-                        <span class="hidden-mobile">01 完整的数据存储过程</span>
+                      <a href="/2023/01/09/02-%E5%AE%9A%E4%B9%89%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B/" title="02 定义字段类型">
+                        <span class="hidden-mobile">02 定义字段类型</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
