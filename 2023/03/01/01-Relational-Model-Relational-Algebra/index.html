@@ -16,15 +16,19 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="01 - Relational Model &amp; Relational Algebra1.DatabaseA database is an organized collection of inter-related data that models some aspects of the real-world. Distinguish  “database” with “database m">
+<meta property="og:type" content="article">
 <meta property="og:title" content="01 - Relational Model &amp; Relational Algebra">
 <meta property="og:url" content="http://example.com/2023/03/01/01-Relational-Model-Relational-Algebra/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="01 - Relational Model &amp; Relational Algebra1.DatabaseA database is an organized collection of inter-related data that models some aspects of the real-world. Distinguish  “database” with “database m">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230301171931187.png">
 <meta property="article:published_time" content="2023-03-01T06:30:17.000Z">
-<meta property="article:modified_time" content="2023-03-01T06:30:45.903Z">
+<meta property="article:modified_time" content="2023-03-01T10:33:56.599Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230301171931187.png">
   
   
   
@@ -216,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          1.8k words
         
       </span>
     
@@ -227,7 +231,7 @@
         
         
         
-          1 mins
+          15 mins
         
       </span>
     
@@ -270,7 +274,50 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="01-Relational-Model-amp-Relational-Algebra"><a href="#01-Relational-Model-amp-Relational-Algebra" class="headerlink" title="01 - Relational Model &amp; Relational Algebra"></a>01 - Relational Model &amp; Relational Algebra</h1><h2 id="1-Database"><a href="#1-Database" class="headerlink" title="1.Database"></a>1.Database</h2><p>A database is an organized collection of inter-related data that models some aspects of the real-world.</p>
+<p>Distinguish  “database” with “database management systems”(DBMS).</p>
+<p>DBMS is the software that manage a database.</p>
+<h2 id="2-Flat-File-Strawman"><a href="#2-Flat-File-Strawman" class="headerlink" title="2.Flat File Strawman"></a>2.Flat File Strawman</h2><p>Database is stored as comma-separated value(CSV) files that DBMS manages.</p>
+<p>Each entity has its own set of attributes ,so in each file,different records are delimited by new lines, while each of the corresponding attributes within a record are delimited by a comma.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230301171931187.png" srcset="/img/loading.gif" lazyload alt="image-20230301171931187"></p>
+<h2 id="3-Database-Management-System"><a href="#3-Database-Management-System" class="headerlink" title="3.Database Management System"></a>3.Database Management System</h2><p>A DBMS is an software that allows applications to store and analyze information in a database.</p>
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function:"></a>Function:</h3><ul>
+<li>Definition</li>
+<li>Creation</li>
+<li>Querying</li>
+<li>Update</li>
+<li>Administration of databases</li>
+</ul>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example:"></a>Example:</h3><ul>
+<li>relational(most common)</li>
+<li>NoSQL(key&#x2F;value,graph)</li>
+<li>Array&#x2F;Matrix&#x2F;Vectors</li>
+</ul>
+<p>A schema is a description of a particular collection of data based on a data model.</p>
+<h2 id="4-Relational-Model"><a href="#4-Relational-Model" class="headerlink" title="4.Relational Model"></a>4.Relational Model</h2><p>The relational model defines a database abstraction based on realtions to avoid maintenance overhead.</p>
+<p>It has three key points:</p>
+<ul>
+<li>Store database in simple <strong>data structure</strong></li>
+<li>Access data through <strong>high-level language</strong>,DBMS figures out best execution strategy.</li>
+<li><strong>Physical storage</strong> left up to the DBMS simplementation.</li>
+</ul>
+<h3 id="Three-Concept-of-Realtional-Data-Model"><a href="#Three-Concept-of-Realtional-Data-Model" class="headerlink" title="Three Concept of Realtional Data Model:"></a>Three Concept of Realtional Data Model:</h3><ul>
+<li><strong>Structure</strong>:The definition of relations and their contents.This is the attributes the relations have and the  values that those attributes can hold.</li>
+<li><strong>Integrity</strong>:Ensure the database’s contents satisfy constraints.</li>
+<li><strong>Manipulation</strong>:How to access and modify a database’s contents.</li>
+</ul>
+<p>A <strong>relation</strong> is an unordered set that contain the relationship of attributes that represent entities.</p>
+<p>A <strong>tuple</strong> is a set of attribute value(also known as its domain) in the relation.</p>
+<h3 id="Keys"><a href="#Keys" class="headerlink" title="Keys:"></a>Keys:</h3><ul>
+<li>Primary key uniquely identifies a single tuple.</li>
+<li>Foreigin key specifies that an attributes from one relation has to map to a tuple in another relation.</li>
+</ul>
+<h2 id="5-Data-Manipulation-Language-DMLs"><a href="#5-Data-Manipulation-Language-DMLs" class="headerlink" title="5.Data Manipulation Language(DMLs)"></a>5.Data Manipulation Language(DMLs)</h2><p>Two classes of language to store and retrieve information from a database.</p>
+<ul>
+<li>Procedural:</li>
+<li>Non-Procedural(Declarative):</li>
+</ul>
+
                 
               </div>
             
