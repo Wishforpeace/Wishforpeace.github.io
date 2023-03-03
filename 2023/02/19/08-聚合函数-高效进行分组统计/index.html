@@ -16,20 +16,27 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="08-聚合函数:高效进行分组统计MySQL中的五种常用函数SUM()、AVG()、MAX()、MIN()、COUNT() 超市经营者提出，他们需要统计某个门店，每天、每个单品的销售情况，包括销售数量和销售金额等。 三个数据表 销售明细表(demo.transactiondetails)  销售单头 12345678910111213select 	left(b.transdate,10),">
+    <meta name="description" content="08-聚合函数:高效进行分组统计MySQL中的五种常用函数SUM()、AVG()、MAX()、MIN()、COUNT() 超市经营者提出，他们需要统计某个门店，每天、每个单品的销售情况，包括销售数量和销售金额等。 三个数据表 销售明细表(demo.transactiondetails)  销售单头(demo.transactionhead)  商品信息表（demo.goodsmaster）  SU">
 <meta property="og:type" content="article">
 <meta property="og:title" content="08-聚合函数:高效进行分组统计">
 <meta property="og:url" content="http://example.com/2023/02/19/08-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0-%E9%AB%98%E6%95%88%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="08-聚合函数:高效进行分组统计MySQL中的五种常用函数SUM()、AVG()、MAX()、MIN()、COUNT() 超市经营者提出，他们需要统计某个门店，每天、每个单品的销售情况，包括销售数量和销售金额等。 三个数据表 销售明细表(demo.transactiondetails)  销售单头 12345678910111213select 	left(b.transdate,10),">
+<meta property="og:description" content="08-聚合函数:高效进行分组统计MySQL中的五种常用函数SUM()、AVG()、MAX()、MIN()、COUNT() 超市经营者提出，他们需要统计某个门店，每天、每个单品的销售情况，包括销售数量和销售金额等。 三个数据表 销售明细表(demo.transactiondetails)  销售单头(demo.transactionhead)  商品信息表（demo.goodsmaster）  SU">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230221135311992.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302151635149.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302151656986.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152449705.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152525599.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152726725.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152755137.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152811191.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219102927119.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219105728594.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219110136113.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219115456110.png">
 <meta property="article:published_time" content="2023-02-19T00:52:53.000Z">
-<meta property="article:modified_time" content="2023-02-21T15:45:45.158Z">
+<meta property="article:modified_time" content="2023-03-02T07:40:08.984Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230221135311992.png">
@@ -224,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          1.8k words
         
       </span>
     
@@ -235,7 +242,7 @@
         
         
         
-          11 mins
+          15 mins
         
       </span>
     
@@ -280,15 +287,43 @@
                 
                 <h1 id="08-聚合函数-高效进行分组统计"><a href="#08-聚合函数-高效进行分组统计" class="headerlink" title="08-聚合函数:高效进行分组统计"></a>08-聚合函数:高效进行分组统计</h1><p>MySQL中的五种常用函数<code>SUM()</code>、<code>AVG()</code>、<code>MAX()</code>、<code>MIN()</code>、<code>COUNT()</code></p>
 <p>超市经营者提出，他们需要统计某个门店，每天、每个单品的销售情况，包括销售数量和销售金额等。</p>
-<p>三个数据表</p>
-<p>销售明细表(demo.transactiondetails)</p>
+<p><strong>三个数据表</strong></p>
+<p><strong>销售明细表(demo.transactiondetails)</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230221135311992.png" srcset="/img/loading.gif" lazyload alt="image-20230221135311992"></p>
-<p>销售单头</p>
+<p><strong>销售单头(demo.transactionhead)</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302151635149.png" srcset="/img/loading.gif" lazyload alt="image-20230302151635149"></p>
+<p><strong>商品信息表（demo.goodsmaster）</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302151656986.png" srcset="/img/loading.gif" lazyload alt="image-20230302151656986"></p>
+<h2 id="SUM"><a href="#SUM" class="headerlink" title="SUM()"></a>SUM()</h2><p>SUM()函数返回指定字段值的和</p>
+<p>查询用户某个门店，每天，每种商品的销售总计数据。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>	left(b.transdate,10),<br>    c.goodsname,<br>    sum(a.quantity),<br>    sum(a.salesvalue)<br>from<br>	demo.transactiondetails a<br>		join<br>	demo.transactionhead b on (a.transactionid = b.transactionid)<br>		join<br>	demo.goodsmaster c on (a.itemnumber= c.itemnumber)<br>group by left(b.transdate,10),c.goodsname<br>order by left(b.transdate,10),c.goodsname;<br></code></pre></td></tr></table></figure>
 
+<p>引入关键字<code>left</code>和<code>ORDER BY</code></p>
+<h3 id="LEFT-str-n"><a href="#LEFT-str-n" class="headerlink" title="LEFT(str,n)"></a>LEFT(str,n)</h3><p>返回字符串str最左边的n个字符，<code>left(a.transdate,10)</code>，表示返回交易时间字符串最左边的10个字符。在MySQL中，<code>DATETIME</code>的格式为：YYYYY-MM-DD，一共是10个字符。</p>
+<h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h3><p>按照指定字段排序</p>
+<h4 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h4><p>第一步：完成三个表的连接</p>
+<img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152449705.png" srcset="/img/loading.gif" lazyload alt="image-20230302152449705" style="zoom:50%;" />
 
+<p>第二步：对结果集<strong>按照交易时间和商品名称</strong>进行分组，我们可以分成下面 4 组</p>
+<p>第一组：</p>
+<img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152525599.png" srcset="/img/loading.gif" lazyload alt="image-20230302152525599" style="zoom:50%;" />
 
+<p>第二组：</p>
+<img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152726725.png" srcset="/img/loading.gif" lazyload alt="image-20230302152726725" style="zoom:50%;" />
+
+<p>第三组：</p>
+<img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152755137.png" srcset="/img/loading.gif" lazyload alt="image-20230302152755137" style="zoom:50%;" />
+
+<p>第四组：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152811191.png" srcset="/img/loading.gif" lazyload alt="image-20230302152811191"></p>
+<p>第三步：对各组的销售数量和销售金额进行统计，并且按照交易日期和商品名称排序。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219102927119.png" srcset="/img/loading.gif" lazyload alt="image-20230219102927119"></p>
+<p>如果用户要知道全部商品销售的总计数量和总计金额，我们可以把数据集的整体看做一张表，进行计算。</p>
+<p>这样就不需要从关联表中获取数据，也不需要连接。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <br><span class="hljs-built_in">sum</span>(quantity),<br><span class="hljs-built_in">sum</span>(salesvalue)<br><span class="hljs-keyword">from</span><br>demo.transactiondetails;<br></code></pre></td></tr></table></figure>
+
+
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>left(a.transdate,10),<br>c.goodsname,<br>avg(b.quantity),<br>avg(b.salesvalue)<br>from<br>demo.transactionhead a<br>join<br>demo.transactiondetails b on (a.transactionid = b.transactionid)<br>join<br>demo.goodsmaster c on(b.itemnumber = c.itemnumber)<br>group by left(a.transdate,10),c.goodsname<br>order by left(a.transdate,10),c.goodsname;<br></code></pre></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219105728594.png" srcset="/img/loading.gif" lazyload alt="image-20230219105728594"></p>
