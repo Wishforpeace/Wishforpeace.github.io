@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118122250004.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118122604240.png">
 <meta property="article:published_time" content="2023-01-17T13:33:51.000Z">
-<meta property="article:modified_time" content="2023-01-18T04:26:52.446Z">
+<meta property="article:modified_time" content="2023-03-07T07:14:43.627Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117213923810.png">
@@ -391,7 +391,7 @@
 <h2 id="如何正确使用where和having"><a href="#如何正确使用where和having" class="headerlink" title="如何正确使用where和having"></a>如何正确使用where和having</h2><p>两个典型区别</p>
 <ul>
 <li>如果需要通过连接从关联表中获取需要的数据，where是先筛选后连接，而having是先连接后筛选<ul>
-<li>此方面，where比having更搞笑，因为where可以先筛选，获得较小的数据集再和关联表进行连接，这样占用的资源较少，执行效率也较高。having需要先把数据集准备好，将未被筛选的数据集进行关联，然后对大的数据集进行筛选，这样占用的资源较多，执行效率低</li>
+<li>此方面，where比having更高效，因为where可以先筛选，获得较小的数据集再和关联表进行连接，这样占用的资源较少，执行效率也较高。having需要先把数据集准备好，将未被筛选的数据集进行关联，然后对大的数据集进行筛选，这样占用的资源较多，执行效率低</li>
 </ul>
 </li>
 <li>where直接用表中字段筛选，不能使用分组的计算函数作为筛选条件；having必须与group by结合，可以把分组字段作为筛选条件</li>
