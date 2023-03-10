@@ -16,17 +16,20 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="03｜Mutex：4种易错场景大盘点 1.Lock&#x2F;Unlock 不是成对出现 Lock&#x2F;Unlock 没有成对出现，就意味着会出现死锁的情况，或者是因为 Unlock 一个未加锁的Mutex 而导致 panic。 缺少Unlock的场景，常见的三种情况：  if-else分支太多，漏写Unlock 重构时删除Unlock Unlock误写成Lock  在这种情况下，锁被获取之后，就不会被释放了，">
+    <meta name="description" content="03｜Mutex：4种易错场景大盘点1.Lock&#x2F;Unlock 不是成对出现Lock&#x2F;Unlock 没有成对出现，就意味着会出现死锁的情况，或者是因为 Unlock 一个未加锁的Mutex 而导致 panic。 缺少Unlock的场景，常见的三种情况：  if-else分支太多，漏写Unlock 重构时删除Unlock Unlock误写成Lock  在这种情况下，锁被获取之后，就不会被释放了，这也">
 <meta property="og:type" content="article">
 <meta property="og:title" content="03｜Mutex：4种易错场景大盘点">
 <meta property="og:url" content="http://example.com/2023/03/03/03%EF%BD%9CMutex%EF%BC%9A4%E7%A7%8D%E6%98%93%E9%94%99%E5%9C%BA%E6%99%AF%E5%A4%A7%E7%9B%98%E7%82%B9/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="03｜Mutex：4种易错场景大盘点 1.Lock&#x2F;Unlock 不是成对出现 Lock&#x2F;Unlock 没有成对出现，就意味着会出现死锁的情况，或者是因为 Unlock 一个未加锁的Mutex 而导致 panic。 缺少Unlock的场景，常见的三种情况：  if-else分支太多，漏写Unlock 重构时删除Unlock Unlock误写成Lock  在这种情况下，锁被获取之后，就不会被释放了，">
+<meta property="og:description" content="03｜Mutex：4种易错场景大盘点1.Lock&#x2F;Unlock 不是成对出现Lock&#x2F;Unlock 没有成对出现，就意味着会出现死锁的情况，或者是因为 Unlock 一个未加锁的Mutex 而导致 panic。 缺少Unlock的场景，常见的三种情况：  if-else分支太多，漏写Unlock 重构时删除Unlock Unlock误写成Lock  在这种情况下，锁被获取之后，就不会被释放了，这也">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230304000406863.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230304001403468.png">
 <meta property="article:published_time" content="2023-03-03T12:51:34.000Z">
 <meta property="article:modified_time" content="2023-03-05T02:44:43.883Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230304000406863.png">
   
   
   
@@ -220,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k words
+          985 words
         
       </span>
     
@@ -274,45 +277,26 @@
             
               <div class="markdown-body">
                 
-                <h1 id="mutex4种易错场景大盘点">03｜Mutex：4种易错场景大盘点</h1>
-<h2 id="lockunlock-不是成对出现">1.<strong>Lock/Unlock</strong>
-<strong>不是成对出现</strong></h2>
-<p>Lock/Unlock 没有成对出现，就意味着会出现死锁的情况，或者是因为 Unlock
-一个未加锁的Mutex 而导致 panic。</p>
+                <h1 id="03｜Mutex：4种易错场景大盘点"><a href="#03｜Mutex：4种易错场景大盘点" class="headerlink" title="03｜Mutex：4种易错场景大盘点"></a>03｜Mutex：4种易错场景大盘点</h1><h2 id="1-Lock-Unlock-不是成对出现"><a href="#1-Lock-Unlock-不是成对出现" class="headerlink" title="1.Lock/Unlock 不是成对出现"></a>1.<strong>Lock/Unlock</strong> <strong>不是成对出现</strong></h2><p>Lock/Unlock 没有成对出现，就意味着会出现死锁的情况，或者是因为 Unlock 一个未加锁的Mutex 而导致 panic。</p>
 <p>缺少Unlock的场景，常见的三种情况：</p>
 <ul>
 <li>if-else分支太多，漏写Unlock</li>
 <li>重构时删除Unlock</li>
 <li>Unlock误写成Lock</li>
 </ul>
-<p>在这种情况下，锁被获取之后，就不会被释放了，这也就意味着，其它的
-goroutine 永远都没机会获取到锁。</p>
+<p>在这种情况下，锁被获取之后，就不会被释放了，这也就意味着，其它的 goroutine 永远都没机会获取到锁。</p>
 <p>误删Lock()</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> mu sync.Mutex<br>	<span class="hljs-keyword">defer</span> mu.Unlock()<br>	fmt.Println(<span class="hljs-string">&quot;hello world&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>运行之后panic</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230304000406863.png" srcset="/img/loading.gif" lazyload
-alt="image-20230304000406863" />
-<figcaption aria-hidden="true">image-20230304000406863</figcaption>
-</figure>
-<h2 id="copy已经使用的mutex">2.Copy已经使用的Mutex</h2>
-<p>Package sync 的同步原语在使用后是不能复制的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230304000406863.png" srcset="/img/loading.gif" lazyload alt="image-20230304000406863"></p>
+<h2 id="2-Copy已经使用的Mutex"><a href="#2-Copy已经使用的Mutex" class="headerlink" title="2.Copy已经使用的Mutex"></a>2.Copy已经使用的Mutex</h2><p>Package sync 的同步原语在使用后是不能复制的。</p>
 <p>为什么Mutex不能够复制？</p>
 <p>Mutex是一个有状态的对象，它的state字段记录了这个锁的状态。如果复制一个已经加锁的Mutex给一个新的变量，新的初始化的变量就被加锁了，显然不符合预期，我们期待一个零值的Mutex。</p>
-<p>在并发环境之中，我们不知道复制的Mutex状态是什么，因为要复制的 Mutex
-是由其它 goroutine 并发访问的，状态可能总是在变化。</p>
+<p>在并发环境之中，我们不知道复制的Mutex状态是什么，因为要复制的 Mutex 是由其它 goroutine 并发访问的，状态可能总是在变化。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;sync&quot;</span><br>)<br><br><span class="hljs-keyword">type</span> Counter <span class="hljs-keyword">struct</span> &#123;<br>	sync.Mutex<br>	Count <span class="hljs-type">int</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> c Counter<br>	c.Lock()<br>	<span class="hljs-keyword">defer</span> c.Unlock()<br>	c.Count++<br>	foo2(c)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">foo2</span><span class="hljs-params">(c Counter)</span></span> &#123;<br>	c.Lock()<br>	<span class="hljs-keyword">defer</span> c.Unlock()<br>	fmt.Println(<span class="hljs-string">&quot;in foo&quot;</span>)<br>&#125;<br><br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230304001403468.png" srcset="/img/loading.gif" lazyload
-alt="image-20230304001403468" />
-<figcaption aria-hidden="true">image-20230304001403468</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230304001403468.png" srcset="/img/loading.gif" lazyload alt="image-20230304001403468"></p>
 <p>这里第18行调用foo函数时，复制了c作为函数的参数，但是c已经被使用，复制出来的Counter带有状态。</p>
-<h3 id="死锁的检查机制">死锁的检查机制</h3>
-<p>这个例子中因为复制了一个使用了的
-Mutex，导致锁无法使用，程序处于死锁的状态。程序运行的时候，死锁检查机制能够发现这种死锁情况并输出错误信息，如下图中错误信息以及错误堆栈。</p>
+<h3 id="死锁的检查机制"><a href="#死锁的检查机制" class="headerlink" title="死锁的检查机制"></a>死锁的检查机制</h3><p>这个例子中因为复制了一个使用了的 Mutex，导致锁无法使用，程序处于死锁的状态。程序运行的时候，死锁检查机制能够发现这种死锁情况并输出错误信息，如下图中错误信息以及错误堆栈。</p>
 
                 
               </div>

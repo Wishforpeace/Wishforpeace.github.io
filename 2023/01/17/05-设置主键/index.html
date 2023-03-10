@@ -16,17 +16,31 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="05-设置主键 设置主键的三种思路：  业务字段做主键 自增字段做主键 手动赋值字段做主键  以会员信息表为例：   image-20230117105518725  业务字段做主键 会员卡号适合，具有唯一性，可以用来表示会员记录 12345678910create table demo.membermaster(	cardno char(8) primary key,  membername t">
+    <meta name="description" content="05-设置主键设置主键的三种思路：  业务字段做主键 自增字段做主键 手动赋值字段做主键  以会员信息表为例：  业务字段做主键会员卡号适合，具有唯一性，可以用来表示会员记录 12345678910create table demo.membermaster(	cardno char(8) primary key,  membername text,  memberphone text,  mem">
 <meta property="og:type" content="article">
 <meta property="og:title" content="05-设置主键">
 <meta property="og:url" content="http://example.com/2023/01/17/05-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%94%AE/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="05-设置主键 设置主键的三种思路：  业务字段做主键 自增字段做主键 手动赋值字段做主键  以会员信息表为例：   image-20230117105518725  业务字段做主键 会员卡号适合，具有唯一性，可以用来表示会员记录 12345678910create table demo.membermaster(	cardno char(8) primary key,  membername t">
+<meta property="og:description" content="05-设置主键设置主键的三种思路：  业务字段做主键 自增字段做主键 手动赋值字段做主键  以会员信息表为例：  业务字段做主键会员卡号适合，具有唯一性，可以用来表示会员记录 12345678910create table demo.membermaster(	cardno char(8) primary key,  membername text,  memberphone text,  mem">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117105518725.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117105816605.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117110451072.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117110839531.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117112728303.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117114142524.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117114222836.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117114839786.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117122830695.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117123020506.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117123257361.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117161145263.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117162221748.png">
 <meta property="article:published_time" content="2023-01-17T02:52:35.000Z">
 <meta property="article:modified_time" content="2023-01-17T09:43:09.516Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117105518725.png">
   
   
   
@@ -220,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k words
+          3.2k words
         
       </span>
     
@@ -231,7 +245,7 @@
         
         
         
-          30 mins
+          27 mins
         
       </span>
     
@@ -274,141 +288,72 @@
             
               <div class="markdown-body">
                 
-                <h1 id="设置主键">05-设置主键</h1>
-<p>设置主键的三种思路：</p>
+                <h1 id="05-设置主键"><a href="#05-设置主键" class="headerlink" title="05-设置主键"></a>05-设置主键</h1><p>设置主键的三种思路：</p>
 <ul>
 <li>业务字段做主键</li>
 <li>自增字段做主键</li>
 <li>手动赋值字段做主键</li>
 </ul>
 <p>以会员信息表为例：</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117105518725.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117105518725" />
-<figcaption aria-hidden="true">image-20230117105518725</figcaption>
-</figure>
-<h2 id="业务字段做主键">业务字段做主键</h2>
-<p>会员卡号适合，具有唯一性，可以用来表示会员记录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117105518725.png" srcset="/img/loading.gif" lazyload alt="image-20230117105518725"></p>
+<h2 id="业务字段做主键"><a href="#业务字段做主键" class="headerlink" title="业务字段做主键"></a>业务字段做主键</h2><p>会员卡号适合，具有唯一性，可以用来表示会员记录</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">create table demo.membermaster<br>(<br>	cardno char(8) primary key,<br>  membername text,<br>  memberphone text,<br>  memberpid text,<br>  memberaddress text,<br>  sex text,<br>  birthday datetime<br>);<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117105816605.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117105816605" />
-<figcaption aria-hidden="true">image-20230117105816605</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117105816605.png" srcset="/img/loading.gif" lazyload alt="image-20230117105816605"></p>
 <p>cardno被设置为了主键</p>
 <p>插入两条数据</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs mysql">insert into demo.membermaster<br>(<br>	cardno,<br>  membername,<br>  memberphone,<br>  memberpid,<br>  memberaddress,<br>  sex,<br>  birthday<br>)<br>values<br>(<br>	&#x27;10000001&#x27;,<br>  &#x27;张三&#x27;,<br>  &#x27;13812345678&#x27;,<br>  &#x27;110123200001017890&#x27;,<br>  &#x27;北京&#x27;,<br>  &#x27;男&#x27;,<br>  &#x27;2000-01-01&#x27;<br>);<br><br><br>insert into demo.membermaster <br>(<br>  cardno,<br>  membername, <br>  memberphone,<br>  memberpid, <br>  memberaddress, <br>  sex, <br>  birthday <br>) <br>values<br>( <br>  &#x27;10000002&#x27;, <br>  &#x27;李四&#x27;, <br>  &#x27;13512345678&#x27;, <br>  &#x27;123123199001012356&#x27;, <br>  &#x27;上海&#x27;, <br>  &#x27;女&#x27;, <br>  &#x27;1990-01-01&#x27; <br>);<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117110451072.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117110451072" />
-<figcaption aria-hidden="true">image-20230117110451072</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117110451072.png" srcset="/img/loading.gif" lazyload alt="image-20230117110451072"></p>
 <p>张三将卡转给了王五，此时cardno将无法唯一识别某个会员，有的模块获取了修改前的信息，有的模块获取了修改后的信息，导致内部数据不一致。</p>
 <p>这种修改如何影响商家？</p>
 <p>张三有一条买书的流水记录</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117110839531.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117110839531" />
-<figcaption aria-hidden="true">image-20230117110839531</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117110839531.png" srcset="/img/loading.gif" lazyload alt="image-20230117110839531"></p>
 <p>创建销售流水表</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">create table demo.trans<br>(<br>	transactionno int,<br>  itemnumber int,<br>  quantity decimal(10,3),<br>  price decimal(10,2),<br>  salesvalue decimal(10,2),<br>  cardno char(8),<br>  transdate datetime<br>);<br></code></pre></td></tr></table></figure>
 <p>创建以后，插入一条销售流水</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs mysql">insert into demo.trans<br>(<br>	transactionno,<br>  itemnumber,<br>  quantity, <br>  price, <br>  salesvalue, <br>  cardno, <br>  transdate<br>)<br>values<br>(<br>	1, <br>  1,<br>  1, <br>  89, <br>  89, <br>  &#x27;10000001&#x27;, <br>  &#x27;2020-12-01&#x27;<br>);<br></code></pre></td></tr></table></figure>
 <p>查询2020-12-01的会员销售记录</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select b.membername,c.goodsname,a.quantity,a.salesvalue,a.transdate<br>from demo.trans as a<br>join demo.membermaster as b<br>join demo.goodsmaster as c<br>on (a.cardno = b.cardno and a.itemnumber=c.itemnumber);<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117112728303.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117112728303" />
-<figcaption aria-hidden="true">image-20230117112728303</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117112728303.png" srcset="/img/loading.gif" lazyload alt="image-20230117112728303"></p>
 <p>此处使用了join，即表的关联，目的是为了引用其他表的信息，包括了demo.goodsmaster和demo.membermaster</p>
 <p>修改会员信息，将10000001卡给王五</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mysql">update demo.membermaster<br>set membername = &#x27;王五&#x27;,<br>memberphone = &#x27;13698765432&#x27;,<br>memberpid = &#x27;475145197001012356&#x27;,<br>memberaddress = &#x27;天津&#x27;,<br>sex = &#x27;女&#x27;,<br>birthday = &#x27;1970-01-01&#x27;<br>where cardno = &#x27;10000001&#x27;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117114142524.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117114142524" />
-<figcaption aria-hidden="true">image-20230117114142524</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117114142524.png" srcset="/img/loading.gif" lazyload alt="image-20230117114142524"></p>
 <p>再次查询消费流水</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select b.membername,c.goodsname,a.quantity,a.salesvalue,a.transdate<br>from demo.trans as a<br>join demo.membermaster as b<br>join demo.goodsmaster as c<br>on (a.cardno = b.cardno and a.itemnumber=c.itemnumber);<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117114222836.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117114222836" />
-<figcaption aria-hidden="true">image-20230117114222836</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117114222836.png" srcset="/img/loading.gif" lazyload alt="image-20230117114222836"></p>
 <p>变成了王五买馒头！</p>
 <p>所以不能拿会员号作为主键</p>
 <p>目前看，任何一个已有字段都不适合做主键</p>
 <p><strong>尽量不要用业务字段作为主键</strong>，因为无法预测项目的整个生命周期内，哪些业务字段会因为项目的业务需求而又重复或重用。</p>
-<h2 id="使用自增字段做主键">使用自增字段做主键</h2>
-<p>给会员信息添加一个字段id，给字段定义自增约束</p>
+<h2 id="使用自增字段做主键"><a href="#使用自增字段做主键" class="headerlink" title="使用自增字段做主键"></a>使用自增字段做主键</h2><p>给会员信息添加一个字段id，给字段定义自增约束</p>
 <ul>
 <li>第一步：修改会员信息表，删除表的主键约束</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter table demo.membermaster<br>drop primary key<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117114839786.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117114839786" />
-<figcaption aria-hidden="true">image-20230117114839786</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117114839786.png" srcset="/img/loading.gif" lazyload alt="image-20230117114839786"></p>
 <ul>
 <li>第二步：修改会员信息表，添加字段id作为主键，定义自增约束</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter table demo.membermaster<br>add id int primary key auto_increment;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117122830695.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117122830695" />
-<figcaption aria-hidden="true">image-20230117122830695</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117122830695.png" srcset="/img/loading.gif" lazyload alt="image-20230117122830695"></p>
 <ul>
 <li>第三步：修改销售流水表，添加memberid，对应会员表中的主键</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter table demo.trans<br>add memberid int;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117123020506.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117123020506" />
-<figcaption aria-hidden="true">image-20230117123020506</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117123020506.png" srcset="/img/loading.gif" lazyload alt="image-20230117123020506"></p>
 <ul>
 <li>第四步：更新销售流水表，给新加字段memberid赋值</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">update demo.trans as a,demo.membermaster as b<br>set a.memberid = b.id<br>where a.transactionno &gt; 0<br>and a.cardno = b.cardno;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117123257361.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117123257361" />
-<figcaption aria-hidden="true">image-20230117123257361</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117123257361.png" srcset="/img/loading.gif" lazyload alt="image-20230117123257361"></p>
 <p>此时，再次面对卡号重用，比如张三的卡转给王五，则在会员信息表中增加一条</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs mysql">insert into demo.membermaster<br>(<br>	cardno,<br>  membername,<br>  memberphone,<br>  memberpid,<br>  memberaddress,<br>  sex,<br>  birthday<br>)<br>values<br>(<br>	&#x27;10000001&#x27;,<br>  &#x27;王五&#x27;,<br>  &#x27;13698765432&#x27;, <br>  &#x27;475145197001012356&#x27;,<br>  &#x27;天津&#x27;, <br>  &#x27;女&#x27;, <br>  &#x27;1970-01-01&#x27;<br>);<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117161145263.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117161145263" />
-<figcaption aria-hidden="true">image-20230117161145263</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117161145263.png" srcset="/img/loading.gif" lazyload alt="image-20230117161145263"></p>
 <p>保存了张三的信息，将不会出现错位问题</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select b.membername,c.goodsname,a.quantity,a.salesvalue,a.transdate<br>from demo.trans as a<br>join demo.membermaster as b<br>join demo.goodsmaster as c<br>on (a.memberid = b.id and a.itemnumber = c.itemnumber);<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117162221748.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117162221748" />
-<figcaption aria-hidden="true">image-20230117162221748</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117162221748.png" srcset="/img/loading.gif" lazyload alt="image-20230117162221748"></p>
 <p>但是如果门店新增会员，新会员信息存在本地Mysqk之中，再汇总到总部，本地id自增就会与总部的id相互冲突，这种情况就需要取消id的自增属性，改成信息系统在添加过程中对id进行赋值操作</p>
-<h2 id="手动赋值字段做主键">手动赋值字段做主键</h2>
-<p>具体操作：在总部的Mysql数据库中，有一个管理信息表，里面的信息包括成本核算策略、支付方式等，还有总部的系统参数，只需要天际一个字段用于记录会员编号的最大值</p>
+<h2 id="手动赋值字段做主键"><a href="#手动赋值字段做主键" class="headerlink" title="手动赋值字段做主键"></a>手动赋值字段做主键</h2><p>具体操作：在总部的Mysql数据库中，有一个管理信息表，里面的信息包括成本核算策略、支付方式等，还有总部的系统参数，只需要天际一个字段用于记录会员编号的最大值</p>
 <p>添加会员时，先获取总部数据库中的id最大值，再在此基础上加1，作为新的id</p>
 
                 

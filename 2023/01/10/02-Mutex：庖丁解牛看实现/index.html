@@ -16,17 +16,21 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="02 | Mutex：庖丁解牛看实现 Mutex架构演进分为四个阶段：  初版：flag标记锁是否被持有 给新人机会：新的goroutine有机会参与竞争锁 多给些机会：新来的和被唤醒的goroutine，但带来饥饿问题 解决饥饿：解决竞争问题，不让goroutine长久等待    image-20230110204930565  初版互斥锁 通过flag变量，标记当前的锁是否被某个gorouti">
+    <meta name="description" content="02 | Mutex：庖丁解牛看实现Mutex架构演进分为四个阶段：  初版：flag标记锁是否被持有 给新人机会：新的goroutine有机会参与竞争锁 多给些机会：新来的和被唤醒的goroutine，但带来饥饿问题 解决饥饿：解决竞争问题，不让goroutine长久等待   初版互斥锁通过flag变量，标记当前的锁是否被某个goroutine持有，1为已经被持有，其他goroutine只能等待">
 <meta property="og:type" content="article">
 <meta property="og:title" content="02 | Mutex：庖丁解牛看实现">
 <meta property="og:url" content="http://example.com/2023/01/10/02-Mutex%EF%BC%9A%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%E7%9C%8B%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="02 | Mutex：庖丁解牛看实现 Mutex架构演进分为四个阶段：  初版：flag标记锁是否被持有 给新人机会：新的goroutine有机会参与竞争锁 多给些机会：新来的和被唤醒的goroutine，但带来饥饿问题 解决饥饿：解决竞争问题，不让goroutine长久等待    image-20230110204930565  初版互斥锁 通过flag变量，标记当前的锁是否被某个gorouti">
+<meta property="og:description" content="02 | Mutex：庖丁解牛看实现Mutex架构演进分为四个阶段：  初版：flag标记锁是否被持有 给新人机会：新的goroutine有机会参与竞争锁 多给些机会：新来的和被唤醒的goroutine，但带来饥饿问题 解决饥饿：解决竞争问题，不让goroutine长久等待   初版互斥锁通过flag变量，标记当前的锁是否被某个goroutine持有，1为已经被持有，其他goroutine只能等待">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110204930565.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110205605823.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110220022268.png">
 <meta property="article:published_time" content="2023-01-10T12:46:01.000Z">
 <meta property="article:modified_time" content="2023-03-03T11:24:11.682Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110204930565.png">
   
   
   
@@ -220,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k words
+          2.6k words
         
       </span>
     
@@ -231,7 +235,7 @@
         
         
         
-          23 mins
+          22 mins
         
       </span>
     
@@ -274,33 +278,19 @@
             
               <div class="markdown-body">
                 
-                <h1 id="mutex庖丁解牛看实现">02 | Mutex：庖丁解牛看实现</h1>
-<p>Mutex架构演进分为四个阶段：</p>
+                <h1 id="02-Mutex：庖丁解牛看实现"><a href="#02-Mutex：庖丁解牛看实现" class="headerlink" title="02 | Mutex：庖丁解牛看实现"></a>02 | Mutex：庖丁解牛看实现</h1><p>Mutex架构演进分为四个阶段：</p>
 <ul>
 <li>初版：flag标记锁是否被持有</li>
 <li>给新人机会：新的goroutine有机会参与竞争锁</li>
 <li>多给些机会：新来的和被唤醒的goroutine，但带来<strong>饥饿问题</strong></li>
 <li>解决饥饿：解决竞争问题，不让goroutine长久等待</li>
 </ul>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110204930565.png" srcset="/img/loading.gif" lazyload
-alt="image-20230110204930565" />
-<figcaption aria-hidden="true">image-20230110204930565</figcaption>
-</figure>
-<h2 id="初版互斥锁">初版互斥锁</h2>
-<p>通过flag变量，标记当前的锁是否被某个goroutine持有，1为已经被持有，其他goroutine只能等待，flag为0，可以通过CAS将flag置为1</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110204930565.png" srcset="/img/loading.gif" lazyload alt="image-20230110204930565"></p>
+<h2 id="初版互斥锁"><a href="#初版互斥锁" class="headerlink" title="初版互斥锁"></a>初版互斥锁</h2><p>通过flag变量，标记当前的锁是否被某个goroutine持有，1为已经被持有，其他goroutine只能等待，flag为0，可以通过CAS将flag置为1</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// CAS操作，当时还没有抽象出atomic包</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">cas</span><span class="hljs-params">(val *<span class="hljs-type">int32</span>, old, <span class="hljs-built_in">new</span> <span class="hljs-type">int32</span>)</span></span> <span class="hljs-type">bool</span> <br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">semacquire</span><span class="hljs-params">(*<span class="hljs-type">int32</span>)</span></span> <br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">semrelease</span><span class="hljs-params">(*<span class="hljs-type">int32</span>)</span></span> <br><span class="hljs-comment">// 互斥锁的结构，包含两个字段</span><br><span class="hljs-keyword">type</span> Mutex <span class="hljs-keyword">struct</span> &#123; <br>  key <span class="hljs-type">int32</span> <span class="hljs-comment">// 锁是否被持有的标识</span><br>  sema <span class="hljs-type">int32</span> <span class="hljs-comment">// 信号量专用，用以阻塞/唤醒goroutine 9 &#125; </span><br><span class="hljs-comment">// 保证成功在val上增加delta的值</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">xadd</span><span class="hljs-params">(val *<span class="hljs-type">int32</span>, delta <span class="hljs-type">int32</span>)</span></span> (<span class="hljs-built_in">new</span> <span class="hljs-type">int32</span>) &#123; <br>  <span class="hljs-keyword">for</span> &#123; <br>    v := *val <br>    <span class="hljs-keyword">if</span> cas(val, v, v+delta) &#123; <br>      <span class="hljs-keyword">return</span> v + delta <br>    &#125; <br>  &#125; <br>  <span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;unreached&quot;</span>) <br>&#125; <br><span class="hljs-comment">// 请求锁</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(m *Mutex)</span></span> Lock() &#123; <br>  <span class="hljs-keyword">if</span> xadd(&amp;m.key, <span class="hljs-number">1</span>) == <span class="hljs-number">1</span> &#123; <span class="hljs-comment">//标识加1，如果等于1，成功获取到锁</span><br>		<span class="hljs-keyword">return</span> <br>  &#125; <br>  semacquire(&amp;m.sema) <span class="hljs-comment">// 否则阻塞等待</span><br>&#125; <br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(m *Mutex)</span></span> Unlock() &#123; <br>  <span class="hljs-keyword">if</span> xadd(&amp;m.key, <span class="hljs-number">-1</span>) == <span class="hljs-number">0</span> &#123; <span class="hljs-comment">// 将标识减去1，如果等于0，则没有其它等待者</span><br>		<span class="hljs-keyword">return</span> <br>  &#125;<br>  semrelease(&amp;m.sema) <span class="hljs-comment">// 唤醒其它阻塞的goroutine 35 &#125;</span><br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="cas指令">CAS指令</h3>
-<h4 id="原子性的">原子性的</h4>
-<p>将给定制和一个内存地址中的值进行比较，如果是同一值，就用新值替换内存地址中的值，这个操作是原子性的</p>
+<h3 id="CAS指令"><a href="#CAS指令" class="headerlink" title="CAS指令"></a>CAS指令</h3><h4 id="原子性的"><a href="#原子性的" class="headerlink" title="原子性的"></a>原子性的</h4><p>将给定制和一个内存地址中的值进行比较，如果是同一值，就用新值替换内存地址中的值，这个操作是原子性的</p>
 <p>原子性保证了指令总是基于最新的值进行计算，如果同时又其他线程修改了这个值，CAS返回失败</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110205605823.png" srcset="/img/loading.gif" lazyload
-alt="image-20230110205605823" />
-<figcaption aria-hidden="true">image-20230110205605823</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110205605823.png" srcset="/img/loading.gif" lazyload alt="image-20230110205605823"></p>
 <p>Mutex结构体包含了两个字段</p>
 <ul>
 <li>字段key：flag，表示排外锁是否被goroutine持有</li>
@@ -308,24 +298,17 @@ alt="image-20230110205605823" />
 </ul>
 <p>Unlock方法可以被任意的goroutine调用释放锁，即使是没持有这个互斥锁的goroutine，也可以进行这个操作。因为，Mutex本身并没有包含着这把锁的goroutine的信息，所以，Unlock也不会对此进行检查。</p>
 <p><strong>这是一个有趣而危险的功能！</strong></p>
-<p>goroutine可以强制释放锁，这是一个危险的操作，因为临界区的goroutine可能不知道锁已经被释放，而继续进行临界区的业务操作，goroutine以为自己持有锁，会造成data
-race问题。</p>
+<p>goroutine可以强制释放锁，这是一个危险的操作，因为临界区的goroutine可能不知道锁已经被释放，而继续进行临界区的业务操作，goroutine以为自己持有锁，会造成data race问题。</p>
 <p>在使用Mutex时，要保证goroutine不释放自己未持有的锁，遵循“谁申请，谁释放”的原则。</p>
 <p>处于性能考虑，即使释放掉锁，在if-else分之加入释放锁，代码会很臃肿，重构时也会误删或漏掉而出现死锁。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Foo <span class="hljs-keyword">struct</span> &#123; <br>  mu sync.Mutex<br>  count <span class="hljs-type">int</span> <br>&#125; <br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(f *Foo)</span></span> Bar() &#123; <br>	f.mu.Lock() <br>  <br>  <span class="hljs-keyword">if</span> f.count &lt; <span class="hljs-number">1000</span> &#123; <br>    f.count += <span class="hljs-number">3</span> <br>    f.mu.Unlock() <span class="hljs-comment">// 此处释放锁</span><br>		<span class="hljs-keyword">return</span> <br>  &#125; <br>	f.count++ <br>  f.mu.Unlock() <span class="hljs-comment">// 此处释放锁</span><br>	<span class="hljs-keyword">return</span> <br>&#125;<br></code></pre></td></tr></table></figure>
 <p>1.14 版本，对defer做了优化</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(f *Foo)</span></span> Bar() &#123;<br>  f.mu.Lock() <br>  <span class="hljs-keyword">defer</span> f.mu.Unlock() <br>  <span class="hljs-keyword">if</span> f.count &lt; <span class="hljs-number">1000</span> &#123; <br>    f.count += <span class="hljs-number">3</span> <br>    <span class="hljs-keyword">return</span> <br>  &#125;<br>  <br>  f.count++ <br>  <span class="hljs-keyword">return</span> <br>&#125;<br></code></pre></td></tr></table></figure>
 <p>初版的Mutex有一个问题：请求锁的goroutine会排队等待获取互斥锁。</p>
-<h2 id="给新人机会">给新人机会</h2>
-<p>2011.6.30 Mutex大调整</p>
+<h2 id="给新人机会"><a href="#给新人机会" class="headerlink" title="给新人机会"></a>给新人机会</h2><p>2011.6.30 Mutex大调整</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Mutex <span class="hljs-keyword">struct</span> &#123; <br>  state <span class="hljs-type">int32</span> <br>  sema <span class="hljs-type">uint32</span> <br>&#125; <br><span class="hljs-keyword">const</span> ( <br>  mutexLocked = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-literal">iota</span> <span class="hljs-comment">// mutex is locked </span><br>  mutexWoken <br>  mutexWaiterShift = <span class="hljs-literal">iota</span> <br>)<br></code></pre></td></tr></table></figure>
 <p><strong>Mutex的结构体第一个字段改为了state</strong></p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110220022268.png" srcset="/img/loading.gif" lazyload
-alt="image-20230110220022268" />
-<figcaption aria-hidden="true">image-20230110220022268</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110220022268.png" srcset="/img/loading.gif" lazyload alt="image-20230110220022268"></p>
 <p>state是符合型的字段，包含多重含义</p>
 <ul>
 <li>第一位表示锁是否被持有</li>

@@ -16,17 +16,26 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="02-定义字段类型 整型类型 包括TINYINT、SMALLINT、MEDIUMINT、INT（INTEGER）和BIGINT   image-20230109154457492  商品编号一般采用INT 浮点数类型和定点数类型 浮点数类型分为FLOAT、DOUBLE、REAL  FLOAT表示单精度浮点数 DOUBLE表示双精度浮点数 REAL默认是DOUBLE，如果把SQL模式设定为REAL_">
+    <meta name="description" content="02-定义字段类型整型类型包括TINYINT、SMALLINT、MEDIUMINT、INT（INTEGER）和BIGINT  商品编号一般采用INT 浮点数类型和定点数类型浮点数类型分为FLOAT、DOUBLE、REAL  FLOAT表示单精度浮点数 DOUBLE表示双精度浮点数 REAL默认是DOUBLE，如果把SQL模式设定为REAL_AS_FLOAT，那么REAL就是FLOAT类型  1SE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="02 定义字段类型">
 <meta property="og:url" content="http://example.com/2023/01/09/02-%E5%AE%9A%E4%B9%89%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="02-定义字段类型 整型类型 包括TINYINT、SMALLINT、MEDIUMINT、INT（INTEGER）和BIGINT   image-20230109154457492  商品编号一般采用INT 浮点数类型和定点数类型 浮点数类型分为FLOAT、DOUBLE、REAL  FLOAT表示单精度浮点数 DOUBLE表示双精度浮点数 REAL默认是DOUBLE，如果把SQL模式设定为REAL_">
+<meta property="og:description" content="02-定义字段类型整型类型包括TINYINT、SMALLINT、MEDIUMINT、INT（INTEGER）和BIGINT  商品编号一般采用INT 浮点数类型和定点数类型浮点数类型分为FLOAT、DOUBLE、REAL  FLOAT表示单精度浮点数 DOUBLE表示双精度浮点数 REAL默认是DOUBLE，如果把SQL模式设定为REAL_AS_FLOAT，那么REAL就是FLOAT类型  1SE">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109154457492.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109155028175.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161532743.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161848208.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161933516.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109162401666.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109162631852.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109163056213.png">
 <meta property="article:published_time" content="2023-01-09T07:28:34.000Z">
 <meta property="article:modified_time" content="2023-01-17T08:52:58.837Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109154457492.png">
   
   
   
@@ -220,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k words
+          1.8k words
         
       </span>
     
@@ -231,7 +240,7 @@
         
         
         
-          17 mins
+          16 mins
         
       </span>
     
@@ -274,114 +283,57 @@
             
               <div class="markdown-body">
                 
-                <h1 id="定义字段类型">02-定义字段类型</h1>
-<h2 id="整型类型">整型类型</h2>
-<p>包括TINYINT、SMALLINT、MEDIUMINT、INT（INTEGER）和BIGINT</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109154457492.png" srcset="/img/loading.gif" lazyload
-alt="image-20230109154457492" />
-<figcaption aria-hidden="true">image-20230109154457492</figcaption>
-</figure>
+                <h1 id="02-定义字段类型"><a href="#02-定义字段类型" class="headerlink" title="02-定义字段类型"></a>02-定义字段类型</h1><h2 id="整型类型"><a href="#整型类型" class="headerlink" title="整型类型"></a>整型类型</h2><p>包括TINYINT、SMALLINT、MEDIUMINT、INT（INTEGER）和BIGINT</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109154457492.png" srcset="/img/loading.gif" lazyload alt="image-20230109154457492"></p>
 <p>商品编号一般采用INT</p>
-<h2 id="浮点数类型和定点数类型">浮点数类型和定点数类型</h2>
-<p>浮点数类型分为FLOAT、DOUBLE、REAL</p>
+<h2 id="浮点数类型和定点数类型"><a href="#浮点数类型和定点数类型" class="headerlink" title="浮点数类型和定点数类型"></a>浮点数类型和定点数类型</h2><p>浮点数类型分为FLOAT、DOUBLE、REAL</p>
 <ul>
 <li>FLOAT表示单精度浮点数</li>
 <li>DOUBLE表示双精度浮点数</li>
 <li>REAL默认是DOUBLE，如果把SQL模式设定为<code>REAL_AS_FLOAT</code>，那么REAL就是FLOAT类型</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SET sql_mode = &quot;REAL_AS_FLOAT&quot;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109155028175.png" srcset="/img/loading.gif" lazyload
-alt="image-20230109155028175" />
-<figcaption aria-hidden="true">image-20230109155028175</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109155028175.png" srcset="/img/loading.gif" lazyload alt="image-20230109155028175"></p>
 <p>Mysql按照这个格式存储浮点数的：符号(S)、尾数(M)、阶码(E)</p>
 <p>无论有没有符号，MySQL的浮点数都会存储表示符号的部分，因此，所谓的无符号数值取值范围，其实也就是有符号取值范围大于零的部分</p>
 <p><strong>浮点数类型的缺陷是不精准</strong>，对于精确度要求较高的项目，<strong>千万</strong>不能使用浮点数！！！</p>
-<h3 id="实例演示">实例演示</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE demo.goodsmaster<br>( <br>  barcode TEXT, <br>  goodsname TEXT, <br>  price DOUBLE, <br>  itemnumber INT PRIMARY KEY AUTO_INCREMENT <br>);<br></code></pre></td></tr></table></figure>
+<h3 id="实例演示"><a href="#实例演示" class="headerlink" title="实例演示"></a>实例演示</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE demo.goodsmaster<br>( <br>  barcode TEXT, <br>  goodsname TEXT, <br>  price DOUBLE, <br>  itemnumber INT PRIMARY KEY AUTO_INCREMENT <br>);<br></code></pre></td></tr></table></figure>
 <p>插入数据</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 第一条<br>INSERT INTO demo.goodsmaster <br>( <br>  barcode,<br>  goodsname, <br>  price <br>)<br>VALUES<br>( <br>  &#x27;0001&#x27;, <br>  &#x27;书&#x27;, <br>  0.47 <br>);<br>-- 第二条<br>INSERT INTO demo.goodsmaster <br>( <br>  barcode,<br>  goodsname,<br>  price <br>) <br>VALUES <br>( <br>  &#x27;0002&#x27;, <br>  &#x27;笔&#x27;, <br>  0.44 <br>); <br>-- 第三条<br>INSERT INTO demo.goodsmaster<br>( <br>  barcode,<br>  goodsname, <br>  price <br>) <br>VALUES <br>( <br>  &#x27;0002&#x27;, <br>  &#x27;胶水&#x27;, <br>  0.19 <br>);<br></code></pre></td></tr></table></figure>
 <p>查看表里情况</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * from demo.goodsmaster<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161532743.png" srcset="/img/loading.gif" lazyload
-alt="image-20230109161532743" />
-<figcaption aria-hidden="true">image-20230109161532743</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161532743.png" srcset="/img/loading.gif" lazyload alt="image-20230109161532743"></p>
 <p>将三个价格加到一起</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT SUM(price)<br>FROM demo.goodsmaster;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161848208.png" srcset="/img/loading.gif" lazyload
-alt="image-20230109161848208" />
-<figcaption aria-hidden="true">image-20230109161848208</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161848208.png" srcset="/img/loading.gif" lazyload alt="image-20230109161848208"></p>
 <p>改成FLOAT型，误差更大</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161933516.png" srcset="/img/loading.gif" lazyload
-alt="image-20230109161933516" />
-<figcaption aria-hidden="true">image-20230109161933516</figcaption>
-</figure>
-<h3
-id="精准的数据类型定点数类型decimal">精准的数据类型：定点数类型DECIMAL</h3>
-<p>浮点数是将十进制数转换为二进制数存储，DECIMAL是将十进制的整数部分和小数部分拆改，分别转换成十六进制数，进行存储。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109161933516.png" srcset="/img/loading.gif" lazyload alt="image-20230109161933516"></p>
+<h3 id="精准的数据类型：定点数类型DECIMAL"><a href="#精准的数据类型：定点数类型DECIMAL" class="headerlink" title="精准的数据类型：定点数类型DECIMAL"></a>精准的数据类型：定点数类型DECIMAL</h3><p>浮点数是将十进制数转换为二进制数存储，DECIMAL是将十进制的整数部分和小数部分拆改，分别转换成十六进制数，进行存储。</p>
 <p>Mysql用DECIMAL(M,D)的方式表示高精度小数，M表示整数部分加小数部分一共有多少位，M&lt;=65，D表示小数部分尾数，D&lt;M</p>
 <p>将price的数据类型修改为DECIMAL(5,2)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER TABLE demo.goodsmaster<br>MODIFY COLUMN price DECIMAL(5,2);<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109162401666.png" srcset="/img/loading.gif" lazyload
-alt="image-20230109162401666" />
-<figcaption aria-hidden="true">image-20230109162401666</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109162401666.png" srcset="/img/loading.gif" lazyload alt="image-20230109162401666"></p>
 <p>再一次运行求和语句</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT SUM(price)<br>FROM demo.goodsmaster;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109162631852.png" srcset="/img/loading.gif" lazyload
-alt="image-20230109162631852" />
-<figcaption aria-hidden="true">image-20230109162631852</figcaption>
-</figure>
-<h2 id="文本类型">文本类型</h2>
-<ul>
-<li>CHAR(M)：固定长度字符串。CHAR(M)
-类型必须预先定义字符串长度。如果太短，数据可能会超出范围；如果太长，又浪费存储空间。</li>
-<li>VARCHAR(M)： 可变长度字符串。VARCHAR(M)
-也需要预先知道字符串的最大长度，不过只要不超过这个最大长度，具体存储的时候，是按照实际字符串长度存储的。</li>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109162631852.png" srcset="/img/loading.gif" lazyload alt="image-20230109162631852"></p>
+<h2 id="文本类型"><a href="#文本类型" class="headerlink" title="文本类型"></a>文本类型</h2><ul>
+<li>CHAR(M)：固定长度字符串。CHAR(M) 类型必须预先定义字符串长度。如果太短，数据可能会超出范围；如果太长，又浪费存储空间。</li>
+<li>VARCHAR(M)： 可变长度字符串。VARCHAR(M) 也需要预先知道字符串的最大长度，不过只要不超过这个最大长度，具体存储的时候，是按照实际字符串长度存储的。</li>
 <li>TEXT：字符串。系统自动按照实际长度存储，不需要预先定义长度。</li>
-<li>ENUM：
-枚举类型，取值必须是预先设定的一组字符串值范围之内的一个，必须要知道字符串所有可能的取值。</li>
-<li>SET：是一个字符串对象，取值必须是在预先设定的字符串值范围之内的 0
-个或多个，也必须知道字符串所有可能的取值。</li>
+<li>ENUM： 枚举类型，取值必须是预先设定的一组字符串值范围之内的一个，必须要知道字符串所有可能的取值。</li>
+<li>SET：是一个字符串对象，取值必须是在预先设定的字符串值范围之内的 0 个或多个，也必须知道字符串所有可能的取值。</li>
 </ul>
 <p>TEXT也分4种类型：</p>
 <ul>
-<li>TINYTEXT：255 字符（这里假设字符是 ASCII
-码，一个字符占用一个字节，下同）。</li>
+<li>TINYTEXT：255 字符（这里假设字符是 ASCII 码，一个字符占用一个字节，下同）。</li>
 <li>TEXT： 65535 字符。</li>
 <li>MEDIUMTEXT：16777215 字符。</li>
 <li>LONGTEXT： 4294967295 字符（相当于 4GB）。</li>
 </ul>
-<p><strong>注意</strong>：由于实际存储的长度不确定，MySQL 不允许TEXT
-类型的字段做主键。遇到这种情况，你只能采用 CHAR(M)，或者
-VARCHAR(M)。</p>
-<h2 id="日期与时间类型">日期与时间类型</h2>
-<p>使用最多的是DATETIME</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109163056213.png" srcset="/img/loading.gif" lazyload
-alt="image-20230109163056213" />
-<figcaption aria-hidden="true">image-20230109163056213</figcaption>
-</figure>
-<p><strong>建议</strong>：为了确保数据的完整性和系统的稳定性，优先考虑使用DATETIME
-类型。因为虽然 DATETIME
-类型占用的存储空间最多，但是它表达的时间最为完整，取值范围也最大。</p>
+<p><strong>注意</strong>：由于实际存储的长度不确定，MySQL 不允许TEXT 类型的字段做主键。遇到这种情况，你只能采用 CHAR(M)，或者 VARCHAR(M)。</p>
+<h2 id="日期与时间类型"><a href="#日期与时间类型" class="headerlink" title="日期与时间类型"></a>日期与时间类型</h2><p>使用最多的是DATETIME</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230109163056213.png" srcset="/img/loading.gif" lazyload alt="image-20230109163056213"></p>
+<p><strong>建议</strong>：为了确保数据的完整性和系统的稳定性，优先考虑使用DATETIME 类型。因为虽然 DATETIME 类型占用的存储空间最多，但是它表达的时间最为完整，取值范围也最大。</p>
 
                 
               </div>

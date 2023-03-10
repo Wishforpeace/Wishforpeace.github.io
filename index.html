@@ -233,7 +233,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/03/05/2-4-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E2%80%9C%E5%BC%95%E6%93%8E%E2%80%9D%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%A2%AF%E5%BA%A6%E7%9A%84%E4%BC%98%E5%8C%96/" target="_self">
         <div>
-          2-4 神经网络的“引擎”：基于梯度的优化 随机初始化：选择权重较小的矩阵进行运算。 训练：逐步调节 训练循环：  抽取训练样本x和对应目标y_true组成的一个数据批量 在x上运行模型，得到y_pred（向前传播） 计算损失值，用于衡量y_pred和y_true之间的差距 更新模型的所有权重，以略微减小模型在这批数据上的损失值。  2.4.1 导数 \[f(x) &#x3D; y\]   image-20
+          2-4 神经网络的“引擎”：基于梯度的优化随机初始化：选择权重较小的矩阵进行运算。 训练：逐步调节 训练循环：  抽取训练样本x和对应目标y_true组成的一个数据批量 在x上运行模型，得到y_pred（向前传播） 计算损失值，用于衡量y_pred和y_true之间的差距 更新模型的所有权重，以略微减小模型在这批数据上的损失值。  2.4.1 导数f(x) &#x3D; y 函数是连续的，x增加很小的eps
         </div>
       </a>
 
@@ -287,7 +287,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/03/03/03%EF%BD%9CMutex%EF%BC%9A4%E7%A7%8D%E6%98%93%E9%94%99%E5%9C%BA%E6%99%AF%E5%A4%A7%E7%9B%98%E7%82%B9/" target="_self">
         <div>
-          03｜Mutex：4种易错场景大盘点 1.Lock&#x2F;Unlock 不是成对出现 Lock&#x2F;Unlock 没有成对出现，就意味着会出现死锁的情况，或者是因为 Unlock 一个未加锁的Mutex 而导致 panic。 缺少Unlock的场景，常见的三种情况：  if-else分支太多，漏写Unlock 重构时删除Unlock Unlock误写成Lock  在这种情况下，锁被获取之后，就不会被释放了，
+          03｜Mutex：4种易错场景大盘点1.Lock&#x2F;Unlock 不是成对出现Lock&#x2F;Unlock 没有成对出现，就意味着会出现死锁的情况，或者是因为 Unlock 一个未加锁的Mutex 而导致 panic。 缺少Unlock的场景，常见的三种情况：  if-else分支太多，漏写Unlock 重构时删除Unlock Unlock误写成Lock  在这种情况下，锁被获取之后，就不会被释放了，这也
         </div>
       </a>
 
@@ -341,7 +341,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/03/03/%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%AD%A6%E4%B9%A0shell/" target="_self">
         <div>
-          第一部分-学习shell shell是一个接收由键盘输入的命令，并将其传递给操作系统来执行的程序。 第一章 什么是Shell 1.1终端仿真器 当使用图形用户界面时，需要另一种叫做终端仿真器（terminal emulator）的程序与shell进行交互。 1.2 第一次键盘输入   image-20230303075554381  1.2.1命令历史记录 如果按下向上方向指示键，将会看到先前的命
+          第一部分-学习shellshell是一个接收由键盘输入的命令，并将其传递给操作系统来执行的程序。 第一章 什么是Shell1.1终端仿真器当使用图形用户界面时，需要另一种叫做终端仿真器（terminal emulator）的程序与shell进行交互。 1.2 第一次键盘输入 1.2.1命令历史记录如果按下向上方向指示键，将会看到先前的命令kaekfjaeifj再一次出现在 提示符的后面，这称为命令
         </div>
       </a>
 
@@ -395,7 +395,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/03/01/01-Relational-Model-Relational-Algebra/" target="_self">
         <div>
-          01 - Relational Model &amp; Relational Algebra 1.Database A database is an organized collection of inter-related data that models some aspects of the real-world. Distinguish &quot;database&quot; with &quot;database
+          01 - Relational Model &amp; Relational Algebra1.DatabaseA database is an organized collection of inter-related data that models some aspects of the real-world. Distinguish  “database” with “database m
         </div>
       </a>
 
@@ -449,7 +449,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/02/24/Go%E5%B9%B6%E5%8F%91%E7%AE%80%E4%BB%8B/" target="_self">
         <div>
-          Go并发简介 Go并发编程的困难  在面对并发难题时，感觉无从下手，不知道该用什么并发原语来解决问题。 如果多个并发原语都可以解决问题，那么，究竟哪个是最优解呢？比如说是用互斥锁，还是  用 Channel。  不知道如何编排并发任务。并发编程不像是传统的串行编程，程序的运行存在着很大的不确  定性。这个时候，就会面临一个问题，怎么才能让相应的任务按照你设想的流程运行呢？  有时候，按照正常理解的
+          Go并发简介Go并发编程的困难 在面对并发难题时，感觉无从下手，不知道该用什么并发原语来解决问题。   如果多个并发原语都可以解决问题，那么，究竟哪个是最优解呢？比如说是用互斥锁，还是  用 Channel。  不知道如何编排并发任务。并发编程不像是传统的串行编程，程序的运行存在着很大的不确  定性。这个时候，就会面临一个问题，怎么才能让相应的任务按照你设想的流程运行呢？  有时候，按照正常理解的
         </div>
       </a>
 
@@ -503,7 +503,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/02/19/08-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0-%E9%AB%98%E6%95%88%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/" target="_self">
         <div>
-          08-聚合函数:高效进行分组统计 MySQL中的五种常用函数SUM()、AVG()、MAX()、MIN()、COUNT() 超市经营者提出，他们需要统计某个门店，每天、每个单品的销售情况，包括销售数量和销售金额等。 三个数据表 销售明细表(demo.transactiondetails)   image-20230221135311992  销售单头(demo.transactionhead)
+          08-聚合函数:高效进行分组统计MySQL中的五种常用函数SUM()、AVG()、MAX()、MIN()、COUNT() 超市经营者提出，他们需要统计某个门店，每天、每个单品的销售情况，包括销售数量和销售金额等。 三个数据表 销售明细表(demo.transactiondetails)  销售单头(demo.transactionhead)  商品信息表（demo.goodsmaster）  SU
         </div>
       </a>
 
@@ -557,7 +557,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/01/17/07-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%EF%BC%9Awhere%E5%92%8Chaving%E7%9A%84%E5%8C%BA%E5%88%86/" target="_self">
         <div>
-          07-条件语句：where和having的区分  where是直接对表中的字段进行限定，来筛选结果 having则需要跟分组关键字 group by一起使用，通过对分组字段和分组计算函数进行限定，来筛选结果  虽然都是进行查询限定，但是如果用错场景，就会出现各种查询问题。 一个实际查询需求 查询单臂销售金额超过50元的商品。 直接查询商品的信息表demo.goodsmaster 1select *
+          07-条件语句：where和having的区分 where是直接对表中的字段进行限定，来筛选结果 having则需要跟分组关键字 group by一起使用，通过对分组字段和分组计算函数进行限定，来筛选结果  虽然都是进行查询限定，但是如果用错场景，就会出现各种查询问题。 一个实际查询需求查询单臂销售金额超过50元的商品。 直接查询商品的信息表demo.goodsmaster 1select * f
         </div>
       </a>
 
@@ -611,7 +611,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/01/17/06-%E5%A4%96%E9%94%AE%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/" target="_self">
         <div>
-          06-外键和连接的关联查询 多表查询 将分散在多个不同的表里的数据查询出来的操作成为多表查询 多表查询查询需要建立起多个表之间的关联，才能去查询，同时还需要规避关联表查询中的常见错误 现项目的进货模块有两个数据表，分别是进货单头表（importhead）和进货单明细表（importdetails）   image-20230117164605597    需要查询一次进货的所有相关数据，就需要把
+          06-外键和连接的关联查询多表查询将分散在多个不同的表里的数据查询出来的操作成为多表查询 多表查询查询需要建立起多个表之间的关联，才能去查询，同时还需要规避关联表查询中的常见错误 现项目的进货模块有两个数据表，分别是进货单头表（importhead）和进货单明细表（importdetails）    需要查询一次进货的所有相关数据，就需要把两个表关联起来 将两个表关联，就需要2个重要的功能：外键
         </div>
       </a>
 
@@ -665,7 +665,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/01/17/05-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%94%AE/" target="_self">
         <div>
-          05-设置主键 设置主键的三种思路：  业务字段做主键 自增字段做主键 手动赋值字段做主键  以会员信息表为例：   image-20230117105518725  业务字段做主键 会员卡号适合，具有唯一性，可以用来表示会员记录 12345678910create table demo.membermaster(	cardno char(8) primary key,  membername t
+          05-设置主键设置主键的三种思路：  业务字段做主键 自增字段做主键 手动赋值字段做主键  以会员信息表为例：  业务字段做主键会员卡号适合，具有唯一性，可以用来表示会员记录 12345678910create table demo.membermaster(	cardno char(8) primary key,  membername text,  memberphone text,  mem
         </div>
       </a>
 
@@ -719,7 +719,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/01/17/viper/" target="_self">
         <div>
-          viper 我们将使用 Viper 包来作为yaml 和 config 信息的基础库。 Viper 是 Go 生态圈里一个很知名的项目，在 GitHub 上有接近 1.8 万个 star。 它支持以下特性：  设置默认值（存入时设置） 支持格式配置信息的格式包括 JSON、TOML、YAML、HCL、envfile 和 Java properties 实时监控和重新读取配置文件（可选） 从环境变量
+          viper我们将使用 Viper 包来作为yaml 和 config 信息的基础库。 Viper 是 Go 生态圈里一个很知名的项目，在 GitHub 上有接近 1.8 万个 star。 它支持以下特性：  设置默认值（存入时设置） 支持格式配置信息的格式包括 JSON、TOML、YAML、HCL、envfile 和 Java properties 实时监控和重新读取配置文件（可选） 从环境变量中
         </div>
       </a>
 
