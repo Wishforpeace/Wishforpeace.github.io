@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="The Redefine Team">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2022/12/26/链表/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="链表">
+    <meta property="og:description" content="Hexo Theme Redefine">
+    <meta property="og:url" content="http://example.com2022/12/26/链表/">
+    
+    <meta property="og:site_name" content="Theme Redefine">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="链表">
+    <meta name="twitter:description" content="Hexo Theme Redefine">
+    <meta name="twitter:image" content="/images/redefine-logo.svg">
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-logo.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-logo.svg">
+    <meta name="theme-color" content="#005080">
+    <link rel="shortcut icon" href="/images/redefine-logo.svg">
+    
+    <title>
+        
+            链表 -
+        
+        Theme Redefine
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    
+    
+    
+    <script id="hexo-configurations">
+    let REDEFINE = window.REDEFINE || {};
+    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","og_image":{"enable":false,"image_url":null},"article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"Theme Redefine","custom_font":{"enable":false,"font_family":null,"font_url":null}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":true},"code_block":{"copy":true,"style":"mac","custom_font":{"enable":false,"font_family":null,"font_url":null}},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"1.2.0","friend_links":{"columns":2},"home_article":{"date_format":"auto","category":{"enable":true,"limit":3},"tag":{"enable":true,"limit":3}},"plugins":{"aplayer":{"enable":false,"audio":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]}}};
+    REDEFINE.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+    
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="menu-wrapper">
+    
+    <div class="menu-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Theme Redefine
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                            <li class="menu-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="menu-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                    <li class="drawer-menu-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">链表</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">The Redefine Team</span>
+                            
+                                <span class="author-label">lol</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="pc">2022-12-26 11:59:59</span>
+        <span class="mobile">2022-12-26 11:59</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="pc">2022-12-26 17:15:56</span>
+            <span class="mobile">2022-12-26 17:15</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Data-Structure/">Data Structure</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="链表">链表</h1>
+<blockquote>
+<p>链表由一个个数据节点组成，是一个递归结构，要么为空，要么存在就是只想另一个数据节点的引用</p>
+</blockquote>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> LinkNode <span class="keyword">struct</span> &#123; </span><br><span class="line">  Data <span class="type">int64</span> </span><br><span class="line">  NextNode *LinkNode </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123; </span><br><span class="line">  <span class="comment">// 新的节点 </span></span><br><span class="line">  node := <span class="built_in">new</span>(LinkNode) </span><br><span class="line">  node.Data = <span class="number">2</span> </span><br><span class="line">  <span class="comment">// 新的节点 </span></span><br><span class="line">  node1 := <span class="built_in">new</span>(LinkNode) </span><br><span class="line">  node1.Data = <span class="number">3</span> </span><br><span class="line">  node.NextNode = node1 </span><br><span class="line">  <span class="comment">// node1 链接到 node 节点上</span></span><br><span class="line">  <span class="comment">// 新的节点 </span></span><br><span class="line">  node2 := <span class="built_in">new</span>(LinkNode) </span><br><span class="line">  node2.Data = <span class="number">4</span> </span><br><span class="line">  node1.NextNode = node2 <span class="comment">// node2 链接到 node1 节点上 </span></span><br><span class="line">  <span class="comment">// 按顺序打印数据</span></span><br><span class="line">  nowNode := node </span><br><span class="line">  <span class="keyword">for</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> nowNode != <span class="literal">nil</span> &#123; </span><br><span class="line">      <span class="comment">// 打印节点值 </span></span><br><span class="line">      fmt.Println(nowNode.Data) </span><br><span class="line">      <span class="comment">// 获取下一个节点 </span></span><br><span class="line">      nowNode = nowNode.NextNode &#125;</span><br><span class="line">    <span class="comment">// 如果下一个节点为空，表示链表结束了 </span></span><br><span class="line">    <span class="keyword">break</span> </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>结构体 <code>LinkNode</code>
+有两个字段，一个字段存放数据<code>Data</code> ，另一个字典指向下一个节点
+<code>NextNode</code>。这种从一个数据节点指向下一个数据节点的结构，都可以叫做链表。</p>
+<h2 id="分类">分类</h2>
+<ol type="1">
+<li><p>单链表，就是链表是单向的，像我们上面这个结构一样，可以一直往下找到下一个数据节点，它只有一个方向，它不能往回找。</p></li>
+<li><p>双链表，每个节点既可以找到它之前的节点，也可以找到之后的节点，是双向的。</p></li>
+<li><p>循环链表，就是它一直往下找数据节点，最后回到了自己那个节点，形成了一个回路。循环单链表和循环双链表的区别就是，一个只能一个方向走，一个两个方向都可以走。</p></li>
+</ol>
+<h2 id="循环链表">循环链表</h2>
+<h3 id="初始化循环链表">1.初始化循环链表</h3>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main </span><br><span class="line"><span class="keyword">import</span> ( <span class="string">&quot;fmt&quot;</span> )</span><br><span class="line"><span class="comment">// 初始化空的循环链表，前驱和后驱都指向自己，因为是循环的 </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Ring)</span></span> init() *Ring &#123; </span><br><span class="line">  r.next = r</span><br><span class="line">  r.prev = r </span><br><span class="line">  <span class="keyword">return</span> r </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123; </span><br><span class="line">  r := <span class="built_in">new</span>(Ring) </span><br><span class="line">  r.init() </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>创建一个指定大小 N 的循环链表，值全为空:</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建N个节点的循环链表 </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">New</span><span class="params">(n <span class="type">int</span>)</span></span> *Ring &#123; </span><br><span class="line">  <span class="keyword">if</span> n &lt;= <span class="number">0</span> &#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span> </span><br><span class="line">  &#125;</span><br><span class="line">  r := <span class="built_in">new</span>(Ring) </span><br><span class="line">  p := r </span><br><span class="line">  <span class="keyword">for</span> i := <span class="number">1</span>; i &lt; n; i++ &#123; </span><br><span class="line">    p.next = &amp;Ring&#123;</span><br><span class="line">      prev: p</span><br><span class="line">    &#125; </span><br><span class="line">    p = p.next </span><br><span class="line">  &#125;</span><br><span class="line">  p.next = r </span><br><span class="line">  r.prev = p</span><br></pre></td></tr></table></figure></div>
+<h3 id="获取上一个或下一个节点">2.获取上一个或下一个节点</h3>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取下一个节点 </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Ring)</span></span> Next() *Ring &#123; </span><br><span class="line">  <span class="keyword">if</span> r.next == <span class="literal">nil</span> &#123; </span><br><span class="line">    <span class="keyword">return</span> r.init() </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> r.next </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取上一个节点 </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Ring)</span></span> Prev() *Ring &#123; </span><br><span class="line">  <span class="keyword">if</span> r.next == <span class="literal">nil</span> &#123; </span><br><span class="line">    <span class="keyword">return</span> r.init() </span><br><span class="line">  &#125;<span class="keyword">return</span> </span><br><span class="line">  r.prev </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h3 id="获取第n个节点">3.获取第n个节点</h3>
+<p>因为链表是循环的，当 n
+为负数，表示从前面往前遍历，否则往后面遍历：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Ring)</span></span> Move(n <span class="type">int</span>) *Ring &#123; </span><br><span class="line">  <span class="keyword">if</span> r.next == <span class="literal">nil</span> &#123; </span><br><span class="line">    <span class="keyword">return</span> r.init() </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">switch</span> &#123; </span><br><span class="line">    <span class="keyword">case</span> n &lt; <span class="number">0</span>: </span><br><span class="line">    	<span class="keyword">for</span> ; n &lt; <span class="number">0</span>; n++ &#123;</span><br><span class="line">        r = r.prev </span><br><span class="line">      &#125; </span><br><span class="line">  	<span class="keyword">case</span> n &gt; <span class="number">0</span>: </span><br><span class="line">    <span class="keyword">for</span> ; n &gt; <span class="number">0</span>; n-- &#123; </span><br><span class="line">      r = r.next </span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> r</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h3 id="添加节点">4.添加节点</h3>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 往节点A，链接一个节点，并且返回之前节点A的后驱节点 </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Ring)</span></span> Link(s *Ring) *Ring &#123; </span><br><span class="line">  n := r.Next() </span><br><span class="line">  <span class="keyword">if</span> s != <span class="literal">nil</span> &#123; </span><br><span class="line">    p := s.Prev() </span><br><span class="line">    r.next = s </span><br><span class="line">    s.prev = r </span><br><span class="line">    n.prev = p </span><br><span class="line">    p.next = n </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> n </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>添加节点的操作比较复杂，如果节点 s 是一个新的节点。那么也就是在 r
+节点后插入一个新节点 s ，而 r
+节点之前的后驱节点，将会链接到新节点后面，并返回 r
+节点之前的第一个后驱节点 n 。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main </span><br><span class="line"><span class="keyword">import</span> (<span class="string">&quot;fmt&quot;</span>)</span><br><span class="line">ffunc linkNewTest() &#123; </span><br><span class="line">  <span class="comment">// 第一个节点 </span></span><br><span class="line">  r := &amp;Ring&#123;Value: <span class="number">-1</span>&#125; </span><br><span class="line">  <span class="comment">// 链接新的五个节点 </span></span><br><span class="line">  r.Link(&amp;Ring&#123;Value: <span class="number">1</span>&#125;) </span><br><span class="line">  r.Link(&amp;Ring&#123;Value: <span class="number">2</span>&#125;) </span><br><span class="line">  r.Link(&amp;Ring&#123;Value: <span class="number">3</span>&#125;) </span><br><span class="line">  r.Link(&amp;Ring&#123;Value: <span class="number">4</span>&#125;) </span><br><span class="line">  node := r </span><br><span class="line">  <span class="keyword">for</span> &#123;</span><br><span class="line">    <span class="comment">// 打印节点值 </span></span><br><span class="line">    fmt.Println(node.Value) </span><br><span class="line">    <span class="comment">// 移到下一个节点 </span></span><br><span class="line">    node = node.Next() </span><br><span class="line">    <span class="comment">// 如果节点回到了起点，结束 </span></span><br><span class="line">    <span class="keyword">if</span> node == r &#123; </span><br><span class="line">      <span class="keyword">return</span> </span><br><span class="line">    &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123; </span><br><span class="line">  linkNewTest() </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h3 id="删除节点">5.删除节点</h3>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除节点后面的 n 个节点 </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Ring)</span></span> Unlink(n <span class="type">int</span>) *Ring &#123; </span><br><span class="line">  <span class="keyword">if</span> n &lt; <span class="number">0</span> &#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span> </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> r.Link(r.Move(n + <span class="number">1</span>)) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>将循环链表的后面几个节点删除。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main </span><br><span class="line"><span class="keyword">import</span> (<span class="string">&quot;fmt&quot;</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">deleteTest</span><span class="params">()</span></span> &#123; </span><br><span class="line">  <span class="comment">// 第一个节点 </span></span><br><span class="line">  r := &amp;Ring&#123;Value: <span class="number">-1</span>&#125; </span><br><span class="line">  <span class="comment">// 链接新的五个节点 </span></span><br><span class="line">  r.Link(&amp;Ring&#123;Value: <span class="number">1</span>&#125;) </span><br><span class="line">  r.Link(&amp;Ring&#123;Value: <span class="number">2</span>&#125;) </span><br><span class="line">  r.Link(&amp;Ring&#123;Value: <span class="number">3</span>&#125;) </span><br><span class="line">  r.Link(&amp;Ring&#123;Value: <span class="number">4</span>&#125;) </span><br><span class="line">  temp := r.Unlink(<span class="number">3</span>) <span class="comment">// 解除了后面两个节点 </span></span><br><span class="line">  <span class="comment">// 打印原来的节点 </span></span><br><span class="line">  node := r <span class="keyword">for</span> &#123;</span><br><span class="line">    <span class="comment">// 打印节点值 </span></span><br><span class="line">    fmt.Println(node.Value) </span><br><span class="line">    <span class="comment">// 移到下一个节点 </span></span><br><span class="line">    node = node.Next() </span><br><span class="line">    <span class="comment">// 如果节点回到了起点，结束 </span></span><br><span class="line">    <span class="keyword">if</span> node == r &#123; </span><br><span class="line">      <span class="keyword">break</span> </span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Println(<span class="string">&quot;------&quot;</span>)</span><br><span class="line">  <span class="comment">// 打印被切断的节点 </span></span><br><span class="line">  node = temp <span class="keyword">for</span> &#123;</span><br><span class="line">    <span class="comment">// 打印节点值 </span></span><br><span class="line">    fmt.Println(node.Value) </span><br><span class="line">    <span class="comment">// 移到下一个节点 node = node.Next()</span></span><br><span class="line">    <span class="comment">// 如果节点回到了起点，结束 </span></span><br><span class="line">    <span class="keyword">if</span> node == temp &#123; </span><br><span class="line">      <span class="keyword">break</span> </span><br><span class="line">    &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h3 id="获取链表长度">6.获取链表长度</h3>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看循环链表长度 </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Ring)</span></span> Len() <span class="type">int</span> &#123; </span><br><span class="line">  n := <span class="number">0</span> </span><br><span class="line">  <span class="keyword">if</span> r != <span class="literal">nil</span> &#123;</span><br><span class="line">    n = <span class="number">1</span> </span><br><span class="line">    <span class="keyword">for</span> p := r.Next(); p != r; p = p.next &#123; </span><br><span class="line">      n++ </span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> n </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h3 id="题目">题目</h3>
+<ol type="1">
+<li>新建一个链表ChainList，输入一组数据，并输入m，实现从第m个数及往后数据的倒序(不允许使用数组，不允许新建链表，在原有链表上实现逆置)</li>
+</ol>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//示例</span></span><br><span class="line">输入数的个数：<span class="number">9</span></span><br><span class="line">数据为：<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span></span><br><span class="line">m值为：<span class="number">5</span></span><br><span class="line">倒叙后输出：<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">9</span> <span class="number">8</span> <span class="number">7</span> <span class="number">6</span> <span class="number">5</span></span><br></pre></td></tr></table></figure></div>
+<ol start="2" type="1">
+<li><p>链表排序</p>
+<figure>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/sort_list_2.jpg"
+                     
+alt="img" 
+                >
+<figcaption aria-hidden="true">img</figcaption>
+</figure></li>
+<li><p>使用单链表实现集合的交、并、差运算</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//示例</span></span><br><span class="line">Set1 = <span class="number">1</span> <span class="number">7</span> <span class="number">4</span> <span class="number">9</span> <span class="number">0</span> <span class="number">6</span></span><br><span class="line">Set1 = <span class="number">1</span> <span class="number">3</span> <span class="number">8</span> <span class="number">5</span> <span class="number">6</span> <span class="number">4</span></span><br><span class="line">Set1∩Set2 = <span class="number">1</span> <span class="number">4</span> <span class="number">6</span></span><br><span class="line">Set1∪Set2 = <span class="number">1</span> <span class="number">7</span> <span class="number">4</span> <span class="number">9</span> <span class="number">0</span> <span class="number">6</span> <span class="number">3</span> <span class="number">8</span> <span class="number">5</span> </span><br><span class="line">Set1-Set2 = <span class="number">7</span> <span class="number">9</span> <span class="number">0</span></span><br><span class="line">Set2-Set1 = <span class="number">3</span> <span class="number">8</span> <span class="number">5</span> </span><br></pre></td></tr></table></figure></div></li>
+</ol>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：链表</li>
+        <li>Post author：The Redefine Team</li>
+        <li>Create time：2022-12-26 11:59:59</li>
+        <li>
+            Post link：https://redefine.ohevan.com/2022/12/26/链表/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/01/09/01-%E5%AE%8C%E6%95%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">01 完整的数据存储过程</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2022/12/18/Go%E9%A1%B9%E7%9B%AE%E5%8C%85%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Go项目包管理方法</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">链表</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="nav-text">循环链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="nav-text">1.初始化循环链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%8A%E4%B8%80%E4%B8%AA%E6%88%96%E4%B8%8B%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9"><span class="nav-text">2.获取上一个或下一个节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9"><span class="nav-text">3.获取第n个节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9"><span class="nav-text">4.添加节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9"><span class="nav-text">5.删除节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%93%BE%E8%A1%A8%E9%95%BF%E5%BA%A6"><span class="nav-text">6.获取链表长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-text">题目</span></a></li></ol></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+
+
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-regular fa-computer-classic"></i>&nbsp;&nbsp;<a href="/">The Redefine Team</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br> 
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v1.2.0</a>
+        </div>
+        
+        
+        
+            <div id="start_time_div" style="display:none">
+                2022/8/17 11:45:14
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="unfolded-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="folded-tools-list">
+        <li class="right-bottom-tools tool-toggle-show flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/menu-shrink.js"></script>
+
+<script src="/js/tools/go-top-bottom.js"></script>
+
+<script src="/js/tools/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/code-block.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/toc-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            REDEFINE.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            REDEFINE.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            REDEFINE.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="The Redefine Team">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2022/07/30/第4章 pod--kubernetes的基本单位/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="第4章 Pod--Kubernetes的基本单位">
+    <meta property="og:description" content="Hexo Theme Redefine">
+    <meta property="og:url" content="http://example.com2022/07/30/第4章 Pod--Kubernetes的基本单位/">
+    
+    <meta property="og:site_name" content="Theme Redefine">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="第4章 Pod--Kubernetes的基本单位">
+    <meta name="twitter:description" content="Hexo Theme Redefine">
+    <meta name="twitter:image" content="/images/redefine-logo.svg">
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-logo.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-logo.svg">
+    <meta name="theme-color" content="#005080">
+    <link rel="shortcut icon" href="/images/redefine-logo.svg">
+    
+    <title>
+        
+            第4章 Pod--Kubernetes的基本单位 -
+        
+        Theme Redefine
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    
+    
+    
+    <script id="hexo-configurations">
+    let REDEFINE = window.REDEFINE || {};
+    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","og_image":{"enable":false,"image_url":null},"article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"Theme Redefine","custom_font":{"enable":false,"font_family":null,"font_url":null}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":true},"code_block":{"copy":true,"style":"mac","custom_font":{"enable":false,"font_family":null,"font_url":null}},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"1.2.0","friend_links":{"columns":2},"home_article":{"date_format":"auto","category":{"enable":true,"limit":3},"tag":{"enable":true,"limit":3}},"plugins":{"aplayer":{"enable":false,"audio":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]}}};
+    REDEFINE.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+    
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="menu-wrapper">
+    
+    <div class="menu-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Theme Redefine
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                            <li class="menu-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="menu-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                    <li class="drawer-menu-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">第4章 Pod--Kubernetes的基本单位</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">The Redefine Team</span>
+                            
+                                <span class="author-label">lol</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="pc">2022-07-30 09:36:03</span>
+        <span class="mobile">2022-07-30 09:36</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="pc">2022-08-31 17:18:56</span>
+            <span class="mobile">2022-08-31 17:18</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Kubernetes/">Kubernetes</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <blockquote>
+<p>Pod是Kubernetes中的==基本单位==。容器本身并不会直接分配到主机上，而会封装到名为Pod的对象中。</p>
+<p>Pod通常表示<strong>单个应用程序</strong>，由一个或多个关系紧密的容器构成，这些容器拥有同样的生命周期，作为一个整体一起编排到Node上。</p>
+<p>这些容器<strong>共享环境、存储卷（volume）和IP空间</strong>。尽管Pod基于一个或多个容器，但应将Pod视作一个单一的整体、单独的应用程序。Kubernetes以Pod为最小单位进行调度、伸缩并共享资源、管理生命周期。</p>
+</blockquote>
+<h1 id="pod基本操作">1. Pod基本操作</h1>
+<h2 id="创建pod">1. 创建Pod</h2>
+<h3 id="部署pod">部署Pod</h3>
+<p>定义模版文件：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim examplepod.yml</span><br></pre></td></tr></table></figure></div>
+<p>填入：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line"> name: examplepod</span><br><span class="line">spec:</span><br><span class="line">	containers:</span><br><span class="line">	- name: examplepod-container</span><br><span class="line">		image: busybox</span><br><span class="line">		imagePullPolicy: IfNotPresent</span><br><span class="line">		command: [&#x27;sh&#x27;, &#x27;-c&#x27;]</span><br><span class="line">		args: [&#x27;echo &quot;Hello Kubernetes!&quot;; sleep 3600&#x27;]</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><p><strong>apiVersion</strong>表示使用的<strong>API版本</strong>。v1表示使用Kubernetes
+API的稳定版本</p></li>
+<li><p><strong>kind</strong>表示要创建的<strong>资源对象</strong>，这里使用关键字Pod。</p></li>
+<li><p><strong>metadata</strong>表示该资源对象的元数据。一个资源对象可拥有多个元数据，其中一项是name，它表示当前资源的名称。</p></li>
+<li><p><strong>spec</strong>表示该资源对象的具体设置。其中containers表示容器的集合，这里只设置了一个容器，该容器的属性如下。</p>
+<ul>
+<li><p>name：要创建的容器名称。</p></li>
+<li><p>image：容器的镜像地址。</p></li>
+<li><p>imagePullPolicy：镜像的下载策略，支持3种</p>
+<p>imagePullPolicy，如下所示。</p>
+<ul>
+<li>Always：不管镜像是否存在都会进行一次拉取。</li>
+<li>Never：不管镜像是否存在都不会进行拉取。</li>
+<li>IfNotPresent：只有镜像不存在时，才会进行拉取。</li>
+</ul></li>
+<li><p>command：容器的启动命令列表（不配置的话，使用镜像内部的命令）。</p></li>
+<li><p>args：启动参数列表（在本例中是输出文字“HelloKubernetes!”并休眠3600s）</p></li>
+</ul></li>
+</ul>
+<p>运行以下命令，通过模板创建Pod。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f examplepod.yml</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804215147389.png"
+                     
+alt="image-20220804215147389" 
+                >
+<figcaption aria-hidden="true">image-20220804215147389</figcaption>
+</figure>
+<hr />
+<p><em><strong>提示</strong>：apply是一种声明式对象配置命令。这里应用了之前创建的模板，-f参数表示使用文件名作为参数。相比命令式对象管理，apply既便于跟踪，又具备很好的可读性。本书将统一使用声明式对象配置来管理资源。</em></p>
+<hr />
+<p>创建成功后，可通过以下命令查询当前运行的所有Pod。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pod</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804215230213.png"
+                     
+alt="image-20220804215230213" 
+                >
+<figcaption aria-hidden="true">image-20220804215230213</figcaption>
+</figure>
+<h2 id="查询pod">2. 查询Pod</h2>
+<p>​
+Pod创建后，最常用的功能就是查询。可以用以下命令<strong>查询Pod的状态</strong>。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pod &#123;Pod名称&#125;</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804215302364.png"
+                     
+alt="image-20220804215302364" 
+                >
+<figcaption aria-hidden="true">image-20220804215302364</figcaption>
+</figure>
+<p>还可以在查询命令中带上参数-w，以对Pod状态进行<strong>持续监控</strong>。</p>
+<p>​ 只要Pod发生了变化，就会在控制台中输出相应信息。命令如下。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pod &#123;Pod名称&#125; -w</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804215324072.png"
+                     
+alt="image-20220804215324072" 
+                >
+<figcaption aria-hidden="true">image-20220804215324072</figcaption>
+</figure>
+<p>​ 另外，还可以在查询命令中带上-o
+wide参数，<strong>输出Pod的更多概要信息</strong>（如调度到哪台机器上，Pod本身的虚拟IP等信息）。命令如下。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pod &#123;Pod名称&#125; -o wide</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804215453630.png"
+                     
+alt="image-20220804215453630" 
+                >
+<figcaption aria-hidden="true">image-20220804215453630</figcaption>
+</figure>
+<p>​
+get命令除了可以显示简要的运行信息外，还可以输出<strong>完整信息</strong>。它支持<strong>多种格式</strong>的输出，如可以用yaml和Json方式输出，命令如下。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pod examplepod --output yaml</span><br><span class="line">kubectl get pod examplepod --output json</span><br></pre></td></tr></table></figure></div>
+<p>一般情况下，如果要<strong>查询Pod更详细的信息</strong>（包括状态、生命周期和执行情况等），除了将其输出为yaml或json格式，还可以用<strong>describe命令</strong>查看详情，格式如下。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe pods &#123;Pod名称&#125;</span><br></pre></td></tr></table></figure></div>
+<p>结果：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line">[root@iZbp1f3y0av6g5d4zhb3uoZ examplepod]# kubectl get pod examplepod --output  yaml</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  annotations:</span><br><span class="line">    kubectl.kubernetes.io/last-applied-configuration: |</span><br><span class="line">      &#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Pod&quot;,&quot;metadata&quot;:&#123;&quot;annotations&quot;:&#123;&#125;,&quot;name&quot;:&quot;examplepod&quot;,&quot;namespace&quot;:&quot;cert-manager&quot;&#125;,&quot;spec&quot;:&#123;&quot;containers&quot;:[&#123;&quot;args&quot;:[&quot;echo \&quot;Hello Kubernetes!\&quot;; sleep 3600&quot;],&quot;command&quot;:[&quot;sh&quot;,&quot;-c&quot;],&quot;image&quot;:&quot;busybox&quot;,&quot;imagePullPolicy&quot;:&quot;IfNotPresent&quot;,&quot;name&quot;:&quot;examplepod-container&quot;&#125;]&#125;&#125;</span><br><span class="line">  creationTimestamp: &quot;2022-08-04T13:32:13Z&quot;</span><br><span class="line">  managedFields:</span><br><span class="line">  - apiVersion: v1</span><br><span class="line">    fieldsType: FieldsV1</span><br><span class="line">    fieldsV1:</span><br><span class="line">      f:metadata:</span><br><span class="line">        f:annotations:</span><br><span class="line">          .: &#123;&#125;</span><br><span class="line">          f:kubectl.kubernetes.io/last-applied-configuration: &#123;&#125;</span><br><span class="line">      f:spec:</span><br><span class="line">        f:containers:</span><br><span class="line">          k:&#123;&quot;name&quot;:&quot;examplepod-container&quot;&#125;:</span><br><span class="line">            .: &#123;&#125;</span><br><span class="line">            f:args: &#123;&#125;</span><br><span class="line">            f:command: &#123;&#125;</span><br><span class="line">            f:image: &#123;&#125;</span><br><span class="line">            f:imagePullPolicy: &#123;&#125;</span><br><span class="line">            f:name: &#123;&#125;</span><br><span class="line">            f:resources: &#123;&#125;</span><br><span class="line">            f:terminationMessagePath: &#123;&#125;</span><br><span class="line">            f:terminationMessagePolicy: &#123;&#125;</span><br><span class="line">        f:dnsPolicy: &#123;&#125;</span><br><span class="line">        f:enableServiceLinks: &#123;&#125;</span><br><span class="line">        f:restartPolicy: &#123;&#125;</span><br><span class="line">        f:schedulerName: &#123;&#125;</span><br><span class="line">        f:securityContext: &#123;&#125;</span><br><span class="line">        f:terminationGracePeriodSeconds: &#123;&#125;</span><br><span class="line">    manager: kubectl-client-side-apply</span><br><span class="line">    operation: Update</span><br><span class="line">    time: &quot;2022-08-04T13:32:13Z&quot;</span><br><span class="line">  - apiVersion: v1</span><br><span class="line">    fieldsType: FieldsV1</span><br><span class="line">    fieldsV1:</span><br><span class="line">      f:status:</span><br><span class="line">        f:conditions:</span><br><span class="line">          k:&#123;&quot;type&quot;:&quot;ContainersReady&quot;&#125;:</span><br><span class="line">            .: &#123;&#125;</span><br><span class="line">            f:lastProbeTime: &#123;&#125;</span><br><span class="line">            f:lastTransitionTime: &#123;&#125;</span><br><span class="line">            f:status: &#123;&#125;</span><br><span class="line">            f:type: &#123;&#125;</span><br><span class="line">          k:&#123;&quot;type&quot;:&quot;Initialized&quot;&#125;:</span><br><span class="line">            .: &#123;&#125;</span><br><span class="line">            f:lastProbeTime: &#123;&#125;</span><br><span class="line">            f:lastTransitionTime: &#123;&#125;</span><br><span class="line">            f:status: &#123;&#125;</span><br><span class="line">            f:type: &#123;&#125;</span><br><span class="line">          k:&#123;&quot;type&quot;:&quot;Ready&quot;&#125;:</span><br><span class="line">            .: &#123;&#125;</span><br><span class="line">            f:lastProbeTime: &#123;&#125;</span><br><span class="line">            f:lastTransitionTime: &#123;&#125;</span><br><span class="line">            f:status: &#123;&#125;</span><br><span class="line">            f:type: &#123;&#125;</span><br><span class="line">        f:containerStatuses: &#123;&#125;</span><br><span class="line">        f:hostIP: &#123;&#125;</span><br><span class="line">        f:phase: &#123;&#125;</span><br><span class="line">        f:podIP: &#123;&#125;</span><br><span class="line">        f:podIPs:</span><br><span class="line">          .: &#123;&#125;</span><br><span class="line">          k:&#123;&quot;ip&quot;:&quot;10.42.2.25&quot;&#125;:</span><br><span class="line">            .: &#123;&#125;</span><br><span class="line">            f:ip: &#123;&#125;</span><br><span class="line">        f:startTime: &#123;&#125;</span><br><span class="line">    manager: k3s</span><br><span class="line">    operation: Update</span><br><span class="line">    time: &quot;2022-08-04T13:32:39Z&quot;</span><br><span class="line">  name: examplepod</span><br><span class="line">  namespace: cert-manager</span><br><span class="line">  resourceVersion: &quot;82803826&quot;</span><br><span class="line">  uid: be9afea5-2764-4a01-ba9e-33f13082e7d0</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - args:</span><br><span class="line">    - echo &quot;Hello Kubernetes!&quot;; sleep 3600</span><br><span class="line">    command:</span><br><span class="line">    - sh</span><br><span class="line">    - -c</span><br><span class="line">    image: busybox</span><br><span class="line">    imagePullPolicy: IfNotPresent</span><br><span class="line">    name: examplepod-container</span><br><span class="line">    resources: &#123;&#125;</span><br><span class="line">    terminationMessagePath: /dev/termination-log</span><br><span class="line">    terminationMessagePolicy: File</span><br><span class="line">    volumeMounts:</span><br><span class="line">    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount</span><br><span class="line">      name: default-token-kj5lt</span><br><span class="line">      readOnly: true</span><br><span class="line">  dnsPolicy: ClusterFirst</span><br><span class="line">  enableServiceLinks: true</span><br><span class="line">  nodeName: izbp113w9axywnhpyk1525z</span><br><span class="line">  preemptionPolicy: PreemptLowerPriority</span><br><span class="line">  priority: 0</span><br><span class="line">  restartPolicy: Always</span><br><span class="line">  schedulerName: default-scheduler</span><br><span class="line">  securityContext: &#123;&#125;</span><br><span class="line">  serviceAccount: default</span><br><span class="line">  serviceAccountName: default</span><br><span class="line">  terminationGracePeriodSeconds: 30</span><br><span class="line">  tolerations:</span><br><span class="line">  - effect: NoExecute</span><br><span class="line">    key: node.kubernetes.io/not-ready</span><br><span class="line">    operator: Exists</span><br><span class="line">    tolerationSeconds: 300</span><br><span class="line">  - effect: NoExecute</span><br><span class="line">    key: node.kubernetes.io/unreachable</span><br><span class="line">    operator: Exists</span><br><span class="line">    tolerationSeconds: 300</span><br><span class="line">  volumes:</span><br><span class="line">  - name: default-token-kj5lt</span><br><span class="line">    secret:</span><br><span class="line">      defaultMode: 420</span><br><span class="line">      secretName: default-token-kj5lt</span><br><span class="line">status:</span><br><span class="line">  conditions:</span><br><span class="line">  - lastProbeTime: null</span><br><span class="line">    lastTransitionTime: &quot;2022-08-04T13:32:13Z&quot;</span><br><span class="line">    status: &quot;True&quot;</span><br><span class="line">    type: Initialized</span><br><span class="line">  - lastProbeTime: null</span><br><span class="line">    lastTransitionTime: &quot;2022-08-04T13:32:39Z&quot;</span><br><span class="line">    status: &quot;True&quot;</span><br><span class="line">    type: Ready</span><br><span class="line">  - lastProbeTime: null</span><br><span class="line">    lastTransitionTime: &quot;2022-08-04T13:32:39Z&quot;</span><br><span class="line">    status: &quot;True&quot;</span><br><span class="line">    type: ContainersReady</span><br><span class="line">  - lastProbeTime: null</span><br><span class="line">    lastTransitionTime: &quot;2022-08-04T13:32:13Z&quot;</span><br><span class="line">    status: &quot;True&quot;</span><br><span class="line">    type: PodScheduled</span><br><span class="line">  containerStatuses:</span><br><span class="line">  - containerID: containerd://7500b2e8b6f2e0932250d129685edaa17ed84e50aa575bfd5e34ff8203ce2b6f</span><br><span class="line">    image: docker.io/library/busybox:latest</span><br><span class="line">    imageID: docker.io/library/busybox@sha256:ef320ff10026a50cf5f0213d35537ce0041ac1d96e9b7800bafd8bc9eff6c693</span><br><span class="line">    lastState: &#123;&#125;</span><br><span class="line">    name: examplepod-container</span><br><span class="line">    ready: true</span><br><span class="line">    restartCount: 0</span><br><span class="line">    started: true</span><br><span class="line">    state:</span><br><span class="line">      running:</span><br><span class="line">        startedAt: &quot;2022-08-04T13:32:38Z&quot;</span><br><span class="line">  hostIP: 172.19.230.67</span><br><span class="line">  phase: Running</span><br><span class="line">  podIP: 10.42.2.25</span><br><span class="line">  podIPs:</span><br><span class="line">  - ip: 10.42.2.25</span><br><span class="line">  qosClass: BestEffort</span><br><span class="line">  startTime: &quot;2022-08-04T13:32:13Z&quot;</span><br></pre></td></tr></table></figure></div>
+<p>该命令会输出<strong>比较全面</strong>的信息，包括资源的<u>基本信息、容器信息、准备情况、存储卷信息及相关的事件列表</u>。在资源部署时如果遇到问题，可以使用此命令查看详情，分析部署错误的原因。</p>
+<p>如果要查询Pod本身输出的日志信息，还可以使用logs命令，格式如下。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl logs &#123;Pod名称&#125;</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804220238729.png"
+                     
+alt="image-20220804220238729" 
+                >
+<figcaption aria-hidden="true">image-20220804220238729</figcaption>
+</figure>
+<h2 id="修改pod">3. 修改Pod</h2>
+<p>​ 可以用replace命令来修改原先设置的Pod属性，命令格式如下:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl replace -f &#123;pod模板路径&#125;</span><br></pre></td></tr></table></figure></div>
+<p>修改之前示例中定义的Pod，使它输出“Hello
+Kubernetesreplaced!”。先打开examplepod.yml文件。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim examplepod.yml</span><br></pre></td></tr></table></figure></div>
+<p>在文件中填入如下内容并保存。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line"> name: examplepod</span><br><span class="line">spec:</span><br><span class="line"> containers:</span><br><span class="line"> - name: examplepod-container</span><br><span class="line"> 	 image: busybox</span><br><span class="line">   imagePullPolicy: IfNotPresent</span><br><span class="line">   command: [&#x27;sh&#x27;, &#x27;-c&#x27;]</span><br><span class="line">   args: [&#x27;echo &quot;Hello Kubernetes replaced!&quot;; sleep 3600&#x27;]</span><br></pre></td></tr></table></figure></div>
+<hr />
+<p><em>提示：Pod有很多属性无法修改，比如containers的image属性，spec下的activeDeadline
+Seconds、tolerations属性等。如果一定要修改，则需要加上--force参数，相当于重新创建Pod，命令如下。</em></p>
+<hr />
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl replace -f &#123;pod模板路径&#125; --force</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804221306895.png"
+                     
+alt="image-20220804221306895" 
+                >
+<figcaption aria-hidden="true">image-20220804221306895</figcaption>
+</figure>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804221403636.png"
+                     
+alt="image-20220804221403636" 
+                >
+<figcaption aria-hidden="true">image-20220804221403636</figcaption>
+</figure>
+<h2 id="删除pod">4. 删除Pod</h2>
+<p>Pod的删除非常简单，只要执行以下命令即可</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete pod &#123;Pod名称&#125;</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804221552127.png"
+                     
+alt="image-20220804221552127" 
+                >
+<figcaption aria-hidden="true">image-20220804221552127</figcaption>
+</figure>
+<p>另外，还可以基于模板文件删除资源，如以下命令所示:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete -f &#123;模板文件名称&#125;</span><br></pre></td></tr></table></figure></div>
+<h1 id="pod模板详解">2. Pod模板详解</h1>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1 #版本，必填，v1代表稳定版本</span><br><span class="line">kind: pod #类型，必填，Pod</span><br><span class="line">metadata: #元数据，表示资源的标识信息</span><br><span class="line"> name: String #元数据，必填，Pod的名字</span><br><span class="line"> namespace: String #元数据，Pod的命名空间</span><br><span class="line"> labels: #元数据，标签列表</span><br><span class="line"> - key: value #元数据，可定义多个标签的键/值对</span><br><span class="line"> annotations: #元数据，自定义注解列表</span><br><span class="line"> - key: value #元数据，可定义多个注解的键/值对</span><br><span class="line">spec: #Pod中容器的详细定义，必填</span><br><span class="line"> containers: #Pod中的容器列表，必填，可以有多个容器</span><br><span class="line"> - name: String #容器名称，必填</span><br><span class="line"> image: String #容器中的镜像地址，必填</span><br><span class="line"> imagePullPolicy: [Always|Never|IfNotPresent]#获取镜像的策略，Always表示下载镜像；</span><br><span class="line"> #IfNotPresent表示优先使用本地镜像，否则下载镜像；Never表示仅使用本地镜像</span><br><span class="line"> command: [String] #容器的启动命令列表（不配置的话，使用镜像内部的命令）</span><br><span class="line"> args: [String] #启动命令参数列表</span><br><span class="line"> workingDir: String #容器的工作目录</span><br><span class="line"> volumeMounts: #挂载到容器内部的存储卷设置</span><br><span class="line"> - name: String #为了引用Pod定义的共享存储卷的名称，要用volumes[]部分定义的卷名</span><br><span class="line"> mountPath: String #存储卷在容器内挂载的绝对路径，应少于512个字符</span><br><span class="line"> readOnly: boolean #是否为只读模式</span><br><span class="line"> ports: #容器需要暴露的端口号列表</span><br><span class="line"> - name: String #端口名称</span><br><span class="line"> containerPort: int #容器要暴露的端口</span><br><span class="line"> hostPort: int #容器所在主机监听的端口（把容器暴露的端口映射到宿主机的端口）</span><br><span class="line"> protocol: String #端口协议，支持TCP和UDP，默认为TCP</span><br><span class="line"> env: #容器运行前要设置的环境变量列表</span><br><span class="line"> - name: String #环境变量名称</span><br><span class="line"> value: String #环境变量值</span><br><span class="line"> resources: #资源限制和请求的设置</span><br><span class="line"> limits: #资源限制的设置</span><br><span class="line"> cpu: String #CPU的限制，单位为CPU内核数。将用于docker run--cpu-quota 参数，</span><br><span class="line"> #也可以使用小数，例如0.1，0.1等价于表达式100m，表示100milicpu</span><br><span class="line"> memory: String #内存限制，单位可以为</span><br><span class="line">MiB/GiB/MB/GB（1MiB=1024×1024B，#1MB=1000×1000B），将用于docker run --memory参数 requests: #资源请求的设置</span><br><span class="line"> cpu: String #CPU请求，容器启动时的初始可用数量，将用于</span><br><span class="line">docker run --cpu-shares参数</span><br><span class="line"> memory: String #内存请求，容器启动时的初始可用数量</span><br><span class="line"> livenessProbe: #Pod内容器健康检查的设置，当探测几次无响应后将自动重启该容器，</span><br><span class="line"> #检查方法有exec、httpGet和tcpSocket，对一个容器只要设置一种方法即可</span><br><span class="line"> exec: #通过exec方式来检查Pod内各容器的健康状况</span><br><span class="line"> command: [String] #exec方式需要指定的命令或脚本</span><br><span class="line"> httpGet: #通过httpGet方式来检查Pod中各容器的健康状况，需要指定path、port</span><br><span class="line"> path: String</span><br><span class="line"> port: number</span><br><span class="line"> host: String</span><br><span class="line"> scheme: String</span><br><span class="line"> httpHeaders:</span><br><span class="line"> - name: String</span><br><span class="line"> value: String </span><br><span class="line"> tcpSocket: #通过tcpSocket检查Pod中各容器的健康状况</span><br><span class="line"> port: number</span><br><span class="line"> initialDelaySeconds: 0 #容器启动完成后，首次探测的时间（单位为秒）</span><br><span class="line"> timeoutSeconds: 0 #对容器进行健康检查时探测等待响应的超时时间</span><br><span class="line">（单位为秒，默认为1s）</span><br><span class="line"> periodSeconds: 0 #对容器监控检查的定期探测时间设置（单位为秒），默认10s一次</span><br><span class="line"> successThreshold: 0</span><br><span class="line"> failureThreshold: 0</span><br><span class="line"> securityContext: #安全配置</span><br><span class="line"> privileged: false</span><br><span class="line"> restartPolicy: [Always|Never|OnFailure]#Pod的重启策略，Always表示不管以何种方式终止</span><br><span class="line"> #运行，kubelet都将重启；OnFailure表示只有Pod以非0码退出才重启；Never表示不再重启该Pod</span><br><span class="line"> nodeSelector: object #节点选择，设置nodeSelector表示将该Pod调度到包含这个标签的</span><br><span class="line"> #节点上，以key：value格式来指定</span><br><span class="line"> imagePullSecrets: #拉取镜像时使用的secret名称，以key：</span><br><span class="line">secretkey格式指定</span><br><span class="line"> - name: String</span><br><span class="line"> hostNetwork: false #是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络</span><br><span class="line"> volumes: #在该Pod上定义共享存储卷列表</span><br><span class="line"> - name: String #共享存储卷名称</span><br><span class="line"> emptyDir: &#123;&#125; #类型为emptyDir的存储卷，与Pod有相同生命周期的一个临时目录，为空值</span><br><span class="line"> hostPath: #类型为hostPath的存储卷，将会挂载Pod所在宿主机的目录</span><br><span class="line"> path: string #Pod所在宿主机的目录，该目录将在容器中挂载</span><br><span class="line"> secret: #类型为secret的存储卷，在容器内部挂载集群中</span><br><span class="line">预定义的secret对象</span><br><span class="line"> secretName: String</span><br><span class="line"> items:</span><br><span class="line"> - key: String</span><br><span class="line"> path: String</span><br><span class="line"> configMap: #类型为configMap的存储卷，挂载预定义的</span><br><span class="line">configMap对象到容器内部</span><br><span class="line"> name: String</span><br><span class="line"> items:</span><br><span class="line"> - key: String</span><br><span class="line"> path: String</span><br></pre></td></tr></table></figure></div>
+<p>还可以使用<code>$ kubectl explain pod</code>命令详细查看Pod资源所支持的所有字段的详细说明</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804222023988.png"
+                     
+alt="image-20220804222023988" 
+                >
+<figcaption aria-hidden="true">image-20220804222023988</figcaption>
+</figure>
+<p>可以看到图中列出了5个字段，分别是apiVersion、kind、metadata、spec、status。如果要进一步查看每个字段的详情，例如，对于spec字段可以使用命令<code>$ kubectl explainpod.spec</code>进行查看，</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Notes/main/picture/image-20220804222153635.png"
+                     
+alt="image-20220804222153635" 
+                >
+<figcaption aria-hidden="true">image-20220804222153635</figcaption>
+</figure>
+<p>如果要了解一个正在运行的Pod的配置，可以通过以下命令来获取。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pod &#123;pod名称&#125; -o yaml</span><br></pre></td></tr></table></figure></div>
+<h1 id="pod与容器">3. Pod与容器</h1>
+<h2 id="pod创建容器的方式">1. Pod创建容器的方式</h2>
+<p>之前描述的<strong>Pod模板</strong>和<strong>Docker-Compose</strong>配置非常相似，但Pod模板涉及其他部署参数的设定，相对更复杂。</p>
+<p>先排除与容器无关的配置参数，在模板的<strong>Containers</strong>部分，<strong>指明容器的部署方式</strong>。在部署过程中，会转换成对应的容器运行时（containerruntime）命令，例如，对于Docker，会转换成类似于Docker
+run的命令。</p>
+<p>​ 在最开始的例子中，yml文件内容如下。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line"> name: examplepod</span><br><span class="line">spec:</span><br><span class="line"> containers:</span><br><span class="line"> - name: examplepod-container</span><br><span class="line"> 	 image: busybox</span><br><span class="line">   imagePullPolicy: IfNotPresent</span><br><span class="line">   command: [&#x27;sh&#x27;, &#x27;-c&#x27;]</span><br><span class="line">   args: [&#x27;echo &quot;Hello Kubernetes!&quot;; sleep 3600&#x27;]</span><br></pre></td></tr></table></figure></div>
+<p>在Kubernetes将Pod调度到某个节点后，kubelet会调用容器运行时（本例中为Docker），执行如下所示的命令。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name examplepod-container busybox sh -c &#x27;echo&quot;Hello Kubernetes!&quot;; sleep 3600&#x27;</span><br></pre></td></tr></table></figure></div>
+<hr />
+<p><em>提示：command和args设置会分别覆盖原Docker镜像中定义的EntryPoint与CMD，在使用时请务必注意以下规则。</em></p>
+<hr />
+<ul>
+<li>如果没有在模板中提供command或args，则<u>使用Docker镜像中定义的默认值运行</u>。</li>
+<li>如果在模板中提供了command，但未提供args，则仅使用提供的command。Docker镜像中定义的默认的EntryPoint和默认的命令都将被忽略。</li>
+<li>如果只提供了args，则Docker镜像中定义的默认的EntryPoint将与所提供的args组合到一起运行。</li>
+<li>如果只提供了args，则Docker镜像中定义的默认的EntryPoint将与所提供的args组合到一起运行。</li>
+<li>如果同时提供了command和args，Docker镜像中定义的默认的EntryPoint和命令都将被忽略。所提供的command和args将会组合到一起运行。</li>
+</ul>
+<p>同样，在Pod模板的Container设置中的各项信息，在运行时都会转换为类似的容器命令来执行。Container的基础信息的设置如下所示。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">containers: <span class="comment">#Pod中的容器列表，必填，可以有多个容器</span></span><br><span class="line">- name: String <span class="comment">#容器的名称，必填</span></span><br><span class="line"> 	image: String <span class="comment">#容器中的镜像地址，必填</span></span><br><span class="line"> 	imagePullPolicy: [Always|Never|IfNotPresent]<span class="comment">#获取镜像的策略。</span></span><br><span class="line">Always表示下载镜像；</span><br><span class="line"> <span class="comment">#IfNotPresent表示优先使用本地镜像，否则下载镜像；Never表示仅使用本地镜</span></span><br><span class="line">像</span><br><span class="line"> <span class="built_in">command</span>: [String] <span class="comment">#容器的启动命令列表（不配置的话，使用镜像内部的</span></span><br><span class="line">命令）</span><br><span class="line"> args: [String] <span class="comment">#启动命令参数列表</span></span><br><span class="line"> workingDir: String <span class="comment">#容器的工作目录</span></span><br><span class="line"> volumeMounts: <span class="comment">#挂载到容器内部的存储卷设置</span></span><br><span class="line"> - name: String <span class="comment">#为了引用Pod定义的共享存储卷的名称，要用</span></span><br><span class="line">volumes[]部分定义的卷名</span><br><span class="line"> mountPath: String <span class="comment">#存储卷在容器内挂载的绝对路径，应少于512个字符</span></span><br><span class="line"> readOnly: boolean <span class="comment">#是否为只读模式</span></span><br><span class="line"> ports: <span class="comment">#容器需要暴露的端口号列表</span></span><br><span class="line"> - name: String <span class="comment">#端口名称</span></span><br><span class="line"> containerPort: int <span class="comment">#容器要暴露的端口</span></span><br><span class="line"> hostPort: int <span class="comment">#容器所在主机监听的端口（把容器暴露的端口映射到</span></span><br><span class="line">宿主机的端口）</span><br><span class="line"> protocol: String <span class="comment">#端口协议，支持TCP和UDP，默认为TCP</span></span><br><span class="line"> <span class="built_in">env</span>: <span class="comment">#容器运行前要设置的环境变量列表</span></span><br><span class="line"> - name: String <span class="comment">#环境变量名称</span></span><br><span class="line"> value: String <span class="comment">#环境变量值</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="volumemounts配置信息">1.1．volumeMounts配置信息</h3>
+<p>容器运行时通常会提供一些机制来将存储附加到容器上。例如，Docker有两种容器机制：一种是<strong>数据卷（data
+volume）</strong>，它可以<u>将容器内的文件或目录映射到宿主机上的文件或目录中</u>，其命令格式为</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$docker run -v /&#123;主机的目录&#125;:/&#123;映射到容器的目录&#125; &#123;镜像名称&#125;</span><br></pre></td></tr></table></figure></div>
+<p>另一种是<strong>数据卷容器（data volume
+container）</strong>，不过其本质使用的还是数据卷，这种容器一般用在一组相关的容器中，<u>用于专门处理数据存储以供其他容器挂载</u>。</p>
+<p>不管是数据卷还是数据卷容器，其<strong>存留时间通常超过其他容器的生命周期</strong>。由于生命周期不同步，因此实现起来非常<strong>缺乏灵活性</strong>。</p>
+<p>为了解决这些问题，<strong>Kubernetes</strong>在数据卷的基础上，<u>又新增加了一套自己的存储卷（volume）抽象机制</u>。该机制不仅允许Pod中的所有容器方便地<strong>共享数据</strong>，还允许存储卷与Pod中的其他容器保持完全一致的生命周期</p>
+<p>下面是一个简单的示例，说明如何对容器创建数据卷及存储卷，以实现数据共享。</p>
+<ol type="1">
+<li>首先，创建examplepodforvolumemount.yml文件。</li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim examplepodforvolumemount.yml</span><br></pre></td></tr></table></figure></div>
+<ol start="2" type="1">
+<li>填入以下内容</li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: examplepodforvolumemount</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: containerforwrite</span><br><span class="line">    image: busybox</span><br><span class="line">    imagePullPolicy: IfNotPresent</span><br><span class="line">    command: [&#x27;sh&#x27;, &#x27;-c&#x27;]</span><br><span class="line">    args: [&#x27;echo &quot;test data!&quot; &gt; /write_dir/data; sleep 3600&#x27;]</span><br><span class="line">    volumeMounts:</span><br><span class="line">  - name: filedata</span><br><span class="line">    mountPath: /write_dir</span><br><span class="line">  - name: containerforread</span><br><span class="line">    image: busybox</span><br><span class="line">    imagePullPolicy: IfNotPresent</span><br><span class="line">    command: [&#x27;sh&#x27;, &#x27;-c&#x27;]</span><br><span class="line">    args: [&#x27;cat /read_dir/data; sleep 3600&#x27;]</span><br><span class="line">    volumeMounts:</span><br><span class="line">  - name: filedata</span><br><span class="line">    mountPath: /read_dir</span><br><span class="line">    volumes:</span><br><span class="line">  - name: filedata</span><br><span class="line">    emptyDir: &#123;&#125;</span><br></pre></td></tr></table></figure></div>
+<p>在本例中，我们创建了<strong>两个容器</strong>。一个是<code>containerforwrite</code>，它<u>向数据卷写入数据</u>，会向<code>/write_dir/data</code>文件写入<code>"testdata!"</code>文本。容器内的<strong>数据卷地址</strong>为<code>/write_dir</code>，它引用的<strong>存储卷</strong>为<code>filedata</code>。</p>
+<p>另一个容器是<code>containerforread</code>，<code>TE</code>会从<code>/read_dir/data</code>文件中读取文本，并将其输出到控制台（后续可以通过日志查询方式读取输出到控制台的文本）。容器内的数据卷地址为<code>/read_dir</code>，它引用的存储卷为<code>filedata</code>。</p>
+<p>本例中还创建了一个存储卷，其名称为<code>filedata</code>，这个名称会<u>被容器设置中的数据卷所引用</u>。</p>
+<p>存储卷的类型是<code>emptyDir</code>它是最基础的类型，表示<strong>纯净的空目录</strong>，其生命周期和所属的<code>Pod</code>完全一致（后续章节会讲解更多的种类）。对于例子中的两个容器，虽然数据卷地址不同（一个是<code>/write_dir</code>，一个是<code>/read_dir</code>），但因为它们都是映射到同一个空目录下的，所以本质上仍在同一个文件夹内进行操作。</p>
+<p>执行以下命令，创建Pod。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f examplepodforvolumemount.yml</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812150036626.png"
+                     
+alt="image-20220812150036626" 
+                >
+<figcaption aria-hidden="true">image-20220812150036626</figcaption>
+</figure>
+<p>通过以下命令，查看Pod的运行情况，READY
+2/2表示两个容器都已成功运行。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pods examplepodforvolumemount</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812150142353.png"
+                     
+alt="image-20220812150142353" 
+                >
+<figcaption aria-hidden="true">image-20220812150142353</figcaption>
+</figure>
+<p>此时可以通过logs命令，查看Pod中containerforread容器的日志</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl logs examplepodforvolumemount containerforread</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812150253756.png"
+                     
+alt="image-20220812150253756" 
+                >
+<figcaption aria-hidden="true">image-20220812150253756</figcaption>
+</figure>
+<p>此处已经可以看到containerforwrite写入的数据内容了。</p>
+<h3 id="ports配置信息">1.2 ports配置信息</h3>
+<p>容器运行时通常会提供一些机制<strong>以将容器端口暴露出来</strong>，并<strong>映射到主机的端口上</strong>，以便其他人能通过“主机IP:端口”访问容器所提供的服务，例如，Docker的命令<code>$ docker run -p &#123;宿主机端口&#125;:&#123;容器端口&#125; &#123;镜像名称&#125;</code>。同样，Pod模板中也提供了这个功能。为了通过例子进行演示，首先，创建<code>examplepodforport.yml</code>文件。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim examplepodforport.yml</span><br></pre></td></tr></table></figure></div>
+<p>在文件中填入以下内容</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line"> name: examplepodforport</span><br><span class="line">spec:</span><br><span class="line"> containers:</span><br><span class="line"> - name: containerfornginx</span><br><span class="line">   image: nginx</span><br><span class="line">   imagePullPolicy: IfNotPresent</span><br><span class="line">   ports: </span><br><span class="line"> - name: portfoxnginx</span><br><span class="line">   containerPort: 80 </span><br><span class="line">   hostPort: 8081 </span><br><span class="line">   protocol: TCP</span><br></pre></td></tr></table></figure></div>
+<p>​
+在本例中，<strong>Nginx镜像中默认定义的对外提供服务的端口为80</strong>。通过<strong>containerPort</strong>属性，我们将80端口暴露出来，再通过<strong>hostPort属性将其映射到宿主机的端口8081上</strong>，以便通过“主机IP:端口”访问容器所提供的服务，其中<strong>protocol为端口协议</strong>，<u>支持TCP和UDP</u>，默认为<strong>TCP</strong>。</p>
+<p>​ 执行以下命令，创建Pod。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f examplepodforport.yml</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812163407488.png"
+                     
+alt="image-20220812163407488" 
+                >
+<figcaption aria-hidden="true">image-20220812163407488</figcaption>
+</figure>
+<p>通过以下命令，查看Pod的运行情况，直到状态变为Running。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pods examplepodforport</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812163813405.png"
+                     
+alt="image-20220812163813405" 
+                >
+<figcaption aria-hidden="true">image-20220812163813405</figcaption>
+</figure>
+<p>Pod创建完成后，执行以下命令，查看Pod具体被分配到哪台Node上</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl describe pods examplepodforport</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812164520644.png"
+                     
+alt="image-20220812164520644" 
+                >
+<figcaption aria-hidden="true">image-20220812164520644</figcaption>
+</figure>
+<p>Pod被分配到了<code>izbp113w9axywnhpyk1525z/172.19.230.67</code>上</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Node:         izbp113w9axywnhpyk1525z/172.19.230.67</span><br></pre></td></tr></table></figure></div>
+<p>使用wget检验端口是否开通</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812172604700.png"
+                     
+alt="image-20220812172604700" 
+                >
+<figcaption aria-hidden="true">image-20220812172604700</figcaption>
+</figure>
+<hr />
+<p><strong>注意：</strong>以上案例仅为了说明<code>Kubernetes</code>是如何创建容器的，<u>这种类似于Docker直接映射到主机端口的方式</u>，在Kubernetes中<strong>强烈不推荐</strong>。</p>
+<p>Pod只是一个运行服务的实例，随时可能在一个Node上停止，而在另一个Node上以新的IP地址启动新的Pod，因此它不能以稳定的IP地址和端口号提供服务。若要稳定地提供服务，则需要服务发现和负载均衡能力。</p>
+<hr />
+<h3 id="env配置信息">3．env配置信息</h3>
+<p>容器运行时通常还会提供一些机制来输入<strong>可动态配置的一些环境变量</strong>，以供容器中的应用程序使用。如在Docker中，配置环境变量的命令为<code>$ docker run --env &#123;变量1&#125;=&#123;值1&#125; --env &#123;变量2&#125;=&#123;值2&#125; ... &#123;镜像名称&#125;</code>。同样，Pod模板中也提供了这个功能。</p>
+<p>首先，创建examplepodforenv.yml文件。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim examplepodforenv.yml</span><br></pre></td></tr></table></figure></div>
+<p>填入以下内容：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: examplepodforenv</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: containerforenv</span><br><span class="line">    image: busybox</span><br><span class="line">    imagePullPolicy: IfNotPresent</span><br><span class="line">    env: </span><br><span class="line">    - name: parameter1</span><br><span class="line">      value: &quot;good morning!&quot; </span><br><span class="line">    - name: parameter2</span><br><span class="line">      value: &quot;good night!&quot;</span><br><span class="line">  		command: [&#x27;sh&#x27;,&#x27;-c&#x27;]</span><br><span class="line">			args: [&#x27;echo &quot;$&#123;parameter1&#125; $&#123;parameter2&#125;&quot;; sleep 3600&#x27;]</span><br></pre></td></tr></table></figure></div>
+<p>在模板中定义了一个名为<code>containerforenv</code>的容器，向它传入了两个环境变量：其中一个名为<code>parameter1</code>，值为<code>goodmorning!</code>；另一个变量名为<code>parameter2</code>，值为<code>good night!</code>。在本例中，将通过在容器中执行命令的方式，<u>将传入的两个环境变量拼接到一起并输出到日志</u>。</p>
+<p>执行以下命令，创建Pod</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f examplepodforenv.yml</span><br></pre></td></tr></table></figure></div>
+<p>运行以下命令，查看Pod的运行情况，直到状态变为Running</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pods examplepodforenv</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812193426614.png"
+                     
+alt="image-20220812193426614" 
+                >
+<figcaption aria-hidden="true">image-20220812193426614</figcaption>
+</figure>
+<p>通过以下命令，查看Pod中输出的日志。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl logs examplepodforenv</span><br></pre></td></tr></table></figure></div>
+<p>可以看到两个环境变量的值成功拼接到一起并输出到日志中</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812193508164.png"
+                     
+alt="image-20220812193508164" 
+                >
+<figcaption aria-hidden="true">image-20220812193508164</figcaption>
+</figure>
+<h2 id="pod组织容器的方式">2. Pod组织容器的方式</h2>
+<p>Pod的设计初衷在于同时运行<strong>多个共同协作</strong>的进程（作为容器来运行）。Pod中的各个容器总是作为一个整体，同时调度到某台Node上。容器之间可以共享资源、网络环境和依赖，并拥有相同的生命周期。</p>
+<p>当然，在同一个Pod中同时运行和管理多个容器，是一种相对高级的用法，只在容器必须要紧密配合进行协作的时候才使用此模式。</p>
+<h3 id="容器如何组成一个pod">1. 容器如何组成一个Pod</h3>
+<p>Pod只是一种抽象，并不是一个真正的物理实体，表示一组相关容器的<strong>逻辑划分</strong>。每个Pod都包含一个或一组密切相关的业务容器，除此之外，每个Pod都还有一个称为“<strong>根容器</strong>”的特殊<strong>Pause容器</strong>。</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812194430776.png"
+                     
+alt="image-20220812194430776" 
+                >
+<figcaption aria-hidden="true">image-20220812194430776</figcaption>
+</figure>
+<p>Pause容器其实属于Kubernetes的一部分。在一组容器作为一个单位的情况下，很难对整个容器组进行判断，如一个容器挂载了能代表整个Pod都挂载了吗？</p>
+<p>如果引入一个和业务无关的Pause容器，用它作为Pod的根容器，<strong>用它的状态代表整组容器的状态</strong>，便能解决该问题。</p>
+<p>另外，Pod中的所有容器都<strong>共享Pause容器的IP地址及其挂载的存储卷</strong>，这样也<strong>简化了容器之间的通信和数据共享</strong>问题。另外，Pause容器还在Pod中担任<strong>Linux命名空间共享</strong>的基础，为各个容器启用<strong>pid命名空间</strong>，开启init进程。</p>
+<p>例如，对于本章最开始的操作示例，<strong>创建Pod后可以登录对应的Node</strong>，使用以下命令查看创建的容器。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br></pre></td></tr></table></figure></div>
+<p>Pod中的容器可以使用Pod所提供的两种共享资源——存储和网络。</p>
+<h4 id="存储">1) 存储</h4>
+<p>在Pod中，可以指定<strong>一个或多个共享存储卷</strong>。Pod中的所有容器都可以<strong>访问共享存储卷</strong>，从而让这些容器共享数据。存储卷也可以用来持久化Pod中的存储资源，以防容器重启后文件丢失。</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812204444677.png"
+                     
+alt="image-20220812204444677" 
+                >
+<figcaption aria-hidden="true">image-20220812204444677</figcaption>
+</figure>
+<h4 id="网络">2）网络</h4>
+<p>每个Pod都分配了<strong>唯一的IP地址</strong>。Pod中的每个容器都<strong>共享网络命名空间</strong>，包括<u>IP地址和网络端口</u>。Pod内部的容器可以使用<strong>localhost互相通信</strong>。当Pod中的容器与Pod外部进行通信时，还必须<strong>共享网络资源</strong>（如使用端口映射）。</p>
+<p>Docker和Kubernetes在网络空间上的差异</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220812215352573.png"
+                     
+alt="image-20220812215352573" 
+                >
+<figcaption aria-hidden="true">image-20220812215352573</figcaption>
+</figure>
+<p>要查看Pod的IP，可以使用以下命令</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pod my-app --template=&#123;&#123;.status.podIP&#125;&#125;</span><br></pre></td></tr></table></figure></div>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220813111719382.png"
+                     
+alt="image-20220813111719382" 
+                >
+<figcaption aria-hidden="true">image-20220813111719382</figcaption>
+</figure>
+<h3 id="pod之间如何通信">2．Pod之间如何通信</h3>
+<p>Docker其实一开始没有考虑<strong>多主机互连的网络解决方案</strong>。在实际的业务场景中，组件之间的管理十分复杂，应用部署的<strong>粒度更加细小</strong>。Kubernetes使用其独有的网络模型去解决这些问题。</p>
+<p>Pod之间的通信主要涉及两个方面:</p>
+<h4 id="同一个node上pod之间的通信">1）同一个Node上Pod之间的通信</h4>
+<p>因为同一个Node上的Pod使用的都是<strong>相同的Docker网桥</strong>，所以它们天然支持通信。</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220813111911317.png"
+                     
+alt="image-20220813111911317" 
+                >
+<figcaption aria-hidden="true">image-20220813111911317</figcaption>
+</figure>
+<p>每一个Pod都有一个<strong>全局IP地址</strong>，同一个Node内不同Pod之间可以<strong>直接采用对方Pod的IP地址通信</strong>，而且不需要使用其他发现机制。因为它们都是通过veth连接在<strong>同一个docker0网桥</strong>上的，其IP地址都是<strong>从docker0网桥上动态获取的，并关联在同一个docker0网桥上</strong>，<strong>地址段也相同</strong>，所以它们之间能直接通信。</p>
+<h4 id="跨node的pod之间的通信">2）跨Node的Pod之间的通信</h4>
+<p>要实现跨Node的Pod之间的通信，首先需要保证的是<strong>Pod的IP地址</strong>在<strong>所有Node上</strong>都是<strong>全局唯一的</strong>。这其实并不复杂，因为Pod的IP地址是由<strong>Docker
+网桥</strong>分配的，所以可以<strong>将不同Node机器上的Docker网桥配置成不同的IP网段</strong>来实现这个功能。</p>
+<p>然后需要在<strong>容器集群中创建一个覆盖网络</strong>来连接各个机器。目前可以通过第三方网络插件来覆盖网络。</p>
+<p>Flannel会配置Docker网桥（即docker0），通过修<strong>改Docker的启动参数bip</strong>来实现这一点。通过这种方式，集群中各台机器的Docker网桥就得到了全局唯一的IP网段，它所创建的容器自然也拥有全局唯一的IP。</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：第4章 Pod--Kubernetes的基本单位</li>
+        <li>Post author：The Redefine Team</li>
+        <li>Create time：2022-07-30 09:36:03</li>
+        <li>
+            Post link：https://redefine.ohevan.com/2022/07/30/第4章 Pod--Kubernetes的基本单位/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2022/08/05/%E6%95%B0%E5%AD%A6%E8%A7%84%E5%88%92/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">数学规划</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2022/07/27/Swag/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Swag</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">第4章 Pod--Kubernetes的基本单位</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pod%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">1. Pod基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BApod"><span class="nav-text">1. 创建Pod</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2pod"><span class="nav-text">部署Pod</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2pod"><span class="nav-text">2. 查询Pod</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9pod"><span class="nav-text">3. 修改Pod</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4pod"><span class="nav-text">4. 删除Pod</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pod%E6%A8%A1%E6%9D%BF%E8%AF%A6%E8%A7%A3"><span class="nav-text">2. Pod模板详解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pod%E4%B8%8E%E5%AE%B9%E5%99%A8"><span class="nav-text">3. Pod与容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pod%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">1. Pod创建容器的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volumemounts%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-text">1.1．volumeMounts配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ports%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-text">1.2 ports配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#env%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-text">3．env配置信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pod%E7%BB%84%E7%BB%87%E5%AE%B9%E5%99%A8%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">2. Pod组织容器的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%A6%82%E4%BD%95%E7%BB%84%E6%88%90%E4%B8%80%E4%B8%AApod"><span class="nav-text">1. 容器如何组成一个Pod</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E5%82%A8"><span class="nav-text">1) 存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-text">2）网络</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pod%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E9%80%9A%E4%BF%A1"><span class="nav-text">2．Pod之间如何通信</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E4%B8%80%E4%B8%AAnode%E4%B8%8Apod%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="nav-text">1）同一个Node上Pod之间的通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%A8node%E7%9A%84pod%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="nav-text">2）跨Node的Pod之间的通信</span></a></li></ol></li></ol></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+
+
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-regular fa-computer-classic"></i>&nbsp;&nbsp;<a href="/">The Redefine Team</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br> 
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v1.2.0</a>
+        </div>
+        
+        
+        
+            <div id="start_time_div" style="display:none">
+                2022/8/17 11:45:14
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="unfolded-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="folded-tools-list">
+        <li class="right-bottom-tools tool-toggle-show flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/menu-shrink.js"></script>
+
+<script src="/js/tools/go-top-bottom.js"></script>
+
+<script src="/js/tools/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/code-block.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/toc-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            REDEFINE.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            REDEFINE.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            REDEFINE.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

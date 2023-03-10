@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="The Redefine Team">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2022/07/09/mysql学习笔记/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="MySQL学习笔记">
+    <meta property="og:description" content="Hexo Theme Redefine">
+    <meta property="og:url" content="http://example.com2022/07/09/MySQL学习笔记/">
+    
+    <meta property="og:site_name" content="Theme Redefine">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MySQL学习笔记">
+    <meta name="twitter:description" content="Hexo Theme Redefine">
+    <meta name="twitter:image" content="/images/redefine-logo.svg">
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-logo.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-logo.svg">
+    <meta name="theme-color" content="#005080">
+    <link rel="shortcut icon" href="/images/redefine-logo.svg">
+    
+    <title>
+        
+            MySQL学习笔记 -
+        
+        Theme Redefine
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    
+    
+    
+    <script id="hexo-configurations">
+    let REDEFINE = window.REDEFINE || {};
+    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","og_image":{"enable":false,"image_url":null},"article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"Theme Redefine","custom_font":{"enable":false,"font_family":null,"font_url":null}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":true},"code_block":{"copy":true,"style":"mac","custom_font":{"enable":false,"font_family":null,"font_url":null}},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"1.2.0","friend_links":{"columns":2},"home_article":{"date_format":"auto","category":{"enable":true,"limit":3},"tag":{"enable":true,"limit":3}},"plugins":{"aplayer":{"enable":false,"audio":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]}}};
+    REDEFINE.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+    
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="menu-wrapper">
+    
+    <div class="menu-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Theme Redefine
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                            <li class="menu-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="menu-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                    <li class="drawer-menu-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">MySQL学习笔记</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">The Redefine Team</span>
+                            
+                                <span class="author-label">lol</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="pc">2022-07-09 17:40:32</span>
+        <span class="mobile">2022-07-09 17:40</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="pc">2023-01-17 16:52:25</span>
+            <span class="mobile">2023-01-17 16:52</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/MySQL/">MySQL</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Mysql/">Mysql</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="mysql学习笔记">MySQL学习笔记</h1>
+<h2 id="一登录mysql">一、登录MySQL</h2>
+<p>当 MySQL 服务已经运行时, 我们可以通过 MySQL 自带的客户端工具登录到
+MySQL 数据库中, 首先打开命令提示符, 输入以下格式的命名:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h 主机名 -u 用户名 -p</span><br></pre></td></tr></table></figure></div>
+<p>参数说明：</p>
+<ul>
+<li><strong>-h</strong> : 指定客户端所要登录的 MySQL 主机名,
+登录本机(localhost 或 127.0.0.1)该参数可以省略;</li>
+<li><strong>-u</strong> : 登录的用户名;</li>
+<li><strong>-p</strong> : 告诉服务器将会使用一个密码来登录,
+如果所要登录的用户名密码为空, 可以忽略此选项。</li>
+</ul>
+<p>如果我们要登录本机的 MySQL 数据库，只需要输入以下命令即可：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure></div>
+<p>按回车确认, 如果安装正确且 MySQL 正在运行, 会得到以下响应:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enter password:</span><br></pre></td></tr></table></figure></div>
+<p>若密码存在, 输入密码登录,
+不存在则直接按回车登录。登录成功后你将会看到 Welcome to the MySQL
+monitor... 的提示语。</p>
+<p>然后命令提示符会一直以 <strong>mysq&gt;</strong>
+加一个闪烁的光标等待命令的输入, 输入 <strong>exit</strong> 或
+<strong>quit</strong> 退出登录。</p>
+<h2 id="二mysql管理">二、MySQL管理</h2>
+<h3 id="启动及关闭mysql服务器">启动及关闭MySQL服务器</h3>
+<h4 id="linux系统">Linux系统</h4>
+<p>首先我们通过命令检查MySQL服务器是否启动</p>
+<p><code>ps -ef | grep mysqld</code></p>
+<p>如果MySql已经启动，以上命令将输出mysql进程列表，
+如果mysql未启动，你可以使用以下命令来启动mysql服务器:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@host# cd /usr/bin</span><br><span class="line">./mysqld_safe &amp;</span><br></pre></td></tr></table></figure></div>
+<p>如果你想关闭目前运行的 MySQL 服务器, 你可以执行以下命令:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@host# cd /usr/bin</span><br><span class="line">./mysqladmin -u root -p shutdown</span><br><span class="line">Enter password: ******</span><br></pre></td></tr></table></figure></div>
+<h3 id="mysql-用户设置">MySQL 用户设置</h3>
+<p>如果你需要添加 MySQL 用户，你只需要在 mysql 数据库中的 user
+表添加新用户即可。</p>
+<p>以下为添加用户的的实例，用户名为guest，密码为guest123，并授权用户可进行
+SELECT, INSERT 和 UPDATE操作权限：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">root@host# mysql -u root -p</span><br><span class="line">Enter password:*******</span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line">mysql&gt; INSERT INTO user </span><br><span class="line">          (host, user, password, </span><br><span class="line">           select_priv, insert_priv, update_priv) </span><br><span class="line">           VALUES (&#x27;localhost&#x27;, &#x27;guest&#x27;, </span><br><span class="line">           PASSWORD(&#x27;guest123&#x27;), &#x27;Y&#x27;, &#x27;Y&#x27;, &#x27;Y&#x27;);</span><br><span class="line">Query OK, 1 row affected (0.20 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; FLUSH PRIVILEGES;</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT host, user, password FROM user WHERE user = &#x27;guest&#x27;;</span><br><span class="line">+-----------+---------+------------------+</span><br><span class="line">| host      | user    | password         |</span><br><span class="line">+-----------+---------+------------------+</span><br><span class="line">| localhost | guest | 6f8c114b58f2ce9e |</span><br><span class="line">+-----------+---------+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></div>
+<p>在添加用户时，请注意使用MySQL提供的 PASSWORD() 函数来对密码进行加密。
+你可以在以上实例看到用户密码加密后为： 6f8c114b58f2ce9e.</p>
+<p><strong>注意：</strong>在 MySQL5.7 中 user 表的 password
+已换成了<strong>authentication_string</strong>。</p>
+<p><strong>注意：</strong>password() 加密函数已经在 8.0.11
+中移除了，可以使用 MD5() 函数代替。</p>
+<p><strong>注意：</strong>在注意需要执行 <strong>FLUSH
+PRIVILEGES</strong> 语句。 这个命令执行后会重新载入授权表。</p>
+<p>如果你不使用该命令，你就无法使用新创建的用户来连接mysql服务器，除非你重启mysql服务器。</p>
+<p>你可以在创建用户时，为用户指定权限，在对应的权限列中，在插入语句中设置为
+'Y' 即可，用户权限列表如下：</p>
+<ul>
+<li>Select_priv</li>
+<li>Insert_priv</li>
+<li>Update_priv</li>
+<li>Delete_priv</li>
+<li>Create_priv</li>
+<li>Drop_priv</li>
+<li>Reload_priv</li>
+<li>Shutdown_priv</li>
+<li>Process_priv</li>
+<li>File_priv</li>
+<li>Grant_priv</li>
+<li>References_priv</li>
+<li>Index_priv</li>
+<li>Alter_priv</li>
+</ul>
+<p>另外一种添加用户的方法为通过SQL的 GRANT
+命令，以下命令会给指定数据库TUTORIALS添加用户 zara ，密码为 zara123
+。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@host# mysql -u root -p</span><br><span class="line">Enter password:*******</span><br><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP</span><br><span class="line">    -&gt; ON TUTORIALS.*</span><br><span class="line">    -&gt; TO &#x27;zara&#x27;@&#x27;localhost&#x27;</span><br><span class="line">    -&gt; IDENTIFIED BY &#x27;zara123&#x27;;</span><br></pre></td></tr></table></figure></div>
+<p>以上命令会在mysql数据库中的user表创建一条用户信息记录。</p>
+<p><strong>注意:</strong> MySQL 的SQL语句以分号 (;) 作为结束标识。</p>
+<h3 id="etcmy.cnf-文件配置">/etc/my.cnf 文件配置</h3>
+<p>一般情况下，你不需要修改该配置文件，该文件默认配置如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">datadir=/var/lib/mysql</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line"></span><br><span class="line">[mysql.server]</span><br><span class="line">user=mysql</span><br><span class="line">basedir=/var/lib</span><br><span class="line"></span><br><span class="line">[safe_mysqld]</span><br><span class="line">err-log=/var/log/mysqld.log</span><br><span class="line">pid-file=/var/run/mysqld/mysqld.pid</span><br></pre></td></tr></table></figure></div>
+<p>在配置文件中，你可以指定不同的错误日志文件存放的目录，一般你不需要改动这些配置。</p>
+<hr />
+<h3 id="管理mysql的命令">管理MySQL的命令</h3>
+<p>以下列出了使用Mysql数据库过程中常用的命令：</p>
+<ul>
+<li><p><strong>USE *数据库名*</strong> :
+选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br></pre></td></tr></table></figure></div></li>
+<li><p><strong>SHOW DATABASES:</strong> 列出 MySQL
+数据库管理系统的数据库列表。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW DATABASES;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| RUNOOB             |</span><br><span class="line">| cdcol              |</span><br><span class="line">| mysql              |</span><br><span class="line">| onethink           |</span><br><span class="line">| performance_schema |</span><br><span class="line">| phpmyadmin         |</span><br><span class="line">| test               |</span><br><span class="line">| wecenter           |</span><br><span class="line">| wordpress          |</span><br><span class="line">+--------------------+</span><br><span class="line">10 rows in set (0.02 sec)</span><br></pre></td></tr></table></figure></div></li>
+<li><p><strong>SHOW TABLES:</strong>
+显示指定数据库的所有表，使用该命令前需要使用 use
+命令来选择要操作的数据库。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; SHOW TABLES;</span><br><span class="line">+------------------+</span><br><span class="line">| Tables_in_runoob |</span><br><span class="line">+------------------+</span><br><span class="line">| employee_tbl     |</span><br><span class="line">| runoob_tbl       |</span><br><span class="line">| tcount_tbl       |</span><br><span class="line">+------------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></div></li>
+<li><p><strong>SHOW COLUMNS FROM *数据表*:</strong>
+显示数据表的属性，属性类型，主键信息 ，是否为
+NULL，默认值等其他信息。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW COLUMNS FROM runoob_tbl;</span><br><span class="line">+-----------------+--------------+------+-----+---------+-------+</span><br><span class="line">| Field           | Type         | Null | Key | Default | Extra |</span><br><span class="line">+-----------------+--------------+------+-----+---------+-------+</span><br><span class="line">| runoob_id       | int(11)      | NO   | PRI | NULL    |       |</span><br><span class="line">| runoob_title    | varchar(255) | YES  |     | NULL    |       |</span><br><span class="line">| runoob_author   | varchar(255) | YES  |     | NULL    |       |</span><br><span class="line">| submission_date | date         | YES  |     | NULL    |       |</span><br><span class="line">+-----------------+--------------+------+-----+---------+-------+</span><br><span class="line">4 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure></div></li>
+<li><p><strong>SHOW INDEX FROM *数据表*:</strong>
+显示数据表的详细索引信息，包括PRIMARY KEY（主键）。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW INDEX FROM runoob_tbl;</span><br><span class="line">+------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span><br><span class="line">| Table      | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |</span><br><span class="line">+------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span><br><span class="line">| runoob_tbl |          0 | PRIMARY  |            1 | runoob_id   | A         |           2 |     NULL | NULL   |      | BTREE      |         |               |</span><br><span class="line">+------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></div></li>
+<li><p><strong>SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern']
+</strong> 该命令将输出Mysql数据库管理系统的性能及统计信息。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW TABLE STATUS  FROM RUNOOB;   # 显示数据库 RUNOOB 中所有表的信息</span><br><span class="line"></span><br><span class="line">mysql&gt; SHOW TABLE STATUS from RUNOOB LIKE &#x27;runoob%&#x27;;     # 表名以runoob开头的表的信息</span><br><span class="line">mysql&gt; SHOW TABLE STATUS from RUNOOB LIKE &#x27;runoob%&#x27;\G;   # 加上 \G，查询结果按列打印</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<p>Gif 图演示：</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://www.runoob.com/wp-content/uploads/2014/03/mysql-admin.gif"
+                     
+alt="img" 
+                >
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h2 id="三mysql-php语法">三、MySQL PHP语法</h2>
+<p>MySQL 可应用于多种语言，包括 PERL, C, C++, JAVA 和
+PHP，在这些语言中，MySQL 在 PHP 的 web 开发中是应用最广泛。</p>
+<p>在本教程中我们大部分实例都采用了 PHP 语言。如果你想了解 MySQL 在 PHP
+中的应用，可以访问我们的 <a class="link" 
+ target="_blank" rel="noopener" href="https://www.runoob.com/php/php-mysql-intro.html" >PHP 中使用 Mysqli
+介绍 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。</p>
+<p>PHP 提供了多种方式来访问和操作Mysql数据库记录。PHP MySQL
+函数格式如下：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_function(value,value,...);</span><br></pre></td></tr></table></figure></div>
+<p>以上格式中 function部分描述了mysql函数的功能，如</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysqli_connect($connect);</span><br><span class="line">mysqli_query($connect,&quot;SQL 语句&quot;);</span><br><span class="line">mysqli_fetch_array()</span><br><span class="line">mysqli_close()</span><br></pre></td></tr></table></figure></div>
+<p>以下实例展示了PHP调用mysql函数的语法：</p>
+<h3 id="实例-mysqli">实例 (MySQLi)</h3>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$retval = mysqli_function(value, [value,...]);</span><br><span class="line">if( !$retval )</span><br><span class="line">&#123;</span><br><span class="line">   die ( &quot;相关错误信息&quot; );</span><br><span class="line">&#125;</span><br><span class="line">// 其他 MySQL 或 PHP 语句</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></div>
+<h2 id="四mysql连接">四、MySQL连接</h2>
+<h3 id="使用mysql二进制方式连接">使用mysql二进制方式连接</h3>
+<p>您可以使用MySQL二进制方式进入到mysql命令提示符下来连接MySQL数据库。</p>
+<h4 id="实例">实例</h4>
+<p>以下是从命令行中连接mysql服务器的简单实例：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysql -u root -p</span><br><span class="line">Enter password:******</span><br></pre></td></tr></table></figure></div>
+<p>在登录成功后会出现 mysql&gt; 命令提示窗口，你可以在上面执行任何 SQL
+语句。</p>
+<p>以上命令执行后，登录成功输出结果如下:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 2854760 to server version: 5.0.9</span><br><span class="line"></span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the buffer.</span><br></pre></td></tr></table></figure></div>
+<p>在以上实例中，我们使用了root用户登录到mysql服务器，当然你也可以使用其他mysql用户登录。</p>
+<p>如果用户权限足够，任何用户都可以在mysql的命令提示窗口中进行SQL操作。</p>
+<p>退出 mysql&gt; 命令提示窗口可以使用 exit 命令，如下所示：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; exit</span><br><span class="line">Bye</span><br></pre></td></tr></table></figure></div>
+<hr />
+<h3 id="使用-php-脚本连接-mysql">使用 PHP 脚本连接 MySQL</h3>
+<p>PHP 提供了 mysqli_connect() 函数来连接数据库。</p>
+<p>该函数有 6 个参数，在成功链接到 MySQL 后返回连接标识，失败返回 FALSE
+。</p>
+<h4 id="语法">语法</h4>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_connect(host, username, password, dbname,port, socket);</span><br></pre></td></tr></table></figure></div>
+<p><strong>参数说明：</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">参数</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><em>host</em></td>
+<td style="text-align: left;">可选。规定主机名或 IP 地址。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>username</em></td>
+<td style="text-align: left;">可选。规定 MySQL 用户名。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>password</em></td>
+<td style="text-align: left;">可选。规定 MySQL 密码。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>dbname</em></td>
+<td style="text-align: left;">可选。规定默认使用的数据库。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>port</em></td>
+<td style="text-align: left;">可选。规定尝试连接到 MySQL
+服务器的端口号。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>socket</em></td>
+<td style="text-align: left;">可选。规定 socket 或要使用的已命名
+pipe。</td>
+</tr>
+</tbody>
+</table>
+<p>你可以使用 PHP 的 mysqli_close() 函数来断开与 MySQL
+数据库的链接。</p>
+<p>该函数只有一个参数为 mysqli_connect() 函数创建连接成功后返回的 MySQL
+连接标识符。</p>
+<h3 id="语法-1">语法</h3>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool mysqli_close ( mysqli $link )</span><br></pre></td></tr></table></figure></div>
+<p>本函数关闭指定的连接标识所关联的到 MySQL
+服务器的非持久连接。如果没有指定
+link_identifier，则关闭上一个打开的连接。</p>
+<p><strong>提示：</strong>通常不需要使用
+mysqli_close()，因为已打开的非持久连接会在脚本执行完毕后自动关闭。</p>
+<h3 id="实例-1">实例</h3>
+<p>你可以尝试以下实例来连接到你的 MySQL 服务器:</p>
+<h3 id="连接-mysql">连接 MySQL</h3>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php $dbhost = &#x27;localhost&#x27;;  // mysql服务器主机地址 </span><br><span class="line">$dbuser = &#x27;root&#x27;;            // mysql用户名 </span><br><span class="line">$dbpass = &#x27;123456&#x27;;          // mysql用户名密码 </span><br><span class="line">$conn = mysqli_connect($dbhost, $dbuser, $dbpass); </span><br><span class="line">if(! $conn ) </span><br><span class="line">&#123;    </span><br><span class="line">	die(&#x27;Could not connect: &#x27; . mysqli_error()); </span><br><span class="line">&#125; </span><br><span class="line">echo &#x27;数据库连接成功！&#x27;; </span><br><span class="line">mysqli_close($conn); </span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h2 id="五创建数据库">五、创建数据库</h2>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE 数据库名;</span><br></pre></td></tr></table></figure></div>
+<p>以下命令简单的演示了创建数据库的过程，数据名为 RUNOOB:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysql -u root -p   </span><br><span class="line">Enter password:******  # 登录后进入终端</span><br><span class="line"></span><br><span class="line">mysql&gt; create DATABASE RUNOOB;</span><br></pre></td></tr></table></figure></div>
+<h2 id="六删除数据库">六、删除数据库</h2>
+<h3 id="drop-命令删除数据库">drop 命令删除数据库</h3>
+<p>drop 命令格式：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop database &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure></div>
+<p>例如删除名为 RUNOOB 的数据库：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; drop database RUNOOB;</span><br></pre></td></tr></table></figure></div>
+<h3 id="使用-mysqladmin-删除数据库">使用 mysqladmin 删除数据库</h3>
+<p>你也可以使用 mysql <strong>mysqladmin</strong>
+命令在终端来执行删除命令。</p>
+<p>以下实例删除数据库 RUNOOB(该数据库在前一章节已创建)：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysqladmin -u root -p drop RUNOOB</span><br><span class="line">Enter password:******</span><br></pre></td></tr></table></figure></div>
+<p>执行以上删除数据库命令后，会出现一个提示框，来确认是否真的删除数据库：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Dropping the database is potentially a very bad thing to do.</span><br><span class="line">Any data stored in the database will be destroyed.</span><br><span class="line"></span><br><span class="line">Do you really want to drop the &#x27;RUNOOB&#x27; database [y/N] y</span><br><span class="line">Database &quot;RUNOOB&quot; dropped</span><br></pre></td></tr></table></figure></div>
+<h2 id="七选择数据库">七、选择数据库</h2>
+<h3
+id="从命令提示窗口中选择mysql数据库">从命令提示窗口中选择MySQL数据库</h3>
+<p>在 mysql&gt;
+提示窗口中可以很简单的选择特定的数据库。你可以使用SQL命令来选择指定的数据库。</p>
+<h4 id="实例-2">实例</h4>
+<p>以下实例选取了数据库 RUNOOB:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@host]# mysql -u root -p</span><br><span class="line">Enter password:******</span><br><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure></div>
+<p>执行以上命令后，你就已经成功选择了 RUNOOB
+数据库，在后续的操作中都会在 RUNOOB 数据库中执行。</p>
+<h2 id="八数据类型">八、数据类型</h2>
+<h3 id="数值类型">数值类型</h3>
+<p>MySQL 支持所有标准 SQL 数值数据类型。</p>
+<p>这些类型包括严格数值数据类型(INTEGER、SMALLINT、DECIMAL 和
+NUMERIC)，以及近似数值数据类型(FLOAT、REAL 和 DOUBLE PRECISION)。</p>
+<p>关键字INT是INTEGER的同义词，关键字DEC是DECIMAL的同义词。</p>
+<p>BIT数据类型保存位字段值，并且支持 MyISAM、MEMORY、InnoDB 和
+BDB表。</p>
+<p>作为 SQL 标准的扩展，MySQL 也支持整数类型 TINYINT、MEDIUMINT 和
+BIGINT。下面的表显示了需要的每个整数类型的存储和范围。</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 21%" />
+<col style="width: 32%" />
+<col style="width: 32%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">大小</th>
+<th style="text-align: left;">范围（有符号）</th>
+<th style="text-align: left;">范围（无符号）</th>
+<th style="text-align: left;">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">TINYINT</td>
+<td style="text-align: left;">1 Bytes</td>
+<td style="text-align: left;">(-128，127)</td>
+<td style="text-align: left;">(0，255)</td>
+<td style="text-align: left;">小整数值</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SMALLINT</td>
+<td style="text-align: left;">2 Bytes</td>
+<td style="text-align: left;">(-32 768，32 767)</td>
+<td style="text-align: left;">(0，65 535)</td>
+<td style="text-align: left;">大整数值</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MEDIUMINT</td>
+<td style="text-align: left;">3 Bytes</td>
+<td style="text-align: left;">(-8 388 608，8 388 607)</td>
+<td style="text-align: left;">(0，16 777 215)</td>
+<td style="text-align: left;">大整数值</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INT或INTEGER</td>
+<td style="text-align: left;">4 Bytes</td>
+<td style="text-align: left;">(-2 147 483 648，2 147 483 647)</td>
+<td style="text-align: left;">(0，4 294 967 295)</td>
+<td style="text-align: left;">大整数值</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BIGINT</td>
+<td style="text-align: left;">8 Bytes</td>
+<td style="text-align: left;">(-9,223,372,036,854,775,808，9 223 372 036
+854 775 807)</td>
+<td style="text-align: left;">(0，18 446 744 073 709 551 615)</td>
+<td style="text-align: left;">极大整数值</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FLOAT</td>
+<td style="text-align: left;">4 Bytes</td>
+<td style="text-align: left;">(-3.402 823 466 E+38，-1.175 494 351
+E-38)，0，(1.175 494 351 E-38，3.402 823 466 351 E+38)</td>
+<td style="text-align: left;">0，(1.175 494 351 E-38，3.402 823 466
+E+38)</td>
+<td style="text-align: left;">单精度 浮点数值</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DOUBLE</td>
+<td style="text-align: left;">8 Bytes</td>
+<td style="text-align: left;">(-1.797 693 134 862 315 7 E+308，-2.225
+073 858 507 201 4 E-308)，0，(2.225 073 858 507 201 4 E-308，1.797 693
+134 862 315 7 E+308)</td>
+<td style="text-align: left;">0，(2.225 073 858 507 201 4 E-308，1.797
+693 134 862 315 7 E+308)</td>
+<td style="text-align: left;">双精度 浮点数值</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DECIMAL</td>
+<td style="text-align: left;">对DECIMAL(M,D)
+，如果M&gt;D，为M+2否则为D+2</td>
+<td style="text-align: left;">依赖于M和D的值</td>
+<td style="text-align: left;">依赖于M和D的值</td>
+<td style="text-align: left;">小数值</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="日期和时间类型">日期和时间类型</h3>
+<p>表示时间值的日期和时间类型为DATETIME、DATE、TIMESTAMP、TIME和YEAR。</p>
+<p>每个时间类型有一个有效值范围和一个"零"值，当指定不合法的MySQL不能表示的值时使用"零"值。</p>
+<p>TIMESTAMP类型有专有的自动更新特性，将在后面描述。</p>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 10%" />
+<col style="width: 48%" />
+<col style="width: 15%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">大小 ( bytes)</th>
+<th style="text-align: left;">范围</th>
+<th style="text-align: left;">格式</th>
+<th style="text-align: left;">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">DATE</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">1000-01-01/9999-12-31</td>
+<td style="text-align: left;">YYYY-MM-DD</td>
+<td style="text-align: left;">日期值</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TIME</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">'-838:59:59'/'838:59:59'</td>
+<td style="text-align: left;">HH:MM:SS</td>
+<td style="text-align: left;">时间值或持续时间</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">YEAR</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1901/2155</td>
+<td style="text-align: left;">YYYY</td>
+<td style="text-align: left;">年份值</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DATETIME</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">1000-01-01 00:00:00/9999-12-31
+23:59:59</td>
+<td style="text-align: left;">YYYY-MM-DD HH:MM:SS</td>
+<td style="text-align: left;">混合日期和时间值</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TIMESTAMP</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">1970-01-01 00:00:00/2038结束时间是第
+<strong>2147483647</strong> 秒，北京时间 <strong>2038-1-19
+11:14:07</strong>，格林尼治时间 2038年1月19日 凌晨 03:14:07</td>
+<td style="text-align: left;">YYYYMMDD HHMMSS</td>
+<td style="text-align: left;">混合日期和时间值，时间戳</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="字符串类型">字符串类型</h3>
+<p>字符串类型指CHAR、VARCHAR、BINARY、VARBINARY、BLOB、TEXT、ENUM和SET。该节描述了这些类型如何工作以及如何在查询中使用这些类型。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">大小</th>
+<th style="text-align: left;">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CHAR</td>
+<td style="text-align: left;">0-255 bytes</td>
+<td style="text-align: left;">定长字符串</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">VARCHAR</td>
+<td style="text-align: left;">0-65535 bytes</td>
+<td style="text-align: left;">变长字符串</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TINYBLOB</td>
+<td style="text-align: left;">0-255 bytes</td>
+<td style="text-align: left;">不超过 255 个字符的二进制字符串</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TINYTEXT</td>
+<td style="text-align: left;">0-255 bytes</td>
+<td style="text-align: left;">短文本字符串</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BLOB</td>
+<td style="text-align: left;">0-65 535 bytes</td>
+<td style="text-align: left;">二进制形式的长文本数据</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: left;">0-65 535 bytes</td>
+<td style="text-align: left;">长文本数据</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MEDIUMBLOB</td>
+<td style="text-align: left;">0-16 777 215 bytes</td>
+<td style="text-align: left;">二进制形式的中等长度文本数据</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MEDIUMTEXT</td>
+<td style="text-align: left;">0-16 777 215 bytes</td>
+<td style="text-align: left;">中等长度文本数据</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LONGBLOB</td>
+<td style="text-align: left;">0-4 294 967 295 bytes</td>
+<td style="text-align: left;">二进制形式的极大文本数据</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LONGTEXT</td>
+<td style="text-align: left;">0-4 294 967 295 bytes</td>
+<td style="text-align: left;">极大文本数据</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong>：char(n) 和 varchar(n) 中括号中 n
+代表字符的个数，并不代表字节个数，比如 CHAR(30) 就可以存储 30
+个字符。</p>
+<p>CHAR 和 VARCHAR
+类型类似，但它们保存和检索的方式不同。它们的最大长度和是否尾部空格被保留等方面也不同。在存储或检索过程中不进行大小写转换。</p>
+<p>BINARY 和 VARBINARY 类似于 CHAR 和
+VARCHAR，不同的是它们包含二进制字符串而不要非二进制字符串。也就是说，它们包含字节字符串而不是字符字符串。这说明它们没有字符集，并且排序和比较基于列值字节的数值值。</p>
+<p>BLOB 是一个二进制大对象，可以容纳可变数量的数据。有 4 种 BLOB
+类型：TINYBLOB、BLOB、MEDIUMBLOB 和
+LONGBLOB。它们区别在于可容纳存储范围不同。</p>
+<p>有 4 种 TEXT 类型：TINYTEXT、TEXT、MEDIUMTEXT 和 LONGTEXT。对应的这 4
+种 BLOB 类型，可存储的最大长度不同，可根据实际情况选择。</p>
+<h2 id="九创建数据表">九、创建数据表</h2>
+<p>创建MySQL数据表需要以下信息：</p>
+<ul>
+<li>表名</li>
+<li>表字段名</li>
+<li>定义每个表字段</li>
+</ul>
+<h3 id="语法-2">语法</h3>
+<p>以下为创建MySQL数据表的SQL通用语法：</p>
+<p><code>CREATE TABLE table_name(column_name column_type):</code></p>
+<p>以下例子中我们将在RUNOOB数据库中创建数据表runoob_tbl:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `runoob_tbl`(</span><br><span class="line">   `runoob_id` INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">   `runoob_title` VARCHAR(100) NOT NULL,</span><br><span class="line">   `runoob_author` VARCHAR(40) NOT NULL,</span><br><span class="line">   `submission_date` DATE,</span><br><span class="line">   PRIMARY KEY ( `runoob_id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure></div>
+<p>实例解析：</p>
+<ul>
+<li>如果你不想字段为NULL可以设置字段的属性为NOT
+NULL，在操作数据库时如果输入该字段的数据为NULL，就会报错；</li>
+<li>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动+1；</li>
+<li>PRIMARY
+KEY关键字用于定义为主键。您可以使用多列来定义主键，列间以逗号分隔。</li>
+<li>ENGINE设置存储引擎，CHARSET设置编码。</li>
+</ul>
+<h3 id="通过命令提示符创建表">通过命令提示符创建表</h3>
+<p>通过 mysql&gt; 命令窗口可以很简单的创建MySQL数据表。你可以使用 SQL
+语句 <strong>CREATE TABLE</strong> 来创建数据表。</p>
+<h4 id="实例-3">实例</h4>
+<p>以下为创建数据表 runoob_tbl 实例:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">root@host# mysql -u root -p</span><br><span class="line">Enter password:*******</span><br><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; CREATE TABLE runoob_tbl(</span><br><span class="line">   -&gt; runoob_id INT NOT NULL AUTO_INCREMENT,</span><br><span class="line">   -&gt; runoob_title VARCHAR(100) NOT NULL,</span><br><span class="line">   -&gt; runoob_author VARCHAR(40) NOT NULL,</span><br><span class="line">   -&gt; submission_date DATE,</span><br><span class="line">   -&gt; PRIMARY KEY ( runoob_id )</span><br><span class="line">   -&gt; )ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br><span class="line">Query OK, 0 rows affected (0.16 sec)</span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure></div>
+<p><strong>注意：</strong>MySQL命令终止符为分号 <strong>;</strong>
+。</p>
+<p><strong>注意：</strong> <strong>-&gt;</strong>
+是换行符标识，不要复制</p>
+<h2 id="十删除数据表">十、删除数据表</h2>
+<h3 id="语法-3">语法</h3>
+<p>以下为删除MySQL数据表的通用语法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE table_name ;</span><br></pre></td></tr></table></figure></div>
+<h2 id="在命令提示窗口中删除数据表">在命令提示窗口中删除数据表</h2>
+<p>在mysql&gt;命令提示窗口中删除数据表SQL语句为 <strong>DROP
+TABLE</strong> ：</p>
+<h3 id="实例-4">实例</h3>
+<p>以下实例删除了数据表runoob_tbl:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@host# mysql -u root -p</span><br><span class="line">Enter password:*******</span><br><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; DROP TABLE runoob_tbl;</span><br><span class="line">Query OK, 0 rows affected (0.8 sec)</span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure></div>
+<h2 id="十一插入数据">十一、插入数据</h2>
+<h3 id="语法-4">语法</h3>
+<p>以下为向MySQL数据表插入数据通用的 <strong>INSERT INTO</strong>
+SQL语法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INFO table_name (field1,field2,...fieldN)</span><br><span class="line">						VALUES</span><br><span class="line">						(value1, value2,...valueN);</span><br></pre></td></tr></table></figure></div>
+<h3 id="通过命令提示窗口插入数据">通过命令提示窗口插入数据</h3>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">root@host# mysql -u root -p password;</span><br><span class="line">Enter password:*******</span><br><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; Query OK, 1 rows affected, 1 warnings (0.01 sec)</span><br><span class="line">mysql&gt; INSERT INTO runoob_tbl</span><br><span class="line">    -&gt; (runoob_title, runoob_author, submission_date)</span><br><span class="line">    -&gt; VALUES</span><br><span class="line">    -&gt; (&quot;学习 PHP&quot;, &quot;菜鸟教程&quot;, NOW());</span><br><span class="line">Query OK, 1 rows affected, 1 warnings (0.01 sec)</span><br><span class="line">mysql&gt; INSERT INTO runoob_tbl</span><br><span class="line">    -&gt; (runoob_title, runoob_author, submission_date)</span><br><span class="line">    -&gt; VALUES</span><br><span class="line">    -&gt; (&quot;学习 MySQL&quot;, &quot;菜鸟教程&quot;, NOW());</span><br><span class="line">Query OK, 1 rows affected, 1 warnings (0.01 sec)</span><br><span class="line">mysql&gt; INSERT INTO runoob_tbl</span><br><span class="line">    -&gt; (runoob_title, runoob_author, submission_date)</span><br><span class="line">    -&gt; VALUES</span><br><span class="line">    -&gt; (&quot;JAVA 教程&quot;, &quot;RUNOOB.COM&quot;, &#x27;2016-05-06&#x27;);</span><br><span class="line">Query OK, 1 rows affected (0.00 sec)</span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure></div>
+<h2 id="十二查询数据">十二、查询数据</h2>
+<p>MySQL 数据库使用SQL SELECT语句来查询数据。</p>
+<h3 id="语法-5">语法</h3>
+<p>以下为在MySQL数据库中查询数据通用的 SELECT 语法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name,column_name</span><br><span class="line">FROM table_name</span><br><span class="line">[WHERE Clause]</span><br><span class="line">[LIMIT N][ OFFSET M]</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><p>查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件。</p></li>
+<li><p>SELECT 命令可以读取一条或者多条记录。</p></li>
+<li><p>你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据</p></li>
+<li><p>你可以使用 WHERE 语句来包含任何条件。</p></li>
+<li><p>你可以使用 LIMIT 属性来设定返回的记录数。</p></li>
+<li><p>你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。通过命令提示符获取数据</p>
+<p>以下实例我们将通过 SQL SELECT 命令来获取 MySQL 数据表 runoob_tbl
+的数据：</p>
+<h3 id="实例-5">实例</h3>
+<p>以下实例将返回数据表 runoob_tbl 的所有记录:</p>
+<h3 id="读取数据表">读取数据表：</h3>
+<p><code>select * from runoob_tbl;</code></p>
+<p>输出结果：</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://www.runoob.com/wp-content/uploads/2014/03/DB742246-84F3-4447-BD43-6BAEADD7CA91.jpg"
+                     
+alt="img" 
+                >
+<figcaption aria-hidden="true">img</figcaption>
+</figure></li>
+</ul>
+<h2 id="十三mysql-where字句">十三、MySQL WHERE字句</h2>
+<p>我们知道从 MySQL 表中使用 SQL SELECT 语句来读取数据。</p>
+<p>如需有条件地从表中选取数据，可将 WHERE 子句添加到 SELECT 语句中。</p>
+<h3 id="语法-6">语法</h3>
+<p>以下是 SQL SELECT 语句使用 WHERE
+子句从数据表中读取数据的通用语法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT field1, field2,...fieldN FROM table_name1, table_name2...</span><br><span class="line">[WHERE condition1 [AND [OR]] condition2.....</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>查询语句中你可以使用一个或者多个表，表之间使用逗号<strong>,</strong>
+分割，并使用WHERE语句来设定查询条件。</li>
+<li>你可以在 WHERE 子句中指定任何条件。</li>
+<li>你可以使用 AND 或者 OR 指定一个或多个条件。</li>
+<li>WHERE 子句也可以运用于 SQL 的 DELETE 或者 UPDATE 命令。</li>
+<li>WHERE 子句类似于程序语言中的 if 条件，根据 MySQL
+表中的字段值来读取指定的数据。</li>
+</ul>
+<p>以下为操作符列表，可用于 WHERE 子句中。</p>
+<p>下表中实例假定 A 为 10, B 为 20</p>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 69%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">操作符</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">实例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">=</td>
+<td
+style="text-align: left;">等号，检测两个值是否相等，如果相等返回true</td>
+<td style="text-align: left;">(A = B) 返回false。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&lt;&gt;, !=</td>
+<td
+style="text-align: left;">不等于，检测两个值是否相等，如果不相等返回true</td>
+<td style="text-align: left;">(A != B) 返回 true。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&gt;</td>
+<td style="text-align: left;">大于号，检测左边的值是否大于右边的值,
+如果左边的值大于右边的值返回true</td>
+<td style="text-align: left;">(A &gt; B) 返回false。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&lt;</td>
+<td style="text-align: left;">小于号，检测左边的值是否小于右边的值,
+如果左边的值小于右边的值返回true</td>
+<td style="text-align: left;">(A &lt; B) 返回 true。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&gt;=</td>
+<td
+style="text-align: left;">大于等于号，检测左边的值是否大于或等于右边的值,
+如果左边的值大于或等于右边的值返回true</td>
+<td style="text-align: left;">(A &gt;= B) 返回false。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&lt;=</td>
+<td
+style="text-align: left;">小于等于号，检测左边的值是否小于或等于右边的值,
+如果左边的值小于或等于右边的值返回true</td>
+<td style="text-align: left;">(A &lt;= B) 返回 true。</td>
+</tr>
+</tbody>
+</table>
+<p>如果我们想在 MySQL 数据表中读取指定的数据，WHERE
+子句是非常有用的。</p>
+<p>使用主键来作为 WHERE 子句的条件查询是非常快速的。</p>
+<p>如果给定的条件在表中没有任何匹配的记录，那么查询不会返回任何数据。</p>
+<h3 id="从命令提示符中读取数据">从命令提示符中读取数据</h3>
+<p>我们将在SQL SELECT语句使用WHERE子句来读取MySQL数据表 runoob_tbl
+中的数据：</p>
+<p>实例</p>
+<p>以下实例将读取 runoob_tbl 表中 runoob_author 字段值为 Sanjay
+的所有记录：</p>
+<h3 id="sql-select-where-子句">SQL SELECT WHERE 子句</h3>
+<p>SELECT * from runoob_tbl WHERE runoob_author='菜鸟教程';</p>
+<p>输出结果：</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://www.runoob.com/wp-content/uploads/2014/03/CED9CA9C-E4C7-4809-875C-A7E48F430059.jpg"
+                     
+alt="img" 
+                >
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>MySQL 的 WHERE 子句的字符串比较是不区分大小写的。 你可以使用 BINARY
+关键字来设定 WHERE 子句的字符串比较是区分大小写的。</p>
+<p>如下实例:</p>
+<h3 id="binary-关键字">BINARY 关键字</h3>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * from runoob_tbl WHERE BINARY runoob_author=&#x27;runoob.com&#x27;;</span><br><span class="line">Empty set (0.01 sec)</span><br><span class="line"> </span><br><span class="line">mysql&gt; SELECT * from runoob_tbl WHERE BINARY runoob_author=&#x27;RUNOOB.COM&#x27;;</span><br><span class="line">+-----------+---------------+---------------+-----------------+</span><br><span class="line">| runoob_id | runoob_title  | runoob_author | submission_date |</span><br><span class="line">+-----------+---------------+---------------+-----------------+</span><br><span class="line">| 3         | JAVA 教程   | RUNOOB.COM    | 2016-05-06      |</span><br><span class="line">| 4         | 学习 Python | RUNOOB.COM    | 2016-03-06      |</span><br><span class="line">+-----------+---------------+---------------+-----------------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure></div>
+<p>实例中使用了 <strong>BINARY</strong> 关键字，是区分大小写的，所以
+<strong>runoob_author='runoob.com'</strong> 的查询条件是没有数据的。</p>
+<h2 id="十四mysql-update更新">十四、MySQL UPDATE更新</h2>
+<p>如果我们需要修改或更新 MySQL 中的数据，我们可以使用 SQL UPDATE
+命令来操作。</p>
+<h3 id="语法-7">语法</h3>
+<p>以下是UPDATE命令修改MySQL数据表数据通用的SQL语法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name SET field1=new-value1, field2=new-value2</span><br><span class="line">[WHERE Clause]</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>你可以同时更新一个或多个字段。</li>
+<li>你可以在 WHERE 子句中指定任何条件。</li>
+<li>你可以在一个单独表中同时更新数据。</li>
+</ul>
+<p>当你需要更新数据表中指定行的数据时 WHERE 子句是非常有用的。</p>
+<p>通过命令提示符更新数据</p>
+<p>以下我们将在 SQL UPDATE 命令使用 WHERE 子句来更新 runoob_tbl
+表中指定的数据：</p>
+<h3 id="实例-6">实例</h3>
+<p>以下实例将更新数据表中 runoob_id 为 3 的 runoob_title 字段值：</p>
+<h3 id="sql-update-语句">SQL UPDATE 语句：</h3>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; UPDATE runoob_tbl SET runoob_title=&#x27;学习 C++&#x27; WHERE runoob_id=3;</span><br><span class="line">Query OK, 1 rows affected (0.01 sec)</span><br><span class="line"> </span><br><span class="line">mysql&gt; SELECT * from runoob_tbl WHERE runoob_id=3;</span><br><span class="line">+-----------+--------------+---------------+-----------------+</span><br><span class="line">| runoob_id | runoob_title | runoob_author | submission_date |</span><br><span class="line">+-----------+--------------+---------------+-----------------+</span><br><span class="line">| 3         | 学习 C++   | RUNOOB.COM    | 2016-05-06      |</span><br><span class="line">+-----------+--------------+---------------+-----------------+</span><br><span class="line">1 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure></div>
+<p>从结果上看，runoob_id 为 3 的 runoob_title 已被修改</p>
+<h2 id="十五delete语句">十五、DELETE语句</h2>
+<p>你可以使用 SQL 的 DELETE FROM 命令来删除 MySQL 数据表中的记录。</p>
+<p>你可以在 <strong>mysql&gt;</strong> 命令提示符或 PHP
+脚本中执行该命令。</p>
+<h3 id="语法-8">语法</h3>
+<p>以下是SQL DELETE语句从MySQL数据表中删除数据的通用语法</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name [WHERE Clause]</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>如果没有指定 WHERE 子句，MySQL 表中的所有记录将被删除。</li>
+<li>你可以在 WHERE 子句中指定任何条件</li>
+<li>您可以在单个表中一次性删除记录。</li>
+</ul>
+<p>当你想删除数据表中指定的记录时 WHERE 子句是非常有用的。</p>
+<h3 id="从命令行中删除数据">从命令行中删除数据</h3>
+<p>这里我们将在 SQL DELETE 命令中使用 WHERE 子句来删除 MySQL 数据表
+runoob_tbl 所选的数据。</p>
+<h3 id="实例-7">实例</h3>
+<p>以下实例将删除 runoob_tbl 表中 runoob_id 为3 的记录：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; DELETE FROM runoob_tbl WHERE runoob_id=3;</span><br><span class="line">Query OK, 1 row affected (0.23 sec)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h2 id="十六like字句">十六、LIKE字句</h2>
+<p>我们知道在 MySQL 中使用 SQL SELECT 命令来读取数据， 同时我们可以在
+SELECT 语句中使用 WHERE 子句来获取指定的记录。</p>
+<p>WHERE 子句中可以使用等号 <strong>=</strong> 来设定获取数据的条件，如
+"runoob_author = 'RUNOOB.COM'"。</p>
+<p>但是有时候我们需要获取 runoob_author 字段含有=="COM"==
+字符的所有记录，这时我们就需要在 WHERE 子句中使用 SQL LIKE 子句。</p>
+<p>SQL LIKE 子句中使用百分号
+<strong>%</strong>字符来表示任意字符，类似于UNIX或正则表达式中的星号
+*****。</p>
+<p>如果没有使用百分号 <strong>%</strong>, LIKE 子句与等号
+<strong>=</strong> 的效果是一样的。</p>
+<h3 id="语法-9">语法</h3>
+<p>以下是 SQL SELECT 语句使用 LIKE
+子句从数据表中读取数据的通用语法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT field1, field2,...fieldN </span><br><span class="line">FROM table_name</span><br><span class="line">WHERE field1 LIKE condition1 [AND [OR]] filed2 = &#x27;somevalue&#x27;</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><p>你可以在 WHERE 子句中指定任何条件。</p></li>
+<li><p>你可以在 WHERE 子句中使用LIKE子句。</p></li>
+<li><p>你可以使用==LIKE子句代替等号 <strong>=</strong>。==</p></li>
+<li><p>LIKE 通常与 <strong>%</strong>
+一同使用，类似于一个元字符的搜索。</p></li>
+<li><p>你可以使用 AND 或者 OR 指定一个或多个条件。</p></li>
+<li><p>你可以在 DELETE 或 UPDATE 命令中使用 WHERE...LIKE
+子句来指定条件。</p>
+<h3 id="在命令提示符中使用-like-子句">在命令提示符中使用 LIKE 子句</h3>
+<p>以下我们将在 SQL SELECT 命令中使用 WHERE...LIKE 子句来从MySQL数据表
+runoob_tbl 中读取数据。</p>
+<p>实例</p>
+<p>以下是我们将 runoob_tbl 表中获取 runoob_author 字段中以
+<strong>COM</strong> 为结尾的的所有记录：</p>
+<h3 id="sql-like-语句">SQL LIKE 语句：</h3>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use RUNOOB;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; SELECT * from runoob_tbl  WHERE runoob_author LIKE &#x27;%COM&#x27;;</span><br><span class="line">+-----------+---------------+---------------+-----------------+</span><br><span class="line">| runoob_id | runoob_title  | runoob_author | submission_date |</span><br><span class="line">+-----------+---------------+---------------+-----------------+</span><br><span class="line">| 3         | 学习 Java   | RUNOOB.COM    | 2015-05-01      |</span><br><span class="line">| 4         | 学习 Python | RUNOOB.COM    | 2016-03-06      |</span><br><span class="line">+-----------+---------------+---------------+-----------------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<h2 id="十七union操作符">十七、UNION操作符</h2>
+<h3 id="描述">描述</h3>
+<p>MySQL UNION 操作符用于连接==两个以上的 SELECT
+语句==的结果组合到一个结果集合中。多个 SELECT 语句会删除重复的数据。</p>
+<h3 id="语法-10">语法</h3>
+<p>MySQL UNION 操作符语法格式：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT expression1, expression2, ... expression_n</span><br><span class="line">FROM tables</span><br><span class="line">[WHERE conditions]</span><br><span class="line">UNION [ALL | DISTINCT]</span><br><span class="line">SELECT expression1, expression2, ... expression_n</span><br><span class="line">FROM tables</span><br><span class="line">[WHERE conditions];</span><br></pre></td></tr></table></figure></div>
+<h3 id="参数">参数</h3>
+<ul>
+<li><strong>expression1, expression2, ... expression_n</strong>:
+要检索的列。</li>
+<li><strong>tables:</strong> 要检索的数据表。</li>
+<li><strong>WHERE conditions:</strong> 可选， 检索条件。</li>
+<li><strong>DISTINCT:</strong> 可选，删除结果集中重复的数据。默认情况下
+UNION 操作符已经删除了重复数据，所以 DISTINCT
+修饰符对结果没啥影响。</li>
+<li><strong>ALL:</strong> 可选，返回所有结果集，包含重复数据。</li>
+</ul>
+<h3 id="演示数据库">演示数据库</h3>
+<p>在本教程中，我们将使用 RUNOOB 样本数据库。</p>
+<p>下面是选自 "Websites" 表的数据：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM Websites;</span><br><span class="line">+----+--------------+---------------------------+-------+---------+</span><br><span class="line">| id | name         | url                       | alexa | country |</span><br><span class="line">+----+--------------+---------------------------+-------+---------+</span><br><span class="line">| 1  | Google       | https://www.google.cm/    | 1     | USA     |</span><br><span class="line">| 2  | 淘宝          | https://www.taobao.com/   | 13    | CN      |</span><br><span class="line">| 3  | 菜鸟教程      | http://www.runoob.com/    | 4689  | CN      |</span><br><span class="line">| 4  | 微博          | http://weibo.com/         | 20    | CN      |</span><br><span class="line">| 5  | Facebook     | https://www.facebook.com/ | 3     | USA     |</span><br><span class="line">| 7  | stackoverflow | http://stackoverflow.com/ |   0 | IND     |</span><br><span class="line">+----+---------------+---------------------------+-------+---------+</span><br></pre></td></tr></table></figure></div>
+<p>下面是 "apps" APP 的数据：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM apps;</span><br><span class="line">+----+------------+-------------------------+---------+</span><br><span class="line">| id | app_name   | url                     | country |</span><br><span class="line">+----+------------+-------------------------+---------+</span><br><span class="line">|  1 | QQ APP     | http://im.qq.com/       | CN      |</span><br><span class="line">|  2 | 微博 APP | http://weibo.com/       | CN      |</span><br><span class="line">|  3 | 淘宝 APP | https://www.taobao.com/ | CN      |</span><br><span class="line">+----+------------+-------------------------+---------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></div>
+<h3 id="sql-union-实例">SQL UNION 实例</h3>
+<p>下面的 SQL 语句从 "Websites" 和 "apps"
+表中选取所有<strong>不同的</strong>country（只有不同的值）：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT country FROM Websites</span><br><span class="line">UNION</span><br><span class="line">SELECT country FROM apps</span><br><span class="line">ORDER BY country;</span><br></pre></td></tr></table></figure></div>
+<p>执行以上 SQL 输出结果如下：</p>
+<figure>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://www.runoob.com/wp-content/uploads/2013/09/union1.jpg"
+                     
+alt="img" 
+                >
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p><strong>注释：</strong>UNION
+不能用于列出两个表中所有的country。如果一些网站和APP来自同一个国家，每个国家只会列出一次。UNION
+只会选取不同的值。请使用 UNION ALL 来选取重复的值！</p>
+<h3 id="sql-union-all-实例">SQL UNION ALL 实例</h3>
+<p>下面的 SQL 语句使用 UNION ALL 从 "Websites" 和 "apps"
+表中选取<strong>所有的</strong>country（也有重复的值）：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT country FROM Websites</span><br><span class="line">UNION ALL</span><br><span class="line">SELECT country FROM apps</span><br><span class="line">ORDER BY country;</span><br></pre></td></tr></table></figure></div>
+<p>执行以上 SQL 输出结果如下：</p>
+<figure>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://www.runoob.com/wp-content/uploads/2013/09/union2.jpg"
+                     
+alt="img" 
+                >
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h3 id="带有-where-的-sql-union-all">带有 WHERE 的 SQL UNION ALL</h3>
+<p>下面的 SQL 语句使用 UNION ALL 从 "Websites" 和 "apps"
+表中选取<strong>所有的</strong>中国(CN)的数据（也有重复的值）：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT country, name FROM Websites</span><br><span class="line">WHERE country=&#x27;CN&#x27;</span><br><span class="line">UNION ALL</span><br><span class="line">SELECT country, app_name FROM apps</span><br><span class="line">WHERE country=&#x27;CN&#x27;</span><br><span class="line">ORDER BY country;</span><br></pre></td></tr></table></figure></div>
+<p>执行以上 SQL 输出结果如下：</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://www.runoob.com/wp-content/uploads/2013/09/AAA99C7B-36A5-43FB-B489-F8CE63B62C71.jpg"
+                     
+alt="img" 
+                >
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：MySQL学习笔记</li>
+        <li>Post author：The Redefine Team</li>
+        <li>Create time：2022-07-09 17:40:32</li>
+        <li>
+            Post link：https://redefine.ohevan.com/2022/07/09/MySQL学习笔记/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Mysql/">#Mysql</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2022/07/10/Go-Redis/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Go Redis</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">MySQL学习笔记</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="nav-text">MySQL学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E7%99%BB%E5%BD%95mysql"><span class="nav-text">一、登录MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8Cmysql%E7%AE%A1%E7%90%86"><span class="nav-text">二、MySQL管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%8F%8A%E5%85%B3%E9%97%ADmysql%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">启动及关闭MySQL服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F"><span class="nav-text">Linux系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-%E7%94%A8%E6%88%B7%E8%AE%BE%E7%BD%AE"><span class="nav-text">MySQL 用户设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etcmy.cnf-%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-text">&#x2F;etc&#x2F;my.cnf 文件配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86mysql%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-text">管理MySQL的命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89mysql-php%E8%AF%AD%E6%B3%95"><span class="nav-text">三、MySQL PHP语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-mysqli"><span class="nav-text">实例 (MySQLi)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9Bmysql%E8%BF%9E%E6%8E%A5"><span class="nav-text">四、MySQL连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8mysql%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E5%BC%8F%E8%BF%9E%E6%8E%A5"><span class="nav-text">使用mysql二进制方式连接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-php-%E8%84%9A%E6%9C%AC%E8%BF%9E%E6%8E%A5-mysql"><span class="nav-text">使用 PHP 脚本连接 MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-1"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5-mysql"><span class="nav-text">连接 MySQL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">五、创建数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">六、删除数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#drop-%E5%91%BD%E4%BB%A4%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">drop 命令删除数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-mysqladmin-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">使用 mysqladmin 删除数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E9%80%89%E6%8B%A9%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">七、选择数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AA%97%E5%8F%A3%E4%B8%AD%E9%80%89%E6%8B%A9mysql%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">从命令提示窗口中选择MySQL数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-2"><span class="nav-text">实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">八、数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="nav-text">数值类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B"><span class="nav-text">日期和时间类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B"><span class="nav-text">字符串类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">九、创建数据表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-2"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="nav-text">通过命令提示符创建表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-3"><span class="nav-text">实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">十、删除数据表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-3"><span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AA%97%E5%8F%A3%E4%B8%AD%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">在命令提示窗口中删除数据表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-4"><span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%80%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-text">十一、插入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-4"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AA%97%E5%8F%A3%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-text">通过命令提示窗口插入数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-text">十二、查询数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-5"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-5"><span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">读取数据表：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%89mysql-where%E5%AD%97%E5%8F%A5"><span class="nav-text">十三、MySQL WHERE字句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-6"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6%E4%B8%AD%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-text">从命令提示符中读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-select-where-%E5%AD%90%E5%8F%A5"><span class="nav-text">SQL SELECT WHERE 子句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#binary-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-text">BINARY 关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%9B%9Bmysql-update%E6%9B%B4%E6%96%B0"><span class="nav-text">十四、MySQL UPDATE更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-7"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-6"><span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-update-%E8%AF%AD%E5%8F%A5"><span class="nav-text">SQL UPDATE 语句：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%94delete%E8%AF%AD%E5%8F%A5"><span class="nav-text">十五、DELETE语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-8"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-text">从命令行中删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-7"><span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%85%ADlike%E5%AD%97%E5%8F%A5"><span class="nav-text">十六、LIKE字句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-9"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6%E4%B8%AD%E4%BD%BF%E7%94%A8-like-%E5%AD%90%E5%8F%A5"><span class="nav-text">在命令提示符中使用 LIKE 子句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-like-%E8%AF%AD%E5%8F%A5"><span class="nav-text">SQL LIKE 语句：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%83union%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-text">十七、UNION操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-text">描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-10"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%94%E7%A4%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">演示数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-union-%E5%AE%9E%E4%BE%8B"><span class="nav-text">SQL UNION 实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-union-all-%E5%AE%9E%E4%BE%8B"><span class="nav-text">SQL UNION ALL 实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89-where-%E7%9A%84-sql-union-all"><span class="nav-text">带有 WHERE 的 SQL UNION ALL</span></a></li></ol></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+
+
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-regular fa-computer-classic"></i>&nbsp;&nbsp;<a href="/">The Redefine Team</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br> 
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v1.2.0</a>
+        </div>
+        
+        
+        
+            <div id="start_time_div" style="display:none">
+                2022/8/17 11:45:14
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="unfolded-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="folded-tools-list">
+        <li class="right-bottom-tools tool-toggle-show flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/menu-shrink.js"></script>
+
+<script src="/js/tools/go-top-bottom.js"></script>
+
+<script src="/js/tools/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/code-block.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/toc-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            REDEFINE.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            REDEFINE.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            REDEFINE.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

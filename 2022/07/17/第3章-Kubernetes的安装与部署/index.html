@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="The Redefine Team">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2022/07/17/第3章-kubernetes的安装与部署/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="第3章 Kubernetes的安装与部署">
+    <meta property="og:description" content="Hexo Theme Redefine">
+    <meta property="og:url" content="http://example.com2022/07/17/第3章-Kubernetes的安装与部署/">
+    
+    <meta property="og:site_name" content="Theme Redefine">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="第3章 Kubernetes的安装与部署">
+    <meta name="twitter:description" content="Hexo Theme Redefine">
+    <meta name="twitter:image" content="/images/redefine-logo.svg">
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-logo.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-logo.svg">
+    <meta name="theme-color" content="#005080">
+    <link rel="shortcut icon" href="/images/redefine-logo.svg">
+    
+    <title>
+        
+            第3章 Kubernetes的安装与部署 -
+        
+        Theme Redefine
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    
+    
+    
+    <script id="hexo-configurations">
+    let REDEFINE = window.REDEFINE || {};
+    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","og_image":{"enable":false,"image_url":null},"article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"Theme Redefine","custom_font":{"enable":false,"font_family":null,"font_url":null}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":true},"code_block":{"copy":true,"style":"mac","custom_font":{"enable":false,"font_family":null,"font_url":null}},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"1.2.0","friend_links":{"columns":2},"home_article":{"date_format":"auto","category":{"enable":true,"limit":3},"tag":{"enable":true,"limit":3}},"plugins":{"aplayer":{"enable":false,"audio":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]}}};
+    REDEFINE.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+    
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="menu-wrapper">
+    
+    <div class="menu-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Theme Redefine
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                            <li class="menu-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="menu-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                    <li class="drawer-menu-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">第3章 Kubernetes的安装与部署</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">The Redefine Team</span>
+                            
+                                <span class="author-label">lol</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="pc">2022-07-17 09:36:03</span>
+        <span class="mobile">2022-07-17 09:36</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="pc">2022-07-30 20:10:41</span>
+            <span class="mobile">2022-07-30 20:10</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Kubernetes/">Kubernetes</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <p>在虚拟机上部署Kubernetes运行环境，集群构成如下</p>
+<table>
+<thead>
+<tr class="header">
+<th>节点类型</th>
+<th>节点名称</th>
+<th>IP地址</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Master</td>
+<td>k8smaster</td>
+<td>192.168.100.100</td>
+</tr>
+<tr class="even">
+<td>Node</td>
+<td>k8snode1</td>
+<td>192.168.100.101</td>
+</tr>
+<tr class="odd">
+<td>Node</td>
+<td>k8snode2</td>
+<td>192.168.100.102</td>
+</tr>
+<tr class="even">
+<td>Node</td>
+<td>k8snode3</td>
+<td>192.168.100.103</td>
+</tr>
+</tbody>
+</table>
+<p>​ 给Master分配更多的内存和CPU，以减少异常的产生。</p>
+<p>​
+在开始安装之前，请先在各台机器上配置好相应的主机，以便各台机器之间可通过机器名称相互访问。可通过如下命令编辑hosts文件。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/hosts</span><br></pre></td></tr></table></figure></div>
+<p>​ hosts的配置如下。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">192.168.100.100 k8smaster</span><br><span class="line">192.168.100.101 k8snode1</span><br><span class="line">192.168.100.102 k8snode2</span><br><span class="line">192.168.100.103 k8snode3</span><br></pre></td></tr></table></figure></div>
+<h1 id="master与node都要安装的基础组件">1.
+Master与Node都要安装的基础组件</h1>
+<h2 id="在centos以及rhel和fedora系统上安装基础组件">1.
+在CentOS以及RHEL和Fedora系统上安装基础组件</h2>
+<p>首先安装并启动docker</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZbp1f3y0av6g5d4zhb3uoZ ~]# yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">-bash: yum-config-manager: 未找到命令</span><br></pre></td></tr></table></figure></div>
+<p>um-config-manager: command not
+found，这个是因为系统默认没有安装这个命令，这个命令在yum-utils
+包里。安装命令：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install yum-utils</span><br></pre></td></tr></table></figure></div>
+<p>结果：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">[root@iZbp1f3y0av6g5d4zhb3uoZ ~]# yum -y install yum-utils</span><br><span class="line">已加载插件：fastestmirror</span><br><span class="line">Determining fastest mirrors</span><br><span class="line">base                                                                                                                                                                          | 3.6 kB  00:00:00</span><br><span class="line">epel                                                                                                                                                                          | 4.7 kB  00:00:00</span><br><span class="line">extras                                                                                                                                                                        | 2.9 kB  00:00:00</span><br><span class="line">updates                                                                                                                                                                       | 2.9 kB  00:00:00</span><br><span class="line">(1/4): extras/7/x86_64/primary_db                                                                                                                                             | 247 kB  00:00:00</span><br><span class="line">(2/4): epel/x86_64/primary_db                                                                                                                                                 | 7.0 MB  00:00:00</span><br><span class="line">(3/4): epel/x86_64/updateinfo                                                                                                                                                 | 1.1 MB  00:00:00</span><br><span class="line">(4/4): updates/7/x86_64/primary_db                                                                                                                                            |  16 MB  00:00:00</span><br><span class="line">正在解决依赖关系</span><br><span class="line">--&gt; 正在检查事务</span><br><span class="line">---&gt; 软件包 yum-utils.noarch.0.1.1.31-54.el7_8 将被 安装</span><br><span class="line">--&gt; 正在处理依赖关系 python-kitchen，它被软件包 yum-utils-1.1.31-54.el7_8.noarch 需要</span><br><span class="line">--&gt; 正在处理依赖关系 libxml2-python，它被软件包 yum-utils-1.1.31-54.el7_8.noarch 需要</span><br><span class="line">--&gt; 正在检查事务</span><br><span class="line">---&gt; 软件包 libxml2-python.x86_64.0.2.9.1-6.el7_9.6 将被 安装</span><br><span class="line">--&gt; 正在处理依赖关系 libxml2 = 2.9.1-6.el7_9.6，它被软件包 libxml2-python-2.9.1-6.el7_9.6.x86_64 需要</span><br><span class="line">---&gt; 软件包 python-kitchen.noarch.0.1.1.1-5.el7 将被 安装</span><br><span class="line">--&gt; 正在处理依赖关系 python-chardet，它被软件包 python-kitchen-1.1.1-5.el7.noarch 需要</span><br><span class="line">--&gt; 正在检查事务</span><br><span class="line">---&gt; 软件包 libxml2.x86_64.0.2.9.1-6.el7_2.3 将被 升级</span><br><span class="line">---&gt; 软件包 libxml2.x86_64.0.2.9.1-6.el7_9.6 将被 更新</span><br><span class="line">---&gt; 软件包 python-chardet.noarch.0.2.2.1-3.el7 将被 安装</span><br><span class="line">--&gt; 解决依赖关系完成</span><br><span class="line"></span><br><span class="line">依赖关系解决</span><br><span class="line"></span><br><span class="line">=====================================================================================================================================================================================================</span><br><span class="line"> Package                                            架构                                       版本                                                源                                           大小</span><br><span class="line">=====================================================================================================================================================================================================</span><br><span class="line">正在安装:</span><br><span class="line"> yum-utils                                          noarch                                     1.1.31-54.el7_8                                     base                                        122 k</span><br><span class="line">为依赖而安装:</span><br><span class="line"> libxml2-python                                     x86_64                                     2.9.1-6.el7_9.6                                     updates                                     247 k</span><br><span class="line"> python-chardet                                     noarch                                     2.2.1-3.el7                                         base                                        227 k</span><br><span class="line"> python-kitchen                                     noarch                                     1.1.1-5.el7                                         base                                        267 k</span><br><span class="line">为依赖而更新:</span><br><span class="line"> libxml2                                            x86_64                                     2.9.1-6.el7_9.6                                     updates                                     668 k</span><br><span class="line"></span><br><span class="line">事务概要</span><br><span class="line">=====================================================================================================================================================================================================</span><br><span class="line">安装  1 软件包 (+3 依赖软件包)</span><br><span class="line">升级           ( 1 依赖软件包)</span><br><span class="line"></span><br><span class="line">总下载量：1.5 M</span><br><span class="line">Downloading packages:</span><br><span class="line">Delta RPMs disabled because /usr/bin/applydeltarpm not installed.</span><br><span class="line">(1/5): libxml2-python-2.9.1-6.el7_9.6.x86_64.rpm                                                                                                                              | 247 kB  00:00:00</span><br><span class="line">(2/5): python-kitchen-1.1.1-5.el7.noarch.rpm                                                                                                                                  | 267 kB  00:00:00</span><br><span class="line">(3/5): python-chardet-2.2.1-3.el7.noarch.rpm                                                                                                                                  | 227 kB  00:00:00</span><br><span class="line">(4/5): yum-utils-1.1.31-54.el7_8.noarch.rpm                                                                                                                                   | 122 kB  00:00:00</span><br><span class="line">(5/5): libxml2-2.9.1-6.el7_9.6.x86_64.rpm                                                                                                                                     | 668 kB  00:00:00</span><br><span class="line">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line">总计                                                                                                                                                                 2.7 MB/s | 1.5 MB  00:00:00</span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction test</span><br><span class="line">Transaction test succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  正在更新    : libxml2-2.9.1-6.el7_9.6.x86_64                                                                                                                                                   1/6</span><br><span class="line">  正在安装    : libxml2-python-2.9.1-6.el7_9.6.x86_64                                                                                                                                            2/6</span><br><span class="line">  正在安装    : python-chardet-2.2.1-3.el7.noarch                                                                                                                                                3/6</span><br><span class="line">  正在安装    : python-kitchen-1.1.1-5.el7.noarch                                                                                                                                                4/6</span><br><span class="line">  正在安装    : yum-utils-1.1.31-54.el7_8.noarch                                                                                                                                                 5/6</span><br><span class="line">  清理        : libxml2-2.9.1-6.el7_2.3.x86_64                                                                                                                                                   6/6</span><br><span class="line">  验证中      : python-chardet-2.2.1-3.el7.noarch                                                                                                                                                1/6</span><br><span class="line">  验证中      : libxml2-2.9.1-6.el7_9.6.x86_64                                                                                                                                                   2/6</span><br><span class="line">  验证中      : libxml2-python-2.9.1-6.el7_9.6.x86_64                                                                                                                                            3/6</span><br><span class="line">  验证中      : python-kitchen-1.1.1-5.el7.noarch                                                                                                                                                4/6</span><br><span class="line">  验证中      : yum-utils-1.1.31-54.el7_8.noarch                                                                                                                                                 5/6</span><br><span class="line">  验证中      : libxml2-2.9.1-6.el7_2.3.x86_64                                                                                                                                                   6/6</span><br><span class="line"></span><br><span class="line">已安装:</span><br><span class="line">  yum-utils.noarch 0:1.1.31-54.el7_8</span><br><span class="line"></span><br><span class="line">作为依赖被安装:</span><br><span class="line">  libxml2-python.x86_64 0:2.9.1-6.el7_9.6                             python-chardet.noarch 0:2.2.1-3.el7                             python-kitchen.noarch 0:1.1.1-5.el7</span><br><span class="line"></span><br><span class="line">作为依赖被升级:</span><br><span class="line">  libxml2.x86_64 0:2.9.1-6.el7_9.6</span><br><span class="line"></span><br><span class="line">完毕！</span><br></pre></td></tr></table></figure></div>
+<p>然后继续：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum makecache fast</span><br><span class="line">$ yum -y install docker-ce</span><br><span class="line">$ systemctl start docker</span><br></pre></td></tr></table></figure></div>
+<p>安装完成，测试命令：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure></div>
+<p>然后安装K8S关键组件</p>
+<p>配置安装源地址</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.repos.d/Kubernetes.repo</span><br></pre></td></tr></table></figure></div>
+<p>修改内容：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/Kubernetes/yum/repos/Kubernetes</span><br><span class="line">-el7-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/Kubernetes/yum/doc/yum-key.gpg </span><br><span class="line">https://mirrors.aliyun.com/Kubernetes/yum/doc/rpm-package-key.gpg</span><br></pre></td></tr></table></figure></div>
+<p>安装K8S关键组件：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ setenforce 0</span><br><span class="line">$ yum install -y kubelet kubeadm kubectl</span><br><span class="line">$ systemctl enable kubelet &amp;&amp; systemctl start kubelet</span><br></pre></td></tr></table></figure></div>
+<p><img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20220730160742043.png"
+                      
+                ></p>
+<p>......</p>
+<p>太烦了，不想装了，直接用团队现成的吧</p>
+<h2 id="master安装与配置">2. Master安装与配置</h2>
+<p>跳过...</p>
+<h2 id="node安装与配置">3.Node安装与配置</h2>
+<p>跳过</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：第3章 Kubernetes的安装与部署</li>
+        <li>Post author：The Redefine Team</li>
+        <li>Create time：2022-07-17 09:36:03</li>
+        <li>
+            Post link：https://redefine.ohevan.com/2022/07/17/第3章-Kubernetes的安装与部署/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2022/07/27/Swag/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Swag</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2022/07/17/%E7%AC%AC2%E7%AB%A0-K8S%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">第2章 K8S的核心概念</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">第3章 Kubernetes的安装与部署</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#master%E4%B8%8Enode%E9%83%BD%E8%A6%81%E5%AE%89%E8%A3%85%E7%9A%84%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6"><span class="nav-text">1.
+Master与Node都要安装的基础组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8centos%E4%BB%A5%E5%8F%8Arhel%E5%92%8Cfedora%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6"><span class="nav-text">1.
+在CentOS以及RHEL和Fedora系统上安装基础组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#master%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-text">2. Master安装与配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-text">3.Node安装与配置</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+
+
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-regular fa-computer-classic"></i>&nbsp;&nbsp;<a href="/">The Redefine Team</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br> 
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v1.2.0</a>
+        </div>
+        
+        
+        
+            <div id="start_time_div" style="display:none">
+                2022/8/17 11:45:14
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="unfolded-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="folded-tools-list">
+        <li class="right-bottom-tools tool-toggle-show flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/menu-shrink.js"></script>
+
+<script src="/js/tools/go-top-bottom.js"></script>
+
+<script src="/js/tools/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/code-block.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/toc-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            REDEFINE.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            REDEFINE.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            REDEFINE.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

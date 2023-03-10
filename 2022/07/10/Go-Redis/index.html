@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="The Redefine Team">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2022/07/10/go-redis/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Go Redis">
+    <meta property="og:description" content="Hexo Theme Redefine">
+    <meta property="og:url" content="http://example.com2022/07/10/Go-Redis/">
+    
+    <meta property="og:site_name" content="Theme Redefine">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Go Redis">
+    <meta name="twitter:description" content="Hexo Theme Redefine">
+    <meta name="twitter:image" content="/images/redefine-logo.svg">
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-logo.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-logo.svg">
+    <meta name="theme-color" content="#005080">
+    <link rel="shortcut icon" href="/images/redefine-logo.svg">
+    
+    <title>
+        
+            Go Redis -
+        
+        Theme Redefine
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    
+    
+    
+    <script id="hexo-configurations">
+    let REDEFINE = window.REDEFINE || {};
+    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","og_image":{"enable":false,"image_url":null},"article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"Theme Redefine","custom_font":{"enable":false,"font_family":null,"font_url":null}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":true},"code_block":{"copy":true,"style":"mac","custom_font":{"enable":false,"font_family":null,"font_url":null}},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"1.2.0","friend_links":{"columns":2},"home_article":{"date_format":"auto","category":{"enable":true,"limit":3},"tag":{"enable":true,"limit":3}},"plugins":{"aplayer":{"enable":false,"audio":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]}}};
+    REDEFINE.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+    
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="menu-wrapper">
+    
+    <div class="menu-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Theme Redefine
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                            <li class="menu-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="menu-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                    <li class="drawer-menu-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">Go Redis</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">The Redefine Team</span>
+                            
+                                <span class="author-label">lol</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="pc">2022-07-10 22:59:51</span>
+        <span class="mobile">2022-07-10 22:59</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="pc">2022-08-08 21:21:53</span>
+            <span class="mobile">2022-08-08 21:21</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Redis/">Redis</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/go/">go</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="快速入门">1.快速入门</h1>
+<h2 id="安装依赖包">1.安装依赖包</h2>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get -u github.com/go-redis/redis</span><br></pre></td></tr></table></figure></div>
+<h2 id="golang连接redis">2.golang连接redis</h2>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据redis配置初始化一个客户端</span></span><br><span class="line">client := redis.NewClient(&amp;redis.Options&#123;</span><br><span class="line">		Addr:     <span class="string">&quot;localhost:6379&quot;</span>, <span class="comment">// redis地址</span></span><br><span class="line">		Password: <span class="string">&quot;&quot;</span>, <span class="comment">// redis密码，没有则留空</span></span><br><span class="line">		DB:       <span class="number">0</span>,  <span class="comment">// 默认数据库，默认是0</span></span><br><span class="line">	&#125;)</span><br></pre></td></tr></table></figure></div>
+<h2 id="简单的例子">3.简单的例子</h2>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置一个key，过期时间为0，意思就是永远不过期</span></span><br><span class="line">err := client.Set(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;value&quot;</span>, <span class="number">0</span>).Err()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检测设置是否成功</span></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据key查询缓存，通过Result函数返回两个值</span></span><br><span class="line"><span class="comment">//  第一个代表key的值，第二个代表查询错误信息</span></span><br><span class="line">val, err := client.Get(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检测，查询是否出错</span></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">&quot;key&quot;</span>, val)</span><br></pre></td></tr></table></figure></div>
+<h2 id="连接设置">2.连接设置</h2>
+<h2 id="golang连接redis-1">1.golang连接redis</h2>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化一个新的redis client</span></span><br><span class="line">client := redis.NewClient(&amp;redis.Options&#123;</span><br><span class="line">		Addr:     <span class="string">&quot;localhost:6379&quot;</span>, <span class="comment">// redis地址</span></span><br><span class="line">		Password: <span class="string">&quot;&quot;</span>, <span class="comment">// redis没密码，没有设置，则留空</span></span><br><span class="line">		DB:       <span class="number">0</span>,  <span class="comment">// 使用默认数据库</span></span><br><span class="line">	&#125;)</span><br></pre></td></tr></table></figure></div>
+<p>通过例子，我们知道主要通过Options配置redis的连接参数，下面对Options参数进行详细说明。</p>
+<blockquote>
+<p>提示：go-redis包自带了连接池，会自动维护redis连接，因此创建一次client即可，不要查询一次redis就关闭client。</p>
+</blockquote>
+<h1 id="options参数详解">2.Options参数详解</h1>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Options <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">// 网络类型 tcp 或者 unix.</span></span><br><span class="line">	<span class="comment">// 默认是 tcp.</span></span><br><span class="line">	Network <span class="type">string</span></span><br><span class="line">	<span class="comment">// redis地址，格式 host:port</span></span><br><span class="line">	Addr <span class="type">string</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 新建一个redis连接的时候，会回调这个函数</span></span><br><span class="line">	OnConnect <span class="function"><span class="keyword">func</span><span class="params">(*Conn)</span></span> <span class="type">error</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// redis密码，redis server没有设置可以为空。</span></span><br><span class="line">	Password <span class="type">string</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// redis数据库，序号从0开始，默认是0，可以不用设置</span></span><br><span class="line">	DB <span class="type">int</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// redis操作失败最大重试次数，默认不重试。</span></span><br><span class="line">	MaxRetries <span class="type">int</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 最小重试时间间隔.</span></span><br><span class="line">	<span class="comment">// 默认是 8ms ; -1 表示关闭.</span></span><br><span class="line">	MinRetryBackoff time.Duration</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 最大重试时间间隔</span></span><br><span class="line">	<span class="comment">// 默认是 512ms; -1 表示关闭.</span></span><br><span class="line">	MaxRetryBackoff time.Duration</span><br><span class="line"></span><br><span class="line">	<span class="comment">// redis连接超时时间.</span></span><br><span class="line">	<span class="comment">// 默认是 5 秒.</span></span><br><span class="line">	DialTimeout time.Duration</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// socket读取超时时间</span></span><br><span class="line">	<span class="comment">// 默认 3 秒.</span></span><br><span class="line">	ReadTimeout time.Duration</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// socket写超时时间</span></span><br><span class="line">	WriteTimeout time.Duration</span><br><span class="line"></span><br><span class="line">	<span class="comment">// redis连接池的最大连接数.</span></span><br><span class="line">	<span class="comment">// 默认连接池大小等于 cpu个数 * 10</span></span><br><span class="line">	PoolSize <span class="type">int</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// redis连接池最小空闲连接数.</span></span><br><span class="line">	MinIdleConns <span class="type">int</span></span><br><span class="line">	<span class="comment">// redis连接最大的存活时间，默认不会关闭过时的连接.</span></span><br><span class="line">	MaxConnAge time.Duration</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 当你从redis连接池获取一个连接之后，连接池最多等待这个拿出去的连接多长时间。</span></span><br><span class="line">	<span class="comment">// 默认是等待 ReadTimeout + 1 秒.</span></span><br><span class="line">	PoolTimeout time.Duration</span><br><span class="line">	<span class="comment">// redis连接池多久会关闭一个空闲连接.</span></span><br><span class="line">	<span class="comment">// 默认是 5 分钟. -1 则表示关闭这个配置项</span></span><br><span class="line">	IdleTimeout time.Duration</span><br><span class="line">	<span class="comment">// 多长时间检测一下，空闲连接</span></span><br><span class="line">	<span class="comment">// 默认是 1 分钟. -1 表示关闭空闲连接检测</span></span><br><span class="line">	IdleCheckFrequency time.Duration</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 只读设置，如果设置为true， redis只能查询缓存不能更新。</span></span><br><span class="line">	readOnly <span class="type">bool</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h1 id="基本键值操作">3.基本键值操作</h1>
+<p>redis基本的key/value操作，指的是针对value值的类型为字符串或者数字类型的读写操作。</p>
+<p>golang redis常用函数列表：</p>
+<ul>
+<li>Set - 设置一个key的值</li>
+<li>Get - 查询key的值</li>
+<li>GetSet - 设置一个key的值，并返回这个key的旧值</li>
+<li>SetNX - 如果key不存在，则设置这个key的值</li>
+<li>MGet - 批量查询key的值</li>
+<li>MSet - 批量设置key的值</li>
+<li>Incr,IncrBy,IncrByFloat - 针对一个key的数值进行递增操作</li>
+<li>Decr,DecrBy - 针对一个key的数值进行递减操作</li>
+<li>Del - 删除key操作，可以批量删除</li>
+<li>Expire - 设置key的过期时间</li>
+</ul>
+<h2 id="set">1.<code>Set</code></h2>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第三个参数为过期时间，0为永不过期</span></span><br><span class="line">err := client.Set(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;value&quot;</span>,<span class="number">0</span>).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</span><br><span class="line">  <span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="get">2.<code>Get</code></h2>
+<p>查询key的值</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Result函数返回两个值，第一个是key的值，第二个是错误信息</span></span><br><span class="line">val, err := client.Get(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"><span class="comment">// 判断查询是否出错</span></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">&quot;key&quot;</span>, val)</span><br></pre></td></tr></table></figure></div>
+<h2 id="getset">3.<code>GetSet</code></h2>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Result函数返回两个值，第一个是key的值，第二个是错误信息</span></span><br><span class="line">oldVal, err := client.GetSet(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;new value&quot;</span>).Result()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 打印key的旧值</span></span><br><span class="line">fmt.Println(<span class="string">&quot;key&quot;</span>, oldVal)</span><br></pre></td></tr></table></figure></div>
+<h2 id="setnx">4.<code>SetNX</code></h2>
+<p>如果key不存在，则设置这个key的值</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第三个参数代表key的过期时间，0代表不会过期。</span></span><br><span class="line">err := client.SetNX(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;value&quot;</span>, <span class="number">0</span>).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="mget">5.<code>MGet</code></h2>
+<p>批量查询key的值</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MGet函数可以传入任意个key，一次性返回多个值。</span></span><br><span class="line"><span class="comment">// 这里Result返回两个值，第一个值是一个数组，第二个值是错误信息</span></span><br><span class="line">vals, err := client.MGet(<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;key2&quot;</span>, <span class="string">&quot;key3&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(vals)</span><br></pre></td></tr></table></figure></div>
+<h2 id="mset">6.<code>MSet</code></h2>
+<p>批量设置key的值</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">err := client.MSet(<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;value1&quot;</span>, <span class="string">&quot;key2&quot;</span>, <span class="string">&quot;value2&quot;</span>, <span class="string">&quot;key3&quot;</span>, <span class="string">&quot;value3&quot;</span>).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  <span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="incr-incrbyincrbyfloat">7.<code>Incr</code>
+、<code>IncrBy</code>、<code>IncrByFloat</code></h2>
+<p>针对一个key的值进行递增操作</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Incr函数每次加一</span></span><br><span class="line">val, err := client.Incr(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">&quot;最新值&quot;</span>, val)</span><br><span class="line"></span><br><span class="line"><span class="comment">// IncrBy函数，可以指定每次递增多少</span></span><br><span class="line">val, err := client.IncrBy(<span class="string">&quot;key&quot;</span>, <span class="number">2</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">&quot;最新值&quot;</span>, val)</span><br><span class="line"></span><br><span class="line"><span class="comment">// IncrByFloat函数，可以指定每次递增多少，跟IncrBy的区别是累加的是浮点数</span></span><br><span class="line">val, err := client.IncrByFloat(<span class="string">&quot;key&quot;</span>, <span class="number">2</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">&quot;最新值&quot;</span>, val)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h2 id="decrdecrby">8.<code>Decr</code>、<code>DecrBy</code></h2>
+<p>针对一个key的值进行递减操作</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Decr函数每次减一</span></span><br><span class="line">val, err := client.Decr(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">&quot;最新值&quot;</span>, val)</span><br><span class="line"></span><br><span class="line"><span class="comment">// DecrBy函数，可以指定每次递减多少</span></span><br><span class="line">val, err := client.DecrBy(<span class="string">&quot;key&quot;</span>, <span class="number">2</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">&quot;最新值&quot;</span>, val)</span><br></pre></td></tr></table></figure></div>
+<h2 id="del">9.<code>Del</code></h2>
+<p>删除key操作，支持批量删除</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/ 删除key</span><br><span class="line">client.Del(<span class="string">&quot;key&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除多个key, Del函数支持删除多个key</span></span><br><span class="line">err := client.Del(<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;key2&quot;</span>, <span class="string">&quot;key3&quot;</span>).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="expire">10.<code>Expire</code></h2>
+<p>设置key的过期时间，单位为<strong>秒</strong></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">client.Expire(<span class="string">&quot;key&quot;</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure></div>
+<h1 id="hash用法">4.hash用法</h1>
+<p>golang redis hash类型数据操作。</p>
+<p>如果你希望key/value的值也能作为hash结构进行操作，可以选择redis
+hash类型。</p>
+<p>使用场景举例：
+如果我们希望缓存一条用户信息(包括用户id、用户名、email字段)，希望能够做到局部读写用户信息（例如：读写用户名），也能够读取整条用户信息，那么hash类型就支持这些操作。</p>
+<p>redis hash操作主要有2-3个元素组成：</p>
+<ul>
+<li>key - redis key 唯一标识</li>
+<li>field - hash数据的字段名</li>
+<li>value - 值，有些操作不需要值</li>
+</ul>
+<p><strong>go redis hash数据常用函数：</strong></p>
+<ul>
+<li>HSet - 根据key和field字段设置，field字段的值</li>
+<li>HGet - 根据key和field字段，查询field字段的值</li>
+<li>HGetAll - 根据key查询所有字段和值</li>
+<li>HIncrBy - 根据key和field字段，累加数值。</li>
+<li>HKeys - 根据key返回所有字段名</li>
+<li>HLen - 根据key，查询hash的字段数量</li>
+<li>HMGet - 根据key和多个字段名，批量查询多个hash字段值</li>
+<li>HMSet - 根据key和多个字段名和字段值，批量设置hash字段值</li>
+<li>HSetNX - 如果field字段不存在，则设置hash字段值</li>
+<li>HDel - 根据key和字段名，删除hash字段，支持批量删除hash字段</li>
+<li>HExists - 检测hash字段名是否存在。</li>
+</ul>
+<blockquote>
+<p>提示：不管我们选择redis什么类型的数据，操作的时候都必须要有一个==唯一的Key,
+用来唯一标识一个数据。==</p>
+</blockquote>
+<h2 id="hset">1.<code>HSet</code></h2>
+<p>根据key和field字段设置，field字段的值</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// user_1 是hash key，username 是字段名, tizi365是字段值</span></span><br><span class="line">err := client.HSet(<span class="string">&quot;user_1&quot;</span>, <span class="string">&quot;username&quot;</span>, <span class="string">&quot;tizi365&quot;</span>).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="hget">2.<code>HGet</code></h2>
+<p>根据<code>key</code>和<code>field</code>字段，查询<code>field</code>字段的值</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// user_1 是hash key，username是字段名</span></span><br><span class="line">username, err := client.HGet(<span class="string">&quot;user_1&quot;</span>, <span class="string">&quot;username&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(username)</span><br></pre></td></tr></table></figure></div>
+<h2 id="hgetall">3.<code>HGetAll</code></h2>
+<p>根据<code>key</code>查询所有字段和值</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一次性返回key=user_1的所有hash字段和值</span></span><br><span class="line">data, err := client.HGetAll(<span class="string">&quot;user_1&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// data是一个map类型，这里使用使用循环迭代输出</span></span><br><span class="line"><span class="keyword">for</span> field, val := <span class="keyword">range</span> data &#123;</span><br><span class="line">	fmt.Println(field,val)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="hincrby">4.<code>HIncrBy</code></h2>
+<p>根据key和field字段，累加字段的数值</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 累加count字段的值，一次性累加2， user_1为hash key</span></span><br><span class="line">count, err := client.HIncrBy(<span class="string">&quot;user_1&quot;</span>, <span class="string">&quot;count&quot;</span>, <span class="number">2</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(count)</span><br></pre></td></tr></table></figure></div>
+<h2 id="hkeys">5.<code>HKeys</code></h2>
+<p>根据<code>Key</code>返回所有字段名</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// keys是一个string数组</span></span><br><span class="line">keys, err := client.HKeys(<span class="string">&quot;user_1&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(keys)</span><br></pre></td></tr></table></figure></div>
+<h2 id="hlen">6.<code>HLen</code></h2>
+<p>根据key，查询hash的字段数量</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">size, err := client.HLen(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(size)</span><br></pre></td></tr></table></figure></div>
+<h2 id="hmget">7.<code>HMGet</code></h2>
+<p>根据key和多个字段名，批量查询多个hash字段值</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">size, err := client.HLen(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(size)</span><br></pre></td></tr></table></figure></div>
+<h2 id="hmset">8.<code>HMSet</code></h2>
+<p>根据key和多个字段名和字段值，批量设置hash字段值</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化hash数据的多个字段值</span></span><br><span class="line">data := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">data[<span class="string">&quot;id&quot;</span>] = <span class="number">1</span></span><br><span class="line">data[<span class="string">&quot;username&quot;</span>] = <span class="string">&quot;tizi&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 一次性保存多个hash字段值</span></span><br><span class="line">err := client.HMSet(<span class="string">&quot;key&quot;</span>, data).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="hsetnx">9.<code>HSetNX</code></h2>
+<p>如果hash不存在，则设置hash字段值</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">err := client.HSetNX(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;id&quot;</span>, <span class="number">100</span>).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="hdel">10.<code>HDel</code></h2>
+<p>根据key和字段名，删除hash字段，支持批量删除hash字段</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除一个字段id</span></span><br><span class="line">client.HDel(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;id&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除多个字段</span></span><br><span class="line">client.HDel(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;id&quot;</span>, <span class="string">&quot;username&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+<h2 id="hexists">11.<code>HExists</code></h2>
+<p>检查hash字段名是否存在</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检测id字段是否存在</span></span><br><span class="line">err := client.HExists(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;id&quot;</span>).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h1 id="list用法">5.List用法</h1>
+<p>Redis列表是简单的字符串列表，列表是有序的，列表中的元素可以重复。</p>
+<p>可以添加一个元素到列表的头部（左边）或者尾部（右边）</p>
+<p><strong>golang redis list数据操作常用函数：</strong></p>
+<ul>
+<li>LPush - 从列表左边插入数据</li>
+<li>LPushX - 跟LPush的区别是，仅当列表存在的时候才插入数据</li>
+<li>RPop - 从列表的右边删除第一个数据，并返回删除的数据</li>
+<li>RPush - 从列表右边插入数据</li>
+<li>RPushX - 跟RPush的区别是，仅当列表存在的时候才插入数据</li>
+<li>LPop - 从列表左边删除第一个数据，并返回删除的数据</li>
+<li>LLen - 返回列表的大小</li>
+<li>LRange - 返回列表的一个范围内的数据，也可以返回全部数据</li>
+<li>LRem - 删除列表中的数据</li>
+<li>LIndex - 根据索引坐标，查询列表中的数据</li>
+<li>LInsert - 在指定位置插入数据</li>
+</ul>
+<h2 id="lpush">1.<code>LPush</code></h2>
+<p>从列表左边插入数据</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 插入一个数据</span></span><br><span class="line">client.LPush(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;data1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// LPush支持一次插入任意个数据</span></span><br><span class="line">err := client.LPush(<span class="string">&quot;key&quot;</span>, <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="lpushx">2.<code>LPushX</code></h2>
+<p>跟LPush的区别是，仅当列表存在的时候才插入数据,用法完全一样。</p>
+<h2 id="rpop">3.<code>RPop</code></h2>
+<p>从列表的右边删除第一个数据，并返回删除的数据</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">val, err := client.RPop(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(val)</span><br></pre></td></tr></table></figure></div>
+<h2 id="rpush">4.<code>RPush</code></h2>
+<p>从列表右边插入数据</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 插入一个数据</span></span><br><span class="line">client.RPush(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;data1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 支持一次插入任意个数据</span></span><br><span class="line">err := client.RPush(<span class="string">&quot;key&quot;</span>, <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="rpushx">5.<code>RPushX</code></h2>
+<p>跟RPush的区别是，仅当列表存在的时候才插入数据, 他们用法一样</p>
+<h2 id="lpop">6.<code>LPop</code></h2>
+<p>从列表左边删除第一个数据，并返回删除的数据</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">val, err := client.LPop(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(val)</span><br></pre></td></tr></table></figure></div>
+<h2 id="llen">7.<code>LLen</code></h2>
+<p>返回列表的大小</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">val, err := client.LLen(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(val)</span><br></pre></td></tr></table></figure></div>
+<h2 id="lrange">8.<code>LRange</code></h2>
+<p>返回列表的一个范围内的数据，也可以返回全部数据</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回从0开始到-1位置之间的数据，意思就是返回全部数据</span></span><br><span class="line">vals, err := client.LRange(<span class="string">&quot;key&quot;</span>,<span class="number">0</span>,<span class="number">-1</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(vals)</span><br></pre></td></tr></table></figure></div>
+<h2 id="lrem">9.<code>LRem</code></h2>
+<p>删除列表中的数据</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从列表左边开始，删除100， 如果出现重复元素，仅删除1次，也就是删除第一个</span></span><br><span class="line">dels, err := client.LRem(<span class="string">&quot;key&quot;</span>,<span class="number">1</span>,<span class="number">100</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果存在多个100，则从列表左边开始删除2个100</span></span><br><span class="line">client.LRem(<span class="string">&quot;key&quot;</span>,<span class="number">2</span>,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果存在多个100，则从列表右边开始删除2个100</span></span><br><span class="line"><span class="comment">// 第二个参数负数表示从右边开始删除几个等于100的元素</span></span><br><span class="line">client.LRem(<span class="string">&quot;key&quot;</span>,<span class="number">-2</span>,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果存在多个100，第二个参数为0，表示删除所有元素等于100的数据</span></span><br><span class="line">client.LRem(<span class="string">&quot;key&quot;</span>,<span class="number">0</span>,<span class="number">100</span>)</span><br></pre></td></tr></table></figure></div>
+<h2 id="lindex">10.<code>LIndex</code></h2>
+<p>根据索引坐标，查询列表中的数据</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 列表索引从0开始计算，这里返回第6个元素</span></span><br><span class="line">val, err := client.LIndex(<span class="string">&quot;key&quot;</span>,<span class="number">5</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(val)</span><br></pre></td></tr></table></figure></div>
+<h2 id="linsert">11.<code>LInsert</code></h2>
+<p>在指定位置插入数据</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在列表中5的前面插入4</span></span><br><span class="line"><span class="comment">// before是之前的意思</span></span><br><span class="line">err := client.LInsert(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;before&quot;</span>, <span class="number">5</span>, <span class="number">4</span>).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在列表中 tizi365 元素的前面插入 欢迎你</span></span><br><span class="line">client.LInsert(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;before&quot;</span>, <span class="string">&quot;tizi365&quot;</span>, <span class="string">&quot;欢迎你&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在列表中 tizi365 元素的后面插入 2019</span></span><br><span class="line">client.LInsert(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;after&quot;</span>, <span class="string">&quot;tizi365&quot;</span>, <span class="string">&quot;2019&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+<h1 id="集合">6.集合</h1>
+<p>redis的set类型（集合）是string类型数值的无序集合，并且集合元素唯一。</p>
+<p>下面介绍go redis的集合用法。</p>
+<p><strong>go redis 集合（set）常用函数列表</strong>：</p>
+<ul>
+<li>SAdd - 添加集合元素</li>
+<li>SCard - 获取集合元素个数</li>
+<li>SIsMember - 判断元素是否在集合中</li>
+<li>SMembers - 获取集合中所有的元素</li>
+<li>SRem - 删除集合元素</li>
+<li>SPop,SPopN - 随机返回集合中的元素，并且删除返回的元素</li>
+</ul>
+<h2 id="sadd">1.<code>SAdd</code></h2>
+<p>添加集合元素</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加100到集合中</span></span><br><span class="line">err := client.SAdd(<span class="string">&quot;key&quot;</span>,<span class="number">100</span>).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将100,200,300添加到集合中</span></span><br><span class="line">client.SAdd(<span class="string">&quot;key&quot;</span>,<span class="number">100</span>, <span class="number">200</span>, <span class="number">300</span>)</span><br></pre></td></tr></table></figure></div>
+<h2 id="scard">2.<code>SCard</code></h2>
+<p>获取集合元素个数</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">size, err := client.SCard(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(size)</span><br></pre></td></tr></table></figure></div>
+<h2 id="sismember">3.<code>SIsMember</code></h2>
+<p>判断元素是否在集合中</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检测100是否包含在集合中</span></span><br><span class="line">ok, _ := client.SIsMember(<span class="string">&quot;key&quot;</span>, <span class="number">100</span>).Result()</span><br><span class="line"><span class="keyword">if</span> ok &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;集合包含指定元素&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="smembers">4.<code>SMembers</code></h2>
+<p>获取集合中所有的元素</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">es, _ := client.SMembers(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"><span class="comment">// 返回的es是string数组</span></span><br><span class="line">fmt.Println(es)</span><br></pre></td></tr></table></figure></div>
+<h2 id="srem">5.<code>SRem</code></h2>
+<p>删除集合元素</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除集合中的元素100</span></span><br><span class="line">client.SRem(<span class="string">&quot;key&quot;</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除集合中的元素tizi和2019</span></span><br><span class="line">client.SRem(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;tizi&quot;</span>, <span class="string">&quot;2019&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+<h2 id="spopspopn">6.<code>SPop,SPopN</code></h2>
+<p>随机返回集合中的元素，并且删除返回的元素</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 随机返回集合中的一个元素，并且删除这个元素</span></span><br><span class="line">val, _ := client.SPop(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line">fmt.Println(val)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 随机返回集合中的5个元素，并且删除这些元素</span></span><br><span class="line">vals, _ := client.SPopN(<span class="string">&quot;key&quot;</span>, <span class="number">5</span>).Result()</span><br><span class="line">fmt.Println(vals)</span><br></pre></td></tr></table></figure></div>
+<h1 id="有序集合">7.有序集合</h1>
+<p>Redis 有序集合（sorted
+set）和集合一样也是string类型元素的集合,且不允许重复的成员，不同的是每个元素都会关联一个double类型的分数，这个分数主要用于集合元素排序。</p>
+<p>下面介绍golang redis 有序集合的用法</p>
+<p><strong>go redis有序集合常用函数:</strong></p>
+<ul>
+<li>ZAdd - 添加一个或者多个元素到集合，如果元素已经存在则更新分数</li>
+<li>ZCard - 返回集合元素个数</li>
+<li>ZCount - 统计某个分数范围内的元素个数</li>
+<li>ZIncrBy - 增加元素的分数</li>
+<li>ZRange,ZRevRange -
+返回集合中某个索引范围的元素，根据分数从小到大排序</li>
+<li>ZRangeByScore,ZRevRangeByScore -
+根据分数范围返回集合元素，元素根据分数从小到大排序，支持分页。</li>
+<li>ZRem - 删除集合元素</li>
+<li>ZRemRangeByRank - 根据索引范围删除元素</li>
+<li>ZRemRangeByScore - 根据分数范围删除元素</li>
+<li>ZScore - 查询元素对应的分数</li>
+<li>ZRank, ZRevRank - 查询元素的排名</li>
+</ul>
+<h2 id="zadd">1.<code>ZAdd</code></h2>
+<p>添加一个或者多个元素到集合，如果元素已经存在则更新分数</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加一个集合元素到集合中， 这个元素的分数是2.5，元素名是tizi</span></span><br><span class="line">err := client.ZAdd(<span class="string">&quot;key&quot;</span>, redis.Z&#123;<span class="number">2.5</span>,<span class="string">&quot;tizi&quot;</span>&#125;).Err()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>下面是redis.Z结构体说明：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Z <span class="keyword">struct</span> &#123;</span><br><span class="line">	Score  <span class="type">float64</span> <span class="comment">// 分数</span></span><br><span class="line">	Member <span class="keyword">interface</span>&#123;&#125; <span class="comment">// 元素名</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="zcard">2.<code>ZCard</code></h2>
+<p>返回集合元素个数</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">size, err := client.ZCard(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(size)</span><br></pre></td></tr></table></figure></div>
+<h2 id="zcount">3.<code>ZCount</code></h2>
+<p>统计某个分数范围内的元素个数</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回： 1&lt;=分数&lt;=5 的元素个数, 注意：&quot;1&quot;, &quot;5&quot;两个参数是字符串</span></span><br><span class="line">size, err := client.ZCount(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;1&quot;</span>,<span class="string">&quot;5&quot;</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(size)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回： 1&lt;分数&lt;=5 的元素个数</span></span><br><span class="line"><span class="comment">// 说明：默认第二，第三个参数是大于等于和小于等于的关系。</span></span><br><span class="line"><span class="comment">// 如果加上（ 则表示大于或者小于，相当于去掉了等于关系。</span></span><br><span class="line">size, err := client.ZCount(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;(1&quot;</span>,<span class="string">&quot;5&quot;</span>).Result()</span><br></pre></td></tr></table></figure></div>
+<h2 id="zincrby">4.<code>ZIncrBy</code></h2>
+<p>增加元素的分数</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给元素5，加上2分</span></span><br><span class="line">client.ZIncrBy(<span class="string">&quot;key&quot;</span>, <span class="number">2</span>,<span class="string">&quot;5&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+<h2 id="zrangezrevrange">5.<code>ZRange,ZRevRange</code></h2>
+<p>返回集合中某个索引范围的元素，根据分数从小到大排序</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回从0到-1位置的集合元素， 元素按分数从小到大排序</span></span><br><span class="line"><span class="comment">// 0到-1代表则返回全部数据</span></span><br><span class="line">vals, err := client.ZRange(<span class="string">&quot;key&quot;</span>, <span class="number">0</span>,<span class="number">-1</span>).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _, val := <span class="keyword">range</span> vals &#123;</span><br><span class="line">	fmt.Println(val)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>ZRevRange用法跟ZRange一样，区别是ZRevRange的结果是按分数从大到小排序。</p>
+<h2 id="zrangebyscore">6.<code>ZRangeByScore</code></h2>
+<p>根据分数范围返回集合元素，元素根据分数从小到大排序，支持分页。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化查询条件， Offset和Count用于分页</span></span><br><span class="line">op := redis.ZRangeBy&#123;</span><br><span class="line">	Min:<span class="string">&quot;2&quot;</span>, <span class="comment">// 最小分数</span></span><br><span class="line">	Max:<span class="string">&quot;10&quot;</span>, <span class="comment">// 最大分数</span></span><br><span class="line">	Offset:<span class="number">0</span>, <span class="comment">// 类似sql的limit, 表示开始偏移量</span></span><br><span class="line">	Count:<span class="number">5</span>, <span class="comment">// 一次返回多少数据</span></span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">vals, err := client.ZRangeByScore(<span class="string">&quot;key&quot;</span>, op).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _, val := <span class="keyword">range</span> vals &#123;</span><br><span class="line">	fmt.Println(val)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="zrevrangebyscore">7.<code>ZRevRangeByScore</code></h2>
+<p>用法类似ZRangeByScore，区别是元素根据分数从大到小排序。</p>
+<h2
+id="zrangebyscorewithscores">8.<code>ZRangeByScoreWithScores</code></h2>
+<p>用法跟ZRangeByScore一样，区别是除了返回集合元素，同时也返回元素对应的分数</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化查询条件， Offset和Count用于分页</span></span><br><span class="line">op := redis.ZRangeBy&#123;</span><br><span class="line">	Min:<span class="string">&quot;2&quot;</span>, <span class="comment">// 最小分数</span></span><br><span class="line">	Max:<span class="string">&quot;10&quot;</span>, <span class="comment">// 最大分数</span></span><br><span class="line">	Offset:<span class="number">0</span>, <span class="comment">// 类似sql的limit, 表示开始偏移量</span></span><br><span class="line">	Count:<span class="number">5</span>, <span class="comment">// 一次返回多少数据</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vals, err := client.ZRangeByScoreWithScores(<span class="string">&quot;key&quot;</span>, op).Result()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _, val := <span class="keyword">range</span> vals &#123;</span><br><span class="line">	fmt.Println(val.Member) <span class="comment">// 集合元素</span></span><br><span class="line">	fmt.Println(val.Score) <span class="comment">// 分数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="zrem">8.<code>ZRem</code></h2>
+<p>删除集合元素</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除集合中的元素tizi</span></span><br><span class="line">client.ZRem(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;tizi&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除集合中的元素tizi和xiaoli</span></span><br><span class="line"><span class="comment">// 支持一次删除多个元素</span></span><br><span class="line">client.ZRem(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;tizi&quot;</span>, <span class="string">&quot;xiaoli&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+<h2 id="zremrangebyrank">9.<code>ZRemRangeByRank</code></h2>
+<p>根据索引范围删除元素</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 集合元素按分数排序，从最低分到高分，删除第0个元素到第5个元素。</span></span><br><span class="line"><span class="comment">// 这里相当于删除最低分的几个元素</span></span><br><span class="line">client.ZRemRangeByRank(<span class="string">&quot;key&quot;</span>, <span class="number">0</span>, <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 位置参数写成负数，代表从高分开始删除。</span></span><br><span class="line"><span class="comment">// 这个例子，删除最高分数的两个元素，-1代表最高分数的位置，-2第二高分，以此类推。</span></span><br><span class="line">client.ZRemRangeByRank(<span class="string">&quot;key&quot;</span>, <span class="number">-1</span>, <span class="number">-2</span>)</span><br></pre></td></tr></table></figure></div>
+<h2 id="zremrangebyscore">10.<code>ZRemRangeByScore</code></h2>
+<p>根据分数范围删除元素</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除范围： 2&lt;=分数&lt;=5 的元素</span></span><br><span class="line">client.ZRemRangeByScore(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;5&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除范围： 2&lt;=分数&lt;5 的元素</span></span><br><span class="line">client.ZRemRangeByScore(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;(5&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+<h2 id="zscore">11.<code>ZScore</code></h2>
+<p>查询元素对应的分数</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询集合元素tizi的分数</span></span><br><span class="line">score, _ := client.ZScore(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;tizi&quot;</span>).Result()</span><br><span class="line">fmt.Println(score)</span><br></pre></td></tr></table></figure></div>
+<h2 id="zrank">12.<code>ZRank</code></h2>
+<p>根据元素名，查询集合元素在集合中的排名，从0开始算，集合元素按分数从小到大排序</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rk, _ := client.ZRank(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;tizi&quot;</span>).Result()</span><br><span class="line">fmt.Println(rk)</span><br></pre></td></tr></table></figure></div>
+<p>ZRevRank的作用跟ZRank一样，区别是ZRevRank是按分数从大到小排序。</p>
+<h1 id="发布订阅">7.发布订阅</h1>
+<p>Redis提供了发布订阅功能，可以用于消息的传输，Redis的发布订阅机制包括三个部分，发布者，订阅者和Channel。</p>
+<p>发布订阅架构图：</p>
+<figure>
+<img 
+
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Wishforpeace/Typora/main/pictureredis-pubsub-20220713145951000.jpg"
+                     
+alt="img" 
+                >
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>发布者和订阅者都是Redis客户端，Channel则为Redis服务器端，发布者将消息发送到某个的频道，订阅了这个频道的订阅者就能接收到这条消息。Redis的这种发布订阅机制与基于主题的发布订阅类似，Channel相当于主题。</p>
+<p>下面介绍golang如何使用redis的发布订阅功能。</p>
+<p><strong>go redis发布订阅常用函数：</strong></p>
+<ul>
+<li>Subscribe - 订阅channel</li>
+<li>PSubscribe - 订阅channel支持通配符匹配</li>
+<li>Publish - 将信息发送到指定的channel。</li>
+<li>PubSubChannels - 查询活跃的channel</li>
+<li>PubSubNumSub - 查询指定的channel有多少个订阅者</li>
+</ul>
+<h2 id="subscribe">1.<code>Subscribe</code></h2>
+<p>订阅channel</p>
+<p>例子1：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 订阅channel1这个channel</span></span><br><span class="line">sub := client.Subscribe(<span class="string">&quot;channel1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取channel消息</span></span><br><span class="line">iface, err := sub.Receive()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="comment">// handle error</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检测收到的消息类型</span></span><br><span class="line"><span class="keyword">switch</span> iface.(<span class="keyword">type</span>) &#123;</span><br><span class="line"><span class="keyword">case</span> *redis.Subscription:</span><br><span class="line">    <span class="comment">// 订阅成功</span></span><br><span class="line"><span class="keyword">case</span> *redis.Message:</span><br><span class="line">    <span class="comment">// 处理收到的消息</span></span><br><span class="line">    <span class="comment">// 这里需要做一下类型转换</span></span><br><span class="line">    m := iface.(redis.Message)</span><br><span class="line">    <span class="comment">// 打印收到的小</span></span><br><span class="line">	fmt.Println(m.Payload)</span><br><span class="line"><span class="keyword">case</span> *redis.Pong:</span><br><span class="line">    <span class="comment">// 收到Pong消息</span></span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    <span class="comment">// handle error</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>例子2： 使用golang channel的方式处理消息</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 订阅channel1这个channel</span></span><br><span class="line">sub := client.Subscribe(<span class="string">&quot;channel1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// sub.Channel() 返回go channel，可以循环读取redis服务器发过来的消息</span></span><br><span class="line"><span class="keyword">for</span> msg := <span class="keyword">range</span> sub.Channel() &#123;</span><br><span class="line">	<span class="comment">// 打印收到的消息</span></span><br><span class="line">	fmt.Println(msg.Channel)</span><br><span class="line">	fmt.Println(msg.Payload)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>例子3： 取消订阅</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 订阅channel1这个channel</span></span><br><span class="line">sub := client.Subscribe(<span class="string">&quot;channel1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 忽略其他处理逻辑</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 取消订阅</span></span><br><span class="line">sub.Unsubscribe(<span class="string">&quot;channel1&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+<h2 id="psubscribe">2.<code>PSubscribe</code></h2>
+<p>用法跟Subscribe一样，区别是PSubscribe订阅通道(channel)支持模式匹配。</p>
+<p>例子：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 订阅channel1这个channel</span></span><br><span class="line">sub := client.PSubscribe(<span class="string">&quot;ch_user_*&quot;</span>)</span><br><span class="line"><span class="comment">// 可以匹配ch_user_开头的任意channel</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="publish">3.<code>Publish</code></h2>
+<p>将消息发送到指定的channel</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将&quot;message&quot;消息发送到channel1这个通道上</span></span><br><span class="line">client.Publish(<span class="string">&quot;channel1&quot;</span>,<span class="string">&quot;message&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+<h2 id="pubsubchannels">4.<code>PubSubChannels</code></h2>
+<p>查询活跃的channel</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没有指定查询channel的匹配模式，则返回所有的channel</span></span><br><span class="line">chs, _ := client.PubSubChannels(<span class="string">&quot;&quot;</span>).Result()</span><br><span class="line"><span class="keyword">for</span> _, ch := <span class="keyword">range</span> chs &#123;</span><br><span class="line">	fmt.Println(ch)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 匹配user_开头的channel</span></span><br><span class="line">chs, _ := client.PubSubChannels(<span class="string">&quot;user_*&quot;</span>).Result()</span><br></pre></td></tr></table></figure></div>
+<h2 id="pubsubnumsub">5.<code>PubSubNumSub</code></h2>
+<p>查询指定的channel有多少个订阅者</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询channel1，channel2两个通道的订阅者数量</span></span><br><span class="line">chs, _ := client.PubSubNumSub(<span class="string">&quot;channel1&quot;</span>, <span class="string">&quot;channel2&quot;</span>).Result()</span><br><span class="line"><span class="keyword">for</span> ch, count := <span class="keyword">range</span> chs &#123;</span><br><span class="line">	fmt.Println(ch) <span class="comment">// channel名字</span></span><br><span class="line">	fmt.Println(count) <span class="comment">// channel的订阅者数量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>redis事务可以一次执行多个命令， 并且带有以下两个重要的保证：</p>
+<ul>
+<li>事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</li>
+<li>事务是一个原子操作：事务中的命令要么全部被执行，要么全部都不执行。</li>
+</ul>
+<h1 id="事务">8.事务</h1>
+<p>下面介绍golang redis事务用法。</p>
+<p><strong>go redis事务常用函数：</strong></p>
+<ul>
+<li>TxPipeline - 以Pipeline的方式操作事务</li>
+<li>Watch - redis乐观锁支持</li>
+</ul>
+<h2 id="txpipeline">1.<code>TxPipeline</code></h2>
+<p>以Pipeline的方式操作事务</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开启一个TxPipeline事务</span></span><br><span class="line">pipe := client.TxPipeline()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行事务操作，可以通过pipe读写redis</span></span><br><span class="line">incr := pipe.Incr(<span class="string">&quot;tx_pipeline_counter&quot;</span>)</span><br><span class="line">pipe.Expire(<span class="string">&quot;tx_pipeline_counter&quot;</span>, time.Hour)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 上面代码等同于执行下面redis命令</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//     MULTI</span></span><br><span class="line"><span class="comment">//     INCR pipeline_counter</span></span><br><span class="line"><span class="comment">//     EXPIRE pipeline_counts 3600</span></span><br><span class="line"><span class="comment">//     EXEC</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过Exec函数提交redis事务</span></span><br><span class="line">_, err := pipe.Exec()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提交事务后，我们可以查询事务操作的结果</span></span><br><span class="line"><span class="comment">// 前面执行Incr函数，在没有执行exec函数之前，实际上还没开始运行。</span></span><br><span class="line">fmt.Println(incr.Val(), err)</span><br></pre></td></tr></table></figure></div>
+<h2 id="watch">2.<code>watch</code></h2>
+<p>redis乐观锁支持，可以通过watch监听一些Key,
+如果这些key的值没有被其他人改变的话，才可以提交事务。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个回调函数，用于处理事务逻辑</span></span><br><span class="line">fn := <span class="function"><span class="keyword">func</span><span class="params">(tx *redis.Tx)</span></span> <span class="type">error</span> &#123;</span><br><span class="line">		<span class="comment">// 先查询下当前watch监听的key的值</span></span><br><span class="line">		v, err := tx.Get(<span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &amp;&amp; err != redis.Nil &#123;</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 这里可以处理业务</span></span><br><span class="line">		fmt.Println(v)</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 如果key的值没有改变的话，Pipelined函数才会调用成功</span></span><br><span class="line">		_, err = tx.Pipelined(<span class="function"><span class="keyword">func</span><span class="params">(pipe redis.Pipeliner)</span></span> <span class="type">error</span> &#123;</span><br><span class="line">			<span class="comment">// 在这里给key设置最新值</span></span><br><span class="line">			pipe.Set(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;new value&quot;</span>, <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">		&#125;)</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用Watch监听一些Key, 同时绑定一个回调函数fn, 监听Key后的逻辑写在fn这个回调函数里面</span></span><br><span class="line"><span class="comment">// 如果想监听多个key，可以这么写：client.Watch(fn, &quot;key1&quot;, &quot;key2&quot;, &quot;key3&quot;)</span></span><br><span class="line">client.Watch(fn, <span class="string">&quot;key&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Go Redis</li>
+        <li>Post author：The Redefine Team</li>
+        <li>Create time：2022-07-10 22:59:51</li>
+        <li>
+            Post link：https://redefine.ohevan.com/2022/07/10/Go-Redis/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/go/">#go</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2022/07/13/K8S%E6%9E%81%E9%80%9F%E5%85%A5%E9%97%A8/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">K8S极速入门</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2022/07/09/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">MySQL学习笔记</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Go Redis</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-text">1.快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="nav-text">1.安装依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#golang%E8%BF%9E%E6%8E%A5redis"><span class="nav-text">2.golang连接redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-text">3.简单的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE"><span class="nav-text">2.连接设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#golang%E8%BF%9E%E6%8E%A5redis-1"><span class="nav-text">1.golang连接redis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#options%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="nav-text">2.Options参数详解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E9%94%AE%E5%80%BC%E6%93%8D%E4%BD%9C"><span class="nav-text">3.基本键值操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#set"><span class="nav-text">1.Set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get"><span class="nav-text">2.Get</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getset"><span class="nav-text">3.GetSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setnx"><span class="nav-text">4.SetNX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mget"><span class="nav-text">5.MGet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mset"><span class="nav-text">6.MSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#incr-incrbyincrbyfloat"><span class="nav-text">7.Incr
+、IncrBy、IncrByFloat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decrdecrby"><span class="nav-text">8.Decr、DecrBy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#del"><span class="nav-text">9.Del</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#expire"><span class="nav-text">10.Expire</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hash%E7%94%A8%E6%B3%95"><span class="nav-text">4.hash用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hset"><span class="nav-text">1.HSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hget"><span class="nav-text">2.HGet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hgetall"><span class="nav-text">3.HGetAll</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hincrby"><span class="nav-text">4.HIncrBy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hkeys"><span class="nav-text">5.HKeys</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hlen"><span class="nav-text">6.HLen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hmget"><span class="nav-text">7.HMGet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hmset"><span class="nav-text">8.HMSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hsetnx"><span class="nav-text">9.HSetNX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hdel"><span class="nav-text">10.HDel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexists"><span class="nav-text">11.HExists</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#list%E7%94%A8%E6%B3%95"><span class="nav-text">5.List用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lpush"><span class="nav-text">1.LPush</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lpushx"><span class="nav-text">2.LPushX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rpop"><span class="nav-text">3.RPop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rpush"><span class="nav-text">4.RPush</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rpushx"><span class="nav-text">5.RPushX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lpop"><span class="nav-text">6.LPop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#llen"><span class="nav-text">7.LLen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lrange"><span class="nav-text">8.LRange</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lrem"><span class="nav-text">9.LRem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lindex"><span class="nav-text">10.LIndex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linsert"><span class="nav-text">11.LInsert</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E5%90%88"><span class="nav-text">6.集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sadd"><span class="nav-text">1.SAdd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scard"><span class="nav-text">2.SCard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sismember"><span class="nav-text">3.SIsMember</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smembers"><span class="nav-text">4.SMembers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#srem"><span class="nav-text">5.SRem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spopspopn"><span class="nav-text">6.SPop,SPopN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88"><span class="nav-text">7.有序集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zadd"><span class="nav-text">1.ZAdd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zcard"><span class="nav-text">2.ZCard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zcount"><span class="nav-text">3.ZCount</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zincrby"><span class="nav-text">4.ZIncrBy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zrangezrevrange"><span class="nav-text">5.ZRange,ZRevRange</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zrangebyscore"><span class="nav-text">6.ZRangeByScore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zrevrangebyscore"><span class="nav-text">7.ZRevRangeByScore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zrangebyscorewithscores"><span class="nav-text">8.ZRangeByScoreWithScores</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zrem"><span class="nav-text">8.ZRem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zremrangebyrank"><span class="nav-text">9.ZRemRangeByRank</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zremrangebyscore"><span class="nav-text">10.ZRemRangeByScore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zscore"><span class="nav-text">11.ZScore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zrank"><span class="nav-text">12.ZRank</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85"><span class="nav-text">7.发布订阅</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#subscribe"><span class="nav-text">1.Subscribe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#psubscribe"><span class="nav-text">2.PSubscribe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#publish"><span class="nav-text">3.Publish</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pubsubchannels"><span class="nav-text">4.PubSubChannels</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pubsubnumsub"><span class="nav-text">5.PubSubNumSub</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-text">8.事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#txpipeline"><span class="nav-text">1.TxPipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch"><span class="nav-text">2.watch</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+
+
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-regular fa-computer-classic"></i>&nbsp;&nbsp;<a href="/">The Redefine Team</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <br> 
+            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v1.2.0</a>
+        </div>
+        
+        
+        
+            <div id="start_time_div" style="display:none">
+                2022/8/17 11:45:14
+            </div>
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="unfolded-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="folded-tools-list">
+        <li class="right-bottom-tools tool-toggle-show flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/menu-shrink.js"></script>
+
+<script src="/js/tools/go-top-bottom.js"></script>
+
+<script src="/js/tools/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/code-block.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/toc-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            REDEFINE.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            REDEFINE.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            REDEFINE.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>
