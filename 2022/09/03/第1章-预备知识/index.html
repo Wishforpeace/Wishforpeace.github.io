@@ -1,253 +1,288 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-default-color-scheme=auto>
+
+
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="Hexo Theme Redefine">
-    <meta name="description" content="Hexo Theme Redefine">
-    <meta name="author" content="The Redefine Team">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
-    
-    <!--- Seo Part-->
-    
-    <link rel="canonical" href="http://example.com/2022/09/03/第1章-预备知识/"/>
-    <meta name="robots" content="index,follow">
-    <meta name="googlebot" content="index,follow">
-    <meta name="revisit-after" content="1 days">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="第1章 预备知识">
-    <meta property="og:description" content="Hexo Theme Redefine">
-    <meta property="og:url" content="http://example.com2022/09/03/第1章-预备知识/">
-    
-    <meta property="og:site_name" content="Theme Redefine">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="第1章 预备知识">
-    <meta name="twitter:description" content="Hexo Theme Redefine">
-    <meta name="twitter:image" content="/images/redefine-logo.svg">
-    <!--- Icon Part-->
-    <link rel="icon" type="image/png" href="/images/redefine-logo.svg" sizes="192x192">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-logo.svg">
-    <meta name="theme-color" content="#005080">
-    <link rel="shortcut icon" href="/images/redefine-logo.svg">
-    
-    <title>
-        
-            第1章 预备知识 -
-        
-        Theme Redefine
-    </title>
-    
-<link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第1章 预备知识 1.1 机器语言与汇编语言 1.1.1 机器语言 机器指令：操作码 + 地址码 指令的全体为计算机的指令系统 指令集合为机器语言 机器语言程序 1.1.2 汇编语言 助记符表示机器指令的操作码；用变量代替操作数的存放地址；在指令前冠以标号， 用来代表该指令的存放地址等。 指令助记符、语句标号、数据变量、伪指令及它们的使用规则构成了整个汇编语言的内容。 1.2 Intel系列机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第1章 预备知识">
+<meta property="og:url" content="http://example.com/2022/09/03/%E7%AC%AC1%E7%AB%A0-%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="第1章 预备知识 1.1 机器语言与汇编语言 1.1.1 机器语言 机器指令：操作码 + 地址码 指令的全体为计算机的指令系统 指令集合为机器语言 机器语言程序 1.1.2 汇编语言 助记符表示机器指令的操作码；用变量代替操作数的存放地址；在指令前冠以标号， 用来代表该指令的存放地址等。 指令助记符、语句标号、数据变量、伪指令及它们的使用规则构成了整个汇编语言的内容。 1.2 Intel系列机">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903204235387.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903204213353.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903205005287.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903205642816.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220904155556771.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220904213647690.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905162515343.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905162706328.png">
+<meta property="article:published_time" content="2022-09-03T07:12:49.000Z">
+<meta property="article:modified_time" content="2022-09-12T13:11:03.212Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903204235387.png">
+  
+  
+  
+  <title>第1章 预备知识 - WYX同学的Blog</title>
 
-    
-<link rel="stylesheet" href="/assets/fonts.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
-    
-    
-    
-    <script id="hexo-configurations">
-    let REDEFINE = window.REDEFINE || {};
-    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","og_image":{"enable":false,"image_url":null},"article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"Theme Redefine","custom_font":{"enable":false,"font_family":null,"font_url":null}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":true},"code_block":{"copy":true,"style":"mac","custom_font":{"enable":false,"font_family":null,"font_url":null}},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"1.2.0","friend_links":{"columns":2},"home_article":{"date_format":"auto","category":{"enable":true,"limit":3},"tag":{"enable":true,"limit":3}},"plugins":{"aplayer":{"enable":false,"audio":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]}}};
-    REDEFINE.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
-    
-    
-<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
 
-    
-<link rel="stylesheet" href="/fontawesome/brands.min.css">
 
-    
-<link rel="stylesheet" href="/fontawesome/solid.min.css">
-
-    
-<link rel="stylesheet" href="/fontawesome/regular.min.css">
-
-    
-    
-    
-    
+  
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+  
 
-    
-        <span class="pjax-progress-bar"></span>
-        <span class="pjax-progress-icon">
-            <i class="fa-solid fa-circle-notch fa-spin"></i>
-        </span>
-    
-</div>
-
-
-<main class="page-container">
-
+  <header>
     
 
-    <div class="page-main-content">
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
 
-        <div class="page-main-content-top">
-            <header class="menu-wrapper">
-    
-    <div class="menu-content">
-        <div class="left">
-            
-            <a class="logo-title" href="/">
-                
-                Theme Redefine
-                
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
             </a>
-        </div>
-
-        <div class="right">
-            <!-- PC -->
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        
-                            <li class="menu-item">
-                                <!-- Menu -->
-                                <a class="" 
-                                    href="/"  >
-                                    
-                                        
-                                            <i class="fa-regular fa-house"></i>
-                                        
-                                        HOME
-                                    
-                                </a>
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                    
-                </ul>
-            </div>
-            <!-- Mobile -->
-            <div class="mobile">
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
+  </div>
+</nav>
 
-    <!-- Mobile drawer -->
-    <div class="menu-drawer">
-        <ul class="drawer-menu-list">
-            
-                
-                    <li class="drawer-menu-item flex-center">
-                        <a class="" 
-                        href="/"  >
-                             
-                                
-                                    <i class="fa-regular fa-house"></i>
-                                
-                                HOME
-                            
-                        </a>
-                    </li>
-                    <!-- Submenu -->
-                    
-            
+  
 
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
-
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第1章 预备知识"></span>
+          
         </div>
 
-        <div class="page-main-content-middle">
-
-            <div class="main-content">
-
-                
-                    <div class="fade-in-down-animation">
-    <div class="post-page-container">
-        <div class="article-content-container">
-
-            
-            
-                <div class="article-title">
-                    <h1 class="article-title-regular">第1章 预备知识</h1>
-                </div>
-            
-                
-            
-
-            
-                <div class="article-header">
-                    <div class="avatar">
-                        <img src="/images/redefine-avatar.svg">
-                    </div>
-                    <div class="info">
-                        <div class="author">
-                            <span class="name">The Redefine Team</span>
-                            
-                                <span class="author-label">lol</span>
-                            
-                        </div>
-                        <div class="meta-info">
-                            <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="pc">2022-09-03 15:12:49</span>
-        <span class="mobile">2022-09-03 15:12</span>
-        <span class="hover-info">Created</span>
-    </span>
+        
+          
+  <div class="mt-3">
     
-        <span class="article-date article-meta-item">
-            <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="pc">2022-09-12 21:11:03</span>
-            <span class="mobile">2022-09-12 21:11</span>
-            <span class="hover-info">Updated</span>
-        </span>
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-03 15:12" pubdate>
+          September 3, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.6k words
+        
+      </span>
     
 
     
-        <span class="article-categories article-meta-item">
-            <i class="fa-regular fa-folders"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 mins
+        
+      </span>
     
 
     
     
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
 </div>
 
-                        </div>
-                    </div>
-                </div>
-            
+</div>
 
-            <div class="article-content markdown-body">
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">第1章 预备知识</h1>
+            
+            
+              <div class="markdown-body">
+                
                 <h1 id="第1章-预备知识">第1章 预备知识</h1>
 <h2 id="机器语言与汇编语言">1.1 机器语言与汇编语言</h2>
 <h3 id="机器语言">1.1.1 机器语言</h3>
@@ -261,14 +296,9 @@
 <p><strong>指令助记符、语句标号、数据变量、伪指令</strong>及它们的使用规则构成了整个汇编语言的内容。</p>
 <h2 id="intel系列机">1.2 Intel系列机</h2>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903152705420.png"
-                     
-alt="image-20220903152705420" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903152705420.png" srcset="/img/loading.gif" lazyload
+alt="image-20220903152705420" />
 <figcaption aria-hidden="true">image-20220903152705420</figcaption>
 </figure>
 <h3 id="intel-80x86-微处理器简介">1.2.1 Intel 80X86 微处理器简介</h3>
@@ -292,14 +322,9 @@ alt="image-20220903152705420"
 <h5
 id="数据寄存器组eaxebxecxedx">（1）数据寄存器组(EAX、EBX、ECX、EDX)</h5>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903154542135.png"
-                     
-alt="image-20220903154542135" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903154542135.png" srcset="/img/loading.gif" lazyload
+alt="image-20220903154542135" />
 <figcaption aria-hidden="true">image-20220903154542135</figcaption>
 </figure>
 <p>EAX(Accumulator)：暂存</p>
@@ -337,12 +362,7 @@ id="指示器编制寄存器组esiediespebp">(2)指示器编制寄存器组(ESI�
 <p>ＳＳ———堆栈段寄存器；</p>
 <p>ＤＳ———数据段寄存器；</p>
 <p>ＥＳ、ＦＳ、ＧＳ———附加数据段寄存器。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903204235387.png"
-                      alt="image-20220903204235387" style="zoom:33%;" 
-                ></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903204235387.png" srcset="/img/loading.gif" lazyload alt="image-20220903204235387" style="zoom:33%;" /></p>
 <p>实方式下，段的大小最大只能为64KB，取数据或指令的物理地址<strong>直接通过段寄存器的内容和EＡ生成</strong></p>
 <p>保护方式下，段大小可达4GB，这时的段寄存器内容称为<strong>选择符</strong>，通过该选择符找到描述符表，取出描述符后才能确定所需访问的段和存储单元</p>
 <ul>
@@ -387,32 +407,17 @@ id="区分不同字节存储单元"><strong>区分不同字节存储单元</stro
 <li><strong>栈指针</strong>：用来指示栈元素进栈和出栈时偏移地址的变化</li>
 <li><strong>栈顶</strong>：指针所指示的最后存入数据的单元</li>
 </ul>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903204213353.png"
-                      alt="image-20220903204213353" style="zoom:33%;" 
-                ></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903204213353.png" srcset="/img/loading.gif" lazyload alt="image-20220903204213353" style="zoom:33%;" /></p>
 <h4 id="进栈指令push">1.进栈指令PUSH</h4>
 <p>语句格式：PUSH OPS</p>
 <p>功能：将立即数或寄存器、段寄存、存储器中的一个字/双字数据压入堆栈中</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PUSH 04F8H</span><br><span class="line">执行前:(SP)=1000H</span><br><span class="line">执行：(SP)-2 -&gt;SP</span><br><span class="line">			04F8H-&gt;[SP]</span><br></pre></td></tr></table></figure></div>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903205005287.png"
-                      alt="image-20220903205005287" style="zoom:33%;" 
-                ></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">PUSH 04F8H<br>执行前:(SP)=1000H<br>执行：(SP)-2 -&gt;SP<br>			04F8H-&gt;[SP]<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903205005287.png" srcset="/img/loading.gif" lazyload alt="image-20220903205005287" style="zoom:33%;" /></p>
 <h4 id="出栈指令pop">2.出栈指令POP</h4>
 <p>语句格式：POP OPD</p>
 <p>功能：将栈顶元素弹出送至某一寄存器、段寄存器或存储器中。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903205642816.png"
-                      alt="image-20220903205642816" style="zoom: 33%;" 
-                ></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">POP BX</span><br><span class="line">执行前:POP BX</span><br><span class="line">执行:([SP])-&gt;BX</span><br><span class="line">			(SP)+1-&gt;SP</span><br><span class="line">执行后:(BX)=04F8H;(SP)=1000H</span><br></pre></td></tr></table></figure></div>
+<p><img src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220903205642816.png" srcset="/img/loading.gif" lazyload alt="image-20220903205642816" style="zoom: 33%;" /></p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">POP</span> <span class="hljs-built_in">BX</span><br>执行前:<span class="hljs-keyword">POP</span> <span class="hljs-built_in">BX</span><br>执行:([<span class="hljs-built_in">SP</span>])-&gt;<span class="hljs-built_in">BX</span><br>			(<span class="hljs-built_in">SP</span>)+<span class="hljs-number">1</span>-&gt;<span class="hljs-built_in">SP</span><br>执行后:(<span class="hljs-built_in">BX</span>)=<span class="hljs-number">04F8H</span><span class="hljs-comment">;(SP)=1000H</span><br></code></pre></td></tr></table></figure>
 <p>除了PUSH和POP指令外，如果其他指令要访问堆栈，也可以通过基址寄存器BP进行</p>
 <p><strong>注意</strong>:</p>
 <ol type="1">
@@ -431,12 +436,7 @@ class="math inline">\(2^{20}B\)</span>，主内存容量为1MB，物理地址编
 <p>此时CPU与存储器交换信息必须要<strong>20位的物理地址</strong>，但是8086内部为<strong>16位结构</strong>，寄存器也是16位的。</p>
 <p>16位寄存器进行地址运算，表示16位地址，<strong>操作数范围最大为64KB</strong>。</p>
 <h4 id="主存分段使用方案">主存分段使用方案：</h4>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220904155556771.png"
-                      alt="image-20220904155556771" style="zoom:33%;" 
-                ></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Wishforpeace/Notes/picture/image-20220904155556771.png" srcset="/img/loading.gif" lazyload alt="image-20220904155556771" style="zoom:33%;" /></p>
 <p>将1MB的存储器<strong>按64KB分段</strong>，设置4个段寄存器CS、DS、SS、ES，保存当前可使用段的段首址。</p>
 <p>段首址从刚好被<strong>16整除</strong>的地址开始，<strong>低四位均为0</strong>，忽略这些0，刚好16位可以存入段寄存器之中，然后操作时，内容左移4位，补上4个0，再加上某待访问存储单元的偏移地址，获得20位物理地址。</p>
 <p>存储单元的地址由两部分组成：<strong>段首地址：偏移地址</strong>，被称为<strong>二维的逻辑地址</strong></p>
@@ -477,14 +477,9 @@ class="math inline">\(2^{20}B\)</span>，主内存容量为1MB，物理地址编
 <p><strong>多任务机制</strong>：对虚拟存储空间的任务进入主存进行合理调度和分配，实施执行环境的<strong>隔离和保护</strong>。</p>
 <h5 id="特权级">(1) 特权级</h5>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220904210520629.png"
-                     
-alt="image-20220904210520629" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220904210520629.png" srcset="/img/loading.gif" lazyload
+alt="image-20220904210520629" />
 <figcaption aria-hidden="true">image-20220904210520629</figcaption>
 </figure>
 <h5 id="描述符">(2) 描述符</h5>
@@ -497,14 +492,9 @@ alt="image-20220904210520629"
 </ul>
 <h6 id="描述符通用结构">描述符通用结构</h6>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220904211612369.png"
-                     
-alt="image-20220904211612369" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220904211612369.png" srcset="/img/loading.gif" lazyload
+alt="image-20220904211612369" />
 <figcaption aria-hidden="true">image-20220904211612369</figcaption>
 </figure>
 <ul>
@@ -522,14 +512,9 @@ alt="image-20220904211612369"
 <p>在两种不同类型的段中， 另两位（第 １０ ～９
 位）所描述的内容是不同的</p>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220904212532573.png"
-                     
-alt="image-20220904212532573" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220904212532573.png" srcset="/img/loading.gif" lazyload
+alt="image-20220904212532573" />
 <figcaption aria-hidden="true">image-20220904212532573</figcaption>
 </figure></li>
 <li><p><strong>A</strong>：已访问位</p></li>
@@ -552,12 +537,7 @@ alt="image-20220904212532573"
 <h5 id="段选择符和描述符寄存器">(4)段选择符和描述符寄存器</h5>
 <p>保护方式下，段寄存器不保存段的开始地址，从描述符表中选择相应段的描述符的方式。</p>
 <h6 id="段选择符">段选择符</h6>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220904213647690.png"
-                      alt="image-20220904213647690" style="zoom:33%;" 
-                ></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220904213647690.png" srcset="/img/loading.gif" lazyload alt="image-20220904213647690" style="zoom:33%;" /></p>
 <h5 id="保护方式下物理地址的形成-1">(5)保护方式下物理地址的形成</h5>
 <ol type="1">
 <li>根据段寄存器中的描述符索引值、TI及RPL值，从描述符表中选出描述符，然后判断是否有溢出，进行特权级、使用合法性及各种相关属性检查，合格之后送入对应描述符高速缓冲寄存器。</li>
@@ -565,14 +545,9 @@ alt="image-20220904212532573"
 <li>不分页，则得到物理地址；分页的话，经过分页部件映射，将线性地址转换为物理地址。</li>
 </ol>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220904214102185.png"
-                     
-alt="image-20220904214102185" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220904214102185.png" srcset="/img/loading.gif" lazyload
+alt="image-20220904214102185" />
 <figcaption aria-hidden="true">image-20220904214102185</figcaption>
 </figure>
 <h2 id="数据在计算机内的表示形式">1.4数据在计算机内的表示形式</h2>
@@ -598,38 +573,23 @@ alt="image-20220904214102185"
 </ul>
 <p>有符号数一律采用二进制补码</p>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905162139363.png"
-                     
-alt="image-20220905162139363" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905162139363.png" srcset="/img/loading.gif" lazyload
+alt="image-20220905162139363" />
 <figcaption aria-hidden="true">image-20220905162139363</figcaption>
 </figure>
 <p>计算机在进行<strong>算术逻辑运算时</strong>，
 总是把参与运算的、用补码表示的操作数作为无符号数处理， 这时，
 数的表示范围则与前面讨论的完全不同。</p>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905162310714.png"
-                     
-alt="image-20220905162310714" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905162310714.png" srcset="/img/loading.gif" lazyload
+alt="image-20220905162310714" />
 <figcaption aria-hidden="true">image-20220905162310714</figcaption>
 </figure>
 <h3 id="bcd码">1.4.2 BCD码</h3>
 <p>利用4位二进制表示十进制数</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905162515343.png"
-                      alt="image-20220905162515343" style="zoom: 50%;" 
-                ></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905162515343.png" srcset="/img/loading.gif" lazyload alt="image-20220905162515343" style="zoom: 50%;" /></p>
 <p>BCD码：</p>
 <ul>
 <li><p>未压缩的BCD码</p>
@@ -640,12 +600,7 @@ alt="image-20220905162310714"
 <ul>
 <li>一个字节存放两个十进制位数</li>
 </ul>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905162706328.png"
-                      alt="image-20220905162706328" style="zoom:50%;" 
-                ></p></li>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905162706328.png" srcset="/img/loading.gif" lazyload alt="image-20220905162706328" style="zoom:50%;" /></p></li>
 </ul>
 <h3 id="字符数据在机内的表示形式">1.4.3 字符数据在机内的表示形式</h3>
 <p><span class="math inline">\(ASCII\)</span>码标准</p>
@@ -656,14 +611,9 @@ alt="image-20220905162310714"
 <p>32位向下兼容</p>
 <h3 id="标志位">1.5.1 标志位</h3>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905170358493.png"
-                     
-alt="image-20220905170358493" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20220905170358493.png" srcset="/img/loading.gif" lazyload
+alt="image-20220905170358493" />
 <figcaption aria-hidden="true">image-20220905170358493</figcaption>
 </figure>
 <p>常用标志位：</p>
@@ -721,329 +671,333 @@ class="math inline">\((EFALGS){7~0} \rightarrow AH\)</span></p>
 EFLAGS\)</span></p>
 <p>说明：该指令不影响标志位RF、VM、IOPL、VIF、VIP和未定义位。</p>
 
-            </div>
-
-            
-                <div class="post-copyright-info">
-                    <div class="article-copyright-info-container">
-    <ul>
-        <li>Post title：第1章 预备知识</li>
-        <li>Post author：The Redefine Team</li>
-        <li>Create time：2022-09-03 15:12:49</li>
-        <li>
-            Post link：https://redefine.ohevan.com/2022/09/03/第1章-预备知识/
-        </li>
-        <li>
-            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
-        </li>
-    </ul>
-</div>
-
-                </div>
-            
-
-            
-
-            
-
-            
-                <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2022/09/12/%E7%AC%AC2%E7%AB%A0-%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                    <i class="fa-solid fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">第2章 寻址方式</span>
-                                    <span class="post-nav-item">Prev posts</span>
-                                </span>
-                            </a>
-                        </div>
-                    
-                    
-                        <div class="article-next">
-                            <a class="next"
-                            rel="next"
-                            href="/2022/08/08/go%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0linxu/"
-                            >
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">go项目部署到linxu</span>
-                                    <span class="post-nav-item">Next posts</span>
-                                </span>
-                                <span class="right arrow-icon flex-center">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    
-                </div>
-            
-
-
-            
-        </div>
-
-        
-            <div class="toc-content-container">
-                <div class="post-toc-wrap">
-    <div class="post-toc">
-        <div class="toc-title">On this page</div>
-        <div class="page-title">第1章 预备知识</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC1%E7%AB%A0-%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="nav-text">第1章 预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E8%AF%AD%E8%A8%80%E4%B8%8E%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="nav-text">1.1 机器语言与汇编语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E8%AF%AD%E8%A8%80"><span class="nav-text">1.1.1 机器语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="nav-text">1.1.2 汇编语言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intel%E7%B3%BB%E5%88%97%E6%9C%BA"><span class="nav-text">1.2 Intel系列机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#intel-80x86-%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8%E7%AE%80%E4%BB%8B"><span class="nav-text">1.2.1 Intel 80X86 微处理器简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#intel-80x86%E5%BE%AE%E5%A4%84%E7%90%86%E7%BB%93%E6%9E%84"><span class="nav-text">1.2.2 Intel 80X86微处理结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BA%BF%E6%8E%A5%E5%8F%A3%E9%83%A8%E4%BB%B6"><span class="nav-text">1.总线接口部件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E9%83%A8%E4%BB%B6"><span class="nav-text">2.执行部件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84eaxebxecxedx"><span class="nav-text">（1）数据寄存器组(EAX、EBX、ECX、EDX)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E7%A4%BA%E5%99%A8%E7%BC%96%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84esiediespebp"><span class="nav-text">(2)指示器编制寄存器组(ESI、EDI、ESP、EBP)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E9%A2%84%E5%8F%96%E9%83%A8%E4%BB%B6%E5%92%8C%E6%8C%87%E4%BB%A4%E8%AF%91%E7%A0%81%E9%83%A8%E4%BB%B6"><span class="nav-text">3.指令预取部件和指令译码部件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%AE%B5%E9%83%A8%E4%BB%B6%E5%88%86%E9%A1%B5%E9%83%A8%E4%BB%B6"><span class="nav-text">4.分段部件、分页部件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x86%E7%9A%843%E7%A7%8D%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F"><span class="nav-text">1.2.3 80X86的3种工作方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E5%9C%B0%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-text">1.实地址方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4%E6%96%B9%E5%BC%8F"><span class="nav-text">2.保护方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4%E6%96%B9%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%99%9A%E6%8B%9F8086%E6%96%B9%E5%BC%8Fv86%E6%96%B9%E5%BC%8F"><span class="nav-text">3.保护方式下的虚拟8086方式（V86方式）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E5%AD%98%E5%82%A8%E5%99%A8%E5%92%8C%E7%89%A9%E5%9C%B0%E5%9D%80%E7%9A%84%E5%BD%A2%E6%88%90"><span class="nav-text">1.3 主存储器和物地址的形成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E5%AD%98%E5%82%A8%E5%99%A8"><span class="nav-text">1.3.1主存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BA%E5%88%86%E4%B8%8D%E5%90%8C%E5%AD%97%E8%8A%82%E5%AD%98%E5%82%A8%E5%8D%95%E5%85%83"><span class="nav-text">区分不同字节存储单元：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80pa"><span class="nav-text">物理地址(PA):</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E6%A0%88"><span class="nav-text">1.3.2 堆栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E6%A0%88%E6%8C%87%E4%BB%A4push"><span class="nav-text">1.进栈指令PUSH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BA%E6%A0%88%E6%8C%87%E4%BB%A4pop"><span class="nav-text">2.出栈指令POP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%868%E4%B8%AA%E5%AF%84%E5%AD%98%E5%99%A8%E5%86%85%E5%AE%B9%E9%A1%BA%E5%BA%8F%E5%85%A5%E6%A0%88%E6%8C%87%E4%BB%A4"><span class="nav-text">3.将8个寄存器内容顺序入栈指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B0%868%E4%B8%AA16%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8%E5%85%A5%E6%A0%88"><span class="nav-text">(1)将8个16位寄存器入栈</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E5%BD%A2%E6%88%90"><span class="nav-text">1.3.3 物理地址的形成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E5%AD%98%E5%88%86%E6%AE%B5%E4%BD%BF%E7%94%A8%E6%96%B9%E6%A1%88"><span class="nav-text">主存分段使用方案：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%96%B9%E5%BC%8F%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E5%BD%A2%E6%88%90"><span class="nav-text">1. 实方式物理地址的形成</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-text">说明：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4%E6%96%B9%E5%BC%8F%E4%B8%8B%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E5%BD%A2%E6%88%90"><span class="nav-text">2.保护方式下物理地址的形成</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%B9%E6%9D%83%E7%BA%A7"><span class="nav-text">(1) 特权级</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-text">(2) 描述符</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E7%AC%A6%E9%80%9A%E7%94%A8%E7%BB%93%E6%9E%84"><span class="nav-text">描述符通用结构</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E7%AC%A6%E8%A1%A8"><span class="nav-text">(3)描述符表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AE%B5%E9%80%89%E6%8B%A9%E7%AC%A6%E5%92%8C%E6%8F%8F%E8%BF%B0%E7%AC%A6%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-text">(4)段选择符和描述符寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%AE%B5%E9%80%89%E6%8B%A9%E7%AC%A6"><span class="nav-text">段选择符</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4%E6%96%B9%E5%BC%8F%E4%B8%8B%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E5%BD%A2%E6%88%90-1"><span class="nav-text">(5)保护方式下物理地址的形成</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%86%85%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F"><span class="nav-text">1.4数据在计算机内的表示形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%86%85%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F"><span class="nav-text">1.4.1
-数值数据在计算机内的表示形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bcd%E7%A0%81"><span class="nav-text">1.4.2 BCD码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E6%95%B0%E6%8D%AE%E5%9C%A8%E6%9C%BA%E5%86%85%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F"><span class="nav-text">1.4.3 字符数据在机内的表示形式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-text">1.5 标志寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="nav-text">1.5.1 标志位</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="nav-text">1.条件标志位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="nav-text">2.控制标志位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8D%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E6%89%A9%E5%85%85%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="nav-text">3.32
-位标志寄存器扩充的系统标志位</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4"><span class="nav-text">1.5.2标志寄存器操作指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="nav-text">1.标志寄存器传送指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#lahf"><span class="nav-text">(1)LAHF</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sahf"><span class="nav-text">(2)SAHF</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8D%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E8%BF%9B%E6%A0%88%E6%8C%87%E4%BB%A4pushfd"><span class="nav-text">2.32位标志寄存器进栈指令PUSHFD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8D%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E5%87%BA%E6%A0%88%E6%8C%87%E4%BB%A4popfd"><span class="nav-text">3.32位标志寄存器出栈指令POPFD</span></a></li></ol></li></ol></li></ol></li></ol>
-
-    </div>
-</div>
-            </div>
-        
-    </div>
-</div>
-
-
                 
-
-            </div>
-
-
-
-        </div>
-
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info">
-            &copy;
+              </div>
             
-              <span>2022</span>
-              -
-            
-            2023&nbsp;&nbsp;<i class="fa-regular fa-computer-classic"></i>&nbsp;&nbsp;<a href="/">The Redefine Team</a>
-        </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
-                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
-                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
-                <br> 
-            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v1.2.0</a>
-        </div>
-        
-        
-        
-            <div id="start_time_div" style="display:none">
-                2022/8/17 11:45:14
-            </div>
+            <hr/>
             <div>
-                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="category-chain-item">汇编语言</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>第1章 预备知识</div>
+      <div>http://example.com/2022/09/03/第1章-预备知识/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 3, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/12/%E7%AC%AC2%E7%AB%A0-%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F/" title="第2章 寻址方式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第2章 寻址方式</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/08/go%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0linxu/" title="go项目部署到linxu">
+                        <span class="hidden-mobile">go项目部署到linxu</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
-        
-        
-        
-            <script async data-pjax>
-                try {
-                    function odometer_init() {
-                    const elements = document.querySelectorAll('.odometer');
-                    elements.forEach(el => {
-                        new Odometer({
-                            el,
-                            format: '( ddd).dd',
-                            duration: 200
-                        });
-                    });
-                    }
-                    odometer_init();
-                } catch (error) {}
-            </script>
-        
-        
-        
-    </div>  
-</footer>
+
+            
+          </article>
         </div>
+      </div>
     </div>
 
-    
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
-            <li class="right-bottom-tools page-aside-toggle">
-                <i class="fa-regular fa-outdent"></i>
-            </li>
-        
-
-        <!-- go comment -->
-        
-    </ul>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
-        </div>
-    
 
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="unfolded-tools-list">
-        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
-            <i class="fa-regular fa-magnifying-glass-plus"></i>
-        </li>
 
-        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
-            <i class="fa-regular fa-magnifying-glass-minus"></i>
-        </li>
+  </aside>
 
-        <li class="right-bottom-tools tool-expand-width flex-center">
-            <i class="fa-regular fa-expand"></i>
-        </li>
-
-        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
-            <i class="fa-regular fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-
-        
-            <li class="right-bottom-tools tool-scroll-to-top flex-center">
-                <i class="fa-regular fa-arrow-up"></i>
-            </li>
-        
-
-        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
-            <i class="fa-regular fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="folded-tools-list">
-        <li class="right-bottom-tools tool-toggle-show flex-center">
-            <i class="fa-regular fa-cog fa-spin"></i>
-        </li>
-        
-    </ul>
-</div>
 
     </div>
-
-    <div class="image-viewer-container">
-    <img src="">
+  </div>
 </div>
 
 
-    
-
-
-</main>
 
 
 
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/main.js"></script>
-
-<script src="/js/layouts/menu-shrink.js"></script>
-
-<script src="/js/tools/go-top-bottom.js"></script>
-
-<script src="/js/tools/dark-light-toggle.js"></script>
+  
 
 
 
-
-
-    
-<script src="/js/tools/code-block.js"></script>
+  
 
 
 
+  
 
-    
-<script src="/js/layouts/lazyload.js"></script>
+
+
+  
+
+
+
+  
+
+
+
 
 
 
 
     
-<script src="/js/tools/runtime.js"></script>
 
     
-<script src="/js/layouts/odometer.min.js"></script>
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
     
-<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
-
-
-
-
-
-<div class="post-scripts pjax">
-    
-        
-<script src="/js/tools/toc-toggle.js"></script>
-
-<script src="/js/libs/anime.min.js"></script>
-
-<script src="/js/layouts/toc.js"></script>
-
-<script src="/js/plugins/tabs.js"></script>
-
-    
-    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
+    
 
     
-<script src="/js/libs/pjax.min.js"></script>
+  </main>
 
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
 <script>
-    window.addEventListener('DOMContentLoaded', () => {
-        window.pjax = new Pjax({
-            selectors: [
-                'head title',
-                '.page-container',
-                '.pjax'
-            ],
-            history: true,
-            debug: false,
-            cacheBust: false,
-            timeout: 0,
-            analytics: false,
-            currentUrlFullReload: false,
-            scrollRestoration: false,
-            // scrollTo: true,
-        });
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
 
-        document.addEventListener('pjax:send', () => {
-            REDEFINE.utils.pjaxProgressBarStart();
-        });
-
-        document.addEventListener('pjax:complete', () => {
-            REDEFINE.utils.pjaxProgressBarEnd();
-            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
-            REDEFINE.refresh();
-        });
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
     });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
 </script>
 
 
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
 
 
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>

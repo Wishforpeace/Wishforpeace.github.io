@@ -1,297 +1,315 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-default-color-scheme=auto>
+
+
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="Hexo Theme Redefine">
-    <meta name="description" content="Hexo Theme Redefine">
-    <meta name="author" content="The Redefine Team">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-redefine.png">
-    
-    <!--- Seo Part-->
-    
-    <link rel="canonical" href="http://example.com/2023/02/19/08-聚合函数-高效进行分组统计/"/>
-    <meta name="robots" content="index,follow">
-    <meta name="googlebot" content="index,follow">
-    <meta name="revisit-after" content="1 days">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="08-聚合函数:高效进行分组统计">
-    <meta property="og:description" content="Hexo Theme Redefine">
-    <meta property="og:url" content="http://example.com2023/02/19/08-聚合函数-高效进行分组统计/">
-    
-    <meta property="og:site_name" content="Theme Redefine">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="08-聚合函数:高效进行分组统计">
-    <meta name="twitter:description" content="Hexo Theme Redefine">
-    <meta name="twitter:image" content="/images/redefine-logo.svg">
-    <!--- Icon Part-->
-    <link rel="icon" type="image/png" href="/images/redefine-logo.svg" sizes="192x192">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-logo.svg">
-    <meta name="theme-color" content="#005080">
-    <link rel="shortcut icon" href="/images/redefine-logo.svg">
-    
-    <title>
-        
-            08-聚合函数:高效进行分组统计 -
-        
-        Theme Redefine
-    </title>
-    
-<link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="08-聚合函数:高效进行分组统计 MySQL中的五种常用函数SUM()、AVG()、MAX()、MIN()、COUNT() 超市经营者提出，他们需要统计某个门店，每天、每个单品的销售情况，包括销售数量和销售金额等。 三个数据表 销售明细表(demo.transactiondetails)   image-20230221135311992  销售单头(demo.transactionhead)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08-聚合函数:高效进行分组统计">
+<meta property="og:url" content="http://example.com/2023/02/19/08-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0-%E9%AB%98%E6%95%88%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="08-聚合函数:高效进行分组统计 MySQL中的五种常用函数SUM()、AVG()、MAX()、MIN()、COUNT() 超市经营者提出，他们需要统计某个门店，每天、每个单品的销售情况，包括销售数量和销售金额等。 三个数据表 销售明细表(demo.transactiondetails)   image-20230221135311992  销售单头(demo.transactionhead)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152449705.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152525599.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152726725.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152755137.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309141610407.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309141650891.png">
+<meta property="article:published_time" content="2023-02-19T00:52:53.000Z">
+<meta property="article:modified_time" content="2023-03-09T07:07:49.486Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152449705.png">
+  
+  
+  
+  <title>08-聚合函数:高效进行分组统计 - WYX同学的Blog</title>
 
-    
-<link rel="stylesheet" href="/assets/fonts.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
-    
-    
-    
-    <script id="hexo-configurations">
-    let REDEFINE = window.REDEFINE || {};
-    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
-    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","og_image":{"enable":false,"image_url":null},"article_img_align":"center","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"Theme Redefine","custom_font":{"enable":false,"font_family":null,"font_url":null}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":true},"code_block":{"copy":true,"style":"mac","custom_font":{"enable":false,"font_family":null,"font_url":null}},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"1.2.0","friend_links":{"columns":2},"home_article":{"date_format":"auto","category":{"enable":true,"limit":3},"tag":{"enable":true,"limit":3}},"plugins":{"aplayer":{"enable":false,"audio":[{"name":null,"artist":null,"url":null,"cover":null},{"name":null,"artist":null,"url":null,"cover":null}]}}};
-    REDEFINE.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
-    
-    
-<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
 
-    
-<link rel="stylesheet" href="/fontawesome/brands.min.css">
 
-    
-<link rel="stylesheet" href="/fontawesome/solid.min.css">
-
-    
-<link rel="stylesheet" href="/fontawesome/regular.min.css">
-
-    
-    
-    
-    
+  
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+  
 
-    
-        <span class="pjax-progress-bar"></span>
-        <span class="pjax-progress-icon">
-            <i class="fa-solid fa-circle-notch fa-spin"></i>
-        </span>
-    
-</div>
-
-
-<main class="page-container">
-
+  <header>
     
 
-    <div class="page-main-content">
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
 
-        <div class="page-main-content-top">
-            <header class="menu-wrapper">
-    
-    <div class="menu-content">
-        <div class="left">
-            
-            <a class="logo-title" href="/">
-                
-                Theme Redefine
-                
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
             </a>
-        </div>
-
-        <div class="right">
-            <!-- PC -->
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        
-                            <li class="menu-item">
-                                <!-- Menu -->
-                                <a class="" 
-                                    href="/"  >
-                                    
-                                        
-                                            <i class="fa-regular fa-house"></i>
-                                        
-                                        HOME
-                                    
-                                </a>
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                    
-                </ul>
-            </div>
-            <!-- Mobile -->
-            <div class="mobile">
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
+  </div>
+</nav>
 
-    <!-- Mobile drawer -->
-    <div class="menu-drawer">
-        <ul class="drawer-menu-list">
-            
-                
-                    <li class="drawer-menu-item flex-center">
-                        <a class="" 
-                        href="/"  >
-                             
-                                
-                                    <i class="fa-regular fa-house"></i>
-                                
-                                HOME
-                            
-                        </a>
-                    </li>
-                    <!-- Submenu -->
-                    
-            
+  
 
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
-
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="08-聚合函数:高效进行分组统计"></span>
+          
         </div>
 
-        <div class="page-main-content-middle">
-
-            <div class="main-content">
-
-                
-                    <div class="fade-in-down-animation">
-    <div class="post-page-container">
-        <div class="article-content-container">
-
-            
-            
-                <div class="article-title">
-                    <h1 class="article-title-regular">08-聚合函数:高效进行分组统计</h1>
-                </div>
-            
-                
-            
-
-            
-                <div class="article-header">
-                    <div class="avatar">
-                        <img src="/images/redefine-avatar.svg">
-                    </div>
-                    <div class="info">
-                        <div class="author">
-                            <span class="name">The Redefine Team</span>
-                            
-                                <span class="author-label">lol</span>
-                            
-                        </div>
-                        <div class="meta-info">
-                            <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="pc">2023-02-19 08:52:53</span>
-        <span class="mobile">2023-02-19 08:52</span>
-        <span class="hover-info">Created</span>
-    </span>
+        
+          
+  <div class="mt-3">
     
-        <span class="article-date article-meta-item">
-            <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="pc">2023-03-09 15:07:49</span>
-            <span class="mobile">2023-03-09 15:07</span>
-            <span class="hover-info">Updated</span>
-        </span>
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-19 08:52" pubdate>
+          February 19, 2023 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k words
+        
+      </span>
     
 
     
-        <span class="article-categories article-meta-item">
-            <i class="fa-regular fa-folders"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/categories/MySQL/">MySQL</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 mins
+        
+      </span>
     
 
     
     
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
 </div>
 
-                        </div>
-                    </div>
-                </div>
-            
+</div>
 
-            <div class="article-content markdown-body">
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">08-聚合函数:高效进行分组统计</h1>
+            
+            
+              <div class="markdown-body">
+                
                 <h1 id="聚合函数高效进行分组统计">08-聚合函数:高效进行分组统计</h1>
 <p>MySQL中的五种常用函数<code>SUM()</code>、<code>AVG()</code>、<code>MAX()</code>、<code>MIN()</code>、<code>COUNT()</code></p>
 <p>超市经营者提出，他们需要统计某个门店，每天、每个单品的销售情况，包括销售数量和销售金额等。</p>
 <p><strong>三个数据表</strong></p>
 <p><strong>销售明细表(demo.transactiondetails)</strong></p>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230221135311992.png"
-                     
-alt="image-20230221135311992" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230221135311992.png" srcset="/img/loading.gif" lazyload
+alt="image-20230221135311992" />
 <figcaption aria-hidden="true">image-20230221135311992</figcaption>
 </figure>
 <p><strong>销售单头(demo.transactionhead)</strong></p>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302151635149.png"
-                     
-alt="image-20230302151635149" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302151635149.png" srcset="/img/loading.gif" lazyload
+alt="image-20230302151635149" />
 <figcaption aria-hidden="true">image-20230302151635149</figcaption>
 </figure>
 <p><strong>商品信息表（demo.goodsmaster）</strong></p>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302151656986.png"
-                     
-alt="image-20230302151656986" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302151656986.png" srcset="/img/loading.gif" lazyload
+alt="image-20230302151656986" />
 <figcaption aria-hidden="true">image-20230302151656986</figcaption>
 </figure>
 <h2 id="sum">SUM()</h2>
 <p>SUM()函数返回指定字段值的和</p>
 <p>查询用户某个门店，每天，每种商品的销售总计数据。</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	left(b.transdate,10),</span><br><span class="line">    c.goodsname,</span><br><span class="line">    sum(a.quantity),</span><br><span class="line">    sum(a.salesvalue)</span><br><span class="line">from</span><br><span class="line">	demo.transactiondetails a</span><br><span class="line">		join</span><br><span class="line">	demo.transactionhead b on (a.transactionid = b.transactionid)</span><br><span class="line">		join</span><br><span class="line">	demo.goodsmaster c on (a.itemnumber= c.itemnumber)</span><br><span class="line">group by left(b.transdate,10),c.goodsname</span><br><span class="line">order by left(b.transdate,10),c.goodsname;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>	left(b.transdate,10),<br>    c.goodsname,<br>    sum(a.quantity),<br>    sum(a.salesvalue)<br>from<br>	demo.transactiondetails a<br>		join<br>	demo.transactionhead b on (a.transactionid = b.transactionid)<br>		join<br>	demo.goodsmaster c on (a.itemnumber= c.itemnumber)<br>group by left(b.transdate,10),c.goodsname<br>order by left(b.transdate,10),c.goodsname;<br></code></pre></td></tr></table></figure>
 <p>引入关键字<code>left</code>和<code>ORDER BY</code></p>
 <h3 id="leftstrn">LEFT(str,n)</h3>
 <p>返回字符串str<strong>最左边的n个字符</strong>，<code>left(a.transdate,10)</code>，表示返回交易时间字符串最左边的10个字符。在MySQL中，<code>DATETIME</code>的格式为：YYYYY-MM-DD，一共是10个字符。</p>
@@ -299,116 +317,61 @@ alt="image-20230302151656986"
 <p>按照指定字段排序</p>
 <h4 id="步骤">步骤：</h4>
 <p>第一步：完成三个表的连接</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152449705.png"
-                      alt="image-20230302152449705" style="zoom:50%;" 
-                ></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152449705.png" srcset="/img/loading.gif" lazyload alt="image-20230302152449705" style="zoom:50%;" /></p>
 <p>第二步：对结果集<strong>按照交易时间和商品名称</strong>进行分组，我们可以分成下面
 4 组</p>
 <p>第一组：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152525599.png"
-                      alt="image-20230302152525599" style="zoom:50%;" 
-                ></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152525599.png" srcset="/img/loading.gif" lazyload alt="image-20230302152525599" style="zoom:50%;" /></p>
 <p>第二组：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152726725.png"
-                      alt="image-20230302152726725" style="zoom:50%;" 
-                ></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152726725.png" srcset="/img/loading.gif" lazyload alt="image-20230302152726725" style="zoom:50%;" /></p>
 <p>第三组：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152755137.png"
-                      alt="image-20230302152755137" style="zoom:50%;" 
-                ></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152755137.png" srcset="/img/loading.gif" lazyload alt="image-20230302152755137" style="zoom:50%;" /></p>
 <p>第四组：</p>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152811191.png"
-                     
-alt="image-20230302152811191" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230302152811191.png" srcset="/img/loading.gif" lazyload
+alt="image-20230302152811191" />
 <figcaption aria-hidden="true">image-20230302152811191</figcaption>
 </figure>
 <p>第三步：对各组的销售数量和销售金额进行统计，并且按照交易日期和商品名称排序。</p>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219102927119.png"
-                     
-alt="image-20230219102927119" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219102927119.png" srcset="/img/loading.gif" lazyload
+alt="image-20230219102927119" />
 <figcaption aria-hidden="true">image-20230219102927119</figcaption>
 </figure>
 <p>如果用户要知道全部商品销售的总计数量和总计金额，我们可以把数据集的整体看做一张表，进行计算。</p>
 <p>这样就不需要从关联表中获取数据，也不需要连接。</p>
-<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> </span><br><span class="line">	<span class="built_in">sum</span>(quantity),</span><br><span class="line">	<span class="built_in">sum</span>(salesvalue)</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">demo.transactiondetails;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <br>	<span class="hljs-built_in">sum</span>(quantity),<br>	<span class="hljs-built_in">sum</span>(salesvalue)<br><span class="hljs-keyword">from</span><br>demo.transactiondetails;<br></code></pre></td></tr></table></figure>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309140757400.png"
-                     
-alt="image-20230309140757400" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309140757400.png" srcset="/img/loading.gif" lazyload
+alt="image-20230309140757400" />
 <figcaption aria-hidden="true">image-20230309140757400</figcaption>
 </figure>
 <h2 id="avgmaxmin">AVG()、MAX()、MIN()</h2>
 <h3 id="avg">1.AVG()</h3>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">left(a.transdate,10),</span><br><span class="line">c.goodsname,</span><br><span class="line">avg(b.quantity),</span><br><span class="line">avg(b.salesvalue)</span><br><span class="line">from</span><br><span class="line">demo.transactionhead a</span><br><span class="line">join</span><br><span class="line">demo.transactiondetails b on (a.transactionid = b.transactionid)</span><br><span class="line">join</span><br><span class="line">demo.goodsmaster c on(b.itemnumber = c.itemnumber)</span><br><span class="line">group by left(a.transdate,10),c.goodsname</span><br><span class="line">order by left(a.transdate,10),c.goodsname;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>left(a.transdate,10),<br>c.goodsname,<br>avg(b.quantity),<br>avg(b.salesvalue)<br>from<br>demo.transactionhead a<br>join<br>demo.transactiondetails b on (a.transactionid = b.transactionid)<br>join<br>demo.goodsmaster c on(b.itemnumber = c.itemnumber)<br>group by left(a.transdate,10),c.goodsname<br>order by left(a.transdate,10),c.goodsname;<br></code></pre></td></tr></table></figure>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219105728594.png"
-                     
-alt="image-20230219105728594" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219105728594.png" srcset="/img/loading.gif" lazyload
+alt="image-20230219105728594" />
 <figcaption aria-hidden="true">image-20230219105728594</figcaption>
 </figure>
 <h3 id="maxmin">2.MAX()、MIN()</h3>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">left(a.transdate,10),</span><br><span class="line">MAX(b.quantity),</span><br><span class="line">MAX(b.salesvalue)</span><br><span class="line">from</span><br><span class="line">demo.transactionhead a</span><br><span class="line">join </span><br><span class="line">demo.transactiondetails b on(a.transactionid = b.transactionid)</span><br><span class="line">join</span><br><span class="line">demo.goodsmaster c on (b.itemnumber = c.itemnumber)</span><br><span class="line">group by left(a.transdate,10)</span><br><span class="line">order by left(a.transdate,10);</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>left(a.transdate,10),<br>MAX(b.quantity),<br>MAX(b.salesvalue)<br>from<br>demo.transactionhead a<br>join <br>demo.transactiondetails b on(a.transactionid = b.transactionid)<br>join<br>demo.goodsmaster c on (b.itemnumber = c.itemnumber)<br>group by left(a.transdate,10)<br>order by left(a.transdate,10);<br></code></pre></td></tr></table></figure>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219110136113.png"
-                     
-alt="image-20230219110136113" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219110136113.png" srcset="/img/loading.gif" lazyload
+alt="image-20230219110136113" />
 <figcaption aria-hidden="true">image-20230219110136113</figcaption>
 </figure>
 <p><strong>注意</strong>：MAX(b.quantity)和MAX(b.salesvalue)算出的结果不一定是同一条记录的数据。</p>
 <p>实际上，MySQL是分开计算的。</p>
 <p>查询中用了3个相互关联的表：销售流水明细表、销售流水单头表、商品信息表，三张表连接完成后，MySQL进行了分组。</p>
-<p>第一组：<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309141610407.png"
-                      alt="image-20230309141610407" style="zoom:50%;" 
-                ></p>
+<p>第一组：<img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309141610407.png" srcset="/img/loading.gif" lazyload alt="image-20230309141610407" style="zoom:50%;" /></p>
 <p>第二组：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309141650891.png"
-                      alt="image-20230309141650891" style="zoom:50%;" 
-                ></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309141650891.png" srcset="/img/loading.gif" lazyload alt="image-20230309141650891" style="zoom:50%;" /></p>
 <p>第一组，最大数量在第2条记录中，是5，最大金额在第一条记录中，是178。</p>
 <p>第二主中，最大数量出现在第4条记录，是10，最大金额则出现在第1条记录中，是267。</p>
 <p>所以，MAX(字段)这个函数返回分组集中最大的那个值。如果查询MAX(字段1)和MAX(字段2)，他们是相互独立、分别计算的，<strong>千万不要认为结果在同一条记录上！！！！！</strong></p>
@@ -424,365 +387,356 @@ alt="image-20230219110136113"
 <li>COUNT(字段):统计有多少个不为空的字段值</li>
 </ul>
 <h3 id="count-1">1.COUNT(*)</h3>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * </span><br><span class="line">from demo.transactiondetails</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * <br>from demo.transactiondetails<br></code></pre></td></tr></table></figure>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309150331158.png"
-                     
-alt="image-20230309150331158" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309150331158.png" srcset="/img/loading.gif" lazyload
+alt="image-20230309150331158" />
 <figcaption aria-hidden="true">image-20230309150331158</figcaption>
 </figure>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select count(*)</span><br><span class="line">from demo.transactiondetails;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select count(*)<br>from demo.transactiondetails;<br></code></pre></td></tr></table></figure>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309150518069.png"
-                     
-alt="image-20230309150518069" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309150518069.png" srcset="/img/loading.gif" lazyload
+alt="image-20230309150518069" />
 <figcaption aria-hidden="true">image-20230309150518069</figcaption>
 </figure>
 <p>一页可以显示30个数据，一共6个数据，所以就只有1页。</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">left (a.transdate,10),c.goodsname,count(*)</span><br><span class="line">from</span><br><span class="line">demo.transactionhead a</span><br><span class="line">join</span><br><span class="line">demo.transactiondetails b on(a.transactionid = b.transactionid)</span><br><span class="line">join</span><br><span class="line">demo.goodsmaster c on (b.itemnumber = c.itemnumber)</span><br><span class="line">group by left(a.transdate,10),c.goodsname</span><br><span class="line">order by left(a.transdate,10),c.goodsname;</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>left (a.transdate,10),c.goodsname,count(*)<br>from<br>demo.transactionhead a<br>join<br>demo.transactiondetails b on(a.transactionid = b.transactionid)<br>join<br>demo.goodsmaster c on (b.itemnumber = c.itemnumber)<br>group by left(a.transdate,10),c.goodsname<br>order by left(a.transdate,10),c.goodsname;<br></code></pre></td></tr></table></figure>
 <figure>
-<img 
-
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219115456110.png"
-                     
-alt="image-20230219115456110" 
-                >
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219115456110.png" srcset="/img/loading.gif" lazyload
+alt="image-20230219115456110" />
 <figcaption aria-hidden="true">image-20230219115456110</figcaption>
 </figure>
 
-            </div>
-
-            
-                <div class="post-copyright-info">
-                    <div class="article-copyright-info-container">
-    <ul>
-        <li>Post title：08-聚合函数:高效进行分组统计</li>
-        <li>Post author：The Redefine Team</li>
-        <li>Create time：2023-02-19 08:52:53</li>
-        <li>
-            Post link：https://redefine.ohevan.com/2023/02/19/08-聚合函数-高效进行分组统计/
-        </li>
-        <li>
-            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
-        </li>
-    </ul>
-</div>
-
-                </div>
-            
-
-            
-
-            
-
-            
-                <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/02/24/Go%E5%B9%B6%E5%8F%91%E7%AE%80%E4%BB%8B/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                    <i class="fa-solid fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">Go并发简介</span>
-                                    <span class="post-nav-item">Prev posts</span>
-                                </span>
-                            </a>
-                        </div>
-                    
-                    
-                        <div class="article-next">
-                            <a class="next"
-                            rel="next"
-                            href="/2023/01/17/07-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%EF%BC%9Awhere%E5%92%8Chaving%E7%9A%84%E5%8C%BA%E5%88%86/"
-                            >
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">07-条件语句：where和having的区分</span>
-                                    <span class="post-nav-item">Next posts</span>
-                                </span>
-                                <span class="right arrow-icon flex-center">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    
-                </div>
-            
-
-
-            
-        </div>
-
-        
-            <div class="toc-content-container">
-                <div class="post-toc-wrap">
-    <div class="post-toc">
-        <div class="toc-title">On this page</div>
-        <div class="page-title">08-聚合函数:高效进行分组统计</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E9%AB%98%E6%95%88%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1"><span class="nav-text">08-聚合函数:高效进行分组统计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sum"><span class="nav-text">SUM()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#leftstrn"><span class="nav-text">LEFT(str,n)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#order-by"><span class="nav-text">ORDER BY</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-text">步骤：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#avgmaxmin"><span class="nav-text">AVG()、MAX()、MIN()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#avg"><span class="nav-text">1.AVG()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maxmin"><span class="nav-text">2.MAX()、MIN()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#count"><span class="nav-text">COUNT()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E7%AD%96%E7%95%A5"><span class="nav-text">分页策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count-1"><span class="nav-text">1.COUNT(*)</span></a></li></ol></li></ol></li></ol>
-
-    </div>
-</div>
-            </div>
-        
-    </div>
-</div>
-
-
                 
-
-            </div>
-
-
-
-        </div>
-
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info">
-            &copy;
+              </div>
             
-              <span>2022</span>
-              -
-            
-            2023&nbsp;&nbsp;<i class="fa-regular fa-computer-classic"></i>&nbsp;&nbsp;<a href="/">The Redefine Team</a>
-        </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
-                        VISITOR COUNT&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
-                        TOTAL PAGE VIEWS&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            <span class="powered-by-container">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a></span>
-                <br> 
-            <span class="theme-version-container">THEME&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v1.2.0</a>
-        </div>
-        
-        
-        
-            <div id="start_time_div" style="display:none">
-                2022/8/17 11:45:14
-            </div>
+            <hr/>
             <div>
-                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/MySQL/" class="category-chain-item">MySQL</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>08-聚合函数:高效进行分组统计</div>
+      <div>http://example.com/2023/02/19/08-聚合函数-高效进行分组统计/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 19, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/24/Go%E5%B9%B6%E5%8F%91%E7%AE%80%E4%BB%8B/" title="Go并发简介">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Go并发简介</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/17/07-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%EF%BC%9Awhere%E5%92%8Chaving%E7%9A%84%E5%8C%BA%E5%88%86/" title="07-条件语句：where和having的区分">
+                        <span class="hidden-mobile">07-条件语句：where和having的区分</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
-        
-        
-        
-            <script async data-pjax>
-                try {
-                    function odometer_init() {
-                    const elements = document.querySelectorAll('.odometer');
-                    elements.forEach(el => {
-                        new Odometer({
-                            el,
-                            format: '( ddd).dd',
-                            duration: 200
-                        });
-                    });
-                    }
-                    odometer_init();
-                } catch (error) {}
-            </script>
-        
-        
-        
-    </div>  
-</footer>
+
+            
+          </article>
         </div>
+      </div>
     </div>
 
-    
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
-            <li class="right-bottom-tools page-aside-toggle">
-                <i class="fa-regular fa-outdent"></i>
-            </li>
-        
-
-        <!-- go comment -->
-        
-    </ul>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
-        </div>
-    
 
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="unfolded-tools-list">
-        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
-            <i class="fa-regular fa-magnifying-glass-plus"></i>
-        </li>
 
-        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
-            <i class="fa-regular fa-magnifying-glass-minus"></i>
-        </li>
+  </aside>
 
-        <li class="right-bottom-tools tool-expand-width flex-center">
-            <i class="fa-regular fa-expand"></i>
-        </li>
-
-        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
-            <i class="fa-regular fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-
-        
-            <li class="right-bottom-tools tool-scroll-to-top flex-center">
-                <i class="fa-regular fa-arrow-up"></i>
-            </li>
-        
-
-        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
-            <i class="fa-regular fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="folded-tools-list">
-        <li class="right-bottom-tools tool-toggle-show flex-center">
-            <i class="fa-regular fa-cog fa-spin"></i>
-        </li>
-        
-    </ul>
-</div>
 
     </div>
-
-    <div class="image-viewer-container">
-    <img src="">
+  </div>
 </div>
 
 
-    
-
-
-</main>
 
 
 
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/main.js"></script>
-
-<script src="/js/layouts/menu-shrink.js"></script>
-
-<script src="/js/tools/go-top-bottom.js"></script>
-
-<script src="/js/tools/dark-light-toggle.js"></script>
+  
 
 
 
-
-
-    
-<script src="/js/tools/code-block.js"></script>
+  
 
 
 
+  
 
-    
-<script src="/js/layouts/lazyload.js"></script>
+
+
+  
+
+
+
+  
+
+
+
 
 
 
 
     
-<script src="/js/tools/runtime.js"></script>
 
     
-<script src="/js/layouts/odometer.min.js"></script>
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
     
-<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
-
-
-
-
-
-<div class="post-scripts pjax">
-    
-        
-<script src="/js/tools/toc-toggle.js"></script>
-
-<script src="/js/libs/anime.min.js"></script>
-
-<script src="/js/layouts/toc.js"></script>
-
-<script src="/js/plugins/tabs.js"></script>
-
-    
-    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
+    
 
     
-<script src="/js/libs/pjax.min.js"></script>
+  </main>
 
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
 <script>
-    window.addEventListener('DOMContentLoaded', () => {
-        window.pjax = new Pjax({
-            selectors: [
-                'head title',
-                '.page-container',
-                '.pjax'
-            ],
-            history: true,
-            debug: false,
-            cacheBust: false,
-            timeout: 0,
-            analytics: false,
-            currentUrlFullReload: false,
-            scrollRestoration: false,
-            // scrollTo: true,
-        });
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
 
-        document.addEventListener('pjax:send', () => {
-            REDEFINE.utils.pjaxProgressBarStart();
-        });
-
-        document.addEventListener('pjax:complete', () => {
-            REDEFINE.utils.pjaxProgressBarEnd();
-            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
-            REDEFINE.refresh();
-        });
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
     });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
 </script>
 
 
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
 
 
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>
