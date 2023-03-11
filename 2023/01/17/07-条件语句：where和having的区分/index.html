@@ -16,17 +16,41 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="07-条件语句：where和having的区分  where是直接对表中的字段进行限定，来筛选结果 having则需要跟分组关键字 group by一起使用，通过对分组字段和分组计算函数进行限定，来筛选结果  虽然都是进行查询限定，但是如果用错场景，就会出现各种查询问题。 一个实际查询需求 查询单臂销售金额超过50元的商品。 直接查询商品的信息表demo.goodsmaster 1select *">
+    <meta name="description" content="07-条件语句：where和having的区分 where是直接对表中的字段进行限定，来筛选结果 having则需要跟分组关键字 group by一起使用，通过对分组字段和分组计算函数进行限定，来筛选结果  虽然都是进行查询限定，但是如果用错场景，就会出现各种查询问题。 一个实际查询需求查询单臂销售金额超过50元的商品。 直接查询商品的信息表demo.goodsmaster 1select * f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="07-条件语句：where和having的区分">
 <meta property="og:url" content="http://example.com/2023/01/17/07-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%EF%BC%9Awhere%E5%92%8Chaving%E7%9A%84%E5%8C%BA%E5%88%86/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="07-条件语句：where和having的区分  where是直接对表中的字段进行限定，来筛选结果 having则需要跟分组关键字 group by一起使用，通过对分组字段和分组计算函数进行限定，来筛选结果  虽然都是进行查询限定，但是如果用错场景，就会出现各种查询问题。 一个实际查询需求 查询单臂销售金额超过50元的商品。 直接查询商品的信息表demo.goodsmaster 1select *">
+<meta property="og:description" content="07-条件语句：where和having的区分 where是直接对表中的字段进行限定，来筛选结果 having则需要跟分组关键字 group by一起使用，通过对分组字段和分组计算函数进行限定，来筛选结果  虽然都是进行查询限定，但是如果用错场景，就会出现各种查询问题。 一个实际查询需求查询单臂销售金额超过50元的商品。 直接查询商品的信息表demo.goodsmaster 1select * f">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117213923810.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117214659364.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117214841317.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117215231046.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118103818366.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118103906213.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118104026473.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105411235.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105446900.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105521051.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105823850.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118111603557.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112034275.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112632295.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112703801.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112741572.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112748296.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112932680.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118114506259.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118114532090.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118114832239.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118122250004.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118122604240.png">
 <meta property="article:published_time" content="2023-01-17T13:33:51.000Z">
 <meta property="article:modified_time" content="2023-03-07T07:14:43.627Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117213923810.png">
   
   
   
@@ -218,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5k words
+          4.5k words
         
       </span>
     
@@ -229,7 +253,7 @@
         
         
         
-          42 mins
+          38 mins
         
       </span>
     
@@ -272,229 +296,104 @@
             
               <div class="markdown-body">
                 
-                <h1
-id="条件语句where和having的区分">07-条件语句：where和having的区分</h1>
-<ul>
+                <h1 id="07-条件语句：where和having的区分"><a href="#07-条件语句：where和having的区分" class="headerlink" title="07-条件语句：where和having的区分"></a>07-条件语句：where和having的区分</h1><ul>
 <li><code>where</code>是直接对表中的字段进行限定，来筛选结果</li>
-<li><code>having</code>则需要跟分组关键字
-<code>group by</code>一起使用，通过对分组字段和分组计算函数进行限定，来筛选结果</li>
+<li><code>having</code>则需要跟分组关键字 <code>group by</code>一起使用，通过对分组字段和分组计算函数进行限定，来筛选结果</li>
 </ul>
 <p>虽然都是进行查询限定，但是如果用错场景，就会出现各种查询问题。</p>
-<h2 id="一个实际查询需求">一个实际查询需求</h2>
-<p>查询单臂销售金额超过50元的商品。</p>
+<h2 id="一个实际查询需求"><a href="#一个实际查询需求" class="headerlink" title="一个实际查询需求"></a>一个实际查询需求</h2><p>查询单臂销售金额超过50元的商品。</p>
 <p>直接查询商品的信息表demo.goodsmaster</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from demo.goodsmaster;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117213923810.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117213923810" />
-<figcaption aria-hidden="true">image-20230117213923810</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117213923810.png" srcset="/img/loading.gif" lazyload alt="image-20230117213923810"></p>
 <p>查看销售明细表</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from demo.trans;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117214659364.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117214659364" />
-<figcaption aria-hidden="true">image-20230117214659364</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117214659364.png" srcset="/img/loading.gif" lazyload alt="image-20230117214659364"></p>
 <ul>
 <li>第一步：使用where查询</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select distinct b.goodsname<br>from demo.trans as a<br>join demo.goodsmaster as b<br>on (a.itemnumber = b.itemnumber)<br>where a.salesvalue &gt; 50;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117214841317.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117214841317" />
-<figcaption aria-hidden="true">image-20230117214841317</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117214841317.png" srcset="/img/loading.gif" lazyload alt="image-20230117214841317"></p>
 <ul>
 <li>第二步：使用having进行查询</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select b.goodsname<br>from demo.trans as a<br>join demo.goodsmaster as b<br>on (a.itemnumber = b.itemnumber)<br>group by b.goodsname<br>having max(a.salesvalue)&gt;50;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117215231046.png" srcset="/img/loading.gif" lazyload
-alt="image-20230117215231046" />
-<figcaption aria-hidden="true">image-20230117215231046</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230117215231046.png" srcset="/img/loading.gif" lazyload alt="image-20230117215231046"></p>
 <p>查询结果相同，区别是什么？</p>
-<h3 id="where">where</h3>
-<p>首先，从demo.trans中抽取满足条件的"a.salesvalue&gt;50"记录</p>
+<h3 id="where"><a href="#where" class="headerlink" title="where"></a>where</h3><p>首先，从demo.trans中抽取满足条件的”a.salesvalue&gt;50”记录</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * <br>from demo.trans as a<br>where a.salesvalue &gt; 50;<br></code></pre></td></tr></table></figure>
 <p>为了获取到销售信息所对应的商品名称，需要通过公共字段itemnumber与demo.goodsmaster进行关联，从demo.goodsmaster中获取商品名称</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select a.*,b.goodsname<br>from demo.trans a<br>join demo.goodsmaster b on (a.itemnumber = b.itemnumber)<br>where<br>a.salesvalue &gt; 50;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118103818366.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118103818366" />
-<figcaption aria-hidden="true">image-20230118103818366</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118103818366.png" srcset="/img/loading.gif" lazyload alt="image-20230118103818366"></p>
 <p>此时查询商品名称，会出现重复记录</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select b.goodsname<br>from demo.trans a<br>join demo.goodsmaster b on (a.itemnumber = b.itemnumber)<br>where<br>a.salesvalue &gt; 50;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118103906213.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118103906213" />
-<figcaption aria-hidden="true">image-20230118103906213</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118103906213.png" srcset="/img/loading.gif" lazyload alt="image-20230118103906213"></p>
 <p>为了消除重复语句，需要使用一个关键字：distinct，作用是返回唯一不同的值。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select distinct(b.goodsname)<br>from demo.trans a<br>join demo.goodsmaster b on (a.itemnumber = b.itemnumber)<br>where<br>a.salesvalue &gt; 50;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118104026473.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118104026473" />
-<figcaption aria-hidden="true">image-20230118104026473</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118104026473.png" srcset="/img/loading.gif" lazyload alt="image-20230118104026473"></p>
 <p>where关键字的特点是，直接用表的字段对数据集进行筛选。</p>
 <p>如果需要通过关联查询从其他的表获取需要的信息，那么执行时也是先通过where条件筛选，用筛选后的较小数据集进行连接。这样，连接过程中的资源占用较少，执行效率也高。</p>
-<h3 id="having">having</h3>
-<p><code>having</code>不能单独使用，必须要和<code>group by</code>一起使用。</p>
+<h3 id="having"><a href="#having" class="headerlink" title="having"></a>having</h3><p><code>having</code>不能单独使用，必须要和<code>group by</code>一起使用。</p>
 <p>先查看一下数据内容</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from demo.trans<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105411235.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118105411235" />
-<figcaption aria-hidden="true">image-20230118105411235</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105411235.png" srcset="/img/loading.gif" lazyload alt="image-20230118105411235"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * <br>from demo.trans<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105446900.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118105446900" />
-<figcaption aria-hidden="true">image-20230118105446900</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105446900.png" srcset="/img/loading.gif" lazyload alt="image-20230118105446900"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from demo.operator;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105521051.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118105521051" />
-<figcaption aria-hidden="true">image-20230118105521051</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105521051.png" srcset="/img/loading.gif" lazyload alt="image-20230118105521051"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select<br>	a.transdate, -- 交易时间<br>	c.operatorname,-- 操作员<br>	d.goodsname, -- 商品名称<br>	b.quantity, -- 销售数量<br>  b.price, -- 价格<br>  b.salesvalue -- 销售金额<br>from<br>	demo.transactionhead as a<br>join<br>	demo.transactiondetails as b on (a.transactionid = b.transactionid)<br>join<br>	demo.operator as c on (a.operatorid = c.operatorid)<br>join<br>	demo.goodsmaster as d on (b.itemnumber = d.itemnumber);<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105823850.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118105823850" />
-<figcaption aria-hidden="true">image-20230118105823850</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118105823850.png" srcset="/img/loading.gif" lazyload alt="image-20230118105823850"></p>
 <p>查看每天的销售数量和销售金额，按照一个字段transdate对数据进行分组和统计</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>a.transdate<br>sum(b.quantity),<br>sum(b.salesvalue)<br>from<br>demo.transactionhead as a<br>join<br>demo.transactiondetails as b on (b.transactionid = b.transactionid)<br>group by a.transdate;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118111603557.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118111603557" />
-<figcaption aria-hidden="true">image-20230118111603557</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118111603557.png" srcset="/img/loading.gif" lazyload alt="image-20230118111603557"></p>
 <p>查看每天每个收营员的销售数量和金额，按照transdate和operatorname分组和统计</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>	a.transdate,<br>	c.opeatorname,<br>	sum(b.quantity),<br>	sum(b.salesvalue)<br>from<br>	demo.transactionhead as a<br>	join<br>	demo.transactiondetails as b on (a.transactionid = b.transactionid)<br>	join<br>	demo.operator as c on (a.operatorid = c.operatorid)<br>group by a.transdate,c.operatorname;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112034275.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118112034275" />
-<figcaption aria-hidden="true">image-20230118112034275</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112034275.png" srcset="/img/loading.gif" lazyload alt="image-20230118112034275"></p>
 <p>使用having，查询单笔金额超过50元的商品。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select b.goodsname<br>from demo.transactiondetails as a<br>join demo.goodsmaster as b<br>on (a.itemnumber = b.itemnumber)<br>group by b.goodsname <br>having max(a.salesvalue) &gt; 50;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>第一步：将流水明细表和商品信息表通过公共字段<code>itemnumber</code>连接起来</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>a.* , b.*<br>from <br>demo.transactiondetails a<br>join demo.goodsmaster b on (a.itemnumber = b.itemnumber);<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112632295.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118112632295" />
-<figcaption aria-hidden="true">image-20230118112632295</figcaption>
-</figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112703801.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118112703801" />
-<figcaption aria-hidden="true">image-20230118112703801</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112632295.png" srcset="/img/loading.gif" lazyload alt="image-20230118112632295"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112703801.png" srcset="/img/loading.gif" lazyload alt="image-20230118112703801"></p>
 <ul>
 <li><p>第二步：将结果按照商品名称分类</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112741572.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118112741572" />
-<figcaption aria-hidden="true">image-20230118112741572</figcaption>
-</figure></li>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112741572.png" srcset="/img/loading.gif" lazyload alt="image-20230118112741572"></p>
+</li>
 </ul>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112748296.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118112748296" />
-<figcaption aria-hidden="true">image-20230118112748296</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112748296.png" srcset="/img/loading.gif" lazyload alt="image-20230118112748296"></p>
 <ul>
 <li>第三步：对分组数据进行筛选，将salesvalue的最大值大于50的组筛选出来</li>
 </ul>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112932680.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118112932680" />
-<figcaption aria-hidden="true">image-20230118112932680</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118112932680.png" srcset="/img/loading.gif" lazyload alt="image-20230118112932680"></p>
 <ul>
 <li>第四步：返回商品名称</li>
 </ul>
 <p>having的查询过程，首先将所有信息都准备好，然后包括从关联表中获取的信息，对数据集进行分组，形成一个包含所有需要的信息的数据集，然后再通过having条件的筛选，得到需要的数据</p>
-<h2 id="如何正确使用where和having">如何正确使用where和having</h2>
-<p>两个典型区别</p>
+<h2 id="如何正确使用where和having"><a href="#如何正确使用where和having" class="headerlink" title="如何正确使用where和having"></a>如何正确使用where和having</h2><p>两个典型区别</p>
 <ul>
-<li>如果需要通过连接从关联表中获取需要的数据，where是先筛选后连接，而having是先连接后筛选
-<ul>
+<li>如果需要通过连接从关联表中获取需要的数据，where是先筛选后连接，而having是先连接后筛选<ul>
 <li>此方面，where比having更高效，因为where可以先筛选，获得较小的数据集再和关联表进行连接，这样占用的资源较少，执行效率也较高。having需要先把数据集准备好，将未被筛选的数据集进行关联，然后对大的数据集进行筛选，这样占用的资源较多，执行效率低</li>
-</ul></li>
-<li>where直接用表中字段筛选，不能使用分组的计算函数作为筛选条件；having必须与group
-by结合，可以把分组字段作为筛选条件</li>
 </ul>
-<p>having在对数据进行分组统计的时候，可以完成where不能完成的任务。where在group
-by之前，所以不能对分组结果进行筛选，而having在group
-by之后，可以使用分组字段和分组中的计算函数，对分组结果进行筛选。</p>
+</li>
+<li>where直接用表中字段筛选，不能使用分组的计算函数作为筛选条件；having必须与group by结合，可以把分组字段作为筛选条件</li>
+</ul>
+<p>having在对数据进行分组统计的时候，可以完成where不能完成的任务。where在group by之前，所以不能对分组结果进行筛选，而having在group by之后，可以使用分组字段和分组中的计算函数，对分组结果进行筛选。</p>
 <p>超市经营者想看哪个收营员在哪天买了2单，就必须先分组才能筛选。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>	a.transdate,c.operatorname<br>from<br>	demo.transactionhead as <br>join <br>	demo.transactiondetails as b on (a.transactionid = b.transactionid)<br>join<br>	demo.operator as c on (a.operatorid = c.operatorid)<br>group by a.transdate,c.operatorname<br>having count(*)=2;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118114506259.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118114506259" />
-<figcaption aria-hidden="true">image-20230118114506259</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118114506259.png" srcset="/img/loading.gif" lazyload alt="image-20230118114506259"></p>
 <p>where和having的各自有缺点</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118114532090.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118114532090" />
-<figcaption aria-hidden="true">image-20230118114532090</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118114532090.png" srcset="/img/loading.gif" lazyload alt="image-20230118114532090"></p>
 <p>where和having并不互相排斥，我们可以在一个查询内同时使用。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>	a.transdate,<br>	c.operatorname,<br>	d.goodsname,<br>	b.price,<br>	b.salesvalue<br>from<br>	demo.transactionhead as a<br>		join<br>	demo.transactiondetails as b on (a.transactionid = b.transactionid)<br>		join<br>	demo.operator as c on (a.operatorid = c.operatorid)<br>		join<br>	demo.goodsmaster as d on (b.itemnumber = d.itemnumber);<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118114832239.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118114832239" />
-<figcaption aria-hidden="true">image-20230118114832239</figcaption>
-</figure>
-<p>查询"2020-12-10"和"2020-12-11"这两天的收银金额超过100元的销售日期、收营员名称、销售数量和销售金额。</p>
-<p>此需求需要将收营员和日期进行分组，可以通过group
-by和having进行查询</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118114832239.png" srcset="/img/loading.gif" lazyload alt="image-20230118114832239"></p>
+<p>查询”2020-12-10”和”2020-12-11”这两天的收银金额超过100元的销售日期、收营员名称、销售数量和销售金额。</p>
+<p>此需求需要将收营员和日期进行分组，可以通过group by和having进行查询</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>	a.transdate,<br>	c.operatorname,<br>	sum(b.quantity),<br>	sum(b.salesvalue)<br>from<br>	demo.transactionhead as a<br>		join<br>	demo.transactiondetails as b on (a.transactionid = b.transactionid)<br>		join<br>	demo.operator as c on (a.operatorid = c.operatorid)<br>group by a.transdate,c.operatorname<br>haing a.transdate in (&#x27;2020-12-10&#x27;,&#x27;2020-12-11&#x27;)<br>and sum(b.salesvalue) &gt; 100;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118122250004.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118122250004" />
-<figcaption aria-hidden="true">image-20230118122250004</figcaption>
-</figure>
-<p><code>a.transdate in ('2020-12-10','2020-12-11')</code>可以用where来限定</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118122250004.png" srcset="/img/loading.gif" lazyload alt="image-20230118122250004"></p>
+<p><code>a.transdate in (&#39;2020-12-10&#39;,&#39;2020-12-11&#39;)</code>可以用where来限定</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>	a.transdate,<br>	c.operatorname,<br>	sum(b.quantity),<br>	sum(b.salesvalue)<br>from<br>	demo.transactionhead as a<br>		join<br>	demo.transactiondetails as b on (a.transactionid = b.transactionid)<br>		join<br>	demo.operator as c on (a.operatorid = c.operatorid)<br>where a.transdate in (&#x27;2020-12-12&#x27;,&#x27;2020-12-11&#x27;)<br>group by a.transdate,c.opertorname<br>having sum(b.salesvalue) &gt; 100;<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118122604240.png" srcset="/img/loading.gif" lazyload
-alt="image-20230118122604240" />
-<figcaption aria-hidden="true">image-20230118122604240</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230118122604240.png" srcset="/img/loading.gif" lazyload alt="image-20230118122604240"></p>
 
                 
               </div>

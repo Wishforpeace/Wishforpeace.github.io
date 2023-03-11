@@ -16,12 +16,12 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="承上启下 寄存器 数据寄存器 地址寄存器  段地址寄存器 偏移地址寄存器  12345;通用寄存器AX BX		;偏移地址寄存器CX		;有其他作用DX		;和AX一起处理数据 通用寄存器都为16位寄存器，可以分割为2个互相独立的8位寄存器 翻译工作 保证数据与寄存器之间的位数一致 由寄存器的位数决定 指令 12mov		;移动指令add		;运算指令   运算时超过寄存器的最大值，超过部分不会消">
+    <meta name="description" content="承上启下寄存器数据寄存器 地址寄存器  段地址寄存器 偏移地址寄存器  12345;通用寄存器AX BX		;偏移地址寄存器CX		;有其他作用DX		;和AX一起处理数据 通用寄存器都为16位寄存器，可以分割为2个互相独立的8位寄存器 翻译工作保证数据与寄存器之间的位数一致 由寄存器的位数决定 指令12mov		;移动指令add		;运算指令   运算时超过寄存器的最大值，超过部分不会消失，存储">
 <meta property="og:type" content="article">
 <meta property="og:title" content="承上启下">
 <meta property="og:url" content="http://example.com/2022/10/19/%E6%89%BF%E4%B8%8A%E5%90%AF%E4%B8%8B/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="承上启下 寄存器 数据寄存器 地址寄存器  段地址寄存器 偏移地址寄存器  12345;通用寄存器AX BX		;偏移地址寄存器CX		;有其他作用DX		;和AX一起处理数据 通用寄存器都为16位寄存器，可以分割为2个互相独立的8位寄存器 翻译工作 保证数据与寄存器之间的位数一致 由寄存器的位数决定 指令 12mov		;移动指令add		;运算指令   运算时超过寄存器的最大值，超过部分不会消">
+<meta property="og:description" content="承上启下寄存器数据寄存器 地址寄存器  段地址寄存器 偏移地址寄存器  12345;通用寄存器AX BX		;偏移地址寄存器CX		;有其他作用DX		;和AX一起处理数据 通用寄存器都为16位寄存器，可以分割为2个互相独立的8位寄存器 翻译工作保证数据与寄存器之间的位数一致 由寄存器的位数决定 指令12mov		;移动指令add		;运算指令   运算时超过寄存器的最大值，超过部分不会消失，存储">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019153653119.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019154053576.png">
@@ -275,9 +275,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="承上启下">承上启下</h1>
-<h2 id="寄存器">寄存器</h2>
-<p>数据寄存器</p>
+                <h1 id="承上启下"><a href="#承上启下" class="headerlink" title="承上启下"></a>承上启下</h1><h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><p>数据寄存器</p>
 <p>地址寄存器</p>
 <ul>
 <li>段地址寄存器</li>
@@ -285,24 +283,20 @@
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">;通用寄存器<br>AX <br>BX		;偏移地址寄存器<br>CX		;有其他作用<br>DX		;和AX一起处理数据<br></code></pre></td></tr></table></figure>
 <p>通用寄存器都为16位寄存器，可以分割为2个互相独立的8位寄存器</p>
-<h2 id="翻译工作">翻译工作</h2>
-<p>保证数据与寄存器之间的位数一致</p>
+<h2 id="翻译工作"><a href="#翻译工作" class="headerlink" title="翻译工作"></a>翻译工作</h2><p>保证数据与寄存器之间的位数一致</p>
 <p>由寄存器的位数决定</p>
-<h2 id="指令">指令</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov		;移动指令<br>add		;运算指令 <br></code></pre></td></tr></table></figure>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov		;移动指令<br>add		;运算指令 <br></code></pre></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019153653119.png" srcset="/img/loading.gif" lazyload alt="image-20221019153653119" style="zoom:50%;" /></p>
 <p>运算时超过寄存器的最大值，超过部分不会消失，存储到其他部分</p>
 <p>ax与al相互独立，超过部分不会存入ah</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019154053576.png" srcset="/img/loading.gif" lazyload alt="image-20221019154053576" style="zoom:50%;" /></p>
-<h3 id="地址寄存器">地址寄存器</h3>
-<ul>
+<h3 id="地址寄存器"><a href="#地址寄存器" class="headerlink" title="地址寄存器"></a>地址寄存器</h3><ul>
 <li>ds(data segment)</li>
 <li>es(extern segment)</li>
 <li>ss(stakc segment)</li>
 <li>cs(code segment)</li>
 </ul>
-<h3 id="偏移地址寄存器">偏移地址寄存器</h3>
-<ul>
+<h3 id="偏移地址寄存器"><a href="#偏移地址寄存器" class="headerlink" title="偏移地址寄存器"></a>偏移地址寄存器</h3><ul>
 <li>sp</li>
 <li>bp</li>
 <li>si</li>
@@ -310,22 +304,17 @@
 <li>ip</li>
 <li>bx</li>
 </ul>
-<h3 id="组合规则组合起来">组合规则：组合起来</h3>
-<p>段地址✖️16+偏移地址=<strong>物理地址</strong></p>
-<h4 id="原因">原因：</h4>
-<p>8086CPU有20根地址线</p>
-<h3 id="cpu区分指令和数据">CPU区分指令和数据：</h3>
-<p>依靠CS和IP两个寄存器</p>
+<h3 id="组合规则：组合起来"><a href="#组合规则：组合起来" class="headerlink" title="组合规则：组合起来"></a>组合规则：组合起来</h3><p>段地址✖️16+偏移地址=<strong>物理地址</strong></p>
+<h4 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h4><p>8086CPU有20根地址线</p>
+<h3 id="CPU区分指令和数据："><a href="#CPU区分指令和数据：" class="headerlink" title="CPU区分指令和数据："></a>CPU区分指令和数据：</h3><p>依靠CS和IP两个寄存器</p>
 <p>任意时刻的CPU将段地址寄存器CS和偏移地址寄存器IP所组合出的地址从中读取内容</p>
 <p>并且全部当作指令执行</p>
 <p>指令是有长度的，且与<strong>IP寄存器</strong>有关</p>
 <p>可以用修改CS和IP两个寄存器的指令</p>
-<p><strong>转移指令</strong>：<code>jmp</code> <code>call</code></p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs assembly">;jmp格式<br>jmp		2000:0<br>jmp		[寄存器];相当于mov ip,ax<br><br>;call<br>call    ******<br>;1.CPU从CS:IP所指向的内存单元读取指令，存放到指令缓存器之中<br>;2.IP=IP+所读取指令的长度，从而指向下一条指令<br>;3.执行指令缓存器中的内容，回到步骤1<br></code></pre></td></tr></table></figure></p>
-<h3 id="指令和数据">指令和数据</h3>
-<p>存放在内存之中没有任何区别</p>
-<p>是程序员通过修改寄存器中的内容（地址寄存器），告诉CPU数据在哪里
-指令在哪里</p>
+<p><strong>转移指令</strong>：<code>jmp</code>     <code>call</code></p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs assembly">;jmp格式<br>jmp		2000:0<br>jmp		[寄存器];相当于mov ip,ax<br><br>;call<br>call    ******<br>;1.CPU从CS:IP所指向的内存单元读取指令，存放到指令缓存器之中<br>;2.IP=IP+所读取指令的长度，从而指向下一条指令<br>;3.执行指令缓存器中的内容，回到步骤1<br></code></pre></td></tr></table></figure>
+<h3 id="指令和数据"><a href="#指令和数据" class="headerlink" title="指令和数据"></a>指令和数据</h3><p>存放在内存之中没有任何区别</p>
+<p>是程序员通过修改寄存器中的内容（地址寄存器），告诉CPU数据在哪里      指令在哪里 </p>
 
                 
               </div>
@@ -407,9 +396,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/19/%E5%AF%84%E5%AD%98%E5%99%A8/" title="寄存器">
+                      <a href="/2022/10/25/Network-Programming-PartII/" title="Network Programming PartII">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">寄存器</span>
+                        <span class="hidden-mobile">Network Programming PartII</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -417,8 +406,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/18/debug%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" title="debug调试工具使用总结">
-                        <span class="hidden-mobile">debug调试工具使用总结</span>
+                      <a href="/2022/10/19/%E5%AF%84%E5%AD%98%E5%99%A8/" title="寄存器">
+                        <span class="hidden-mobile">寄存器</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
