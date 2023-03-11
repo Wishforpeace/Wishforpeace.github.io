@@ -16,12 +16,12 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="验证栈序列给定 pushed 和 popped 两个序列，每个序列中的 值都不重复，只有当它们可能是在最初空栈上进行的推入 push 和弹出 pop 操作序列的结果时，返回 true；否则，返回 false 。 方法一：pushed和popped的性质：  pushed中元素互不相同 popped和pushed长度相同 popped是数组pushed的一个排列  结论：  栈内无重复元素 如果pu">
+    <meta name="description" content="验证栈序列 给定 pushed 和 popped 两个序列，每个序列中的 值都不重复，只有当它们可能是在最初空栈上进行的推入 push 和弹出 pop 操作序列的结果时，返回 true；否则，返回 false 。 方法一： pushed和popped的性质：  pushed中元素互不相同 popped和pushed长度相同 popped是数组pushed的一个排列  结论：  栈内无重复元素 如果">
 <meta property="og:type" content="article">
 <meta property="og:title" content="验证栈序列">
 <meta property="og:url" content="http://example.com/2022/11/08/%E9%AA%8C%E8%AF%81%E6%A0%88%E5%BA%8F%E5%88%97/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="验证栈序列给定 pushed 和 popped 两个序列，每个序列中的 值都不重复，只有当它们可能是在最初空栈上进行的推入 push 和弹出 pop 操作序列的结果时，返回 true；否则，返回 false 。 方法一：pushed和popped的性质：  pushed中元素互不相同 popped和pushed长度相同 popped是数组pushed的一个排列  结论：  栈内无重复元素 如果pu">
+<meta property="og:description" content="验证栈序列 给定 pushed 和 popped 两个序列，每个序列中的 值都不重复，只有当它们可能是在最初空栈上进行的推入 push 和弹出 pop 操作序列的结果时，返回 true；否则，返回 false 。 方法一： pushed和popped的性质：  pushed中元素互不相同 popped和pushed长度相同 popped是数组pushed的一个排列  结论：  栈内无重复元素 如果">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-08T15:30:57.000Z">
 <meta property="article:modified_time" content="2022-11-12T05:35:06.538Z">
@@ -81,9 +81,7 @@
 
 
   
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -274,8 +272,14 @@
             
               <div class="markdown-body">
                 
-                <h1 id="验证栈序列"><a href="#验证栈序列" class="headerlink" title="验证栈序列"></a>验证栈序列</h1><p>给定 <code>pushed</code> 和 <code>popped</code> 两个序列，每个序列中的 <strong>值都不重复</strong>，只有当它们可能是在最初空栈上进行的推入 push 和弹出 pop 操作序列的结果时，返回 <code>true</code>；否则，返回 <code>false</code> 。</p>
-<h2 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h2><p><code>pushed</code>和<code>popped</code>的性质：</p>
+                <h1 id="验证栈序列">验证栈序列</h1>
+<p>给定 <code>pushed</code> 和 <code>popped</code>
+两个序列，每个序列中的
+<strong>值都不重复</strong>，只有当它们可能是在最初空栈上进行的推入 push
+和弹出 pop 操作序列的结果时，返回 <code>true</code>；否则，返回
+<code>false</code> 。</p>
+<h2 id="方法一">方法一：</h2>
+<p><code>pushed</code>和<code>popped</code>的性质：</p>
 <ul>
 <li><code>pushed</code>中元素互不相同</li>
 <li><code>popped</code>和<code>pushed</code>长度相同</li>
@@ -288,9 +292,10 @@
 </ul>
 <p>方法：</p>
 <p>因此，可以遍历两个数组，模拟入栈和出栈操作，判断两个数组是否为有效的栈操作序列。</p>
-<p>模拟入栈操作可以通过遍历数组 <code>pushed</code>实现。由于只有栈顶的元素可以出栈，因此需要判断栈顶元素是否与<code>popped</code>的当前元素相同，如果相同则将栈顶元素出栈。由于元素互不相同，因此当前栈顶元素与<code>popped</code>的当前元素必须将栈顶元素出栈，否则出栈顺序一定不等于<code>popped</code>。</p>
+<p>模拟入栈操作可以通过遍历数组
+<code>pushed</code>实现。由于只有栈顶的元素可以出栈，因此需要判断栈顶元素是否与<code>popped</code>的当前元素相同，如果相同则将栈顶元素出栈。由于元素互不相同，因此当前栈顶元素与<code>popped</code>的当前元素必须将栈顶元素出栈，否则出栈顺序一定不等于<code>popped</code>。</p>
 <p>验证栈序列的模拟做法：</p>
-<ol>
+<ol type="1">
 <li>遍历数组<code>pushed</code>，将<code>pushed</code>的每个元素一次入栈；</li>
 <li>每次将<code>pushed</code>的元素入栈之后，如果栈不为空且栈顶元素与<code>popped</code>的当前元素相同，则将栈顶元素出栈，同时遍历数组<code>popped</code>，直到栈为空或栈顶元素与<code>popped</code>的当前元素不同。</li>
 </ol>
@@ -299,7 +304,7 @@
 <p>复杂度分析:</p>
 <ul>
 <li>时间复杂度O(n)</li>
-<li>空间负责度O(n)，取决于栈的大小for (int x: nums) </li>
+<li>空间负责度O(n)，取决于栈的大小for (int x: nums)</li>
 </ul>
 
                 

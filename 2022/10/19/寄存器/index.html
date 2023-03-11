@@ -16,28 +16,23 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="寄存器 一个字型数据可以存放在内存之中 可以由2个连续的地址内存单元组成 高地址：内存单元存放字型数据的高位字节 低地址：内存单元存放字型数据的低位字节  ds段地址寄存器访问数据用的 12mov al,ds:[0]		;mov移动指令CPU中的AL寄存器，内存地址为ds:[0] 0为偏移地址，方括号是ds+0组合成的段地址，方括号内为得到的内容;cpu从段寄存器内读取了8位数据 错误修改ds的方">
+    <meta name="description" content="寄存器   img  一个字型数据可以存放在内存之中 可以由2个连续的地址内存单元组成 高地址：内存单元存放字型数据的高位字节 低地址：内存单元存放字型数据的低位字节   image-20221019163034201  ds段地址寄存器 访问数据用的 12mov al,ds:[0]		;mov移动指令CPU中的AL寄存器，内存地址为ds:[0] 0为偏移地址，方括号是ds+0组合成的段地址，方括">
 <meta property="og:type" content="article">
 <meta property="og:title" content="寄存器">
 <meta property="og:url" content="http://example.com/2022/10/19/%E5%AF%84%E5%AD%98%E5%99%A8/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="寄存器 一个字型数据可以存放在内存之中 可以由2个连续的地址内存单元组成 高地址：内存单元存放字型数据的高位字节 低地址：内存单元存放字型数据的低位字节  ds段地址寄存器访问数据用的 12mov al,ds:[0]		;mov移动指令CPU中的AL寄存器，内存地址为ds:[0] 0为偏移地址，方括号是ds+0组合成的段地址，方括号内为得到的内容;cpu从段寄存器内读取了8位数据 错误修改ds的方">
+<meta property="og:description" content="寄存器   img  一个字型数据可以存放在内存之中 可以由2个连续的地址内存单元组成 高地址：内存单元存放字型数据的高位字节 低地址：内存单元存放字型数据的低位字节   image-20221019163034201  ds段地址寄存器 访问数据用的 12mov al,ds:[0]		;mov移动指令CPU中的AL寄存器，内存地址为ds:[0] 0为偏移地址，方括号是ds+0组合成的段地址，方括">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/Hyeonwuu/Image/master/image-20221019161654005.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019163034201.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019164656493.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019164806872.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019165406196.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019171548323.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170350121.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170656087.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170543070.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019171513948.png">
 <meta property="article:published_time" content="2022-10-19T13:06:18.000Z">
 <meta property="article:modified_time" content="2022-10-19T13:07:11.439Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Hyeonwuu/Image/master/image-20221019161654005.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019164656493.png">
   
   
   
@@ -92,9 +87,7 @@
 
 
   
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -231,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          263 words
+          358 words
         
       </span>
     
@@ -285,12 +278,24 @@
             
               <div class="markdown-body">
                 
-                <h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><p><img src="https://raw.githubusercontent.com/Hyeonwuu/Image/master/image-20221019161654005.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+                <h1 id="寄存器">寄存器</h1>
+<figure>
+<img
+src="https://raw.githubusercontent.com/Hyeonwuu/Image/master/image-20221019161654005.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>一个字型数据可以存放在内存之中 可以由2个连续的地址内存单元组成</p>
 <p><strong>高地址</strong>：内存单元存放字型数据的<strong>高位字节</strong></p>
 <p><strong>低地址</strong>：内存单元存放字型数据的<strong>低位字节</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019163034201.png" srcset="/img/loading.gif" lazyload alt="image-20221019163034201"></p>
-<h2 id="ds段地址寄存器"><a href="#ds段地址寄存器" class="headerlink" title="ds段地址寄存器"></a>ds段地址寄存器</h2><p>访问数据用的</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019163034201.png" srcset="/img/loading.gif" lazyload
+alt="image-20221019163034201" />
+<figcaption aria-hidden="true">image-20221019163034201</figcaption>
+</figure>
+<h2 id="ds段地址寄存器">ds段地址寄存器</h2>
+<p>访问数据用的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov al,ds:[0]		;mov移动指令CPU中的AL寄存器，内存地址为ds:[0] 0为偏移地址，方括号是ds+0组合成的段地址，方括号内为得到的内容<br>;cpu从段寄存器内读取了8位数据<br></code></pre></td></tr></table></figure>
 <p><strong>错误修改ds的方法</strong></p>
 <p><strong><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019164656493.png" srcset="/img/loading.gif" lazyload alt="image-20221019164656493" style="zoom:25%;" /></strong></p>
@@ -298,13 +303,30 @@
 <p><strong><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019164806872.png" srcset="/img/loading.gif" lazyload alt="image-20221019164806872" style="zoom:25%;" /></strong></p>
 <p><strong>高位字节到高位地址，低位字节到低位地址</strong></p>
 <p><strong><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019165406196.png" srcset="/img/loading.gif" lazyload alt="image-20221019165406196" style="zoom:25%;" /></strong></p>
-<h2 id="寄存器ax-bx-cx"><a href="#寄存器ax-bx-cx" class="headerlink" title="寄存器ax bx cx"></a>寄存器ax bx cx</h2><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019171548323.png" srcset="/img/loading.gif" lazyload alt="image-20221019171548323"></p>
+<h2 id="寄存器ax-bx-cx">寄存器ax bx cx</h2>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019171548323.png" srcset="/img/loading.gif" lazyload
+alt="image-20221019171548323" />
+<figcaption aria-hidden="true">image-20221019171548323</figcaption>
+</figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov ax,1000H<br>mov ds,ax			;获取段地址<br></code></pre></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170350121.png" srcset="/img/loading.gif" lazyload alt="image-20221019170350121" style="zoom:25%;" /></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170656087.png" srcset="/img/loading.gif" lazyload alt="image-20221019170656087" style="zoom:50%;" /></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170543070.png" srcset="/img/loading.gif" lazyload alt="image-20221019170543070"></p>
-<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><p> 问题3.4</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019171513948.png" srcset="/img/loading.gif" lazyload alt="image-20221019171513948"></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170543070.png" srcset="/img/loading.gif" lazyload
+alt="image-20221019170543070" />
+<figcaption aria-hidden="true">image-20221019170543070</figcaption>
+</figure>
+<h2 id="内存">内存</h2>
+<p>问题3.4</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019171513948.png" srcset="/img/loading.gif" lazyload
+alt="image-20221019171513948" />
+<figcaption aria-hidden="true">image-20221019171513948</figcaption>
+</figure>
 
                 
               </div>

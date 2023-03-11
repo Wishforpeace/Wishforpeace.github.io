@@ -16,19 +16,17 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Go程序如何运行？Go程序的入口第一行代码在runtime包中 runtime&#x2F;rt0_XXX.s   读取命令行参数 复制参数数量argc和参数值argv到栈上  初始化g0执行栈 g0是为了调度协程而产生的协程 g0是每个go语言的第一个协程  运行时检测 检查各类型的长度 检查指针操作 检查结构体字段的偏移量 检查atomic原子操作 检查CAS操作 检查栈大小是否是2的幂次  参数初始化">
+    <meta name="description" content="Go程序如何运行？ Go程序的入口 第一行代码在runtime包中 runtime&#x2F;rt0_XXX.s   image-20221217112513003   读取命令行参数  复制参数数量argc和参数值argv到栈上  初始化g0执行栈  g0是为了调度协程而产生的协程 g0是每个go语言的第一个协程  运行时检测  检查各类型的长度 检查指针操作 检查结构体字段的偏移量 检查atomic原">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go程序如何运行">
 <meta property="og:url" content="http://example.com/2022/12/17/Go%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="Go程序如何运行？Go程序的入口第一行代码在runtime包中 runtime&#x2F;rt0_XXX.s   读取命令行参数 复制参数数量argc和参数值argv到栈上  初始化g0执行栈 g0是为了调度协程而产生的协程 g0是每个go语言的第一个协程  运行时检测 检查各类型的长度 检查指针操作 检查结构体字段的偏移量 检查atomic原子操作 检查CAS操作 检查栈大小是否是2的幂次  参数初始化">
+<meta property="og:description" content="Go程序如何运行？ Go程序的入口 第一行代码在runtime包中 runtime&#x2F;rt0_XXX.s   image-20221217112513003   读取命令行参数  复制参数数量argc和参数值argv到栈上  初始化g0执行栈  g0是为了调度协程而产生的协程 g0是每个go语言的第一个协程  运行时检测  检查各类型的长度 检查指针操作 检查结构体字段的偏移量 检查atomic原">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221217112513003.png">
 <meta property="article:published_time" content="2022-12-17T03:14:03.000Z">
 <meta property="article:modified_time" content="2022-12-17T17:13:28.938Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221217112513003.png">
   
   
   
@@ -83,9 +81,7 @@
 
 
   
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -222,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          470 words
+          493 words
         
       </span>
     
@@ -233,7 +229,7 @@
         
         
         
-          4 mins
+          5 mins
         
       </span>
     
@@ -276,18 +272,28 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Go程序如何运行？"><a href="#Go程序如何运行？" class="headerlink" title="Go程序如何运行？"></a>Go程序如何运行？</h1><h2 id="Go程序的入口"><a href="#Go程序的入口" class="headerlink" title="Go程序的入口"></a>Go程序的入口</h2><p>第一行代码在runtime包中</p>
+                <h1 id="go程序如何运行">Go程序如何运行？</h1>
+<h2 id="go程序的入口">Go程序的入口</h2>
+<p>第一行代码在runtime包中</p>
 <p><strong>runtime/rt0_XXX.s</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221217112513003.png" srcset="/img/loading.gif" lazyload alt="image-20221217112513003"></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221217112513003.png" srcset="/img/loading.gif" lazyload
+alt="image-20221217112513003" />
+<figcaption aria-hidden="true">image-20221217112513003</figcaption>
+</figure>
 <p></p>
-<h2 id="读取命令行参数"><a href="#读取命令行参数" class="headerlink" title="读取命令行参数"></a>读取命令行参数</h2><ul>
+<h2 id="读取命令行参数">读取命令行参数</h2>
+<ul>
 <li>复制参数数量argc和参数值argv到栈上</li>
 </ul>
-<h2 id="初始化g0执行栈"><a href="#初始化g0执行栈" class="headerlink" title="初始化g0执行栈"></a>初始化g0执行栈</h2><ul>
+<h2 id="初始化g0执行栈">初始化g0执行栈</h2>
+<ul>
 <li>g0是为了调度协程而产生的协程</li>
 <li>g0是每个go语言的第一个协程</li>
 </ul>
-<h2 id="运行时检测"><a href="#运行时检测" class="headerlink" title="运行时检测"></a>运行时检测</h2><ul>
+<h2 id="运行时检测">运行时检测</h2>
+<ul>
 <li>检查各类型的长度</li>
 <li>检查指针操作</li>
 <li>检查结构体字段的偏移量</li>
@@ -295,12 +301,14 @@
 <li>检查CAS操作</li>
 <li>检查栈大小是否是2的幂次</li>
 </ul>
-<h2 id="参数初始化runtime-args"><a href="#参数初始化runtime-args" class="headerlink" title="参数初始化runtime.args"></a>参数初始化runtime.args</h2><ul>
+<h2 id="参数初始化runtime.args">参数初始化runtime.args</h2>
+<ul>
 <li>对命令行中的参数进行处理</li>
 <li>参数数量赋值给<code>argc int32</code></li>
 <li>参数值复制给<code>argv **byte</code></li>
 </ul>
-<h2 id="调度器初始化rumtime-shedinit"><a href="#调度器初始化rumtime-shedinit" class="headerlink" title="调度器初始化rumtime.shedinit"></a>调度器初始化rumtime.shedinit</h2><ul>
+<h2 id="调度器初始化rumtime.shedinit">调度器初始化rumtime.shedinit</h2>
+<ul>
 <li>全局栈空间内存分配</li>
 <li>加载命令行参数到os.Args</li>
 <li>堆内存空间的初始化</li>
@@ -310,14 +318,17 @@
 <li>算法初始化（map、hash）</li>
 <li>设置process数量</li>
 </ul>
-<h2 id="创建主协程"><a href="#创建主协程" class="headerlink" title="创建主协程"></a>创建主协程</h2><ul>
+<h2 id="创建主协程">创建主协程</h2>
+<ul>
 <li>创建一个新的协程，执行runtime.main</li>
 <li>放入调度器等待调度</li>
 </ul>
-<h2 id="初始化M"><a href="#初始化M" class="headerlink" title="初始化M"></a>初始化M</h2><ul>
+<h2 id="初始化m">初始化M</h2>
+<ul>
 <li>初始化一个M，用来调度主协程</li>
 </ul>
-<h2 id="主协程执行主函数"><a href="#主协程执行主函数" class="headerlink" title="主协程执行主函数"></a>主协程执行主函数</h2><ul>
+<h2 id="主协程执行主函数">主协程执行主函数</h2>
+<ul>
 <li>执行runtime包中的init方法</li>
 <li>启动GC垃圾收集器</li>
 <li>执行用户包依赖的init方法</li>

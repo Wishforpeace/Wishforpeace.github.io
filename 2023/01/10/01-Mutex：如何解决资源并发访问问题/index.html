@@ -16,22 +16,17 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="01-Mutex：如何解决资源并发访问问题互斥锁的实现机制临界区在并发编程中，如果程序中的一部分会被并发访问或修改，那么，为了避免并发访问导致的意想不到的结果，这部分程序需要被保护起来，这部分被保护起来的程序，就叫做临界区。 临界区就是一个被共享的资源，或者说是一个整体的一组共享资源，比如对数据库的访问、对某一个共享数据结构的操作、对一个 I&#x2F;O 设备的使用、对一个连接池中的连接的调用，等等。 多">
+    <meta name="description" content="01-Mutex：如何解决资源并发访问问题 互斥锁的实现机制 临界区 在并发编程中，如果程序中的一部分会被并发访问或修改，那么，为了避免并发访问导致的意想不到的结果，这部分程序需要被保护起来，这部分被保护起来的程序，就叫做临界区。 临界区就是一个被共享的资源，或者说是一个整体的一组共享资源，比如对数据库的访问、对某一个共享数据结构的操作、对一个 I&#x2F;O 设备的使用、对一个连接池中的连接的调用，等等">
 <meta property="og:type" content="article">
 <meta property="og:title" content="01 | Mutex：如何解决资源并发访问问题?">
 <meta property="og:url" content="http://example.com/2023/01/10/01-Mutex%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%B5%84%E6%BA%90%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="01-Mutex：如何解决资源并发访问问题互斥锁的实现机制临界区在并发编程中，如果程序中的一部分会被并发访问或修改，那么，为了避免并发访问导致的意想不到的结果，这部分程序需要被保护起来，这部分被保护起来的程序，就叫做临界区。 临界区就是一个被共享的资源，或者说是一个整体的一组共享资源，比如对数据库的访问、对某一个共享数据结构的操作、对一个 I&#x2F;O 设备的使用、对一个连接池中的连接的调用，等等。 多">
+<meta property="og:description" content="01-Mutex：如何解决资源并发访问问题 互斥锁的实现机制 临界区 在并发编程中，如果程序中的一部分会被并发访问或修改，那么，为了避免并发访问导致的意想不到的结果，这部分程序需要被保护起来，这部分被保护起来的程序，就叫做临界区。 临界区就是一个被共享的资源，或者说是一个整体的一组共享资源，比如对数据库的访问、对某一个共享数据结构的操作、对一个 I&#x2F;O 设备的使用、对一个连接池中的连接的调用，等等">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110172308798.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110165713065.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110165833018.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110193751324.png">
 <meta property="article:published_time" content="2023-01-10T08:42:07.000Z">
 <meta property="article:modified_time" content="2023-01-10T11:44:28.440Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110172308798.png">
   
   
   
@@ -86,9 +81,7 @@
 
 
   
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 
 <body>
@@ -225,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k words
+          2.9k words
         
       </span>
     
@@ -236,7 +229,7 @@
         
         
         
-          24 mins
+          25 mins
         
       </span>
     
@@ -279,32 +272,67 @@
             
               <div class="markdown-body">
                 
-                <h1 id="01-Mutex：如何解决资源并发访问问题"><a href="#01-Mutex：如何解决资源并发访问问题" class="headerlink" title="01-Mutex：如何解决资源并发访问问题"></a>01-Mutex：如何解决资源并发访问问题</h1><h2 id="互斥锁的实现机制"><a href="#互斥锁的实现机制" class="headerlink" title="互斥锁的实现机制"></a>互斥锁的实现机制</h2><h3 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h3><p>在并发编程中，如果程序中的一部分会被并发访问或修改，那么，为了避免并发访问导致的意想不到的结果，这部分程序需要被保护起来，这部分被保护起来的程序，就叫做临界区。</p>
-<p>临界区就是一个被共享的资源，或者说是一个整体的一组共享资源，比如对数据库的访问、对某一个共享数据结构的操作、对一个 I/O 设备的使用、对一个连接池中的连接的调用，等等。</p>
+                <h1
+id="mutex如何解决资源并发访问问题">01-Mutex：如何解决资源并发访问问题</h1>
+<h2 id="互斥锁的实现机制">互斥锁的实现机制</h2>
+<h3 id="临界区">临界区</h3>
+<p>在并发编程中，如果程序中的一部分会被并发访问或修改，那么，为了避免并发访问导致的意想不到的结果，这部分程序需要被保护起来，这部分被保护起来的程序，就叫做临界区。</p>
+<p>临界区就是一个被共享的资源，或者说是一个整体的一组共享资源，比如对数据库的访问、对某一个共享数据结构的操作、对一个
+I/O 设备的使用、对一个连接池中的连接的调用，等等。</p>
 <p>多个线程同步访问临界区，就会造成访问或操作错误。</p>
 <p><strong>使用互斥锁，限定临界区只能为一个线程持有。</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110172308798.png" srcset="/img/loading.gif" lazyload alt="image-20230110172308798"></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110172308798.png" srcset="/img/loading.gif" lazyload
+alt="image-20230110172308798" />
+<figcaption aria-hidden="true">image-20230110172308798</figcaption>
+</figure>
 <p>Mutex是使用最广泛的同步原语，也叫并发原语</p>
-<h3 id="同步原语的使用场景："><a href="#同步原语的使用场景：" class="headerlink" title="同步原语的使用场景："></a>同步原语的使用场景：</h3><ul>
+<h3 id="同步原语的使用场景">同步原语的使用场景：</h3>
+<ul>
 <li>共享资源：数据竞争，常用Mutex、RWMutex</li>
 <li>任务编排：goroutine按照一定规律执行，常用WaitGroup、Channel</li>
 <li>消息传递：不同的goroutine之间线程安全交流，常用Channel</li>
 </ul>
-<h2 id="Mutex的基本使用方法"><a href="#Mutex的基本使用方法" class="headerlink" title="Mutex的基本使用方法"></a>Mutex的基本使用方法</h2><h3 id="Locker接口"><a href="#Locker接口" class="headerlink" title="Locker接口"></a>Locker接口</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Locker <span class="hljs-keyword">interface</span>&#123;<br>  Lock() <br>  Unlock()<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="mutex的基本使用方法">Mutex的基本使用方法</h2>
+<h3 id="locker接口">Locker接口</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Locker <span class="hljs-keyword">interface</span>&#123;<br>  Lock() <br>  Unlock()<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>互斥锁Mutex提供两个方法Lock和Unlock:进入临界区前调用Lock，退出临界区调用Unlock</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(m *Mutex)</span></span>Lock()<br><span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(m *Mutex)</span></span>Unlock()<br></code></pre></td></tr></table></figure>
-<p><strong>当一个 goroutine 通过调用 Lock 方法获得了这个锁的拥有权后， 其它请求锁的 goroutine就会阻塞在 Lock 方法的调用上，直到锁被释放并且自己获取到了这个锁的拥有权。</strong></p>
-<h3 id="为什么要加锁？"><a href="#为什么要加锁？" class="headerlink" title="为什么要加锁？"></a>为什么要加锁？</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;sync&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 计数器的值</span><br>	<span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span><br><br>	<span class="hljs-comment">// 辅助变量，用来确定所有goroutine都完成</span><br>	<span class="hljs-keyword">var</span> wg sync.WaitGroup<br>	wg.Add(<span class="hljs-number">10</span>)<br><br>	<span class="hljs-comment">// 启动10个goroutine</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ &#123;<br>		<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>			<span class="hljs-keyword">defer</span> wg.Done()<br>			<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">1000</span>; j++ &#123;<br>				count++<br>			&#125;<br>		&#125;()<br>	&#125;<br>	wg.Wait()<br>	fmt.Println(count)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p><strong>当一个 goroutine 通过调用 Lock 方法获得了这个锁的拥有权后，
+其它请求锁的 goroutine就会阻塞在 Lock
+方法的调用上，直到锁被释放并且自己获取到了这个锁的拥有权。</strong></p>
+<h3 id="为什么要加锁">为什么要加锁？</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;sync&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 计数器的值</span><br>	<span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span><br><br>	<span class="hljs-comment">// 辅助变量，用来确定所有goroutine都完成</span><br>	<span class="hljs-keyword">var</span> wg sync.WaitGroup<br>	wg.Add(<span class="hljs-number">10</span>)<br><br>	<span class="hljs-comment">// 启动10个goroutine</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ &#123;<br>		<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>			<span class="hljs-keyword">defer</span> wg.Done()<br>			<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">1000</span>; j++ &#123;<br>				count++<br>			&#125;<br>		&#125;()<br>	&#125;<br>	wg.Wait()<br>	fmt.Println(count)<br>&#125;<br><br></code></pre></td></tr></table></figure>
 <p>执行结果不尽如人意啊！！！</p>
-<p><strong><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110165713065.png" srcset="/img/loading.gif" lazyload alt="image-20230110165713065"></strong></p>
+<p><strong><img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110165713065.png" srcset="/img/loading.gif" lazyload
+alt="image-20230110165713065" /></strong></p>
 <p><strong>cout++不是一个原子操作！！</strong>好多计数被吞掉了</p>
-<h3 id="race-detector"><a href="#race-detector" class="headerlink" title="race detector"></a>race detector</h3><p>编译器通过探测所 有的内存访问，加入代码能监视对这些内存地址的访问（读还是写）。在代码运行的时候,race detector 就能监控到对共享变量的非同步访问，出现 race 的时候，就会打印出警告信息。</p>
+<h3 id="race-detector">race detector</h3>
+<p>编译器通过探测所
+有的内存访问，加入代码能监视对这些内存地址的访问（读还是写）。在代码运行的时候,race
+detector 就能监控到对共享变量的非同步访问，出现 race
+的时候，就会打印出警告信息。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> run -race example1.<span class="hljs-keyword">go</span><br></code></pre></td></tr></table></figure>
-<p>但是只能通过真正对实际地址进行读写访问的时候才能探测，所以它并不能在编译的时候发现 data race 的问题。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110165833018.png" srcset="/img/loading.gif" lazyload alt="image-20230110165833018"></p>
+<p>但是只能通过真正对实际地址进行读写访问的时候才能探测，所以它并不能在编译的时候发现
+data race 的问题。</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110165833018.png" srcset="/img/loading.gif" lazyload
+alt="image-20230110165833018" />
+<figcaption aria-hidden="true">image-20230110165833018</figcaption>
+</figure>
 <p>运行<code>go tool compile -race -S example1.go</code>，可以查看计数器例子的代码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110193751324.png" srcset="/img/loading.gif" lazyload alt="image-20230110193751324"></p>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>临界区是count++，只要在临界区前面获取锁，在离开临界区的时候释放锁，就可以完美解决data race问题</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230110193751324.png" srcset="/img/loading.gif" lazyload
+alt="image-20230110193751324" />
+<figcaption aria-hidden="true">image-20230110193751324</figcaption>
+</figure>
+<h3 id="使用方法">使用方法</h3>
+<p>临界区是count++，只要在临界区前面获取锁，在离开临界区的时候释放锁，就可以完美解决data
+race问题</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;sync&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 互斥锁保护计时器</span><br>	<span class="hljs-keyword">var</span> mu sync.Mutex<br>	<span class="hljs-comment">// 计数器的值</span><br>	<span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span><br><br>	<span class="hljs-comment">// 辅助变量，用来确定所有goroutine都完成</span><br>	<span class="hljs-keyword">var</span> wg sync.WaitGroup<br>	wg.Add(<span class="hljs-number">10</span>)<br><br>	<span class="hljs-comment">// 启动10个goroutine</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ &#123;<br>		<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>			<span class="hljs-keyword">defer</span> wg.Done()<br>			mu.Lock()<br>			<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">1000</span>; j++ &#123;<br>				count++<br>			&#125;<br>			mu.Unlock()<br>		&#125;()<br>	&#125;<br>	wg.Wait()<br>	fmt.Println(count)<br>&#125;<br><br></code></pre></td></tr></table></figure>
 <p>其他用法：</p>
 <p><strong>嵌入字段</strong></p>
