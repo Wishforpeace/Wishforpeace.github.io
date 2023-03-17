@@ -40,8 +40,11 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309150331158.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309150518069.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219115456110.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230313224901874.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230313225002459.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230313225317370.png">
 <meta property="article:published_time" content="2023-02-19T00:52:53.000Z">
-<meta property="article:modified_time" content="2023-03-09T07:07:49.486Z">
+<meta property="article:modified_time" content="2023-03-13T14:54:48.791Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230221135311992.png">
@@ -238,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k words
+          2.7k words
         
       </span>
     
@@ -249,7 +252,7 @@
         
         
         
-          20 mins
+          23 mins
         
       </span>
     
@@ -351,9 +354,18 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select count(*)<br>from demo.transactiondetails;<br></code></pre></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230309150518069.png" srcset="/img/loading.gif" lazyload alt="image-20230309150518069"></p>
 <p>一页可以显示30个数据，一共6个数据，所以就只有1页。</p>
+<p>如果超市经营者想知道每天每种商品有几次销售，就需要按天、按商品名称，进行分组查询：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select <br>left (a.transdate,10),c.goodsname,count(*)<br>from<br>demo.transactionhead a<br>join<br>demo.transactiondetails b on(a.transactionid = b.transactionid)<br>join<br>demo.goodsmaster c on (b.itemnumber = c.itemnumber)<br>group by left(a.transdate,10),c.goodsname<br>order by left(a.transdate,10),c.goodsname;<br></code></pre></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230219115456110.png" srcset="/img/loading.gif" lazyload alt="image-20230219115456110"></p>
-
+<h3 id="2-COUNT-字段"><a href="#2-COUNT-字段" class="headerlink" title="2.COUNT(字段)"></a>2.COUNT(字段)</h3><p>COUNT(字段)用来统计分组这个字段的值出现了几次，如果字段是空，就不统计。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select *<br>from demo.goodsmaster<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230313224901874.png" srcset="/img/loading.gif" lazyload alt="image-20230313224901874" style="zoom:50%;" /></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(goodsname)<br><span class="hljs-keyword">from</span> demo.goodsmaster;<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230313225002459.png" srcset="/img/loading.gif" lazyload alt="image-20230313225002459" style="zoom:50%;" /></p>
+<p>统计字段“specification”，用COUNT(specification)，结果为1，空值不统计</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select COUNT(specification)<br>from demo.goodsmaster;<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230313225317370.png" srcset="/img/loading.gif" lazyload alt="image-20230313225317370" style="zoom:50%;" /></p>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2>
                 
               </div>
             

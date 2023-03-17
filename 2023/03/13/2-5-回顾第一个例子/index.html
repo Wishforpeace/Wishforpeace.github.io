@@ -16,32 +16,23 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="寄存器 一个字型数据可以存放在内存之中 可以由2个连续的地址内存单元组成 高地址：内存单元存放字型数据的高位字节 低地址：内存单元存放字型数据的低位字节  ds段地址寄存器访问数据用的 12mov al,ds:[0]		;mov移动指令CPU中的AL寄存器，内存地址为ds:[0] 0为偏移地址，方括号是ds+0组合成的段地址，方括号内为得到的内容;cpu从段寄存器内读取了8位数据 错误修改ds的方">
+    <meta name="description" content="2.5 回顾第一个例子">
 <meta property="og:type" content="article">
-<meta property="og:title" content="寄存器">
-<meta property="og:url" content="http://example.com/2022/10/19/%E5%AF%84%E5%AD%98%E5%99%A8/index.html">
+<meta property="og:title" content="2.5 回顾第一个例子">
+<meta property="og:url" content="http://example.com/2023/03/13/2-5-%E5%9B%9E%E9%A1%BE%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="寄存器 一个字型数据可以存放在内存之中 可以由2个连续的地址内存单元组成 高地址：内存单元存放字型数据的高位字节 低地址：内存单元存放字型数据的低位字节  ds段地址寄存器访问数据用的 12mov al,ds:[0]		;mov移动指令CPU中的AL寄存器，内存地址为ds:[0] 0为偏移地址，方括号是ds+0组合成的段地址，方括号内为得到的内容;cpu从段寄存器内读取了8位数据 错误修改ds的方">
+<meta property="og:description" content="2.5 回顾第一个例子">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/Hyeonwuu/Image/master/image-20221019161654005.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019163034201.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019164656493.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019164806872.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019165406196.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019171548323.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170350121.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170656087.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170543070.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019171513948.png">
-<meta property="article:published_time" content="2022-10-19T13:06:18.000Z">
-<meta property="article:modified_time" content="2022-10-19T13:07:11.439Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230313165310408.png">
+<meta property="article:published_time" content="2023-03-13T08:50:10.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:56:49.090Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Hyeonwuu/Image/master/image-20221019161654005.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230313165310408.png">
   
   
   
-  <title>寄存器 - WYX同学的Blog</title>
+  <title>2.5 回顾第一个例子 - WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -94,7 +85,119 @@
   
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 
 <body>
@@ -208,7 +311,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="寄存器"></span>
+            <span id="subtitle" data-typed-text="2.5 回顾第一个例子"></span>
           
         </div>
 
@@ -219,8 +322,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-19 21:06" pubdate>
-          October 19, 2022 pm
+        <time datetime="2023-03-13 16:50" pubdate>
+          March 13, 2023 pm
         </time>
       </span>
     
@@ -231,7 +334,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          263 words
+          10 words
         
       </span>
     
@@ -242,7 +345,7 @@
         
         
         
-          3 mins
+          1 mins
         
       </span>
     
@@ -280,31 +383,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">寄存器</h1>
+            <h1 style="display: none">2.5 回顾第一个例子</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><p><img src="https://raw.githubusercontent.com/Hyeonwuu/Image/master/image-20221019161654005.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>一个字型数据可以存放在内存之中 可以由2个连续的地址内存单元组成</p>
-<p><strong>高地址</strong>：内存单元存放字型数据的<strong>高位字节</strong></p>
-<p><strong>低地址</strong>：内存单元存放字型数据的<strong>低位字节</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019163034201.png" srcset="/img/loading.gif" lazyload alt="image-20221019163034201"></p>
-<h2 id="ds段地址寄存器"><a href="#ds段地址寄存器" class="headerlink" title="ds段地址寄存器"></a>ds段地址寄存器</h2><p>访问数据用的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov al,ds:[0]		;mov移动指令CPU中的AL寄存器，内存地址为ds:[0] 0为偏移地址，方括号是ds+0组合成的段地址，方括号内为得到的内容<br>;cpu从段寄存器内读取了8位数据<br></code></pre></td></tr></table></figure>
-<p><strong>错误修改ds的方法</strong></p>
-<p><strong><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019164656493.png" srcset="/img/loading.gif" lazyload alt="image-20221019164656493" style="zoom:25%;" /></strong></p>
-<p><strong>正确方式，使用寄存器存储</strong></p>
-<p><strong><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019164806872.png" srcset="/img/loading.gif" lazyload alt="image-20221019164806872" style="zoom:25%;" /></strong></p>
-<p><strong>高位字节到高位地址，低位字节到低位地址</strong></p>
-<p><strong><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019165406196.png" srcset="/img/loading.gif" lazyload alt="image-20221019165406196" style="zoom:25%;" /></strong></p>
-<h2 id="寄存器ax-bx-cx"><a href="#寄存器ax-bx-cx" class="headerlink" title="寄存器ax bx cx"></a>寄存器ax bx cx</h2><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019171548323.png" srcset="/img/loading.gif" lazyload alt="image-20221019171548323"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov ax,1000H<br>mov ds,ax			;获取段地址<br></code></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170350121.png" srcset="/img/loading.gif" lazyload alt="image-20221019170350121" style="zoom:25%;" /></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170656087.png" srcset="/img/loading.gif" lazyload alt="image-20221019170656087" style="zoom:50%;" /></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019170543070.png" srcset="/img/loading.gif" lazyload alt="image-20221019170543070"></p>
-<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><p> 问题3.4</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20221019171513948.png" srcset="/img/loading.gif" lazyload alt="image-20221019171513948"></p>
+                <h1 id="2-5-回顾第一个例子"><a href="#2-5-回顾第一个例子" class="headerlink" title="2.5 回顾第一个例子"></a>2.5 回顾第一个例子</h1><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230313165310408.png" srcset="/img/loading.gif" lazyload alt="神经网络、层、损失函数与优化器之间的关系" style="zoom:50%;"></p>
 
                 
               </div>
@@ -323,7 +407,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="category-chain-item">汇编语言</a>
+  <a href="/categories/Deep-Learning/" class="category-chain-item">Deep Learning</a>
   
   
 
@@ -343,8 +427,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>寄存器</div>
-      <div>http://example.com/2022/10/19/寄存器/</div>
+      <div>2.5 回顾第一个例子</div>
+      <div>http://example.com/2023/03/13/2-5-回顾第一个例子/</div>
     </div>
     <div class="license-meta">
       
@@ -356,7 +440,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 19, 2022</div>
+          <div>March 13, 2023</div>
         </div>
       
       
@@ -386,9 +470,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/25/Network-Programming-PartII/" title="Network Programming PartII">
+                      <a href="/2023/03/13/09-%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0%EF%BC%9A%E6%97%B6%E9%97%B4%E7%B1%BB%E6%95%B0%E6%8D%AE%EF%BC%8CMySQL%E6%98%AF%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%E7%9A%84%EF%BC%9F/" title="09 时间函数：时间类数据，MySQL是怎么处理的？">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Network Programming PartII</span>
+                        <span class="hidden-mobile">09 时间函数：时间类数据，MySQL是怎么处理的？</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -396,8 +480,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/19/%E6%89%BF%E4%B8%8A%E5%90%AF%E4%B8%8B/" title="承上启下">
-                        <span class="hidden-mobile">承上启下</span>
+                      <a href="/2023/03/05/2-4-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E2%80%9C%E5%BC%95%E6%93%8E%E2%80%9D%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%A2%AF%E5%BA%A6%E7%9A%84%E4%BC%98%E5%8C%96/" title="2.4　神经网络的“引擎”：基于梯度的优化">
+                        <span class="hidden-mobile">2.4　神经网络的“引擎”：基于梯度的优化</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

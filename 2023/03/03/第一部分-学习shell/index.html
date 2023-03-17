@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230303085148597.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230303085811698.png">
 <meta property="article:published_time" content="2023-03-02T23:51:28.000Z">
-<meta property="article:modified_time" content="2023-03-11T16:22:31.899Z">
+<meta property="article:modified_time" content="2023-03-17T06:48:50.703Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230303075554381.png">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.6k words
+          8k words
         
       </span>
     
@@ -243,7 +243,7 @@
         
         
         
-          48 mins
+          67 mins
         
       </span>
     
@@ -343,7 +343,7 @@
 </tbody>
 </table>
 </div>
-<h2 id="3-操作系统"><a href="#3-操作系统" class="headerlink" title="3.操作系统"></a>3.操作系统</h2><h3 id="3-1-ls命令"><a href="#3-1-ls命令" class="headerlink" title="3.1 ls命令"></a>3.1 ls命令</h3><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230303082319410.png" srcset="/img/loading.gif" lazyload alt="image-20230303082319410"></p>
+<h2 id="第3章-操作系统"><a href="#第3章-操作系统" class="headerlink" title="第3章 操作系统"></a>第3章 操作系统</h2><h3 id="3-1-ls命令"><a href="#3-1-ls命令" class="headerlink" title="3.1 ls命令"></a>3.1 ls命令</h3><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230303082319410.png" srcset="/img/loading.gif" lazyload alt="image-20230303082319410"></p>
 <p>指定要显示的目录</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230303082340877.png" srcset="/img/loading.gif" lazyload alt="image-20230303082340877"></p>
 <p>指定多个目录</p>
@@ -580,10 +580,351 @@
 </tbody>
 </table>
 </div>
-<h3 id="3-5-符号连接"><a href="#3-5-符号连接" class="headerlink" title="3.5 符号连接"></a>3.5 符号连接</h3><p>浏览过程中看到以下条目的目录信息</p>
+<h3 id="3-5-符号链接"><a href="#3-5-符号链接" class="headerlink" title="3.5 符号链接"></a>3.5 符号链接</h3><p>浏览过程中看到以下条目的目录信息</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">lrwxrwxrwx 1 root root 11 2012-08-11 07:34 libc.so.6 -&gt; libc-2.6.so<br></code></pre></td></tr></table></figure>
 <p>注意，该条目信息的第一个字母是l，而且看起来像是有两个文件名。这种特殊的文件叫做<strong>符号链接</strong>（又叫软链接或symlink）。protoc 指定为 arch_64 版本</p>
 <p>在大多类UNIX系统中，一个文件很可能采用多个名字引用。</p>
+<p>某个程序需要使用foo文件中的一个共享资源，文件名包含了版本号，但是foo的版本变化频繁，版本变化后，如果名称变化，就必须跟踪每个可能使用该共享资源的程序，安装了该资源的版本后，都要让使用该资源的程序去寻找新的资源名字。</p>
+<p>创建一个符号链接foo指向foo-2.6,打开foo文件其实就是意味着打开foo-2.6。升级到2.7时，将文件添加到系统里，删除符号链接文件，创建指向新版本的符号链接即可。</p>
+<p>解决了版本问题，还保存了原有的版本文件。</p>
+<h4 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h4><p>允许文件有多个名字。</p>
+<h2 id="第4章-操作文件与目录"><a href="#第4章-操作文件与目录" class="headerlink" title="第4章 操作文件与目录"></a>第4章 操作文件与目录</h2><ul>
+<li>cp：复制文件与目录</li>
+<li>mv：移动或重命名文件和目录</li>
+<li>mkdir：创建目录</li>
+<li>rm：移除文件和目录</li>
+<li>in：创建硬链接和符号链接</li>
+</ul>
+<h3 id="4-1-通配符"><a href="#4-1-通配符" class="headerlink" title="4.1 通配符"></a>4.1 通配符</h3><p>​                                                                                        <strong>通配符</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">通配符</th>
+<th style="text-align:center">匹配项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">匹配任意多个字符（包括0和1个）</td>
+</tr>
+<tr>
+<td style="text-align:center">？</td>
+<td style="text-align:center">匹配任意单个字符（不包括0）</td>
+</tr>
+<tr>
+<td style="text-align:center">[characters]</td>
+<td style="text-align:center">匹配任意一个属于字符集中的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[!characters]</td>
+<td style="text-align:center">匹配任意一个不属于字符集中的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[[:class:]]</td>
+<td style="text-align:center">匹配任意一个属于指定字符类中的字符</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​                                                                                    <strong>常用字符类</strong>            </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符类</th>
+<th style="text-align:center">匹配项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">[:alnum:]</td>
+<td style="text-align:center">匹配任意一个字母或数字</td>
+</tr>
+<tr>
+<td style="text-align:center">[:alpha:]</td>
+<td style="text-align:center">匹配任意一个字母</td>
+</tr>
+<tr>
+<td style="text-align:center">[:digit]</td>
+<td style="text-align:center">匹配任意一个数字</td>
+</tr>
+<tr>
+<td style="text-align:center">[:lower]</td>
+<td style="text-align:center">匹配任意一个小写字母</td>
+</tr>
+<tr>
+<td style="text-align:center">[:upper:]</td>
+<td style="text-align:center">匹配任意一个大写字母</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​                                                                                    <strong>通配符示例</strong>            </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模式</th>
+<th style="text-align:center">匹配项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">所有文件</td>
+</tr>
+<tr>
+<td style="text-align:center">g*</td>
+<td style="text-align:center">以g开头的所有文件</td>
+</tr>
+<tr>
+<td style="text-align:center">b*.txt</td>
+<td style="text-align:center">以b开头的txt文件</td>
+</tr>
+<tr>
+<td style="text-align:center">Data???</td>
+<td style="text-align:center">以Data开头，后面跟3个字符的任一文件</td>
+</tr>
+<tr>
+<td style="text-align:center">[abc]*</td>
+<td style="text-align:center">以abc任一开头的任一文件</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>BACKUP.[0-9][0-9][0-9]</code></td>
+<td style="text-align:center">以<code>BACKUP.</code>开头，后面紧跟3个数字的任一文件</td>
+</tr>
+<tr>
+<td style="text-align:center">[[:upper:]]*</td>
+<td style="text-align:center">以大写字母开头的任一文件</td>
+</tr>
+<tr>
+<td style="text-align:center">[![:digit:]]*</td>
+<td style="text-align:center">不以数载开头的任一文件</td>
+</tr>
+<tr>
+<td style="text-align:center">*[[:lower]123]</td>
+<td style="text-align:center">以小写字母或数字1、2、3中的任一结尾的任一文件</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​                            </p>
+<h4 id="字符范围"><a href="#字符范围" class="headerlink" title="字符范围"></a>字符范围</h4><p>[a-z]和[A-Z]尽管还能用，但是难以确保不会发生意想不到的错误</p>
+<h4 id="通配符在GUI中也奏效"><a href="#通配符在GUI中也奏效" class="headerlink" title="通配符在GUI中也奏效"></a>通配符在GUI中也奏效</h4><ul>
+<li><p>Nautilus：Edit-&gt;Select Pattern选择文件。输入通配符表示的文件选择模式，会显示匹配的文件</p>
+</li>
+<li><p>Dolphin和Konqueror：直接地址栏输入通配符，比如在<code>\usr\bin</code>目录下，输入<code>u*</code>，可以显示匹配结果。</p>
+</li>
+</ul>
+<h3 id="4-2-mkdir——创建目录"><a href="#4-2-mkdir——创建目录" class="headerlink" title="4.2 mkdir——创建目录"></a>4.2 mkdir——创建目录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir dir1<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir dir1 dir2 dir3<br></code></pre></td></tr></table></figure>
+<h3 id="4-3-cp——复制文件和目录"><a href="#4-3-cp——复制文件和目录" class="headerlink" title="4.3 cp——复制文件和目录"></a>4.3 cp——复制文件和目录</h3><p>复制文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp item1 item2<br></code></pre></td></tr></table></figure>
+<p>复制目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp item... directory<br></code></pre></td></tr></table></figure>
+<p>​                                                                                        <strong>cp常用选项</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-a<br />—archive</td>
+<td style="text-align:center">复制文件和目录及其属性，包括所有权和权限。通常来说，复制的文件具有用户操作文件的默认属性</td>
+</tr>
+<tr>
+<td style="text-align:center">-i<br />—interactive</td>
+<td style="text-align:center">在覆盖一个已存在的文件前，提升用户进行确认。如果没有指定该项，cp会默认覆盖文件</td>
+</tr>
+<tr>
+<td style="text-align:center">-r<br />—recursive</td>
+<td style="text-align:center">递归地复制目录及其内容。复制目录时需要使用这个选项(或者-a选项)</td>
+</tr>
+<tr>
+<td style="text-align:center">-u<br />—update</td>
+<td style="text-align:center">当将文件从一个目录复制到另一个目录时，只会复制目标目录中没有的文件或者更新已有的文件</td>
+</tr>
+<tr>
+<td style="text-align:center">-v<br />—verbose</td>
+<td style="text-align:center">复制文件时，显示信息性消息(informative message)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​                                                                                <strong>cp命令示例</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">cp file1 file2</td>
+<td style="text-align:center">将file1复制到file2。如果file2存在，会被file1覆盖，不存在，会生成file2</td>
+</tr>
+<tr>
+<td style="text-align:center">cp -i file1 file2</td>
+<td style="text-align:center">同上，区别是覆盖前会通知用户确认</td>
+</tr>
+<tr>
+<td style="text-align:center">cp file1 file2 dir1</td>
+<td style="text-align:center">将file1和file2复制到dir1文件夹下，前提是dir1存在</td>
+</tr>
+<tr>
+<td style="text-align:center">cp dir/* dir2</td>
+<td style="text-align:center">将dir1中全部文件复制到dir2中，前提是dir2存在</td>
+</tr>
+<tr>
+<td style="text-align:center">cp -r dir1 dir2</td>
+<td style="text-align:center">将dir1目录(及其内容)复制到dir2中，如果dir2不存在，创建dir2</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-4-mv——移除和重命名文件"><a href="#4-4-mv——移除和重命名文件" class="headerlink" title="4.4 mv——移除和重命名文件"></a>4.4 mv——移除和重命名文件</h3><p>重命名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mv item1 item2<br></code></pre></td></tr></table></figure>
+<p>将item移入dir</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mv item... directory<br></code></pre></td></tr></table></figure>
+<p>​                                                                               <strong>mv选项</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-i<br />—interactive</td>
+<td style="text-align:center">覆盖一个已存在的文件之前，提示用户确认。如果没有指定该选项，mv会默认覆盖</td>
+</tr>
+<tr>
+<td style="text-align:center">-u<br />—update</td>
+<td style="text-align:center">把文件从一个目录移动到另一个目录，只移动没有的文件，或更新已有的文件</td>
+</tr>
+<tr>
+<td style="text-align:center">-v<br />—verbose</td>
+<td style="text-align:center">移动文件时显示信息性消息</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​                                                                          <strong>mv示例</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">mv file1 file2</td>
+<td style="text-align:center">file1移动到file2，如果存在file2，会覆盖file2，不存在，会创建file2</td>
+</tr>
+<tr>
+<td style="text-align:center">mv -i file1 file2</td>
+<td style="text-align:center">同上，显示确认信息</td>
+</tr>
+<tr>
+<td style="text-align:center">mv file1 file2 dir</td>
+<td style="text-align:center">移动file1和file2到dir下，dir必须存在</td>
+</tr>
+<tr>
+<td style="text-align:center">mv dir1 dir2</td>
+<td style="text-align:center">将dir1移动到dir2，删除原来位置的dir1，如果dir2不存在，创建dir2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-5-rm——删除文件和目录"><a href="#4-5-rm——删除文件和目录" class="headerlink" title="4.5 rm——删除文件和目录"></a>4.5 rm——删除文件和目录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm item...<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm *.html<br></code></pre></td></tr></table></figure>
+<p>如果不小心多打了一个空格</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm * .html<br></code></pre></td></tr></table></figure>
+<p>rm 命令将会删除目录中所有文件，并提示说明目录中没有叫做.html的文件。</p>
+<p>​                                                                                    <strong>rm选项</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-i<br />-interactive</td>
+<td style="text-align:center">删除一个已经存在的文件时，提示用户确认</td>
+</tr>
+<tr>
+<td style="text-align:center">-r<br />—recursive</td>
+<td style="text-align:center">递归删除目录</td>
+</tr>
+<tr>
+<td style="text-align:center">-f<br />—force</td>
+<td style="text-align:center">忽视不存在的文件，无需提示确认，覆盖-i</td>
+</tr>
+<tr>
+<td style="text-align:center">-v<br />—verbose</td>
+<td style="text-align:center">删除文件时显示信息性消息</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​                                                                                    <strong>rm实例</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">rm file1</td>
+<td style="text-align:center">在不提示用户的情况下，删除file1</td>
+</tr>
+<tr>
+<td style="text-align:center">rm -i file1</td>
+<td style="text-align:center">删除file1前提示用户</td>
+</tr>
+<tr>
+<td style="text-align:center">rm -r file1 dir1</td>
+<td style="text-align:center">删除file1、dir1及它们的内容</td>
+</tr>
+<tr>
+<td style="text-align:center">rm -rf file1 dir1</td>
+<td style="text-align:center">即使file1和dir1不存在，也会继续删除</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-6-ln——创建链接"><a href="#4-6-ln——创建链接" class="headerlink" title="4.6 ln——创建链接"></a>4.6 ln——创建链接</h3><p>创建硬链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ln file link<br></code></pre></td></tr></table></figure>
+<p>创建符号链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ln -s item link<br></code></pre></td></tr></table></figure>
+<h4 id="4-6-1-硬链接"><a href="#4-6-1-硬链接" class="headerlink" title="4.6.1 硬链接"></a>4.6.1 硬链接</h4><p>默认情况下，每一个文件都有一个硬链接，该硬链接会给文件起名字。</p>
+<p>当创建一个硬链接时，也会为这个文件创建一个额外的目录条目。</p>
+<p><strong>硬链接的局限性：</strong></p>
+<ul>
+<li>硬链接不能引用自身系统之外的文件，不在同一磁盘分区的无法引用</li>
+<li>硬链接不能够引用目录</li>
+</ul>
 
                 
               </div>
