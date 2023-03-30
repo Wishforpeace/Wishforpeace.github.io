@@ -26,8 +26,11 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230314132003689.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230314132838193.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230314132904407.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230321133159958.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230321134013491.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230321135506213.png">
 <meta property="article:published_time" content="2023-03-13T14:55:10.000Z">
-<meta property="article:modified_time" content="2023-03-14T05:34:05.913Z">
+<meta property="article:modified_time" content="2023-03-21T05:57:48.273Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230314132003689.png">
@@ -224,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          284 words
+          1.2k words
         
       </span>
     
@@ -235,7 +238,7 @@
         
         
         
-          3 mins
+          10 mins
         
       </span>
     
@@ -287,7 +290,30 @@
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230314132904407.png" srcset="/img/loading.gif" lazyload alt="商品信息表 demo.goodsmaster" style="zoom:50%;" /></p>
 <p>销售单明细表通过流水编号与销售单头表关联，其中流水编号是外键。</p>
 <p>首先分析一下“统计一天中每小时的销售数量和销售金额”</p>
-<p>统计一天中每小时的销售情况，先把销售数据按照小时进行分组统计</p>
+<p>统计一天中每小时的销售情况，先把销售数据按照小时进行分组统计。</p>
+<p>解决问题的关键是把交易时间的小时部分提取出来。使用EXTRACT()和HOUR()函数。</p>
+<p><code>EXTRACT(type FROM date)</code>表示从日期时间date中抽取type指定部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT <br>EXTRACT(HOUR FROM b.transdate) AS 时段,<br>SUM(a.quantity) AS 数量,<br>SUM(a.salesvalue) AS 金额<br>FROM <br>demo.transactiondetails a<br>JOIN <br>demo.transactionhead b ON (a.transactionid = b.transactionid)<br>GROUP BY EXTRACT(HOUR FROM b.transdate)<br>ORDER BY EXTRACT(HOUR FROM b.transdate);<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230321133159958.png" srcset="/img/loading.gif" lazyload alt="image-20230321133159958"></p>
+<p>查询过程：</p>
+<ul>
+<li>先从交易时间中抽取出小时信息</li>
+<li>按照交易时间进行分组</li>
+<li>按照分组来统计数量和金额</li>
+<li>按照时间进行排序</li>
+</ul>
+<p>使用HOUR()函数直接提取时间</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT <br>HOUR(b.transdate) AS 时段,<br>SUM(a.quantity) AS 数量,<br>SUM(a.salesvalue) AS 金额<br>FROM<br>demo.transactiondetails a<br>JOIN <br>demo.transactionhead b ON (a.transactionid = b.transactionid)<br>GROUP BY HOUR(b.transdate)<br>ORDER BY HOUR(b.transdate);<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230321134013491.png" srcset="/img/loading.gif" lazyload alt="image-20230321134013491"></p>
+<p>支持的函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">YEAR（date）：获取 date 中的年。<br>MONTH（date）：获取 date 中的月。<br>DAY（date）：获取 date 中的日。<br>HOUR（date）：获取 date 中的小时。<br>MINUTE（date）：获取 date 中的分。<br>SECOND（date）：获取 date 中的秒。<br></code></pre></td></tr></table></figure>
+<h2 id="计算日期时间的函数"><a href="#计算日期时间的函数" class="headerlink" title="计算日期时间的函数"></a>计算日期时间的函数</h2><ul>
+<li>DATE_ADD(date,INTERVAL表达式type):</li>
+<li>LAST_DAY(date):</li>
+</ul>
+<p>第一步：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT DATE_ADD(&#x27;2020-12-10&#x27;,INTERVAL -1 YEAR);<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230321135506213.png" srcset="/img/loading.gif" lazyload alt="image-20230321135506213"></p>
 
                 
               </div>

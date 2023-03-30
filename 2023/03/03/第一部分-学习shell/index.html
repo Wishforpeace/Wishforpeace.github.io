@@ -34,8 +34,18 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230303084604541.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230303085148597.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230303085811698.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230317151028103.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230317151130584.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230317151228702.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230317151305530.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081055206.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081235903.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081553017.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081700946.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081830661.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081931795.png">
 <meta property="article:published_time" content="2023-03-02T23:51:28.000Z">
-<meta property="article:modified_time" content="2023-03-17T06:48:50.703Z">
+<meta property="article:modified_time" content="2023-03-24T05:31:37.758Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230303075554381.png">
@@ -232,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8k words
+          8.4k words
         
       </span>
     
@@ -243,7 +253,7 @@
         
         
         
-          67 mins
+          71 mins
         
       </span>
     
@@ -925,6 +935,40 @@
 <li>硬链接不能引用自身系统之外的文件，不在同一磁盘分区的无法引用</li>
 <li>硬链接不能够引用目录</li>
 </ul>
+<p>硬链接与文件本身无区别，但是包含硬链接的目标列表没有特别的链接指示说明。</p>
+<p>当硬链接被删除时，只是删除了链接，文件本身还存在，除非删除文件的全部链接。</p>
+<h4 id="4-6-2-符号链接"><a href="#4-6-2-符号链接" class="headerlink" title="4.6.2 符号链接"></a>4.6.2 符号链接</h4><p>克服硬链接的局限性。</p>
+<p>符号链接通过创建特殊类型的文件起作用，该文件包含了指向引用文件或目录的文本指针。</p>
+<p>向符号链接中写入东西，同样会写入引用文件，删除符号链接时，只会删除链接，不会删除文件本身。</p>
+<p>坏链接：文件本身先被删除，符号链接仍然存在，不指向任何位置。</p>
+<p>ls命令会显示坏链接，标红。</p>
+<h3 id="4-7-实战演练"><a href="#4-7-实战演练" class="headerlink" title="4.7 实战演练"></a>4.7 实战演练</h3><p>创建目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir playground<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230317151028103.png" srcset="/img/loading.gif" lazyload alt="image-20230317151028103"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd playground<br>mkdir dir1 dir2<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230317151130584.png" srcset="/img/loading.gif" lazyload alt="image-20230317151130584"></p>
+<p>复制文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp /etc/passwd .<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230317151228702.png" srcset="/img/loading.gif" lazyload alt="image-20230317151228702"></p>
+<p>查看文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls -l<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230317151305530.png" srcset="/img/loading.gif" lazyload alt="image-20230317151305530"></p>
+<p>重复操作复制命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp -v /etc/passwd .<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081055206.png" srcset="/img/loading.gif" lazyload alt="image-20230324081055206"></p>
+<p>加上交互信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp -i /etc/passwd .<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081235903.png" srcset="/img/loading.gif" lazyload alt="image-20230324081235903"></p>
+<p>重命名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mv passwd fun<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081553017.png" srcset="/img/loading.gif" lazyload alt="image-20230324081553017"></p>
+<p>移动文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mv fun dir1<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081700946.png" srcset="/img/loading.gif" lazyload alt="image-20230324081700946"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mv /dir1/fun  dir2<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081830661.png" srcset="/img/loading.gif" lazyload alt="image-20230324081830661"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mv ~/dir2/fun .<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230324081931795.png" srcset="/img/loading.gif" lazyload alt="image-20230324081931795"></p>
 
                 
               </div>
