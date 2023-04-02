@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>[WARNING]: Console output during zsh initialization detected.</title>
+    <link href="/2023/04/02/WARNING-Console-output-during-zsh-initialization-detected/"/>
+    <url>/2023/04/02/WARNING-Console-output-during-zsh-initialization-detected/</url>
+    
+    <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs shell">Last login: Sun Apr  2 17:06:39 on ttys000<br><br>[WARNING]: Console output during zsh initialization detected.<br><br>When using Powerlevel10k with instant prompt, console output during zsh<br>initialization may indicate issues.<br><br>You can:<br><br>  - Recommended: Change ~/.zshrc so that it does not perform console I/O<br>    after the instant prompt preamble. See the link below for details.<br><br>    * You will not see this error message again.<br>    * Zsh will start quickly and prompt will update smoothly.<br><br>  - Suppress this warning either by running p10k configure or by manually<br>    defining the following parameter:<br><br>      typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet<br><br>    * You will not see this error message again.<br>    * Zsh will start quickly but prompt will jump down after initialization.<br><br>  - Disable instant prompt either by running p10k configure or by manually<br>    defining the following parameter:<br><br>      typeset -g POWERLEVEL9K_INSTANT_PROMPT=off<br><br>    * You will not see this error message again.<br>    * Zsh will start slowly.<br><br>  - Do nothing.<br><br>    * You will see this error message every time you start zsh.<br>    * Zsh will start quickly but prompt will jump down after initialization.<br><br>For details, see:<br>https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt<br><br>-- console output produced during zsh initialization follows --<br></code></pre></td></tr></table></figure><p>解决方法</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">p10k</span> configure <br></code></pre></td></tr></table></figure><p>   把<code>Instant Prompt Mode</code>改为off</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>SHELL</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>3.11 虚拟局域网VLAN概述</title>
     <link href="/2023/04/02/3-11-%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91VLAN%E6%A6%82%E8%BF%B0/"/>
     <url>/2023/04/02/3-11-%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91VLAN%E6%A6%82%E8%BF%B0/</url>
