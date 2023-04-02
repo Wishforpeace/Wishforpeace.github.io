@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>3.10 以太网交换机的生成树协议STP</title>
+    <link href="/2023/04/02/3-10-%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AESTP/"/>
+    <url>/2023/04/02/3-10-%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AESTP/</url>
+    
+    <content type="html"><![CDATA[<h1 id="3-10-以太网交换机的生成树协议STP"><a href="#3-10-以太网交换机的生成树协议STP" class="headerlink" title="3.10 以太网交换机的生成树协议STP"></a>3.10 以太网交换机的生成树协议STP</h1><h2 id="提高以太网的可靠性"><a href="#提高以太网的可靠性" class="headerlink" title="提高以太网的可靠性"></a>提高以太网的可靠性</h2><p>A、B之间链路断开，B和C也无法进行通信</p><p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402140441461.png" alt="image-20230402140441461" style="zoom:33%;" /></p><p>A、B、C之间全部断开，就变成了三个小的以太网</p><p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402140556654.png" alt="image-20230402140556654" style="zoom:33%;" /></p><h3 id="添加冗余链路"><a href="#添加冗余链路" class="headerlink" title="添加冗余链路"></a>添加冗余链路</h3><p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402140633047.png" alt="image-20230402140633047" style="zoom:33%;" /></p><p>负面效应：网络环路</p><p>带来的问题：</p><ul><li><p>广播风暴：反复转发，一直兜圈</p><ul><li>大量消耗网络资源，使网络无法正常转发其他数据帧</li></ul></li><li><p>主机收到重复的广播帧</p><ul><li>大量消耗主机资源</li></ul></li><li><p>交换机帧交换表震荡</p><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230402141050590.png" alt="image-20230402141050590"></p></li></ul><h2 id="生成树协议STP"><a href="#生成树协议STP" class="headerlink" title="生成树协议STP"></a>生成树协议STP</h2><ul><li><p>增加冗余链路，又避免环路</p></li><li><p>不考虑物理连接方式，自动构成<strong>逻辑上</strong>的无环路网络，逻辑拓扑结构为树型的</p></li><li>生成的树型逻辑结构拓扑要确保连通整个网络</li><li>物理拓扑发生变化，需要重新计算</li></ul><p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402141340737.png" alt="image-20230402141340737" style="zoom:25%;" /></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机网络</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>3.9 以太网交换机自学习和转发帧的过程</title>
+    <link href="/2023/04/02/3-9-%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%87%AA%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%BD%AC%E5%8F%91%E5%B8%A7%E7%9A%84%E8%BF%87%E7%A8%8B/"/>
+    <url>/2023/04/02/3-9-%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%87%AA%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%BD%AC%E5%8F%91%E5%B8%A7%E7%9A%84%E8%BF%87%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="3-9-以太网交换机自学习和转发帧的过程"><a href="#3-9-以太网交换机自学习和转发帧的过程" class="headerlink" title="3.9 以太网交换机自学习和转发帧的过程"></a>3.9 以太网交换机自学习和转发帧的过程</h1><ul><li>以太网工作在<strong>数据链路层</strong>（包括物理层）</li><li>以太网交换机接收到帧之后，在帧交换表中查找<strong>帧的目的MAC地址所对应的接口号</strong>，然后通过该接口转发帧</li><li>以太网交换机即插即用，通过<strong>自学习算法</strong>自动逐渐建立起<strong>帧交换表</strong></li></ul><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230402125840400.png" alt="image-20230402125840400"></p><h2 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h2><ol><li>收到帧后进行登记，登记的内容为帧的源MAC地址及进入交换机的接口号</li><li>根据帧的目的MAC地址和交换机的帧交换表对帧进行转发：</li></ol><ul><li>明确转发：交换机知道从哪个接口转发该帧ƒ</li><li>盲目转发：交换机不知道向哪个端口转发，只能将其通过除进入交换机的接口外的所有接口进行转发</li><li>明确丢弃：交换机不应该转发，所以丢弃</li></ul><h2 id="帧交换表的有效时间："><a href="#帧交换表的有效时间：" class="headerlink" title="帧交换表的有效时间："></a>帧交换表的有效时间：</h2><ul><li>交换机的接口改接另一台主机</li><li>主机更换了网卡</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机网络</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>3.8 集线器与交换机的区别</title>
     <link href="/2023/04/02/3-8-%E9%9B%86%E7%BA%BF%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
     <url>/2023/04/02/3-8-%E9%9B%86%E7%BA%BF%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
