@@ -16,27 +16,32 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="3.10 以太网交换机的生成树协议STP提高以太网的可靠性A、B之间链路断开，B和C也无法进行通信  A、B、C之间全部断开，就变成了三个小的以太网  添加冗余链路 负面效应：网络环路 带来的问题：  广播风暴：反复转发，一直兜圈  大量消耗网络资源，使网络无法正常转发其他数据帧   主机收到重复的广播帧  大量消耗主机资源   交换机帧交换表震荡    生成树协议STP 增加冗余链路，又避免环路">
+    <meta name="description" content="3.11 虚拟局域网VLAN概述 巨大的广播域存在弊端： 广播风暴（极大浪费网络资源和各主机CPU的资源） 难以管理和维护 潜在的安全问题  网络中频繁出现广播信息TCP&#x2F;IP协议栈中很多协议会使用广播  地址解析协议ARP（已知IP地址，找出MAC地址） 路由信息协议RIP（一种小型的内部路由协议） 动态主机配置协议DHCP（用于自动配置IP地址）  分割广播域使用路由器可以隔离广播域 路由器成">
 <meta property="og:type" content="article">
-<meta property="og:title" content="3.10 以太网交换机的生成树协议STP">
-<meta property="og:url" content="http://example.com/2023/04/02/3-10-%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AESTP/index.html">
+<meta property="og:title" content="3.11 虚拟局域网VLAN概述">
+<meta property="og:url" content="http://example.com/2023/04/02/3-11-%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91VLAN%E6%A6%82%E8%BF%B0/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="3.10 以太网交换机的生成树协议STP提高以太网的可靠性A、B之间链路断开，B和C也无法进行通信  A、B、C之间全部断开，就变成了三个小的以太网  添加冗余链路 负面效应：网络环路 带来的问题：  广播风暴：反复转发，一直兜圈  大量消耗网络资源，使网络无法正常转发其他数据帧   主机收到重复的广播帧  大量消耗主机资源   交换机帧交换表震荡    生成树协议STP 增加冗余链路，又避免环路">
+<meta property="og:description" content="3.11 虚拟局域网VLAN概述 巨大的广播域存在弊端： 广播风暴（极大浪费网络资源和各主机CPU的资源） 难以管理和维护 潜在的安全问题  网络中频繁出现广播信息TCP&#x2F;IP协议栈中很多协议会使用广播  地址解析协议ARP（已知IP地址，找出MAC地址） 路由信息协议RIP（一种小型的内部路由协议） 动态主机配置协议DHCP（用于自动配置IP地址）  分割广播域使用路由器可以隔离广播域 路由器成">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402140441461.png">
-<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402140556654.png">
-<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402140633047.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230402141050590.png">
-<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402141340737.png">
-<meta property="article:published_time" content="2023-04-02T06:02:13.000Z">
-<meta property="article:modified_time" content="2023-04-02T06:15:02.343Z">
+<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402141823464.png">
+<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402142259618.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230402142625888.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230402142910825.png">
+<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402151404515.png">
+<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402151545828.png">
+<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402151846699.png">
+<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402152346481.png">
+<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402152150468.png">
+<meta property="og:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402152437598.png">
+<meta property="article:published_time" content="2023-04-02T06:15:54.000Z">
+<meta property="article:modified_time" content="2023-04-02T07:24:53.303Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402140441461.png">
+<meta name="twitter:image" content="http://example.com/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402141823464.png">
   
   
   
-  <title>3.10 以太网交换机的生成树协议STP - WYX同学的Blog</title>
+  <title>3.11 虚拟局域网VLAN概述 - WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +208,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="3.10 以太网交换机的生成树协议STP"></span>
+            <span id="subtitle" data-typed-text="3.11 虚拟局域网VLAN概述"></span>
           
         </div>
 
@@ -214,7 +219,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-02 14:02" pubdate>
+        <time datetime="2023-04-02 14:15" pubdate>
           April 2, 2023 pm
         </time>
       </span>
@@ -226,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          245 words
+          1k words
         
       </span>
     
@@ -237,7 +242,7 @@
         
         
         
-          3 mins
+          9 mins
         
       </span>
     
@@ -275,42 +280,94 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">3.10 以太网交换机的生成树协议STP</h1>
+            <h1 style="display: none">3.11 虚拟局域网VLAN概述</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="3-10-以太网交换机的生成树协议STP"><a href="#3-10-以太网交换机的生成树协议STP" class="headerlink" title="3.10 以太网交换机的生成树协议STP"></a>3.10 以太网交换机的生成树协议STP</h1><h2 id="提高以太网的可靠性"><a href="#提高以太网的可靠性" class="headerlink" title="提高以太网的可靠性"></a>提高以太网的可靠性</h2><p>A、B之间链路断开，B和C也无法进行通信</p>
-<p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402140441461.png" srcset="/img/loading.gif" lazyload alt="image-20230402140441461" style="zoom:33%;" /></p>
-<p>A、B、C之间全部断开，就变成了三个小的以太网</p>
-<p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402140556654.png" srcset="/img/loading.gif" lazyload alt="image-20230402140556654" style="zoom:33%;" /></p>
-<h3 id="添加冗余链路"><a href="#添加冗余链路" class="headerlink" title="添加冗余链路"></a>添加冗余链路</h3><p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402140633047.png" srcset="/img/loading.gif" lazyload alt="image-20230402140633047" style="zoom:33%;" /></p>
-<p>负面效应：网络环路</p>
-<p>带来的问题：</p>
+                <h1 id="3-11-虚拟局域网VLAN概述"><a href="#3-11-虚拟局域网VLAN概述" class="headerlink" title="3.11 虚拟局域网VLAN概述"></a>3.11 虚拟局域网VLAN概述</h1><p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402141823464.png" srcset="/img/loading.gif" lazyload alt="image-20230402141823464" style="zoom:25%;" /></p>
+<h2 id="巨大的广播域存在弊端："><a href="#巨大的广播域存在弊端：" class="headerlink" title="巨大的广播域存在弊端："></a>巨大的广播域存在弊端：</h2><ul>
+<li>广播风暴（极大浪费网络资源和各主机CPU的资源）</li>
+<li>难以管理和维护</li>
+<li>潜在的安全问题</li>
+</ul>
+<h2 id="网络中频繁出现广播信息"><a href="#网络中频繁出现广播信息" class="headerlink" title="网络中频繁出现广播信息"></a>网络中频繁出现广播信息</h2><p>TCP/IP协议栈中很多协议会使用广播</p>
 <ul>
-<li><p>广播风暴：反复转发，一直兜圈</p>
+<li>地址解析协议ARP（已知IP地址，找出MAC地址）</li>
+<li>路由信息协议RIP（一种小型的内部路由协议）</li>
+<li>动态主机配置协议DHCP（用于自动配置IP地址）</li>
+</ul>
+<h2 id="分割广播域"><a href="#分割广播域" class="headerlink" title="分割广播域"></a>分割广播域</h2><h3 id="使用路由器可以隔离广播域"><a href="#使用路由器可以隔离广播域" class="headerlink" title="使用路由器可以隔离广播域"></a>使用路由器可以隔离广播域</h3><p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402142259618.png" srcset="/img/loading.gif" lazyload alt="image-20230402142259618" style="zoom:33%;" /></p>
+<p>路由器成本较高</p>
+<h3 id="虚拟局域网技术VLAN"><a href="#虚拟局域网技术VLAN" class="headerlink" title="虚拟局域网技术VLAN"></a>虚拟局域网技术VLAN</h3><p>将局域网内的设备划分成与物理组无关的逻辑组的技术，这些逻辑组具有某些共同的需求</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230402142625888.png" srcset="/img/loading.gif" lazyload alt="image-20230402142625888"></p>
+<h4 id="VLAN的实现技术"><a href="#VLAN的实现技术" class="headerlink" title="VLAN的实现技术"></a>VLAN的实现技术</h4><h5 id="IEEE-802-1Q帧"><a href="#IEEE-802-1Q帧" class="headerlink" title="IEEE 802.1Q帧"></a>IEEE 802.1Q帧</h5><p>对以太网的MAC帧格式进行了扩展，插入了4个字节的VLAN标记</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230402142910825.png" srcset="/img/loading.gif" lazyload alt="image-20230402142910825"></p>
 <ul>
-<li>大量消耗网络资源，使网络无法正常转发其他数据帧</li>
+<li>VLAN的最后12个比特称为<strong>VLAN标识符VID</strong>，唯一标记了以太网帧属于哪一个VLAN<ul>
+<li>VID的取值范围0～4095（2的12次方减1）</li>
+<li>0和4095都不用来表示VLAN，VID的有效取值范围是1-4094</li>
 </ul>
 </li>
-<li><p>主机收到重复的广播帧</p>
+<li>802.1Q帧由交换机处理，而不是有用户主机处理<ul>
+<li>交换机接收到普通的以太网帧使，进行<strong>打标签</strong>，插入4字节的VLAN标记，转变为802.1Q帧</li>
+<li>交换机转发802.1Q帧时，可能进行<strong>去标签</strong>，删除4字节的VLAN标记，转变为普通的以太网帧</li>
+</ul>
+</li>
+</ul>
+<h5 id="交换机端口类型"><a href="#交换机端口类型" class="headerlink" title="交换机端口类型"></a>交换机端口类型</h5><ul>
+<li>Access</li>
+<li>Trunk</li>
+<li>Hybrid</li>
+</ul>
+<h5 id="交换机各端口的缺省VLAN-ID"><a href="#交换机各端口的缺省VLAN-ID" class="headerlink" title="交换机各端口的缺省VLAN ID"></a>交换机各端口的缺省VLAN ID</h5><ul>
+<li>思科交换机，Native VLAN（本征VLAN）</li>
+<li>华为交换机，Port VLAN ID，端口VLAN ID，简记为PVID</li>
+</ul>
+<h5 id="Access端口"><a href="#Access端口" class="headerlink" title="Access端口"></a>Access端口</h5><ul>
+<li><p>用于连接用户计算机</p>
+</li>
+<li><p>Access端口只属于一个VLAN</p>
+</li>
+<li><p>Access端口的PVID值与端口所属VLAN的ID相同（默认为1）</p>
+</li>
+<li><p>Access端口接受处理方法：</p>
+<p>一般只接受“未打标签”的普通以太网MAC帧，根据接收帧的端口的PVID给帧<strong>“打标签”</strong>，插入4个字节的VLAN标记字段，字段中的VID取值与端口的PVID取值相同</p>
+</li>
+<li><p>Access端口发送处理方法：</p>
+<p>若帧的VID和端口的PVID相同，则<strong>“去标签”</strong>并转发该帧，否则不转发</p>
+<p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402151404515.png" srcset="/img/loading.gif" lazyload alt="image-20230402151404515" style="zoom:25%;" /></p>
+</li>
+</ul>
+<h5 id="Trunk端口"><a href="#Trunk端口" class="headerlink" title="Trunk端口"></a>Trunk端口</h5><ul>
+<li><p>用于交换机和交换机之间的连接</p>
+</li>
+<li><p>Trunk端口可以属于多个VLAN</p>
+</li>
+<li><p>用户可以自己定义Trunk端口的PVID值，默认为1</p>
+<p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402151545828.png" srcset="/img/loading.gif" lazyload alt="image-20230402151545828" style="zoom:25%;" /></p>
+</li>
+<li><p>Trunk端口发送处理方法</p>
 <ul>
-<li>大量消耗主机资源</li>
+<li><p>对VID等于PVID的帧，<strong>去标签</strong>再转发</p>
+<p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402151846699.png" srcset="/img/loading.gif" lazyload alt="image-20230402151846699" style="zoom:25%;" /></p>
+</li>
+<li><p>对于VID不等于PVID的帧，不去掉标签，直接转发</p>
+</li>
+</ul>
+<p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402152346481.png" srcset="/img/loading.gif" lazyload alt="image-20230402152346481" style="zoom:25%;" /></p>
+</li>
+<li><p>Trunk端口接收处理方法</p>
+<ul>
+<li><p>接收<strong>未打标签</strong>的帧，根据接收帧端口的PVID给帧<strong>打标签</strong>，插入4字节的VLAN标记字段，字段中的VID取值与端口的PVID取值相等</p>
+<p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402152150468.png" srcset="/img/loading.gif" lazyload alt="image-20230402152150468" style="zoom: 25%;" /></p>
+</li>
 </ul>
 </li>
-<li><p>交换机帧交换表震荡</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230402141050590.png" srcset="/img/loading.gif" lazyload alt="image-20230402141050590"></p>
+<li><p>接收<strong>已打标签</strong>的帧</p>
 </li>
 </ul>
-<h2 id="生成树协议STP"><a href="#生成树协议STP" class="headerlink" title="生成树协议STP"></a>生成树协议STP</h2><ul>
-<li><p>增加冗余链路，又避免环路</p>
-</li>
-<li><p>不考虑物理连接方式，自动构成<strong>逻辑上</strong>的无环路网络，逻辑拓扑结构为树型的</p>
-</li>
-<li>生成的树型逻辑结构拓扑要确保连通整个网络</li>
-<li>物理拓扑发生变化，需要重新计算</li>
-</ul>
-<p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402141340737.png" srcset="/img/loading.gif" lazyload alt="image-20230402141340737" style="zoom:25%;" /></p>
+<p><img src="/Users/wuyuxian/Library/Application%20Support/typora-user-images/image-20230402152437598.png" srcset="/img/loading.gif" lazyload alt="image-20230402152437598" style="zoom:25%;" /></p>
 
                 
               </div>
@@ -349,8 +406,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>3.10 以太网交换机的生成树协议STP</div>
-      <div>http://example.com/2023/04/02/3-10-以太网交换机的生成树协议STP/</div>
+      <div>3.11 虚拟局域网VLAN概述</div>
+      <div>http://example.com/2023/04/02/3-11-虚拟局域网VLAN概述/</div>
     </div>
     <div class="license-meta">
       
@@ -392,18 +449,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/02/3-11-%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91VLAN%E6%A6%82%E8%BF%B0/" title="3.11 虚拟局域网VLAN概述">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">3.11 虚拟局域网VLAN概述</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/02/3-9-%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%87%AA%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%BD%AC%E5%8F%91%E5%B8%A7%E7%9A%84%E8%BF%87%E7%A8%8B/" title="3.9 以太网交换机自学习和转发帧的过程">
-                        <span class="hidden-mobile">3.9 以太网交换机自学习和转发帧的过程</span>
+                      <a href="/2023/04/02/3-10-%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AESTP/" title="3.10 以太网交换机的生成树协议STP">
+                        <span class="hidden-mobile">3.10 以太网交换机的生成树协议STP</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
