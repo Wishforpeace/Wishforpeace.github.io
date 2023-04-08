@@ -16,21 +16,35 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Archives">
-<meta property="og:url" content="http://example.com/archives/2023/index.html">
+    <meta name="description" content="质因数分解 n &#x3D; a * b Max(a,b)  搜索 贪心策略不行 优先修改最高位，要么加，要么减，DFS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WYX同学的Blog">
+<meta property="og:url" content="http://example.com/2023/04/04/%E8%93%9D%E6%A1%A5%E6%9D%AF%E4%B8%B4%E6%97%B6%E6%8A%B1%E4%BD%9B%E8%84%9A/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="质因数分解 n &#x3D; a * b Max(a,b)  搜索 贪心策略不行 优先修改最高位，要么加，要么减，DFS">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230404194351582.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230404195857087.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230404202453192.png">
+<meta property="article:published_time" content="2023-04-04T11:44:09.625Z">
+<meta property="article:modified_time" content="2023-04-04T12:47:32.941Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230404194351582.png">
   
   
   
-  <title>Archives - WYX同学的Blog</title>
+  <title>WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -82,7 +96,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -187,9 +201,49 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Archives"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-04 19:44" pubdate>
+          April 4, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          45 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          1 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -205,100 +259,170 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">59 posts in total</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2023</p>
-    
-    <a href="/2023/04/07/What-is-deep-learning/" class="list-group-item list-group-item-action">
-      <time>04-07</time>
-      <div class="list-group-item-title">What is deep learning</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="质因数分解"><a href="#质因数分解" class="headerlink" title="质因数分解"></a>质因数分解</h1><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230404194351582.png" srcset="/img/loading.gif" lazyload alt="image-20230404194351582"></p>
+<p>n = a * b</p>
+<p>Max(a,b)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230404195857087.png" srcset="/img/loading.gif" lazyload alt="image-20230404195857087"></p>
+<h1 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h1><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230404202453192.png" srcset="/img/loading.gif" lazyload alt="image-20230404202453192"></p>
+<p>贪心策略不行</p>
+<p>优先修改最高位，要么加，要么减，DFS</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
-    
-    <a href="/2023/04/06/ExtracurricularTask%20of%20AI/" class="list-group-item list-group-item-action">
-      <time>04-06</time>
-      <div class="list-group-item-title"></div>
-    </a>
-  
-    
-    <a href="/2023/04/04/%E8%93%9D%E6%A1%A5%E6%9D%AF%E4%B8%B4%E6%97%B6%E6%8A%B1%E4%BD%9B%E8%84%9A/" class="list-group-item list-group-item-action">
-      <time>04-04</time>
-      <div class="list-group-item-title"></div>
-    </a>
-  
-    
-    <a href="/2023/04/02/WARNING-Console-output-during-zsh-initialization-detected/" class="list-group-item list-group-item-action">
-      <time>04-02</time>
-      <div class="list-group-item-title">[WARNING]: Console output during zsh initialization detected.</div>
-    </a>
-  
-    
-    <a href="/2023/04/02/3-11-%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91VLAN%E6%A6%82%E8%BF%B0/" class="list-group-item list-group-item-action">
-      <time>04-02</time>
-      <div class="list-group-item-title">3.11 虚拟局域网VLAN概述</div>
-    </a>
-  
-    
-    <a href="/2023/04/02/3-10-%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AESTP/" class="list-group-item list-group-item-action">
-      <time>04-02</time>
-      <div class="list-group-item-title">3.10 以太网交换机的生成树协议STP</div>
-    </a>
-  
-    
-    <a href="/2023/04/02/3-9-%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%87%AA%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%BD%AC%E5%8F%91%E5%B8%A7%E7%9A%84%E8%BF%87%E7%A8%8B/" class="list-group-item list-group-item-action">
-      <time>04-02</time>
-      <div class="list-group-item-title">3.9 以太网交换机自学习和转发帧的过程</div>
-    </a>
-  
-    
-    <a href="/2023/04/02/3-8-%E9%9B%86%E7%BA%BF%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E5%8C%BA%E5%88%AB/" class="list-group-item list-group-item-action">
-      <time>04-02</time>
-      <div class="list-group-item-title">3.8 集线器与交换机的区别</div>
-    </a>
-  
-    
-    <a href="/2023/03/31/3-7-MAC%E5%9C%B0%E5%9D%80%E3%80%81IP%E5%9C%B0%E5%9D%80%E3%80%81ARP%E5%8D%8F%E8%AE%AE/" class="list-group-item list-group-item-action">
-      <time>03-31</time>
-      <div class="list-group-item-title">3.7 MAC地址、IP地址、ARP协议</div>
-    </a>
-  
-    
-    <a href="/2023/03/31/GCC%E7%BC%96%E8%AF%91%E5%99%A8/" class="list-group-item list-group-item-action">
-      <time>03-31</time>
-      <div class="list-group-item-title">GCC编译器</div>
-    </a>
   
 </div>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2023/page/2/#board">2</a><a class="page-number" href="/archives/2023/page/3/#board">3</a><a class="extend next" rel="next" href="/archives/2023/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
+              
+  
 
-
-
-
-              </div>
-            </div>
-          </div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>http://example.com/2023/04/04/蓝桥杯临时抱佛脚/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 4, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
         </div>
       </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/06/ExtracurricularTask%20of%20AI/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/02/WARNING-Console-output-during-zsh-initialization-detected/" title="[WARNING]: Console output during zsh initialization detected.">
+                        <span class="hidden-mobile">[WARNING]: Console output during zsh initialization detected.</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
     
 
     
@@ -392,6 +516,106 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

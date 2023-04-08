@@ -1,0 +1,733 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="What is deep learning?1.1 Artificial intelligence, machine learning, and deep learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What is deep learning">
+<meta property="og:url" content="http://example.com/2023/04/07/What-is-deep-learning/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="What is deep learning?1.1 Artificial intelligence, machine learning, and deep learning">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230407212426409.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230407212728330.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230407222122500.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230407223604611.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408132403423.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408170654665.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408170819766.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408171047113.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408171724553.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408172136304.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408173018011.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408173511191.png">
+<meta property="article:published_time" content="2023-04-07T07:03:23.000Z">
+<meta property="article:modified_time" content="2023-04-08T09:44:53.763Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230407212426409.png">
+  
+  
+  
+  <title>What is deep learning - WYX同学的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="What is deep learning"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-07 15:03" pubdate>
+          April 7, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          81 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">What is deep learning</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="What-is-deep-learning"><a href="#What-is-deep-learning" class="headerlink" title="What is deep learning?"></a>What is deep learning?</h1><h2 id="1-1-Artificial-intelligence-machine-learning-and-deep-learning"><a href="#1-1-Artificial-intelligence-machine-learning-and-deep-learning" class="headerlink" title="1.1 Artificial intelligence, machine learning, and deep learning"></a>1.1 <em>Artificial intelligence, machine learning,</em> and deep learning</h2><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230407212426409.png" srcset="/img/loading.gif" lazyload alt="image-20230407212426409" style="zoom:50%;" />                                                                                                                                                        </p>
+<h3 id="1-1-1Artificial-intelligence"><a href="#1-1-1Artificial-intelligence" class="headerlink" title="1.1.1Artificial intelligence"></a>1.1.1Artificial intelligence</h3><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230407212728330.png" srcset="/img/loading.gif" lazyload alt="image-20230407212728330"></p>
+<p>For a fairly long time, most experts believed that human-level artificial intelligence could be achieved by having</p>
+<p>programmers handcraft a sufficiently large set of <strong>explicit rules</strong> for manipulating knowledge stored in explicit databases. This approach is known as <strong><em>symbolic AI</em>.</strong></p>
+<p>Symbolic AI proved suitable to solve well-defined,logical problems,such as  playing chess, it turned out to be intractable to figure out explicit rules for solving more complex, fuzzy problems, such as image classification, speech recognition, or natural language translation. A new approach arose to take symbolic AI’s place:<strong><em>machine learning</em>.</strong> </p>
+<h3 id="1-1-2-Machine-learning"><a href="#1-1-2-Machine-learning" class="headerlink" title="1.1.2 Machine learning"></a>1.1.2 Machine learning</h3><p>Machine Learning looks at the input data and the corresponding answers,and figures out what the rules should be.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230407222122500.png" srcset="/img/loading.gif" lazyload alt="image-20230407222122500"></p>
+<h2 id="1-1-3-Learning-rules-and-representations-from-data"><a href="#1-1-3-Learning-rules-and-representations-from-data" class="headerlink" title="1.1.3 Learning rules and representations from data"></a>1.1.3 Learning rules and representations from data</h2><p>To define <em>deep learning</em> and understand the difference between deep learning and other machine learning approaches, first we need some idea of what machine learning algorithms do. We just stated that machine learning discovers rules for executing a</p>
+<p>data processing task, given examples of what’s expected. So, to do machine learning, we need three things:</p>
+<ul>
+<li><strong><em>Input data points</em></strong>—For instance, if the task is speech recognition, these data points could be sound files of people speaking. If the task is image tagging, they could be pictures.</li>
+<li><strong><em>Examples of the expected output</em></strong>—In a speech-recognition task, these could be human-generated transcripts of sound files. In an image task, expected outputs could be tags such as “dog,” “cat,” and so on.</li>
+<li><strong><em>A way to measure whether the algorithm is doing a good job</em></strong>—This is necessary in order to determine the distance between the algorithm’s current output and its expected output. The measurement is used as a feedback signal to adjust the way the algorithm works. This adjustment step is what we call <em>learning</em></li>
+</ul>
+<p>A machine learning model transforms its input data into meaningful outputs, a process that is “learned” from exposure to known examples of inputs and outputs. Therefore, the central problem in machine learning and deep learning is to <strong><em>meaningfully transform data</em></strong>: in other words, to learn useful <strong><em>representations</em></strong> of the input data at hand—representations that get us closer to the expected output.</p>
+<p>What is <strong>representations</strong>?</p>
+<p> At its core, it’s a <strong>different way to look at data</strong>—to represent or encode data. </p>
+<p>Two different representations of a color image:</p>
+<ul>
+<li>RGB(red-green-blue)</li>
+<li>HSV(hue-saturation-value)</li>
+</ul>
+<p>The task ‘select all red pixels in the image’ is simpler in the RGB format.</p>
+<p>The task ‘make the image less saturated’ is simpler in the HSV format.</p>
+<p> Machine learning models are all about finding appropriate <strong>representations</strong> for their input data—transformations of the data that make it <strong>more amenable</strong> to the task at hand.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230407223604611.png" srcset="/img/loading.gif" lazyload alt="image-20230407223604611"></p>
+<p>We have <u>a few white points and a few black points</u>. Let’s say we want to <strong>develop an algorithm</strong> that can take the <strong>coordinates (<em>x</em>, <em>y</em>)</strong> of a point and output whether that point is likely to be black or to be white.</p>
+<p>Let’s say we want to develop an algorithm that can take the coordinates (<em>x</em>, <em>y</em>) of a point and output whether that point is likely to be black or to be white. In this case：</p>
+<ul>
+<li><p>The <strong>inputs</strong> are the <strong>coordinates</strong> of our points.</p>
+</li>
+<li><p>The expected <strong>outputs</strong> are the <strong>color</strong>s of our points.</p>
+</li>
+<li><p>A way to measure whether our algorithm is doing a good job could be, for instance, the percentage of points that are <strong>being correctly classified</strong>.</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408132403423.png" srcset="/img/loading.gif" lazyload alt="image-20230408132403423"></p>
+<p>With this representation, the black/white classification problem can be expressed as <strong>a simple rule</strong>: <strong>“Black points are such that <em>x</em> &gt; 0,” or “White points are such that <em>x</em> &lt; 0.”</strong> </p>
+<p> In this case we defined the coordinate change by hand.This is a simple problem.But,can we do the same if the task were to <strong>classify images of handwritten digits</strong>? </p>
+<p>This is possible to an extentt.But if you come across a new example that breaks your rules,you have to add a new transformation and new rules,while taking account their interaction with every previous rule.</p>
+<p>The process is painful,then we try to find a way to automate it.What if we tried systematically searching for different sets of automatically generated representations of the data and rules based on them, identifying good ones by using as feedback the percentage of digits being correctly classified in some development dataset? We would then be doing <strong>machine learning</strong>. <strong><em>Learning</em></strong>, in the context of machine learning, describes <strong>an automatic search process</strong> <strong>for data transformations</strong> that produce useful representations of some data, guided by some <strong>feedback signal</strong>—representations that are amenable to <strong>simpler rules</strong> solving the task at hand.</p>
+<p>These transformations contains coordinate changes, taking a histogram of pixels ,counting loops,linear projects, translations,nonlinear operations ,and so on.</p>
+<p>Machine learning algorithms aren’t usually creative in finding these transformations;they’re merely searching through a predefined set of operations, called a <strong><em>hypothesis space</em>.</strong> For instance, the space of all possible coordinate changes would be our hypothesis space in the 2D coordinates classification example.</p>
+<p>So that’s what machine learning is, concisely: <strong>searching for useful representations and rules over some input data, within a predefined space of possibilities, using guidance from a feedback signal.</strong> This simple idea allows for solving a remarkably broad range of intellectual tasks, from speech recognition to autonomous driving.</p>
+<h3 id="1-1-4-The-“deep”-in-“deep-learning”"><a href="#1-1-4-The-“deep”-in-“deep-learning”" class="headerlink" title="1.1.4 The “deep” in “deep learning”"></a>1.1.4 The “deep” in “deep learning”</h3><p>Deep learning is a specific subfield of machine learning: a new take on learning representations from data that puts an emphasis on learning successive layers of increasingly meaningful representations.</p>
+<p> The “deep” in “deep learning” isn’t a reference to any kind of deeper understanding achieved by the approach; rather, it stands for this idea of <strong>successive layers of representations</strong>. </p>
+<p>How many layers contribute to a model of the data is called the <strong><em>depth</em></strong> of the model. Other appropriate names for the field could have been <strong><em>layered representations learning</em></strong> or <strong><em>hierarchical representations learning</em></strong>. Modern deep learning often involves tens or even hundreds of successive layers of representations, and they’re all learned automatically from exposure to training</p>
+<p>data. </p>
+<p>Meanwhile, other approaches to machine learning tend to focus on learning only one or two layers of representations of the data (say, taking a pixel histogram and then applying a classification rule); hence, they’re sometimes called <strong><em>shallow learning</em></strong></p>
+<p> In deep learning, these layered representations are learned via models called <strong><em>neural networks</em></strong>, structured in literal layers stacked on top of each other. </p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408170654665.png" srcset="/img/loading.gif" lazyload alt="image-20230408170654665"></p>
+<p>The network transforms the digit image into representations that are increasingly <strong>different from the original image</strong> and increasingly <strong>informative about the final result</strong>. You can think of a deep network as a <strong>multistage <em>information distillation</em></strong> process, where information goes through successive filters and comes out increasingly <strong><em>purified</em></strong> (that is, useful with regard to some task).</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408170819766.png" srcset="/img/loading.gif" lazyload alt="image-20230408170819766"></p>
+<p>So that’s what deep learning is, technically: a multistage way to learn data representations. </p>
+<h3 id="1-1-5-Understanding-how-deep-learning-works-in-three-figures"><a href="#1-1-5-Understanding-how-deep-learning-works-in-three-figures" class="headerlink" title="1.1.5  Understanding how deep learning works, in three figures"></a>1.1.5  Understanding how deep learning works, in three figures</h3><p> The specification of what a layer does to its input data is stored in the layer’s <strong><em>weights</em></strong>, which in essence are a bunch of numbers. In technical terms, we’d say that the</p>
+<p>transformation implemented by a layer is <strong><em>parameterized</em></strong> by its weights .(Weights are also sometimes called the <strong><em>parameters</em></strong> of a layer.) In this context, <strong><em>learning</em></strong> means <strong>finding a set of values for the weights of all layers in a network</strong>, such that the network will correctly map example inputs to their associated targets. </p>
+<p>But here’s the thing: a deep neural network can contain tens of millions of parameters. Finding the correct values for all of them may seem like a daunting task, especially given that modifying the value of one parameter will affect the behavior of all the others!</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408171047113.png" srcset="/img/loading.gif" lazyload alt=" A neural network is parameterized by its weights."></p>
+<p>To control something, first you need to be able to observe it. To control the output of a neural network, you need to be able to measure <strong>how far this output is from what you expected</strong>. This is the job of the <strong><em>loss function</em></strong> of the network, also sometimes called the <strong><em>objective function</em></strong> or <strong><em>cost function</em></strong>. The loss function takes the predictions of the network and the true target (what you wanted the network to output) and computes a distance score, capturing how well the network has done on this specific example.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408171724553.png" srcset="/img/loading.gif" lazyload alt="A loss function measures the quality of the network’s output."></p>
+<p>The fundamental trick in deep learning is to <strong>use this score as a feedback signal to adjust the value of the weights a little</strong>, in a direction that will lower the loss score for the current example . This adjustment is the job of the <strong><em>optimizer</em></strong>, which implements what’s called the <strong><em>Backpropagation</em></strong> algorithm: the central algorithm in deep learning. </p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408172136304.png" srcset="/img/loading.gif" lazyload alt="The loss score is used as a feedback signal to adjust the weights."></p>
+<p>Initially, the weights of the network are assigned random values, so the network merely implements a series of random transformations. Naturally, its output is far from what it should ideally be, and the loss score is accordingly very high. But with every example the network processes, the weights are adjusted a little in the correct direction, and the loss score decreases. This is the <strong><em>training loop</em></strong>, which, repeated a sufficient number of times (typically tens of iterations over thousands of examples), yields weight values that minimize the loss function. A network with a minimal loss is one for which the outputs are as close as they can be to the targets: a trained network. </p>
+<h2 id="1-2-A-brief-history-of-machine-learning"><a href="#1-2-A-brief-history-of-machine-learning" class="headerlink" title="1.2 A brief history of machine learning"></a>1.2 A brief history of machine learning</h2><h3 id="1-2-1-Probabilistic-modeling"><a href="#1-2-1-Probabilistic-modeling" class="headerlink" title="1.2.1 Probabilistic modeling"></a>1.2.1 Probabilistic modeling</h3><p><em>Probabilistic modeling</em> is the application of the principles of statistics to data analysis. It is one of the earliest forms of machine learning, and it’s still widely used to this day. One of the best-known algorithms in this category is the Naive Bayes algorithm.</p>
+<ul>
+<li>Naive Bayes </li>
+<li>logistic regression </li>
+</ul>
+<h3 id="1-2-2-Early-neural-networks"><a href="#1-2-2-Early-neural-networks" class="headerlink" title="1.2.2 Early neural networks"></a>1.2.2 Early neural networks</h3><p> The first successful practical application of neural nets came in 1989 from Bell Labs, when Yann LeCun combined the earlier ideas of convolutional neural networks and backpropagation, and applied them to the problem of classifying handwritten digits. The resulting network, dubbed <em>LeNet</em>, was used by the United States Postal Service in the 1990s to automate the reading of ZIP codes on mail envelopes. </p>
+<h3 id="1-2-3-Kernel-methods"><a href="#1-2-3-Kernel-methods" class="headerlink" title="1.2.3 Kernel methods"></a>1.2.3 Kernel methods</h3><p> <em>Kernel methods</em> are a group of classification algorithms, the best known of which is the <strong><em>Support Vector Machine</em> (SVM).</strong> </p>
+<p>SVM is a classification algorithm that works by finding “decision boundaries” separating two classes.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408173018011.png" srcset="/img/loading.gif" lazyload alt="A decision boundary"></p>
+<ul>
+<li>The data is mapped to a new high-dimensional representation where the decision boundary can be expressed as a hyperplane.</li>
+<li>A good decision boundary (a separation hyperplane) is computed by trying to maximize the distance between the hyperplane and the closest data points from each class, a step called <strong><em>maximizing the margin</em></strong>. This allows the boundary to generalize well to new samples outside of the training dataset.</li>
+</ul>
+<h3 id="1-2-4-Decision-trees-random-forests-and-gradient-boosting-machines"><a href="#1-2-4-Decision-trees-random-forests-and-gradient-boosting-machines" class="headerlink" title="1.2.4 Decision trees, random forests, and gradient boosting machines"></a>1.2.4 Decision trees, random forests, and gradient boosting machines</h3><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408173511191.png" srcset="/img/loading.gif" lazyload alt="image-20230408173511191"></p>
+<p><em>Decision trees</em> are flowchart-like structures that let you classify input data points or predict output values given inputs. </p>
+<p>In particular, the <em>Random Forest</em> algorithm introduced a robust, practical take on decision-tree learning that involves building a large number of specialized decision trees and then ensembling their outputs. </p>
+<h3 id="1-2-5-Neural-networks"><a href="#1-2-5-Neural-networks" class="headerlink" title="1.2.5 Neural networks"></a>1.2.5 Neural networks</h3>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Deep-Learning/" class="category-chain-item">Deep Learning</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>What is deep learning</div>
+      <div>http://example.com/2023/04/07/What-is-deep-learning/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 7, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/06/ExtracurricularTask%20of%20AI/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
