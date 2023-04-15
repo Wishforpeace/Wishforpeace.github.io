@@ -18,7 +18,7 @@
   
     <meta name="description" content="What is deep learning?1.1 Artificial intelligence, machine learning, and deep learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="What is deep learning">
+<meta property="og:title" content="What is deep learning?">
 <meta property="og:url" content="http://example.com/2023/04/07/What-is-deep-learning/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
 <meta property="og:description" content="What is deep learning?1.1 Artificial intelligence, machine learning, and deep learning">
@@ -36,14 +36,14 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408173018011.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408173511191.png">
 <meta property="article:published_time" content="2023-04-07T07:03:23.000Z">
-<meta property="article:modified_time" content="2023-04-08T09:44:53.763Z">
+<meta property="article:modified_time" content="2023-04-08T12:30:54.398Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230407212426409.png">
   
   
   
-  <title>What is deep learning - WYX同学的Blog</title>
+  <title>What is deep learning? - WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="What is deep learning"></span>
+            <span id="subtitle" data-typed-text="What is deep learning?"></span>
           
         </div>
 
@@ -282,7 +282,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">What is deep learning</h1>
+            <h1 style="display: none">What is deep learning?</h1>
             
             
               <div class="markdown-body">
@@ -294,8 +294,7 @@
 <p>Symbolic AI proved suitable to solve well-defined,logical problems,such as  playing chess, it turned out to be intractable to figure out explicit rules for solving more complex, fuzzy problems, such as image classification, speech recognition, or natural language translation. A new approach arose to take symbolic AI’s place:<strong><em>machine learning</em>.</strong> </p>
 <h3 id="1-1-2-Machine-learning"><a href="#1-1-2-Machine-learning" class="headerlink" title="1.1.2 Machine learning"></a>1.1.2 Machine learning</h3><p>Machine Learning looks at the input data and the corresponding answers,and figures out what the rules should be.</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230407222122500.png" srcset="/img/loading.gif" lazyload alt="image-20230407222122500"></p>
-<h2 id="1-1-3-Learning-rules-and-representations-from-data"><a href="#1-1-3-Learning-rules-and-representations-from-data" class="headerlink" title="1.1.3 Learning rules and representations from data"></a>1.1.3 Learning rules and representations from data</h2><p>To define <em>deep learning</em> and understand the difference between deep learning and other machine learning approaches, first we need some idea of what machine learning algorithms do. We just stated that machine learning discovers rules for executing a</p>
-<p>data processing task, given examples of what’s expected. So, to do machine learning, we need three things:</p>
+<h2 id="1-1-3-Learning-rules-and-representations-from-data"><a href="#1-1-3-Learning-rules-and-representations-from-data" class="headerlink" title="1.1.3 Learning rules and representations from data"></a>1.1.3 Learning rules and representations from data</h2><p>To define <em>deep learning</em> and understand the difference between deep learning and other machine learning approaches, first we need some idea of what machine learning algorithms do. We just stated that machine learning discovers rules for executing a data processing task, given examples of what’s expected. So, to do machine learning, we need three things:</p>
 <ul>
 <li><strong><em>Input data points</em></strong>—For instance, if the task is speech recognition, these data points could be sound files of people speaking. If the task is image tagging, they could be pictures.</li>
 <li><strong><em>Examples of the expected output</em></strong>—In a speech-recognition task, these could be human-generated transcripts of sound files. In an image task, expected outputs could be tags such as “dog,” “cat,” and so on.</li>
@@ -325,9 +324,9 @@
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230408132403423.png" srcset="/img/loading.gif" lazyload alt="image-20230408132403423"></p>
 <p>With this representation, the black/white classification problem can be expressed as <strong>a simple rule</strong>: <strong>“Black points are such that <em>x</em> &gt; 0,” or “White points are such that <em>x</em> &lt; 0.”</strong> </p>
-<p> In this case we defined the coordinate change by hand.This is a simple problem.But,can we do the same if the task were to <strong>classify images of handwritten digits</strong>? </p>
+<p> In this case we defined the coordinate change by hand.This is a simple problem.But,can we do the same if the task were to <strong>classify images of hand written digits</strong>? </p>
 <p>This is possible to an extentt.But if you come across a new example that breaks your rules,you have to add a new transformation and new rules,while taking account their interaction with every previous rule.</p>
-<p>The process is painful,then we try to find a way to automate it.What if we tried systematically searching for different sets of automatically generated representations of the data and rules based on them, identifying good ones by using as feedback the percentage of digits being correctly classified in some development dataset? We would then be doing <strong>machine learning</strong>. <strong><em>Learning</em></strong>, in the context of machine learning, describes <strong>an automatic search process</strong> <strong>for data transformations</strong> that produce useful representations of some data, guided by some <strong>feedback signal</strong>—representations that are amenable to <strong>simpler rules</strong> solving the task at hand.</p>
+<p>The process is painful,then we try to find a way to <strong>automate it</strong>.What if we tried systematically searching for different sets of automatically generated representations of the data and rules based on them, identifying good ones by using as feedback the percentage of digits being correctly classified in some development dataset? We would then be doing <strong>machine learning</strong>. <strong><em>Learning</em></strong>, in the context of machine learning, describes <strong>an automatic search process</strong> <strong>for data transformations</strong> that produce useful representations of some data, guided by some <strong>feedback signal</strong>—representations that are amenable to <strong>simpler rules</strong> solving the task at hand.</p>
 <p>These transformations contains coordinate changes, taking a histogram of pixels ,counting loops,linear projects, translations,nonlinear operations ,and so on.</p>
 <p>Machine learning algorithms aren’t usually creative in finding these transformations;they’re merely searching through a predefined set of operations, called a <strong><em>hypothesis space</em>.</strong> For instance, the space of all possible coordinate changes would be our hypothesis space in the 2D coordinates classification example.</p>
 <p>So that’s what machine learning is, concisely: <strong>searching for useful representations and rules over some input data, within a predefined space of possibilities, using guidance from a feedback signal.</strong> This simple idea allows for solving a remarkably broad range of intellectual tasks, from speech recognition to autonomous driving.</p>
@@ -404,7 +403,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>What is deep learning</div>
+      <div>What is deep learning?</div>
       <div>http://example.com/2023/04/07/What-is-deep-learning/</div>
     </div>
     <div class="license-meta">
@@ -446,6 +445,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/04/09/4-1%E7%BD%91%E7%BB%9C%E5%B1%82%E6%A6%82%E8%BF%B0/" title="4.1网络层概述">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">4.1网络层概述</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

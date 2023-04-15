@@ -16,21 +16,24 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Q1:What happens to loss  if car scores decrease by 0.5 for this training example?A1:The score of the car is larger than the others.So if the score of the the car change a little bit,the margin of one">
+    <meta name="description" content="4.2网络层提供的两种服务1.面向连接的虚电路服务  可靠通信由网络来保证 必须建立网络层的连接——虚电路VC（virtual Circuit） 通信双方沿着已建立的虚电路发送分组 目的主机的地址仅在连接建立阶段使用，之后每个分组的首部只需要携带一条虚电路的编号 结合可靠传输的网络协议，就可以使发送的分组最终正确到达接收方 通信结束后，需要释放之前所建立的虚电路    2.无连接的数据报服务  可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WYX同学的Blog">
-<meta property="og:url" content="http://example.com/2023/04/06/ExtracurricularTask%20of%20AI/index.html">
+<meta property="og:title" content="4.2网络层提供的两种服务">
+<meta property="og:url" content="http://example.com/2023/04/09/4-2%E7%BD%91%E7%BB%9C%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%8D%E5%8A%A1/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="Q1:What happens to loss  if car scores decrease by 0.5 for this training example?A1:The score of the car is larger than the others.So if the score of the the car change a little bit,the margin of one">
+<meta property="og:description" content="4.2网络层提供的两种服务1.面向连接的虚电路服务  可靠通信由网络来保证 必须建立网络层的连接——虚电路VC（virtual Circuit） 通信双方沿着已建立的虚电路发送分组 目的主机的地址仅在连接建立阶段使用，之后每个分组的首部只需要携带一条虚电路的编号 结合可靠传输的网络协议，就可以使发送的分组最终正确到达接收方 通信结束后，需要释放之前所建立的虚电路    2.无连接的数据报服务  可">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-04-06T08:08:07.533Z">
-<meta property="article:modified_time" content="2023-04-06T11:58:52.554Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230409142427952.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230409143000083.png">
+<meta property="article:published_time" content="2023-04-09T06:22:35.000Z">
+<meta property="article:modified_time" content="2023-04-09T06:32:48.535Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230409142427952.png">
   
   
   
-  <title>WYX同学的Blog</title>
+  <title>4.2网络层提供的两种服务 - WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="4.2网络层提供的两种服务"></span>
           
         </div>
 
@@ -208,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-06 16:08" pubdate>
-          April 6, 2023 pm
+        <time datetime="2023-04-09 14:22" pubdate>
+          April 9, 2023 pm
         </time>
       </span>
     
@@ -220,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          900 words
+          355 words
         
       </span>
     
@@ -231,7 +234,7 @@
         
         
         
-          8 mins
+          3 mins
         
       </span>
     
@@ -269,18 +272,58 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">4.2网络层提供的两种服务</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Q1-What-happens-to-loss-if-car-scores-decrease-by-0-5-for-this-training-example"><a href="#Q1-What-happens-to-loss-if-car-scores-decrease-by-0-5-for-this-training-example" class="headerlink" title="Q1:What happens to loss  if car scores decrease by 0.5 for this training example?"></a>Q1:What happens to loss  if car scores decrease by 0.5 for this training example?</h2><h2 id="A1-The-score-of-the-car-is-larger-than-the-others-So-if-the-score-of-the-the-car-change-a-little-bit-the-margin-of-one-will-still-be-retained-and-the-loss-will-not-change"><a href="#A1-The-score-of-the-car-is-larger-than-the-others-So-if-the-score-of-the-the-car-change-a-little-bit-the-margin-of-one-will-still-be-retained-and-the-loss-will-not-change" class="headerlink" title="A1:The score of the car is larger than the others.So if the score of the the car change a little bit,the margin of one will still be retained and the loss will not change."></a>A1:The score of the car is larger than the others.So if the score of the the car change a little bit,the margin of one will still be retained and the loss will not change.</h2><h2 id="Q2-What-is-the-min-max-possible-SVM-loss-L-i"><a href="#Q2-What-is-the-min-max-possible-SVM-loss-L-i" class="headerlink" title="Q2:What is the min/max possible SVM loss L_i?"></a>Q2:What is the min/max possible SVM loss <script type="math/tex">L_i</script>?</h2><h2 id="A2-The-minimun-loss-is-zero-and-the-maximum-is-infinity"><a href="#A2-The-minimun-loss-is-zero-and-the-maximum-is-infinity" class="headerlink" title="A2: The minimun loss is zero and the maximum is infinity."></a>A2: The minimun loss is zero and the maximum is infinity.</h2><h2 id="Q3-At-initialization-W-is-small-so-all-s-approx-0-What-is-the-loss-L-i-assuming-N-examples-and-C-classes"><a href="#Q3-At-initialization-W-is-small-so-all-s-approx-0-What-is-the-loss-L-i-assuming-N-examples-and-C-classes" class="headerlink" title="Q3:At initialization W is small so all s \approx 0.What is the loss L_i,assuming N examples and C classes?"></a>Q3:At initialization W is small so all <script type="math/tex">s \approx 0</script>.What is the loss <script type="math/tex">L_i</script>,assuming N examples and C classes?</h2><h2 id="A3-We-loop-over-all-of-the-incorrect-classes-so-it-is-C-1-classes-And-the-S-is-about-the-same-so-the-loss-L-i-will-be-C-1"><a href="#A3-We-loop-over-all-of-the-incorrect-classes-so-it-is-C-1-classes-And-the-S-is-about-the-same-so-the-loss-L-i-will-be-C-1" class="headerlink" title="A3:We loop over all of the incorrect classes,so it is C-1 classes.And the S is about the same,so the loss L_i will be C-1."></a>A3:We loop over all of the incorrect classes,so it is C-1 classes.And the S is about the same,so the loss <script type="math/tex">L_i</script> will be C-1.</h2><h2 id="Q4-What-if-the-sum-was-over-all-classes-including-j-y-i"><a href="#Q4-What-if-the-sum-was-over-all-classes-including-j-y-i" class="headerlink" title="Q4:What if the sum was over all classes?(including j = y_i)"></a>Q4:What if the sum was over all classes?(including <script type="math/tex">j = y_i</script>)</h2><h2 id="A4-The-result-is-the-loss-L-i-1-as-we-also-loop-over-the-correct-class"><a href="#A4-The-result-is-the-loss-L-i-1-as-we-also-loop-over-the-correct-class" class="headerlink" title="A4:The result is the loss L_i+1,as we also loop over the correct class."></a>A4:The result is the loss <script type="math/tex">L_i+1</script>,as we also loop over the correct class.</h2><h2 id="Q5-What-if-we-used-mean-instead-of-sum"><a href="#Q5-What-if-we-used-mean-instead-of-sum" class="headerlink" title="Q5:What if we used mean instead of sum?"></a>Q5:What if we used mean instead of sum?</h2><h2 id="A5-It-will-rescale-the-whole-loss-function-by-a-constant-but-it-doesn’t-matter-it-won’t-have-any-effect-on-the-classification"><a href="#A5-It-will-rescale-the-whole-loss-function-by-a-constant-but-it-doesn’t-matter-it-won’t-have-any-effect-on-the-classification" class="headerlink" title="A5:It will rescale the whole loss function by a constant,but it doesn’t matter,it won’t have any effect on the classification."></a>A5:It will rescale the whole loss function by a constant,but it doesn’t matter,it won’t have any effect on the classification.</h2><h2 id="Q6-What-if-we-used-L-i-sum-j-neq-y-i-max-0-s-j-s-y-i-1-2"><a href="#Q6-What-if-we-used-L-i-sum-j-neq-y-i-max-0-s-j-s-y-i-1-2" class="headerlink" title="Q6:What if we used L_i = \sum_{j \neq y_i}max(0,s_j-s_{y_i}+1)^2"></a>Q6:What if we used <script type="math/tex">L_i = \sum_{j \neq y_i}max(0,s_j-s_{y_i}+1)^2</script></h2><h2 id="A6-This-magnifies-an-error-we-encounter-and-some-of-the-nuances-we-encounter-are-even-more-subtle-because-all-the-results-are-shown-as-squares"><a href="#A6-This-magnifies-an-error-we-encounter-and-some-of-the-nuances-we-encounter-are-even-more-subtle-because-all-the-results-are-shown-as-squares" class="headerlink" title="A6:This magnifies an error we encounter, and some of the nuances we encounter are even more subtle because all the results are shown as squares."></a>A6:This magnifies an error we encounter, and some of the nuances we encounter are even more subtle because all the results are shown as squares.</h2>
+                <h1 id="4-2网络层提供的两种服务"><a href="#4-2网络层提供的两种服务" class="headerlink" title="4.2网络层提供的两种服务"></a>4.2网络层提供的两种服务</h1><h2 id="1-面向连接的虚电路服务"><a href="#1-面向连接的虚电路服务" class="headerlink" title="1.面向连接的虚电路服务"></a>1.面向连接的虚电路服务</h2><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230409142427952.png" srcset="/img/loading.gif" lazyload alt="image-20230409142427952"></p>
+<ul>
+<li>可靠通信由<strong>网络</strong>来保证</li>
+<li>必须建立网络层的连接——虚电路VC（virtual Circuit）</li>
+<li>通信双方沿着已建立的虚电路发送分组</li>
+<li>目的主机的地址仅在连接建立阶段使用，之后每个<strong>分组的首部只需要携带一条虚电路的编号</strong></li>
+<li>结合可靠传输的网络协议，就可以使发送的分组最终正确到达接收方</li>
+<li>通信结束后，需要释放之前所建立的虚电路  </li>
+</ul>
+<h2 id="2-无连接的数据报服务"><a href="#2-无连接的数据报服务" class="headerlink" title="2.无连接的数据报服务"></a>2.无连接的数据报服务</h2><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230409143000083.png" srcset="/img/loading.gif" lazyload alt="image-20230409143000083"></p>
+<ul>
+<li>可靠通信由<strong>用户主机</strong>来保证</li>
+<li><strong>不需要建立网络层连接</strong></li>
+<li>每个分组可走<strong>不同的路径</strong></li>
+<li>每个分组的<strong>首部必须携带目的主机的完整地址</strong></li>
+<li>这种通信方式所传送的<strong>分组可能误码、丢失、重复和失序</strong></li>
+<li>网络本身<strong>不提供端到端的可靠传输服务</strong>，网络中的路由器比较简单，价格低廉</li>
+<li>将<strong>复杂的网络处理功能</strong>置于因特网的<strong>边缘</strong>（用户主机和其内部的运输层），将<strong>相对简单</strong>的尽最大努力的分组交付功能置于因特网<strong>核心</strong></li>
+</ul>
+
                 
               </div>
             
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -291,8 +334,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>http://example.com/2023/04/06/ExtracurricularTask of AI/</div>
+      <div>4.2网络层提供的两种服务</div>
+      <div>http://example.com/2023/04/09/4-2网络层提供的两种服务/</div>
     </div>
     <div class="license-meta">
       
@@ -304,7 +347,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 6, 2023</div>
+          <div>April 9, 2023</div>
         </div>
       
       
@@ -334,9 +377,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/07/What-is-deep-learning/" title="What is deep learning?">
+                      <a href="/2023/04/09/4-3IPv4%E5%9C%B0%E5%9D%80%E6%A6%82%E8%BF%B0/" title="4.3IPv4">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">What is deep learning?</span>
+                        <span class="hidden-mobile">4.3IPv4</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -344,8 +387,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/04/%E8%93%9D%E6%A1%A5%E6%9D%AF%E4%B8%B4%E6%97%B6%E6%8A%B1%E4%BD%9B%E8%84%9A/" title="">
-                        <span class="hidden-mobile"></span>
+                      <a href="/2023/04/09/4-1%E7%BD%91%E7%BB%9C%E5%B1%82%E6%A6%82%E8%BF%B0/" title="4.1网络层概述">
+                        <span class="hidden-mobile">4.1网络层概述</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
