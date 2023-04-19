@@ -1,0 +1,793 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="4.6 互联网的路由选择协议4.6.1 路由选择协议概述静态路由选择 人工配置 方式简单，开销小，但是不能及时适应网络状态（流量、拓扑）的变化 一般只在小规模网络中采用  动态路由选择 路由器通过路由选择协议自动获取路由信息 复杂、开销大，能够比较好的适应网络状态的变化 适用于大规模网络  因特网采用的路由协议的主要特点自适应动态路由选择，能较好地适应网络状态的变化 分布式路由器之间交换路由信息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4.6互联网的路由选择协议">
+<meta property="og:url" content="http://example.com/2023/04/17/4-6%E4%BA%92%E8%81%94%E7%BD%91%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="4.6 互联网的路由选择协议4.6.1 路由选择协议概述静态路由选择 人工配置 方式简单，开销小，但是不能及时适应网络状态（流量、拓扑）的变化 一般只在小规模网络中采用  动态路由选择 路由器通过路由选择协议自动获取路由信息 复杂、开销大，能够比较好的适应网络状态的变化 适用于大规模网络  因特网采用的路由协议的主要特点自适应动态路由选择，能较好地适应网络状态的变化 分布式路由器之间交换路由信息">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417231817384.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417233315920.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417234248416.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419081531154.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419081805334.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419081928099.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419082132032.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419083644238.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419083803223.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419084147861.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419090657775.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419090927012.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419091404130.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419092138785.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419092934138.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419094001516.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419093917253.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419100316220.png">
+<meta property="article:published_time" content="2023-04-17T14:04:05.000Z">
+<meta property="article:modified_time" content="2023-04-19T02:03:57.541Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417231817384.png">
+  
+  
+  
+  <title>4.6互联网的路由选择协议 - WYX同学的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="4.6互联网的路由选择协议"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-17 22:04" pubdate>
+          April 17, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">4.6互联网的路由选择协议</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="4-6-互联网的路由选择协议"><a href="#4-6-互联网的路由选择协议" class="headerlink" title="4.6 互联网的路由选择协议"></a>4.6 互联网的路由选择协议</h1><h2 id="4-6-1-路由选择协议概述"><a href="#4-6-1-路由选择协议概述" class="headerlink" title="4.6.1 路由选择协议概述"></a>4.6.1 路由选择协议概述</h2><h3 id="静态路由选择"><a href="#静态路由选择" class="headerlink" title="静态路由选择"></a>静态路由选择</h3><ul>
+<li>人工配置</li>
+<li>方式简单，开销小，但是<strong>不能及时适应网络状态（流量、拓扑）的变化</strong></li>
+<li>一般只在<strong>小规模网络</strong>中采用</li>
+</ul>
+<h3 id="动态路由选择"><a href="#动态路由选择" class="headerlink" title="动态路由选择"></a>动态路由选择</h3><ul>
+<li>路由器通过路由选择协议<strong>自动获取路由信息</strong></li>
+<li>复杂、开销大，<strong>能够比较好的适应网络状态的变化</strong></li>
+<li>适用于<strong>大规模网络</strong></li>
+</ul>
+<h3 id="因特网采用的路由协议的主要特点"><a href="#因特网采用的路由协议的主要特点" class="headerlink" title="因特网采用的路由协议的主要特点"></a>因特网采用的路由协议的主要特点</h3><h4 id="自适应"><a href="#自适应" class="headerlink" title="自适应"></a>自适应</h4><p>动态路由选择，能较好地适应网络状态的变化</p>
+<h4 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h4><p>路由器之间交换路由信息</p>
+<h4 id="分层次"><a href="#分层次" class="headerlink" title="分层次"></a>分层次</h4><p>将整个因特网划分为许多较小的<strong>自治系统AS</strong>（Autonomous System）</p>
+<h3 id="因特网采用分层次的路由选择协议"><a href="#因特网采用分层次的路由选择协议" class="headerlink" title="因特网采用分层次的路由选择协议"></a>因特网采用分层次的路由选择协议</h3><p>路由选择分为域内选择和域间选择</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417231817384.png" srcset="/img/loading.gif" lazyload alt="image-20230417231817384"></p>
+<h3 id="常见路由选择协议"><a href="#常见路由选择协议" class="headerlink" title="常见路由选择协议"></a>常见路由选择协议</h3><h4 id="内部网关协议IGP"><a href="#内部网关协议IGP" class="headerlink" title="内部网关协议IGP"></a>内部网关协议IGP</h4><ul>
+<li>路由信息协议RIP</li>
+<li>内部网关路由协议IGRP</li>
+<li>增强型内部网关路由协议EIGRP</li>
+<li>开放式最短路径优先OSPF</li>
+<li>中间系统到中间系统 IS-IS</li>
+</ul>
+<h4 id="外部网关协议EGP"><a href="#外部网关协议EGP" class="headerlink" title="外部网关协议EGP"></a>外部网关协议EGP</h4><ul>
+<li>边界网关协议</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417233315920.png" srcset="/img/loading.gif" lazyload alt="image-20230417233315920"></p>
+<h3 id="路由器基本结构"><a href="#路由器基本结构" class="headerlink" title="路由器基本结构"></a>路由器基本结构</h3><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417234248416.png" srcset="/img/loading.gif" lazyload alt="image-20230417234248416"></p>
+<h2 id="4-6-2-路由信息协议RIP的基本工作原理"><a href="#4-6-2-路由信息协议RIP的基本工作原理" class="headerlink" title="4.6.2 路由信息协议RIP的基本工作原理"></a>4.6.2 路由信息协议RIP的基本工作原理</h2><ul>
+<li>路由信息协议RIP是内部网关协议IGP中最先得到广泛使用的协议之一</li>
+<li>RIP要求自治系统AS内的每一个路由器都要维护从它自己到AS内其他每一个网络的距离记录。这是一组记录，称为<strong>距离向量D-V</strong>（Distances- Vector）</li>
+<li>RIP使用跳数作为度量来衡量到达目的网络的距离<ul>
+<li>路由器到直连网络的距离定义为1</li>
+<li>路由器到非直连网络的距离定义为所经过的路由器数加1</li>
+<li>允许一条路径最多十五个路由器，<strong>距离等于16不可达</strong>，因此RIP只适用于<strong>小型互联网</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419081531154.png" srcset="/img/loading.gif" lazyload alt="image-20230419081531154"></p>
+<ul>
+<li>RIP认为好的路由就是<strong>距离短</strong></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419081805334.png" srcset="/img/loading.gif" lazyload alt="image-20230419081805334"></p>
+<p>此处选择经过R4，尽管它的带宽很小</p>
+<ul>
+<li>到达同一目的网络有多条距离相等的路由时，可以进行<strong>等价负载均衡</strong>，将通信量均衡分布在多条等价路由上</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419081928099.png" srcset="/img/loading.gif" lazyload alt="image-20230419081928099"></p>
+<h3 id="RIP的三个要点"><a href="#RIP的三个要点" class="headerlink" title="RIP的三个要点"></a>RIP的三个要点</h3><ul>
+<li>和谁交换信息：仅<strong>和相邻路由器</strong>交换信息</li>
+<li>交换什么信息：自己的<strong>路由表</strong></li>
+<li>何时交换信息：<strong>周期性交换</strong>（例如每30秒）</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419082132032.png" srcset="/img/loading.gif" lazyload alt="image-20230419082132032"></p>
+<h3 id="RIP路由条目更新规则"><a href="#RIP路由条目更新规则" class="headerlink" title="RIP路由条目更新规则"></a>RIP路由条目更新规则</h3><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419083644238.png" srcset="/img/loading.gif" lazyload alt="image-20230419083644238"></p>
+<p>C将封装有路由信息的RIP更新报文发送给D</p>
+<p>路由器D收到后，进行改造</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419083803223.png" srcset="/img/loading.gif" lazyload alt="image-20230419083803223" style="zoom:33%;" /></p>
+<p> 改造后更新D的路由表</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419084147861.png" srcset="/img/loading.gif" lazyload alt="image-20230419084147861"></p>
+<h3 id="坏消息传播得慢"><a href="#坏消息传播得慢" class="headerlink" title="坏消息传播得慢"></a>坏消息传播得慢</h3><p> 又称为<strong>路由环路或距离无穷计数</strong>问题，这是距离向量算法的一个固有问题</p>
+<p>采取措施：</p>
+<ul>
+<li>限制最大路径距离为15（16不可达）</li>
+<li>当路由表发生变化时立即发送更新报文（<strong>触发更新</strong>），而不仅仅是周期性发送</li>
+<li>让路由器记录收到某特定路由信息的接口，而不让同一路由信息再通过此接口向反向传送（<strong>水平分割</strong>）</li>
+</ul>
+<h2 id="4-6-3-开放最短路径优先OSPF的基本工作原理"><a href="#4-6-3-开放最短路径优先OSPF的基本工作原理" class="headerlink" title="4.6.3 开放最短路径优先OSPF的基本工作原理"></a>4.6.3 开放最短路径优先OSPF的基本工作原理</h2><ul>
+<li>OSPF<strong>基于链路状态</strong></li>
+<li>OSPF采用<strong>最短路径算法SPF</strong>，保证了不会产生环路</li>
+<li>OSPF<strong>不限制网络规模</strong>，更新效率高，<strong>收敛速度快</strong></li>
+<li>链路状态是指<strong>本路由器都和哪些路由器相邻</strong>，以及相应的链路的“代价”<ul>
+<li>代价是表示费用、距离、时延、带宽等等</li>
+</ul>
+</li>
+</ul>
+<h3 id="问候分组"><a href="#问候分组" class="headerlink" title="问候分组"></a>问候分组</h3><ul>
+<li>OSPF相邻路由器之间通过交互<strong>问候（Hello）分组</strong>，建立和维护<strong>邻居关系</strong><ul>
+<li>Hello分组封装在IP数据报中，发送组播地址224.0.0.5</li>
+<li>发送周期为10秒</li>
+<li>40秒未收到来自邻居路由器的Hello分组，则认为该邻居路由器不可达</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419090657775.png" srcset="/img/loading.gif" lazyload alt="image-20230419090657775" style="zoom:50%;" /></p>
+<p>每个 路由器都会有一张邻居表</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419090927012.png" srcset="/img/loading.gif" lazyload alt="image-20230419090927012"></p>
+<h3 id="链路状态通告LSA"><a href="#链路状态通告LSA" class="headerlink" title="链路状态通告LSA"></a>链路状态通告LSA</h3><ul>
+<li>直连网络的链路状态信息</li>
+<li>邻居路由器的链路状态信息</li>
+</ul>
+<h4 id="LSU"><a href="#LSU" class="headerlink" title="LSU"></a>LSU</h4><ul>
+<li>LSA被封装在链路状态更新分组<strong>LSU</strong>中，采用<strong>洪泛法</strong>发送</li>
+</ul>
+<h4 id="LSDB"><a href="#LSDB" class="headerlink" title="LSDB"></a>LSDB</h4><ul>
+<li><p>使用OSPF的每个路由器都有一个链路状态数据库LSDB，用于存储LSA</p>
+</li>
+<li><p>通过各路由器洪泛发送封装有自己LSA的LSU分组，各路由器的LSDB最终将达成一致</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419091404130.png" srcset="/img/loading.gif" lazyload alt="image-20230419091404130" style="zoom:50%;" /></p>
+</li>
+</ul>
+<h3 id="最短路径优先SPF"><a href="#最短路径优先SPF" class="headerlink" title="最短路径优先SPF"></a>最短路径优先SPF</h3><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419092138785.png" srcset="/img/loading.gif" lazyload alt="image-20230419092138785"></p>
+<h3 id="OSPF的五种分组类型"><a href="#OSPF的五种分组类型" class="headerlink" title="OSPF的五种分组类型"></a>OSPF的五种分组类型</h3><ul>
+<li>类型1，<strong>问候</strong>（Hello）分组</li>
+<li>类型2，<strong>数据库描述</strong>（Database Description）分组</li>
+</ul>
+<p>​        向邻居路由器给出自己的链路状态数据库中的所有链路状态项目的摘要信息</p>
+<ul>
+<li><p>类型3，<strong>链路状态请求</strong>（Link State Request）分组</p>
+<p>向邻居路由器请求发送某些链路状态项目的详细信息</p>
+</li>
+<li><p>类型4，<strong>链路状态更新</strong>（Link State Update）分组</p>
+<p>路由器使用这种分组将其链路状态进行洪泛发送，对全网链路状态进行更新</p>
+</li>
+<li><p>类型5，<strong>链路状态确认</strong>（Link State Acknowledgment）分组</p>
+<p>对链路状态更新分组的确认分组</p>
+</li>
+</ul>
+<h3 id="OSPF的基本工作过程"><a href="#OSPF的基本工作过程" class="headerlink" title="OSPF的基本工作过程"></a>OSPF的基本工作过程</h3><p> <img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419092934138.png" srcset="/img/loading.gif" lazyload alt="image-20230419092934138"></p>
+<h3 id="多点接入网络建立邻居关系"><a href="#多点接入网络建立邻居关系" class="headerlink" title="多点接入网络建立邻居关系"></a>多点接入网络建立邻居关系</h3><ul>
+<li>选举<strong>指定路由器DR</strong>和<strong>备用的制定路由器BDR</strong></li>
+<li>所有的非DR/BDR只与DR/BDR建立邻居关系</li>
+<li>非DR/BDR之间通过DR/BDR交换信息</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419094001516.png" srcset="/img/loading.gif" lazyload alt="image-20230419094001516" style="zoom:50%;" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419093917253.png" srcset="/img/loading.gif" lazyload alt="image-20230419093917253" style="zoom:50%;" /></p>
+<h3 id="区域"><a href="#区域" class="headerlink" title="区域"></a>区域</h3><p>为了使OSPF能够用于规模很大的网络，OSPF将自治系统再划分为若干个更小的范围，叫做区域（Area）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230419100316220.png" srcset="/img/loading.gif" lazyload alt="image-20230419100316220"></p>
+<ul>
+<li>区域内路由器IR（internal router）:R1 R2  R5 R8 R9</li>
+<li>主干路由器BBR（backbone router）:R3 R4 R5 R6 R7</li>
+<li>区域边界路由器ABR（area border router）：R3 R4 R7</li>
+<li>自治系统边界路由器ASBR（AS border router）：R6</li>
+</ul>
+<h2 id="4-6-4-边界网关协议BGP的基本工作原理"><a href="#4-6-4-边界网关协议BGP的基本工作原理" class="headerlink" title="4.6.4 边界网关协议BGP的基本工作原理"></a>4.6.4 边界网关协议BGP的基本工作原理</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>4.6互联网的路由选择协议</div>
+      <div>http://example.com/2023/04/17/4-6互联网的路由选择协议/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 17, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/17/4-5%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE%E5%8F%8A%E5%85%B6%E5%8F%AF%E8%83%BD%E4%BA%A7%E7%94%9F%E7%9A%84%E8%B7%AF%E7%94%B1%E7%8E%AF%E8%B7%AF%E9%97%AE%E9%A2%98/" title="4.5静态路由配置及其可能产生的路由环路问题">
+                        <span class="hidden-mobile">4.5静态路由配置及其可能产生的路由环路问题</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

@@ -16,21 +16,32 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="debug调试工具使用总结123456r     ;查看和改变寄存器中的内容d     ;查看内存中的内容u			;将内存中的机器指令翻译成汇编指令a			;以汇编指令格式在内存中写入一条汇编指令t			;执行当前CS:IP所指向的机器指令e			;可以改写内存中内容">
+    <meta name="description" content="4.5静态路由配置及其可能产生的路由环路问题静态路由配置 默认路由 特定主机路由 静态路由配置错误导致路由环路 为了防止IP数据报在路由环路中永久兜圈，在IP数据报首部设有生存时间TTL字段。 IP数据报进入路由后，TTL字段的值减1。若TTL的值不等于0，则被路由器转发，否则被丢弃。 聚合了不存在的网络而导致路由环路 R2表中，192.168.0.0&#x2F;22 下一跳转发给10.0.0.1，但是进入">
 <meta property="og:type" content="article">
-<meta property="og:title" content="debug调试工具使用总结">
-<meta property="og:url" content="http://example.com/2022/10/18/debug%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="4.5静态路由配置及其可能产生的路由环路问题">
+<meta property="og:url" content="http://example.com/2023/04/17/4-5%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE%E5%8F%8A%E5%85%B6%E5%8F%AF%E8%83%BD%E4%BA%A7%E7%94%9F%E7%9A%84%E8%B7%AF%E7%94%B1%E7%8E%AF%E8%B7%AF%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="debug调试工具使用总结123456r     ;查看和改变寄存器中的内容d     ;查看内存中的内容u			;将内存中的机器指令翻译成汇编指令a			;以汇编指令格式在内存中写入一条汇编指令t			;执行当前CS:IP所指向的机器指令e			;可以改写内存中内容">
+<meta property="og:description" content="4.5静态路由配置及其可能产生的路由环路问题静态路由配置 默认路由 特定主机路由 静态路由配置错误导致路由环路 为了防止IP数据报在路由环路中永久兜圈，在IP数据报首部设有生存时间TTL字段。 IP数据报进入路由后，TTL字段的值减1。若TTL的值不等于0，则被路由器转发，否则被丢弃。 聚合了不存在的网络而导致路由环路 R2表中，192.168.0.0&#x2F;22 下一跳转发给10.0.0.1，但是进入">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-10-18T13:06:18.000Z">
-<meta property="article:modified_time" content="2022-10-19T07:18:30.633Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417193218244.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417193858285.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417194123754.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417194437484.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417195247936.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417195455971.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417195754094.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417200055001.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417200429678.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417200526798.png">
+<meta property="article:published_time" content="2023-04-17T11:15:50.000Z">
+<meta property="article:modified_time" content="2023-04-17T14:01:48.987Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417193218244.png">
   
   
   
-  <title>debug调试工具使用总结 - WYX同学的Blog</title>
+  <title>4.5静态路由配置及其可能产生的路由环路问题 - WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +208,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="debug调试工具使用总结"></span>
+            <span id="subtitle" data-typed-text="4.5静态路由配置及其可能产生的路由环路问题"></span>
           
         </div>
 
@@ -208,8 +219,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-18 21:06" pubdate>
-          October 18, 2022 pm
+        <time datetime="2023-04-17 19:15" pubdate>
+          April 17, 2023 pm
         </time>
       </span>
     
@@ -220,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          112 words
+          437 words
         
       </span>
     
@@ -231,7 +242,7 @@
         
         
         
-          1 mins
+          4 mins
         
       </span>
     
@@ -269,12 +280,29 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">debug调试工具使用总结</h1>
+            <h1 style="display: none">4.5静态路由配置及其可能产生的路由环路问题</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="debug调试工具使用总结"><a href="#debug调试工具使用总结" class="headerlink" title="debug调试工具使用总结"></a>debug调试工具使用总结</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs assembly">r     ;查看和改变寄存器中的内容<br>d     ;查看内存中的内容<br>u			;将内存中的机器指令翻译成汇编指令<br>a			;以汇编指令格式在内存中写入一条汇编指令<br>t			;执行当前CS:IP所指向的机器指令<br>e			;可以改写内存中内容<br></code></pre></td></tr></table></figure>
+                <h1 id="4-5静态路由配置及其可能产生的路由环路问题"><a href="#4-5静态路由配置及其可能产生的路由环路问题" class="headerlink" title="4.5静态路由配置及其可能产生的路由环路问题"></a>4.5静态路由配置及其可能产生的路由环路问题</h1><h2 id="静态路由配置"><a href="#静态路由配置" class="headerlink" title="静态路由配置"></a>静态路由配置</h2><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417193218244.png" srcset="/img/loading.gif" lazyload alt="image-20230417193218244"></p>
+<h2 id="默认路由"><a href="#默认路由" class="headerlink" title="默认路由"></a>默认路由</h2><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417193858285.png" srcset="/img/loading.gif" lazyload alt="image-20230417193858285"></p>
+<h2 id="特定主机路由"><a href="#特定主机路由" class="headerlink" title="特定主机路由"></a>特定主机路由</h2><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417194123754.png" srcset="/img/loading.gif" lazyload alt="image-20230417194123754"></p>
+<h2 id="静态路由配置错误导致路由环路"><a href="#静态路由配置错误导致路由环路" class="headerlink" title="静态路由配置错误导致路由环路"></a>静态路由配置错误导致路由环路</h2><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417194437484.png" srcset="/img/loading.gif" lazyload alt="image-20230417194437484"></p>
+<p>为了<strong>防止IP数据报在路由环路中永久兜圈</strong>，在IP数据报首部设有<strong>生存时间TTL</strong>字段。</p>
+<p>IP数据报进入路由后，TTL字段的值减1。若TTL的值不等于0，则被路由器转发，否则被丢弃。</p>
+<h2 id="聚合了不存在的网络而导致路由环路"><a href="#聚合了不存在的网络而导致路由环路" class="headerlink" title="聚合了不存在的网络而导致路由环路"></a>聚合了不存在的网络而导致路由环路</h2><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417195247936.png" srcset="/img/loading.gif" lazyload alt="image-20230417195247936"></p>
+<p>R2表中，192.168.0.0/22 下一跳转发给10.0.0.1，但是进入R1后只能走默认的路由，形成了环路</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417195455971.png" srcset="/img/loading.gif" lazyload alt="image-20230417195455971"></p>
+<p>假设此时R2要转发IP数据报到192.168.3.0 ，该IP不存在，根据最长匹配原则，进入黑洞，丢了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417195754094.png" srcset="/img/loading.gif" lazyload alt="image-20230417195754094"></p>
+<h2 id="网络故障而导致路由环路"><a href="#网络故障而导致路由环路" class="headerlink" title="网络故障而导致路由环路"></a>网络故障而导致路由环路</h2><p> <img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417200055001.png" srcset="/img/loading.gif" lazyload alt="image-20230417200055001"></p>
+<p>此时R1检测到了192.168.1.0/24发生故障，删除了路由表的该配置</p>
+<p>R2发送IP数据报给192.168.1.0/24，发送给了10.0.0.1，R1收到后，查表转发，走默认路由，转发给了10.0.0.2，产生了路由环路</p>
+<p>应该添加192.168.1.0/24的黑洞路由</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417200429678.png" srcset="/img/loading.gif" lazyload alt="image-20230417200429678"></p>
+<p>如果恢复了，就再次更新，黑洞条目失效，如果再次故障，黑洞条目恢复</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417200526798.png" srcset="/img/loading.gif" lazyload alt="image-20230417200526798"></p>
 
                 
               </div>
@@ -293,7 +321,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="category-chain-item">汇编语言</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
   
   
 
@@ -313,8 +341,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>debug调试工具使用总结</div>
-      <div>http://example.com/2022/10/18/debug调试工具使用总结/</div>
+      <div>4.5静态路由配置及其可能产生的路由环路问题</div>
+      <div>http://example.com/2023/04/17/4-5静态路由配置及其可能产生的路由环路问题/</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +354,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 18, 2022</div>
+          <div>April 17, 2023</div>
         </div>
       
       
@@ -356,9 +384,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/19/%E6%89%BF%E4%B8%8A%E5%90%AF%E4%B8%8B/" title="承上启下">
+                      <a href="/2023/04/17/4-6%E4%BA%92%E8%81%94%E7%BD%91%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE/" title="4.6互联网的路由选择协议">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">承上启下</span>
+                        <span class="hidden-mobile">4.6互联网的路由选择协议</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -366,8 +394,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/08/Colly/" title="Colly">
-                        <span class="hidden-mobile">Colly</span>
+                      <a href="/2023/04/17/4-4IP%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%9A%84%E5%8F%91%E9%80%81%E5%92%8C%E8%BD%AC%E5%8F%91%E8%BF%87%E7%A8%8B/" title="4.4IP数据报的发送和转发过程">
+                        <span class="hidden-mobile">4.4IP数据报的发送和转发过程</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

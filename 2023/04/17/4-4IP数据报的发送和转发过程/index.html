@@ -16,21 +16,28 @@
   <meta name="author" content="WYX ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="debug调试工具使用总结123456r     ;查看和改变寄存器中的内容d     ;查看内存中的内容u			;将内存中的机器指令翻译成汇编指令a			;以汇编指令格式在内存中写入一条汇编指令t			;执行当前CS:IP所指向的机器指令e			;可以改写内存中内容">
+    <meta name="description" content="4.4 IP数据报的发送和转发过程IP数据报的发送和转发过程： 主机发送IP数据报 路由器转发IP数据报  两个交换式以太网  同一网络之间直接通信 不同网络之间间接通信 判断是否在同一网络中，将两个地址用子网掩码进行与运算，判断网络地址是否相同  主机C如何判断路由器R的存在 指定路由器称之为默认网关  路由器转发路由器收到IP数据报后如何进行转发？  检查IP数据报首部是否出错：  ​">
 <meta property="og:type" content="article">
-<meta property="og:title" content="debug调试工具使用总结">
-<meta property="og:url" content="http://example.com/2022/10/18/debug%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="4.4IP数据报的发送和转发过程">
+<meta property="og:url" content="http://example.com/2023/04/17/4-4IP%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%9A%84%E5%8F%91%E9%80%81%E5%92%8C%E8%BD%AC%E5%8F%91%E8%BF%87%E7%A8%8B/index.html">
 <meta property="og:site_name" content="WYX同学的Blog">
-<meta property="og:description" content="debug调试工具使用总结123456r     ;查看和改变寄存器中的内容d     ;查看内存中的内容u			;将内存中的机器指令翻译成汇编指令a			;以汇编指令格式在内存中写入一条汇编指令t			;执行当前CS:IP所指向的机器指令e			;可以改写内存中内容">
+<meta property="og:description" content="4.4 IP数据报的发送和转发过程IP数据报的发送和转发过程： 主机发送IP数据报 路由器转发IP数据报  两个交换式以太网  同一网络之间直接通信 不同网络之间间接通信 判断是否在同一网络中，将两个地址用子网掩码进行与运算，判断网络地址是否相同  主机C如何判断路由器R的存在 指定路由器称之为默认网关  路由器转发路由器收到IP数据报后如何进行转发？  检查IP数据报首部是否出错：  ​">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-10-18T13:06:18.000Z">
-<meta property="article:modified_time" content="2022-10-19T07:18:30.633Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417173618874.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417173836274.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417173944422.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417174642183.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417174836386.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417175253820.png">
+<meta property="article:published_time" content="2023-04-17T01:40:12.000Z">
+<meta property="article:modified_time" content="2023-04-17T09:57:22.336Z">
 <meta property="article:author" content="WYX ">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417173618874.png">
   
   
   
-  <title>debug调试工具使用总结 - WYX同学的Blog</title>
+  <title>4.4IP数据报的发送和转发过程 - WYX同学的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="debug调试工具使用总结"></span>
+            <span id="subtitle" data-typed-text="4.4IP数据报的发送和转发过程"></span>
           
         </div>
 
@@ -208,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-18 21:06" pubdate>
-          October 18, 2022 pm
+        <time datetime="2023-04-17 09:40" pubdate>
+          April 17, 2023 am
         </time>
       </span>
     
@@ -220,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          112 words
+          355 words
         
       </span>
     
@@ -231,7 +238,7 @@
         
         
         
-          1 mins
+          3 mins
         
       </span>
     
@@ -269,12 +276,41 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">debug调试工具使用总结</h1>
+            <h1 style="display: none">4.4IP数据报的发送和转发过程</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="debug调试工具使用总结"><a href="#debug调试工具使用总结" class="headerlink" title="debug调试工具使用总结"></a>debug调试工具使用总结</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs assembly">r     ;查看和改变寄存器中的内容<br>d     ;查看内存中的内容<br>u			;将内存中的机器指令翻译成汇编指令<br>a			;以汇编指令格式在内存中写入一条汇编指令<br>t			;执行当前CS:IP所指向的机器指令<br>e			;可以改写内存中内容<br></code></pre></td></tr></table></figure>
+                <h1 id="4-4-IP数据报的发送和转发过程"><a href="#4-4-IP数据报的发送和转发过程" class="headerlink" title="4.4 IP数据报的发送和转发过程"></a>4.4 IP数据报的发送和转发过程</h1><h2 id="IP数据报的发送和转发过程："><a href="#IP数据报的发送和转发过程：" class="headerlink" title="IP数据报的发送和转发过程："></a>IP数据报的发送和转发过程：</h2><ul>
+<li>主机发送IP数据报</li>
+<li>路由器转发IP数据报</li>
+</ul>
+<p>两个交换式以太网</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417173618874.png" srcset="/img/loading.gif" lazyload alt="image-20230417173618874"></p>
+<p>同一网络之间<strong>直接通信</strong></p>
+<p>不同网络之间<strong>间接通信</strong></p>
+<p>判断是否在同一网络中，将两个地址用<strong>子网掩码进行与运算</strong>，判断网络地址是否相同</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417173836274.png" srcset="/img/loading.gif" lazyload alt="image-20230417173836274"></p>
+<p>主机C如何判断路由器R的存在</p>
+<p>指定路由器称之为<strong>默认网关</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417173944422.png" srcset="/img/loading.gif" lazyload alt="image-20230417173944422"></p>
+<h3 id="路由器转发"><a href="#路由器转发" class="headerlink" title="路由器转发"></a>路由器转发</h3><p>路由器收到IP数据报后如何进行转发？</p>
+<ol>
+<li>检查IP数据报首部是否出错：</li>
+</ol>
+<p>​    若出错，则直接丢弃该IP数据报并通告源主机</p>
+<p>​    若没有出错，就进行转发        </p>
+<ol>
+<li>根据IP数据报的目的地址在路由表中<strong>查找匹配的条目</strong>：</li>
+</ol>
+<p>​    若找到匹配条目，就转发给条目中指示的下一跳</p>
+<p>​    若找不到，就丢弃该IP数据报并通告源主机 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417174642183.png" srcset="/img/loading.gif" lazyload alt="image-20230417174642183"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417174836386.png" srcset="/img/loading.gif" lazyload alt="image-20230417174836386"></p>
+<h4 id="广播地址"><a href="#广播地址" class="headerlink" title="广播地址"></a>广播地址</h4><p>路由器收到广播地址后，不会进行任何转发工作，会造成广播风暴和资源浪费</p>
+<p>自动隔离广播域</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230417175253820.png" srcset="/img/loading.gif" lazyload alt="image-20230417175253820"></p>
+<p> 主机A向<strong>另一个网络</strong>发送广播IP数据报，同样，路由器不会进行转发</p>
 
                 
               </div>
@@ -293,7 +329,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="category-chain-item">汇编语言</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
   
   
 
@@ -313,8 +349,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>debug调试工具使用总结</div>
-      <div>http://example.com/2022/10/18/debug调试工具使用总结/</div>
+      <div>4.4IP数据报的发送和转发过程</div>
+      <div>http://example.com/2023/04/17/4-4IP数据报的发送和转发过程/</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +362,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 18, 2022</div>
+          <div>April 17, 2023</div>
         </div>
       
       
@@ -356,9 +392,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/19/%E6%89%BF%E4%B8%8A%E5%90%AF%E4%B8%8B/" title="承上启下">
+                      <a href="/2023/04/17/4-5%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE%E5%8F%8A%E5%85%B6%E5%8F%AF%E8%83%BD%E4%BA%A7%E7%94%9F%E7%9A%84%E8%B7%AF%E7%94%B1%E7%8E%AF%E8%B7%AF%E9%97%AE%E9%A2%98/" title="4.5静态路由配置及其可能产生的路由环路问题">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">承上启下</span>
+                        <span class="hidden-mobile">4.5静态路由配置及其可能产生的路由环路问题</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -366,8 +402,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/08/Colly/" title="Colly">
-                        <span class="hidden-mobile">Colly</span>
+                      <a href="/2023/04/09/4-3IPv4%E5%9C%B0%E5%9D%80%E6%A6%82%E8%BF%B0/" title="4.3IPv4">
+                        <span class="hidden-mobile">4.3IPv4</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
