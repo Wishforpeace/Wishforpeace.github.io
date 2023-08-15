@@ -1,0 +1,724 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="107 | Go编程模式：切片、接口、时间和性能你好，我是陈皓，网名左耳朵耗子。 今天是我们的第一节课，我先带你学习下Go语言编程模式的一些基本技术和要点。了解了这些内容，你就可以更轻松地掌握Go语言编程了，其中主要包括数组切片的一些小坑、接口编程，以及时间和程序运行性能相关的内容。 话不多说，我们直接开始。 Slice首先，我来介绍下Slice，中文翻译叫“切片”，这个东西在Go语言中不是数组，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WYX同学的Blog">
+<meta property="og:url" content="http://example.com/2023/05/16/107-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%88%87%E7%89%87%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E6%97%B6%E9%97%B4%E5%92%8C%E6%80%A7%E8%83%BD/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="107 | Go编程模式：切片、接口、时间和性能你好，我是陈皓，网名左耳朵耗子。 今天是我们的第一节课，我先带你学习下Go语言编程模式的一些基本技术和要点。了解了这些内容，你就可以更轻松地掌握Go语言编程了，其中主要包括数组切片的一些小坑、接口编程，以及时间和程序运行性能相关的内容。 话不多说，我们直接开始。 Slice首先，我来介绍下Slice，中文翻译叫“切片”，这个东西在Go语言中不是数组，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/05/16/107-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%88%87%E7%89%87%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E6%97%B6%E9%97%B4%E5%92%8C%E6%80%A7%E8%83%BD/images/332600/3e82a8bfb0f9cc51430cf9206c8fcf80.jpg">
+<meta property="og:image" content="http://example.com/2023/05/16/107-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%88%87%E7%89%87%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E6%97%B6%E9%97%B4%E5%92%8C%E6%80%A7%E8%83%BD/images/332600/66ed288ef019a8445b639db92d79a420.jpg">
+<meta property="og:image" content="http://example.com/2023/05/16/107-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%88%87%E7%89%87%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E6%97%B6%E9%97%B4%E5%92%8C%E6%80%A7%E8%83%BD/images/332600/90e91f0e9517594b6c26fb64d531c621.jpg">
+<meta property="og:image" content="http://example.com/2023/05/16/107-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%88%87%E7%89%87%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E6%97%B6%E9%97%B4%E5%92%8C%E6%80%A7%E8%83%BD/images/332600/33b6fb6a551a13cef4e0d9644a410601.jpg">
+<meta property="article:published_time" content="2023-05-16T07:44:32.878Z">
+<meta property="article:modified_time" content="2023-05-16T07:44:32.878Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/05/16/107-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%88%87%E7%89%87%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E6%97%B6%E9%97%B4%E5%92%8C%E6%80%A7%E8%83%BD/images/332600/3e82a8bfb0f9cc51430cf9206c8fcf80.jpg">
+  
+  
+  
+  <title>WYX同学的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-16 15:44" pubdate>
+          May 16, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          58 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="107-Go编程模式：切片、接口、时间和性能"><a href="#107-Go编程模式：切片、接口、时间和性能" class="headerlink" title="107 | Go编程模式：切片、接口、时间和性能"></a>107 | Go编程模式：切片、接口、时间和性能</h1><p>你好，我是陈皓，网名左耳朵耗子。</p>
+<p>今天是我们的第一节课，我先带你学习下Go语言编程模式的一些基本技术和要点。了解了这些内容，你就可以更轻松地掌握Go语言编程了，其中主要包括数组切片的一些小坑、接口编程，以及时间和程序运行性能相关的内容。</p>
+<p>话不多说，我们直接开始。</p>
+<h2 id="Slice"><a href="#Slice" class="headerlink" title="Slice"></a>Slice</h2><p>首先，我来介绍下Slice，中文翻译叫“切片”，这个东西在Go语言中不是数组，而是一个结构体，其定义如下：</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs smali">type slice struct &#123;<br>   <span class="hljs-built_in"> array </span>unsafe.Pointer //指向存放数据的数组指针<br>    len  <span class="hljs-built_in"> int </span>           //长度有多大<br>    cap  <span class="hljs-built_in"> int </span>           //容量有多大<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>一个空的Slice的表现如下图所示：</p>
+<p><img src="images/332600/3e82a8bfb0f9cc51430cf9206c8fcf80.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>熟悉C/C++的同学一定会知道在结构体里用数组指针的问题—— <strong>数据会发生共享</strong>！下面我们来看看Slice的一些操作：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">foo</span> = make([]int, <span class="hljs-number">5</span>)<br><span class="hljs-attribute">foo</span>[<span class="hljs-number">3</span>] = <span class="hljs-number">42</span><br><span class="hljs-attribute">foo</span>[<span class="hljs-number">4</span>] = <span class="hljs-number">100</span><br><br><span class="hljs-attribute">bar</span>  := foo[<span class="hljs-number">1</span>:<span class="hljs-number">4</span>]<br><span class="hljs-attribute">bar</span>[<span class="hljs-number">1</span>] = <span class="hljs-number">99</span><br><br></code></pre></td></tr></table></figure>
+<p>我来解释下这段代码：</p>
+<ul>
+<li>首先，创建一个foo的Slice，其中的长度和容量都是5；</li>
+<li>然后，开始对foo所指向的数组中的索引为3和4的元素进行赋值；</li>
+<li>最后，对foo做切片后赋值给bar，再修改bar[1]。</li>
+</ul>
+<p>为了方便你理解，我画了一张图：</p>
+<p><img src="images/332600/66ed288ef019a8445b639db92d79a420.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从这张图片中，我们可以看到，因为foo和bar的内存是共享的，所以，foo和bar对数组内容的修改都会影响到对方。</p>
+<p>接下来，我们再来看一个数据操作 <code>append()</code> 的示例：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-selector-tag">a</span> := <span class="hljs-built_in">make</span>(<span class="hljs-selector-attr">[]</span>int, <span class="hljs-number">32</span>)<br><span class="hljs-selector-tag">b</span> := <span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[1:16]</span><br><span class="hljs-selector-tag">a</span> = <span class="hljs-built_in">append</span>(<span class="hljs-selector-tag">a</span>, <span class="hljs-number">1</span>)<br><span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[2]</span> = <span class="hljs-number">42</span><br><br></code></pre></td></tr></table></figure>
+<p>在这段代码中，把 <code>a[1:16]</code> 的切片赋给 <code>b</code> ，此时， <code>a</code> 和 <code>b</code> 的内存空间是共享的，然后，对 <code>a</code> 做了一个 <code>append()</code> 的操作，这个操作会让 <code>a</code> 重新分配内存，这就会导致 <code>a</code> 和 <code>b</code> 不再共享，如下图所示：</p>
+<p><img src="images/332600/90e91f0e9517594b6c26fb64d531c621.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从图中，我们可以看到， <code>append()</code> 操作让 <code>a</code> 的容量变成了64，而长度是33。这里你需要重点注意一下， <strong><code>append()</code> 这个函数在 <code>cap</code> 不够用的时候，就会重新分配内存以扩大容量，如果够用，就不会重新分配内存了</strong>！</p>
+<p>我们再来看一个例子：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs stylus">func <span class="hljs-selector-tag">main</span>() &#123;<br>    path := <span class="hljs-selector-attr">[]</span><span class="hljs-built_in">byte</span>(<span class="hljs-string">&quot;AAAA/BBBBBBBBB&quot;</span>)<br>    sepIndex := bytes<span class="hljs-selector-class">.IndexByte</span>(path,<span class="hljs-string">&#x27;/&#x27;</span>)<br><br>    dir1 := path<span class="hljs-selector-attr">[:sepIndex]</span><br>    dir2 := path<span class="hljs-selector-attr">[sepIndex+1:]</span><br><br>    fmt<span class="hljs-selector-class">.Println</span>(<span class="hljs-string">&quot;dir1 =&gt;&quot;</span>,<span class="hljs-built_in">string</span>(dir1)) <span class="hljs-comment">//prints: dir1 =&gt; AAAA</span><br>    fmt<span class="hljs-selector-class">.Println</span>(<span class="hljs-string">&quot;dir2 =&gt;&quot;</span>,<span class="hljs-built_in">string</span>(dir2)) <span class="hljs-comment">//prints: dir2 =&gt; BBBBBBBBB</span><br><br>    dir1 = <span class="hljs-built_in">append</span>(dir1,<span class="hljs-string">&quot;suffix&quot;</span>...)<br><br>    fmt<span class="hljs-selector-class">.Println</span>(<span class="hljs-string">&quot;dir1 =&gt;&quot;</span>,<span class="hljs-built_in">string</span>(dir1)) <span class="hljs-comment">//prints: dir1 =&gt; AAAAsuffix</span><br>    fmt<span class="hljs-selector-class">.Println</span>(<span class="hljs-string">&quot;dir2 =&gt;&quot;</span>,<span class="hljs-built_in">string</span>(dir2)) <span class="hljs-comment">//prints: dir2 =&gt; uffixBBBB</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>在这个例子中， <code>dir1</code> 和 <code>dir2</code> 共享内存，虽然 <code>dir1</code> 有一个 <code>append()</code> 操作，但是因为 cap 足够，于是数据扩展到了 <code>dir2</code> 的空间。下面是相关的图示（注意上图中 <code>dir1</code> 和 <code>dir2</code> 结构体中的 <code>cap</code> 和 <code>len</code> 的变化）：</p>
+<p><img src="images/332600/33b6fb6a551a13cef4e0d9644a410601.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>如果要解决这个问题，我们只需要修改一行代码。我们要把代码</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dos">dir1 := <span class="hljs-built_in">path</span>[:sepIndex]<br><br></code></pre></td></tr></table></figure>
+<p>修改为：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir">dir1 <span class="hljs-symbol">:</span>= path[<span class="hljs-symbol">:sepIndex</span><span class="hljs-symbol">:sepIndex</span>]<br><br></code></pre></td></tr></table></figure>
+<p>新的代码使用了 Full Slice Expression，最后一个参数叫“Limited Capacity”，于是，后续的 <code>append()</code> 操作会导致重新分配内存。</p>
+<h2 id="深度比较"><a href="#深度比较" class="headerlink" title="深度比较"></a>深度比较</h2><p>当我们复制一个对象时，这个对象可以是内建数据类型、数组、结构体、Map……在复制结构体的时候，如果我们需要比较两个结构体中的数据是否相同，就要使用深度比较，而不只是简单地做浅度比较。这里需要使用到反射 <code>reflect.DeepEqual()</code> ，下面是几个示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;reflect&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br><br>    v1 := data&#123;&#125;<br>    v2 := data&#123;&#125;<br>    fmt.Println(<span class="hljs-string">&quot;v1 == v2:&quot;</span>,reflect.DeepEqual(v1,v2))<br>    <span class="hljs-comment">//prints: v1 == v2: true</span><br><br>    m1 := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">string</span>&#123;<span class="hljs-string">&quot;one&quot;</span>: <span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;two&quot;</span>: <span class="hljs-string">&quot;b&quot;</span>&#125;<br>    m2 := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">string</span>&#123;<span class="hljs-string">&quot;two&quot;</span>: <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;one&quot;</span>: <span class="hljs-string">&quot;a&quot;</span>&#125;<br>    fmt.Println(<span class="hljs-string">&quot;m1 == m2:&quot;</span>,reflect.DeepEqual(m1, m2))<br>    <span class="hljs-comment">//prints: m1 == m2: true</span><br><br>    s1 := []<span class="hljs-type">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;<br>    s2 := []<span class="hljs-type">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;<br>    fmt.Println(<span class="hljs-string">&quot;s1 == s2:&quot;</span>,reflect.DeepEqual(s1, s2))<br>    <span class="hljs-comment">//prints: s1 == s2: true</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="接口编程"><a href="#接口编程" class="headerlink" title="接口编程"></a>接口编程</h2><p>下面，我们来看段代码，其中是两个方法，它们都是要输出一个结构体，其中一个使用一个函数，另一个使用一个“成员函数”。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs stylus">func <span class="hljs-built_in">PrintPerson</span>(<span class="hljs-selector-tag">p</span> *Person) &#123;<br>    fmt<span class="hljs-selector-class">.Printf</span>(<span class="hljs-string">&quot;Name=%s, Sexual=%s, Age=%d\n&quot;</span>,<br>  <span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.Name</span>, <span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.Sexual</span>, <span class="hljs-selector-tag">p</span>.Age)<br>&#125;<br><br>func (<span class="hljs-selector-tag">p</span> *Person) <span class="hljs-built_in">Print</span>() &#123;<br>    fmt<span class="hljs-selector-class">.Printf</span>(<span class="hljs-string">&quot;Name=%s, Sexual=%s, Age=%d\n&quot;</span>,<br>  <span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.Name</span>, <span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.Sexual</span>, <span class="hljs-selector-tag">p</span>.Age)<br>&#125;<br><br>func <span class="hljs-selector-tag">main</span>() &#123;<br>    <span class="hljs-selector-tag">var</span> <span class="hljs-selector-tag">p</span> = Person&#123;<br>        Name: <span class="hljs-string">&quot;Hao Chen&quot;</span>,<br>        Sexual: <span class="hljs-string">&quot;Male&quot;</span>,<br>        Age: <span class="hljs-number">44</span>,<br>    &#125;<br><br>    <span class="hljs-built_in">PrintPerson</span>(&amp;p)<br>    <span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.Print</span>()<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>你更喜欢哪种方式呢？在 Go 语言中，使用“成员函数”的方式叫“Receiver”，这种方式是一种封装，因为 <code>PrintPerson()</code> 本来就是和 <code>Person</code> 强耦合的，所以理应放在一起。更重要的是，这种方式可以进行接口编程，对于接口编程来说，也就是一种抽象，主要是用在“多态”，这个技术，我在《 <a target="_blank" rel="noopener" href="https://coolshell.cn/articles/8460.html#%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%A4%9A%E6%80%81">Go语言简介（上）：接口与多态</a>》中讲过，你可以点击链接查看。</p>
+<p>在这里，我想讲另一个Go语言接口的编程模式。</p>
+<p>首先，我们来看一段代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Country <span class="hljs-keyword">struct</span> &#123;<br>    Name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-keyword">type</span> City <span class="hljs-keyword">struct</span> &#123;<br>    Name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-keyword">type</span> Printable <span class="hljs-keyword">interface</span> &#123;<br>    PrintStr()<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c Country)</span></span> PrintStr() &#123;<br>    fmt.Println(c.Name)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c City)</span></span> PrintStr() &#123;<br>    fmt.Println(c.Name)<br>&#125;<br><br>c1 := Country &#123;<span class="hljs-string">&quot;China&quot;</span>&#125;<br>c2 := City &#123;<span class="hljs-string">&quot;Beijing&quot;</span>&#125;<br>c1.PrintStr()<br>c2.PrintStr()<br><br></code></pre></td></tr></table></figure>
+<p>可以看到，这段代码中使用了一个 <code>Printable</code> 的接口，而 <code>Country</code> 和 <code>City</code> 都实现了接口方法 <code>PrintStr()</code> 把自己输出。然而，这些代码都是一样的，能不能省掉呢？</p>
+<p>其实，我们可以使用“结构体嵌入”的方式来完成这个事，如下所示：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-keyword">type</span> <span class="hljs-type">WithName</span> struct &#123;<br>    <span class="hljs-type">Name</span> string<br>&#125;<br><br><span class="hljs-keyword">type</span> <span class="hljs-type">Country</span> struct &#123;<br>    <span class="hljs-type">WithName</span><br>&#125;<br><br><span class="hljs-keyword">type</span> <span class="hljs-type">City</span> struct &#123;<br>    <span class="hljs-type">WithName</span><br>&#125;<br><br><span class="hljs-keyword">type</span> <span class="hljs-type">Printable</span> interface &#123;<br>    <span class="hljs-type">PrintStr</span>()<br>&#125;<br><br><span class="hljs-title">func</span> (w <span class="hljs-type">WithName</span>) <span class="hljs-type">PrintStr</span>() &#123;<br>    fmt.<span class="hljs-type">Println</span>(w.<span class="hljs-type">Name</span>)<br>&#125;<br><br><span class="hljs-title">c1</span> := <span class="hljs-type">Country</span> &#123;<span class="hljs-type">WithName</span>&#123; <span class="hljs-string">&quot;China&quot;</span>&#125;&#125;<br><span class="hljs-title">c2</span> := <span class="hljs-type">City</span> &#123; <span class="hljs-type">WithName</span>&#123;<span class="hljs-string">&quot;Beijing&quot;</span>&#125;&#125;<br><span class="hljs-title">c1</span>.<span class="hljs-type">PrintStr</span>()<br><span class="hljs-title">c2</span>.<span class="hljs-type">PrintStr</span>()<br><br></code></pre></td></tr></table></figure>
+<p>引入一个叫 <code>WithName</code> 的结构体，但是这会带来一个问题：在初始化的时候变得有点乱。那么，有没有更好的方法呢？再来看另外一个解。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Country <span class="hljs-keyword">struct</span> &#123;<br>    Name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-keyword">type</span> City <span class="hljs-keyword">struct</span> &#123;<br>    Name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-keyword">type</span> Stringable <span class="hljs-keyword">interface</span> &#123;<br>    ToString() <span class="hljs-type">string</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c Country)</span></span> ToString() <span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Country = &quot;</span> + c.Name<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c City)</span></span> ToString() <span class="hljs-type">string</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;City = &quot;</span> + c.Name<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">PrintStr</span><span class="hljs-params">(p Stringable)</span></span> &#123;<br>    fmt.Println(p.ToString())<br>&#125;<br><br>d1 := Country &#123;<span class="hljs-string">&quot;USA&quot;</span>&#125;<br>d2 := City&#123;<span class="hljs-string">&quot;Los Angeles&quot;</span>&#125;<br>PrintStr(d1)<br>PrintStr(d2)<br><br></code></pre></td></tr></table></figure>
+<p>在这段代码中，我们可以看到， <strong>我们使用了一个叫</strong> <code>Stringable</code> 的接口，我们用这个接口把“业务类型” <code>Country</code> 和 <code>City</code> 和“控制逻辑” <code>Print()</code> 给解耦了。于是，只要实现了 <code>Stringable</code> 接口，都可以传给 <code>PrintStr()</code> 来使用。</p>
+<p>这种编程模式在Go 的标准库有很多的示例，最著名的就是 <code>io.Read</code> 和 <code>ioutil.ReadAll</code> 的玩法，其中 <code>io.Read</code> 是一个接口，你需要实现它的一个 <code>Read(p []byte) (n int, err error)</code> 接口方法，只要满足这个规则，就可以被 <code>ioutil.ReadAll</code> 这个方法所使用。 <strong>这就是面向对象编程方法的黄金法则——“Program to an interface not an implementation”。</strong></p>
+<h2 id="接口完整性检查"><a href="#接口完整性检查" class="headerlink" title="接口完整性检查"></a>接口完整性检查</h2><p>另外，我们可以看到，Go语言的编译器并没有严格检查一个对象是否实现了某接口所有的接口方法，如下面这个示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Shape <span class="hljs-keyword">interface</span> &#123;<br>    Sides() <span class="hljs-type">int</span><br>    Area() <span class="hljs-type">int</span><br>&#125;<br><span class="hljs-keyword">type</span> Square <span class="hljs-keyword">struct</span> &#123;<br>    <span class="hljs-built_in">len</span> <span class="hljs-type">int</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s* Square)</span></span> Sides() <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">4</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    s := Square&#123;<span class="hljs-built_in">len</span>: <span class="hljs-number">5</span>&#125;<br>    fmt.Printf(<span class="hljs-string">&quot;%d\n&quot;</span>,s.Sides())<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>可以看到， <code>Square</code> 并没有实现 <code>Shape</code> 接口的所有方法，程序虽然可以跑通，但是这样的编程方式并不严谨，如果我们需要强制实现接口的所有方法，那该怎么办呢？</p>
+<p>在Go语言编程圈里，有一个比较标准的做法：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gcode">var _ Shape = <span class="hljs-comment">(*Square)</span><span class="hljs-comment">(nil)</span><br><br></code></pre></td></tr></table></figure>
+<p>声明一个 <code>_</code> 变量（没人用）会把一个 <code>nil</code> 的空指针从 <code>Square</code> 转成 <code>Shape</code>，这样，如果没有实现完相关的接口方法，编译器就会报错：</p>
+<blockquote>
+<p>_cannot use (*Square)(nil) (type *Square) as type Shape in assignment: *Square does not implement Shape (missing Area method)_</p>
+</blockquote>
+<p>这样就做到了强验证的方法。</p>
+<h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><p>对于时间来说，这应该是编程中比较复杂的问题了，相信我，时间是一种非常复杂的事（比如《 <a target="_blank" rel="noopener" href="https://coolshell.cn/articles/5075.html">你确信你了解时间吗？</a>》《 <a target="_blank" rel="noopener" href="https://coolshell.cn/articles/7804.html">关于闰秒</a>》等文章）。而且，时间有时区、格式、精度等问题，其复杂度不是一般人能处理的。所以，一定要重用已有的时间处理，而不是自己干。</p>
+<p>在 Go 语言中，你一定要使用 <code>time.Time</code> 和 <code>time.Duration</code> 这两个类型。</p>
+<ul>
+<li>在命令行上， <code>flag</code> 通过 <code>time.ParseDuration</code> 支持了 <code>time.Duration</code>。</li>
+<li>JSON 中的 <code>encoding/json</code> 中也可以把 <code>time.Time</code> 编码成 <a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> 的格式。</li>
+<li>数据库使用的 <code>database/sql</code> 也支持把 <code>DATATIME</code> 或 <code>TIMESTAMP</code> 类型转成 <code>time.Time</code>。</li>
+<li>YAML也可以使用 <code>gopkg.in/yaml.v2</code> 支持 <code>time.Time</code> 、 <code>time.Duration</code> 和 <a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> 格式。</li>
+</ul>
+<p>如果你要和第三方交互，实在没有办法，也请使用 <a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> 的格式。</p>
+<p>最后，如果你要做全球化跨时区的应用，一定要把所有服务器和时间全部使用UTC时间。</p>
+<h2 id="性能提示"><a href="#性能提示" class="headerlink" title="性能提示"></a>性能提示</h2><p>Go 语言是一个高性能的语言，但并不是说这样我们就不用关心性能了，我们还是需要关心的。下面我给你提供一份在编程方面和性能相关的提示。</p>
+<ul>
+<li>如果需要把数字转换成字符串，使用 <code>strconv.Itoa()</code> 比 <code>fmt.Sprintf()</code> 要快一倍左右。</li>
+<li>尽可能避免把 <code>String</code> 转成 <code>[]Byte</code> ，这个转换会导致性能下降。</li>
+<li>如果在for-loop里对某个Slice 使用 <code>append()</code>，请先把 Slice的容量扩充到位，这样可以避免内存重新分配以及系统自动按2的N次方幂进行扩展但又用不到的情况，从而避免浪费内存。</li>
+<li>使用 <code>StringBuffer</code> 或是 <code>StringBuild</code> 来拼接字符串，性能会比使用 <code>+</code> 或 <code>+=</code> 高三到四个数量级。</li>
+<li>尽可能使用并发的 goroutine，然后使用 <code>sync.WaitGroup</code> 来同步分片操作。</li>
+<li>避免在热代码中进行内存分配，这样会导致gc很忙。尽可能使用 <code>sync.Pool</code> 来重用对象。</li>
+<li>使用 lock-free的操作，避免使用 mutex，尽可能使用 <code>sync/Atomic</code> 包（关于无锁编程的相关话题，可参看《 <a target="_blank" rel="noopener" href="https://coolshell.cn/articles/8239.html">无锁队列实现</a>》或《 <a target="_blank" rel="noopener" href="https://coolshell.cn/articles/9703.html">无锁Hashmap实现</a>》）。</li>
+<li>使用 I/O缓冲，I/O是个非常非常慢的操作，使用 <code>bufio.NewWrite()</code> 和 <code>bufio.NewReader()</code> 可以带来更高的性能。</li>
+<li>对于在for-loop里的固定的正则表达式，一定要使用 <code>regexp.Compile()</code> 编译正则表达式。性能会提升两个数量级。</li>
+<li>如果你需要更高性能的协议，就要考虑使用 <a target="_blank" rel="noopener" href="https://github.com/golang/protobuf">protobuf</a> 或 <a target="_blank" rel="noopener" href="https://github.com/tinylib/msgp">msgp</a> 而不是JSON，因为JSON的序列化和反序列化里使用了反射。</li>
+<li>你在使用Map的时候，使用整型的key会比字符串的要快，因为整型比较比字符串比较要快。</li>
+</ul>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>其实，还有很多不错的技巧，我给你推荐一些参考文档，它们可以帮助你写出更好的Go的代码，必读！</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://golang.org/doc/effective_go.html"><strong>Effective Go</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/uber-go/guide/blob/master/style.md"><strong>Uber Go Style</strong></a></li>
+<li><a target="_blank" rel="noopener" href="http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/"><strong>50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/cristaloleg/go-advice"><strong>Go Advice</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://www.instana.com/blog/practical-golang-benchmarks/"><strong>Practical Go Benchmarks</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/alecthomas/go_serialization_benchmarks"><strong>Benchmarks of Go serialization methods</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/golang/go/wiki/Performance"><strong>Debugging performance issues in Go programs</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7"><strong>Go code refactoring: the 23x performance hunt</strong></a></li>
+</ul>
+<p>好了，这节课就到这里。如果你觉得今天的内容对你有所帮助，欢迎你帮我分享给更多人。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>http://example.com/2023/05/16/107-Go编程模式：切片、接口、时间和性能/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 16, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/16/108-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/16/106-%E9%AB%98%E6%95%88%E6%B2%9F%E9%80%9A%EF%BC%9A%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D%E7%9A%84%E8%89%BA%E6%9C%AF/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

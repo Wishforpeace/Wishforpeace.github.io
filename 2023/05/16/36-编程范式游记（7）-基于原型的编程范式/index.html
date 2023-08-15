@@ -1,0 +1,745 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="36 | 编程范式游记（7）- 基于原型的编程范式你好，我是陈皓，网名左耳朵耗子。 基于原型（Prototype）的编程其实也是面向对象编程的一种方式。没有class化的，直接使用对象。又叫，基于实例的编程。其主流的语言就是JavaScript，与传统的面向对象编程的比较如下：  在基于类的编程当中，对象总共有两种类型。类定义了对象的基本布局和函数特性，而接口是“可以使用的”对象，它基于特定类的样">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WYX同学的Blog">
+<meta property="og:url" content="http://example.com/2023/05/16/36-%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E6%B8%B8%E8%AE%B0%EF%BC%887%EF%BC%89-%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="36 | 编程范式游记（7）- 基于原型的编程范式你好，我是陈皓，网名左耳朵耗子。 基于原型（Prototype）的编程其实也是面向对象编程的一种方式。没有class化的，直接使用对象。又叫，基于实例的编程。其主流的语言就是JavaScript，与传统的面向对象编程的比较如下：  在基于类的编程当中，对象总共有两种类型。类定义了对象的基本布局和函数特性，而接口是“可以使用的”对象，它基于特定类的样">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/05/16/36-%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E6%B8%B8%E8%AE%B0%EF%BC%887%EF%BC%89-%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/images/2741/a67686c883e8077da6779ae956efdcec.png">
+<meta property="og:image" content="http://example.com/2023/05/16/36-%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E6%B8%B8%E8%AE%B0%EF%BC%887%EF%BC%89-%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/images/2741/6ca465981ae68f4a055f9ca4f16fdffa.png">
+<meta property="article:published_time" content="2023-05-16T07:46:26.405Z">
+<meta property="article:modified_time" content="2023-05-16T07:46:26.406Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/05/16/36-%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E6%B8%B8%E8%AE%B0%EF%BC%887%EF%BC%89-%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/images/2741/a67686c883e8077da6779ae956efdcec.png">
+  
+  
+  
+  <title>WYX同学的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-16 15:46" pubdate>
+          May 16, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          53 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="36-编程范式游记（7）-基于原型的编程范式"><a href="#36-编程范式游记（7）-基于原型的编程范式" class="headerlink" title="36 | 编程范式游记（7）- 基于原型的编程范式"></a>36 | 编程范式游记（7）- 基于原型的编程范式</h1><p>你好，我是陈皓，网名左耳朵耗子。</p>
+<p>基于原型（Prototype）的编程其实也是面向对象编程的一种方式。没有class化的，直接使用对象。又叫，基于实例的编程。其主流的语言就是JavaScript，与传统的面向对象编程的比较如下：</p>
+<ul>
+<li><p>在基于类的编程当中，对象总共有两种类型。类定义了对象的基本布局和函数特性，而接口是“可以使用的”对象，它基于特定类的样式。在此模型中，类表现为行为和结构的集合，对所有接口来说这些类的行为和结构都是相同的。因而，区分规则首先是基于行为和结构，而后才是状态。</p>
+</li>
+<li><p>原型编程的主张者经常争论说，基于类的语言提倡使用一个关注分类和类之间关系的开发模型。与此相对，原型编程看起来提倡程序员关注一系列对象实例的行为，而之后才关心如何将这些对象划分到最近的使用方式相似的原型对象，而不是分成类。</p>
+</li>
+</ul>
+<p>因为如此，很多基于原型的系统提倡运行时进行原型的修改，而只有极少数基于类的面向对象系统（比如第一个动态面向对象的系统Smalltalk）允许类在程序运行时被修改。</p>
+<ul>
+<li><p>在基于类的语言中，一个新的实例通过类构造器和构造器可选的参数来构造，结果实例由类选定的行为和布局创建模型。</p>
+</li>
+<li><p>在基于原型的系统中构造对象有两种方法，通过复制已有的对象或者通过扩展空对象创建。很多基于原型的系统提倡运行时进行原型的修改，而基于类的面向对象系统只有动态语言允许类在运行时被修改（Common Lisp、Dylan、Objective-C、Perl、Python、Ruby和Smalltalk）。</p>
+</li>
+</ul>
+<h1 id="JavaScript的原型概念"><a href="#JavaScript的原型概念" class="headerlink" title="JavaScript的原型概念"></a>JavaScript的原型概念</h1><p>这里，我们主要以JavaScript举例，面向对象里面要有个Class。但是JavaScript觉得不是这样的，它就是要基于原型编程，就不要Class，就直接在对象上改就行了，基于编程的修改，直接对类型进行修改。</p>
+<p>我们先来看一个示例。</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">var foo</span> = &#123;name: <span class="hljs-string">&quot;foo&quot;</span>, one: 1, two: 2&#125;;<br><br><span class="hljs-attribute">var bar</span> = &#123;three: 3&#125;;<br><br></code></pre></td></tr></table></figure>
+<p>每个对象都有一个 <code>__proto__</code> 的属性，这个就是“原型”。对于上面的两个对象，如果我们把 <code>foo</code> 赋值给 <code>bar.__proto__</code>，那就意味着， <code>bar</code> 的原型就成了 <code>foo</code> 的。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">bar.__proto__</span> = foo<span class="hljs-comment">; // foo is now the prototype of bar.</span><br><br></code></pre></td></tr></table></figure>
+<p>于是，我们就可以在 <code>bar</code> 里面访问 <code>foo</code> 的属性了。</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sqf"><span class="hljs-comment">// If we try to access foo&#x27;s properties from bar</span><br><span class="hljs-comment">// from now on, we&#x27;ll succeed.</span><br>bar.one <span class="hljs-comment">// Resolves to 1.</span><br><br><span class="hljs-comment">// The child object&#x27;s properties are also accessible.</span><br>bar.three <span class="hljs-comment">// Resolves to 3.</span><br><br><span class="hljs-comment">// Own properties shadow prototype properties</span><br>bar.<span class="hljs-built_in">name</span> = <span class="hljs-string">&quot;bar&quot;</span>;<br>foo.<span class="hljs-built_in">name</span>; <span class="hljs-comment">// unaffected, resolves to &quot;foo&quot;</span><br>bar.<span class="hljs-built_in">name</span>; <span class="hljs-comment">// Resolves to &quot;bar&quot;</span><br><br></code></pre></td></tr></table></figure>
+<p>需要解释一下JavaScript的两个东西，一个是 <code>__proto__</code>，另一个是 <code>prototype</code>，这两个东西很容易混淆。这里说明一下：</p>
+<ul>
+<li><p><strong><code>__proto__</code></strong> 主要是安放在一个实际的对象中，用它来产生一个链接，一个原型链，用于寻找方法名或属性，等等。</p>
+</li>
+<li><p><strong><code>prototype</code></strong> 是用 <code>new</code> 来创建一个对象时构造 <code>__proto__</code> 用的。它是构造函数的一个属性。</p>
+</li>
+</ul>
+<p>在JavaScript中，对象有两种表现形式， 一种是 <code>Object</code> ( <a target="_blank" rel="noopener" href="http://www.ecma-international.org/ecma-262/5.1/#sec-15.2">ES5关于Object的文档</a>)，一种是 <code>Function</code> （ <a target="_blank" rel="noopener" href="http://www.ecma-international.org/ecma-262/5.1/#sec-15.2">ES5关于Function的文档</a>）。</p>
+<p>我们可以简单地认为， <code>__proto__</code> 是所有对象用于链接原型的一个指针，而 <code>prototype</code> 则是 Function 对象的属性，其主要是用来当需要 <code>new</code> 一个对象时让 <code>__proto__</code> 指针所指向的地方。 对于超级对象 <code>Function</code> 而言， <code>Function.__proto__</code> 就是 <code>Function.prototype</code>。</p>
+<p>比如我们有如下的代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">var</span> a = &#123;<br>  x: <span class="hljs-number">10</span>,<br>  calculate: function (z) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.x + <span class="hljs-keyword">this</span>.y + z;<br>  &#125;<br>&#125;;<br><br><span class="hljs-keyword">var</span> b = &#123;<br>  y: <span class="hljs-number">20</span>,<br>  __proto__: a<br>&#125;;<br><br><span class="hljs-keyword">var</span> c = &#123;<br>  y: <span class="hljs-number">30</span>,<br>  __proto__: a<br>&#125;;<br><br><span class="hljs-comment">// call the inherited method</span><br>b.calculate(<span class="hljs-number">30</span>); <span class="hljs-comment">// 60</span><br>c.calculate(<span class="hljs-number">40</span>); <span class="hljs-comment">// 80</span><br><br></code></pre></td></tr></table></figure>
+<p>其中的“原型链”如下所示：</p>
+<p><img src="images/2741/a67686c883e8077da6779ae956efdcec.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>注意：ES5 中，规定原型继承需要使用 <code>Object.create()</code> 函数。如下所示：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">var</span> b = Object.<span class="hljs-title function_ invoke__">create</span>(a, &#123;<span class="hljs-attr">y</span>: &#123;<span class="hljs-attr">value</span>: <span class="hljs-number">20</span>&#125;&#125;);<br><span class="hljs-keyword">var</span> c = Object.<span class="hljs-title function_ invoke__">create</span>(a, &#123;<span class="hljs-attr">y</span>: &#123;<span class="hljs-attr">value</span>: <span class="hljs-number">30</span>&#125;&#125;);<br><br></code></pre></td></tr></table></figure>
+<p>好了，我们再来看一段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 一种构造函数写法</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">Foo</span>(<span class="hljs-params">y</span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">y</span> = y;<br>&#125;<br><br><span class="hljs-comment">// 修改 Foo 的 prototype，加入一个成员变量 x</span><br><span class="hljs-title class_">Foo</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">x</span> = <span class="hljs-number">10</span>;<br><br><span class="hljs-comment">// 修改 Foo 的 prototype，加入一个成员函数 calculate</span><br><span class="hljs-title class_">Foo</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">calculate</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">z</span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">x</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">y</span> + z;<br>&#125;;<br><br><span class="hljs-comment">// 现在，我们用 Foo 这个原型来创建 b 和 c</span><br><span class="hljs-keyword">var</span> b = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Foo</span>(<span class="hljs-number">20</span>);<br><span class="hljs-keyword">var</span> c = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Foo</span>(<span class="hljs-number">30</span>);<br><br><span class="hljs-comment">// 调用原型中的方法，可以得到正确的值</span><br>b.<span class="hljs-title function_">calculate</span>(<span class="hljs-number">30</span>); <span class="hljs-comment">// 60</span><br>c.<span class="hljs-title function_">calculate</span>(<span class="hljs-number">40</span>); <span class="hljs-comment">// 80</span><br><br></code></pre></td></tr></table></figure>
+<p>那么，在内存中的布局是怎么样的呢？大概是下面这个样子。</p>
+<p><img src="images/2741/6ca465981ae68f4a055f9ca4f16fdffa.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这个图应该可以让你很好地看明白 <code>__proto__</code> 和 <code>prototype</code> 的差别了。</p>
+<p>我们可以测试一下：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">b.__proto__</span> === Foo.prototype, // <span class="hljs-literal">true</span><br><span class="hljs-attr">c.__proto__</span> === Foo.prototype, // <span class="hljs-literal">true</span><br><br><span class="hljs-attr">b.constructor</span> === Foo, // <span class="hljs-literal">true</span><br><span class="hljs-attr">c.constructor</span> === Foo, // <span class="hljs-literal">true</span><br><span class="hljs-attr">Foo.prototype.constructor</span> === Foo, // <span class="hljs-literal">true</span><br><br><span class="hljs-attr">b.calculate</span> === b.__proto__.calculate, // <span class="hljs-literal">true</span><br><span class="hljs-attr">b.__proto__.calculate</span> === Foo.prototype.calculate // <span class="hljs-literal">true</span><br><br></code></pre></td></tr></table></figure>
+<p>这里需要说明的是：</p>
+<p><strong><code>Foo.prototype</code> 自动创建了一个属性 <code>constructor</code>，这是一个指向函数自己的一个reference。这样一来，对于实例 <code>b</code> 或 <code>c</code> 来说，就能访问到这个继承的 <code>constructor</code> 了。</strong></p>
+<p>有了这些基本概念，我们就可以讲一下JavaScript的面向对象编程了。</p>
+<blockquote>
+<p>注： 上面示例和图示来源于 <a target="_blank" rel="noopener" href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/">JavaScript, The Core</a> 一文。</p>
+</blockquote>
+<h1 id="JavaScript原型编程的面向对象"><a href="#JavaScript原型编程的面向对象" class="headerlink" title="JavaScript原型编程的面向对象"></a>JavaScript原型编程的面向对象</h1><p>我们再来重温一下上面讲述的内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Person</span>(<span class="hljs-params"></span>)&#123;&#125;<br><span class="hljs-keyword">var</span> p = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>();<br><br><span class="hljs-title class_">Person</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">name</span> = <span class="hljs-string">&quot;Hao Chen&quot;</span>;<br><span class="hljs-title class_">Person</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">sayHello</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Hi, I am &quot;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>);<br>&#125;<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(p.<span class="hljs-property">name</span>); <span class="hljs-comment">// &quot;Hao Chen&quot;</span><br>p.<span class="hljs-title function_">sayHello</span>(); <span class="hljs-comment">// &quot;Hi, I am Hao Chen&quot;</span><br><br></code></pre></td></tr></table></figure>
+<p>在上面这个例子中：</p>
+<ul>
+<li>我们先生成了一个空的函数对象 <code>Person()</code>；</li>
+<li>然后将这个空的函数对象 <code>new</code> 出另一个对象，存在 <code>p</code> 中；</li>
+<li>这时再改变 <code>Person.prototype</code>，让其有一个 <code>name</code> 的属性和一个 <code>sayHello()</code> 的方法；</li>
+<li>我们发现，另外那个 <code>p</code> 的对象也跟着一起改变了。</li>
+</ul>
+<p>注意一下：</p>
+<ul>
+<li>当创建 <code>function Person()&#123;&#125;</code> 时， <code>Person.__proto__</code> 指向 <code>Function.prototype</code>;</li>
+<li>当创建 <code>var p = new Person()</code> 时， <code>p.__proto__</code> 指向 <code>Person.prototype</code>;</li>
+<li>当修改了 <code>Person.prototype</code> 的内容后， <code>p.__proto__</code> 的内容也就被改变了。</li>
+</ul>
+<p>好了，我们再来看一下“原型编程”中面向对象的编程玩法。</p>
+<p>首先，我们定义一个 <code>Person</code> 类。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//Define human class</span><br><span class="hljs-keyword">var</span> <span class="hljs-title class_">Person</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">fullName, email</span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">fullName</span> = fullName;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">email</span> = email;<br><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">speak</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;I speak English!&quot;</span>);<br>  &#125;;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">introduction</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Hi, I am &quot;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">fullName</span>);<br>  &#125;;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>上面这个对象中，包含了：</p>
+<ul>
+<li>属性： <code>fullName</code> 和 <code>email</code>；</li>
+<li>方法： <code>speak()</code> 和 <code>introduction()</code>。</li>
+</ul>
+<p>其实，所谓的方法也是属性。</p>
+<p>然后，我们可以定义一个 <code>Student</code> 对象。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">//Define Student class</span><br><span class="hljs-keyword">var</span> Student = function(fullName, email, school, courses) &#123;<br><br>  Person.call(<span class="hljs-keyword">this</span>, fullName, email);<br><br>  <span class="hljs-comment">// Initialize our Student properties</span><br>  <span class="hljs-keyword">this</span>.school = school;<br>  <span class="hljs-keyword">this</span>.courses = courses;<br><br>  <span class="hljs-comment">// override the &quot;introduction&quot; method</span><br>  <span class="hljs-keyword">this</span>.introduction= function()&#123;<br>	console.log(<span class="hljs-string">&quot;Hi, I am &quot;</span> + <span class="hljs-keyword">this</span>.fullName +<br>				<span class="hljs-string">&quot;. I am a student of &quot;</span> + <span class="hljs-keyword">this</span>.school +<br>				<span class="hljs-string">&quot;, I study &quot;</span>+ <span class="hljs-keyword">this</span>.courses +<span class="hljs-string">&quot;.&quot;</span>);<br>  &#125;;<br><br>  <span class="hljs-comment">// Add a &quot;exams&quot; method</span><br>  <span class="hljs-keyword">this</span>.takeExams = function()&#123;<br>    console.log(<span class="hljs-string">&quot;This is my exams time!&quot;</span>);<br>  &#125;;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+<p>在上面的代码中：</p>
+<ul>
+<li><p>使用了 <code>Person.call(this, fullName, email)</code>， <code>call()</code> 或 <code>apply()</code> 都是为了动态改变 <code>this</code> 所指向的对象的内容而出现的。这里的 <code>this</code> 就是 <code>Student</code>。</p>
+</li>
+<li><p>上面的例子中，我们重载了 <code>introduction()</code> 方法，并新增加了一个 <code>takeExams()</code> 的方法。</p>
+</li>
+</ul>
+<p>虽然，我们这样定义了 <code>Student</code>，但是它还没有和 <code>Person</code> 发生继承关系。为了要让它们发生关系，我们就需要修改 <code>Student</code> 的原型。</p>
+<p>我们可以简单粗暴地做赋值： <code>Student.__proto__ = Person.prototype</code> ，但是，这太粗暴了。</p>
+<p>我们还是使用比较规范的方式：</p>
+<ul>
+<li><p>先用 <code>Object.create()</code> 来将 <code>Person.prototype</code> 和 <code>Student.prototype</code> 关联上。</p>
+</li>
+<li><p>然后，修改一下构造函数 <code>Student.prototype.constructor = Student;</code>。</p>
+</li>
+</ul>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs elm">// <span class="hljs-type">Create</span> a <span class="hljs-type">Student</span>.proto<span class="hljs-keyword">type</span> object that inherits<br>// from <span class="hljs-type">Person</span>.proto<span class="hljs-keyword">type</span>.<br><span class="hljs-type">Student</span>.proto<span class="hljs-keyword">type</span> = <span class="hljs-type">Object</span>.create(<span class="hljs-type">Person</span>.prototype);<br><br>// <span class="hljs-type">Set</span> the <span class="hljs-string">&quot;constructor&quot;</span> property to refer to <span class="hljs-type">Student</span><br><span class="hljs-type">Student</span>.proto<span class="hljs-keyword">type</span>.constructor = <span class="hljs-type">Student</span>;<br><br></code></pre></td></tr></table></figure>
+<p>这样，我们就可以这样使用了。</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">var</span> student = <span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;Hao Chen&quot;</span>,<br>						  <span class="hljs-string">&quot;haoel@hotmail.com&quot;</span>,<br>						  <span class="hljs-string">&quot;XYZ University&quot;</span>,<br>						  <span class="hljs-string">&quot;Computer Science&quot;</span>);<br>student.introduction();<br>student.speak();<br>student.takeExams();<br><br><span class="hljs-comment">// Check that instanceof works correctly</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(student instanceof Person);  <span class="hljs-comment">// true</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(student instanceof Student); <span class="hljs-comment">// true</span><br><br></code></pre></td></tr></table></figure>
+<p>上述就是基于原型的面向对象编程的玩法了。</p>
+<blockquote>
+<p>注：在ECMAScript标准的第四版开始寻求使JavaScript提供基于类的构造，且ECMAScript第六版有提供”class”(类)作为原有的原型架构之上的语法糖，提供构建对象与处理继承时的另一种语法。</p>
+</blockquote>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>我们可以看到，这种玩法就是一种委托的方式。在使用委托的基于原型的语言中，运行时语言可以“仅仅通过序列的指针找到匹配”这样的方式来定位属性或者寻找正确的数据。所有这些创建行为、共享的行为需要的是委托指针。</p>
+<p>不像是基于类的面向对象语言中类和接口的关系，原型和它的分支之间的关系并不要求子对象有相似的内存结构，因为如此，子对象可以继续修改而无需像基于类的系统那样整理结构。还有一个要提到的地方是，不仅仅是数据，方法也能被修改。因为这个原因，大多数基于原型的语言把数据和方法提作“slots”。</p>
+<p>这种在对象里面直接修改的玩法，虽然这个特性可以带来运行时的灵活性，我们可以在运行时修改一个prototype，给它增加甚至删除属性和方法。但是其带来了执行的不确定性，也有安全性的问题，而代码还变得不可预测，这有点黑科技的味道了。因为这些不像静态类型系统，没有一个不可变的契约对代码的确定性有保证，所以，需要使用者来自己保证。</p>
+<p>以下是《编程范式游记》系列文章的目录，方便你了解这一系列内容的全貌。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/301">01 | 编程范式游记：起源</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/303">02 | 编程范式游记：泛型编程</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/2017">03 | 编程范式游记：类型系统和泛型的本质</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/2711">04 | 编程范式游记：函数式编程</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/2723">05 | 编程范式游记：修饰器模式</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/2729">06 | 编程范式游记：面向对象编程</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/2741">07 | 编程范式游记：基于原型的编程范式</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/2748">08 | 编程范式游记：Go 语言的委托模式</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/2751">09 | 编程范式游记：编程的本质</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/2752">10 | 编程范式游记：逻辑编程范式</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/2754">11 | 编程范式游记：程序世界里的编程范式</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>http://example.com/2023/05/16/36-编程范式游记（7）-基于原型的编程范式/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 16, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/16/37-%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E6%B8%B8%E8%AE%B0%EF%BC%888%EF%BC%89-Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A7%94%E6%89%98%E6%A8%A1%E5%BC%8F/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/16/35-%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E6%B8%B8%E8%AE%B0%EF%BC%886%EF%BC%89-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

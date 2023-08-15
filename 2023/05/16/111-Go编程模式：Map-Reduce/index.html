@@ -1,0 +1,716 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="111 | Go 编程模式：Map-Reduce你好，我是陈皓，网名左耳朵耗子。 这节课，我们来学习一下函数式编程中非常重要的Map、Reduce、Filter这三种操作。这三种操作可以让我们轻松灵活地进行一些数据处理，毕竟，我们的程序大多数情况下都在倒腾数据。尤其是对于一些需要统计的业务场景来说，Map、Reduce、Filter是非常通用的玩法。 话不多说，我们先来看几个例子。 基本示例Map">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WYX同学的Blog">
+<meta property="og:url" content="http://example.com/2023/05/16/111-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9AMap-Reduce/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="111 | Go 编程模式：Map-Reduce你好，我是陈皓，网名左耳朵耗子。 这节课，我们来学习一下函数式编程中非常重要的Map、Reduce、Filter这三种操作。这三种操作可以让我们轻松灵活地进行一些数据处理，毕竟，我们的程序大多数情况下都在倒腾数据。尤其是对于一些需要统计的业务场景来说，Map、Reduce、Filter是非常通用的玩法。 话不多说，我们先来看几个例子。 基本示例Map">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/05/16/111-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9AMap-Reduce/images/332606/1506b63044071bfa5c214a725a9caf56.png">
+<meta property="article:published_time" content="2023-05-16T07:44:40.529Z">
+<meta property="article:modified_time" content="2023-05-16T07:44:40.529Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/05/16/111-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9AMap-Reduce/images/332606/1506b63044071bfa5c214a725a9caf56.png">
+  
+  
+  
+  <title>WYX同学的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-16 15:44" pubdate>
+          May 16, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          99 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="111-Go-编程模式：Map-Reduce"><a href="#111-Go-编程模式：Map-Reduce" class="headerlink" title="111 | Go 编程模式：Map-Reduce"></a>111 | Go 编程模式：Map-Reduce</h1><p>你好，我是陈皓，网名左耳朵耗子。</p>
+<p>这节课，我们来学习一下函数式编程中非常重要的Map、Reduce、Filter这三种操作。这三种操作可以让我们轻松灵活地进行一些数据处理，毕竟，我们的程序大多数情况下都在倒腾数据。尤其是对于一些需要统计的业务场景来说，Map、Reduce、Filter是非常通用的玩法。</p>
+<p>话不多说，我们先来看几个例子。</p>
+<h2 id="基本示例"><a href="#基本示例" class="headerlink" title="基本示例"></a>基本示例</h2><h3 id="Map示例"><a href="#Map示例" class="headerlink" title="Map示例"></a>Map示例</h3><p>在下面的程序代码中，我写了两个Map函数，这两个函数需要两个参数：</p>
+<ul>
+<li>一个是字符串数组 <code>[]</code> <code>string</code>，说明需要处理的数据是一个字符串；</li>
+<li>另一个是一个函数func(s string) string 或 func(s string) int。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">MapStrToStr</span><span class="hljs-params">(arr []<span class="hljs-type">string</span>, fn <span class="hljs-keyword">func</span>(s <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">string</span>) []<span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">var</span> newArray = []<span class="hljs-type">string</span>&#123;&#125;<br>    <span class="hljs-keyword">for</span> _, it := <span class="hljs-keyword">range</span> arr &#123;<br>        newArray = <span class="hljs-built_in">append</span>(newArray, fn(it))<br>    &#125;<br>    <span class="hljs-keyword">return</span> newArray<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">MapStrToInt</span><span class="hljs-params">(arr []<span class="hljs-type">string</span>, fn <span class="hljs-keyword">func</span>(s <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">int</span>) []<span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">var</span> newArray = []<span class="hljs-type">int</span>&#123;&#125;<br>    <span class="hljs-keyword">for</span> _, it := <span class="hljs-keyword">range</span> arr &#123;<br>        newArray = <span class="hljs-built_in">append</span>(newArray, fn(it))<br>    &#125;<br>    <span class="hljs-keyword">return</span> newArray<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>整个Map函数的运行逻辑都很相似，函数体都是在遍历第一个参数的数组，然后，调用第二个参数的函数，把它的值组合成另一个数组返回。</p>
+<p>因此，我们就可以这样使用这两个函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> list = []<span class="hljs-type">string</span>&#123;<span class="hljs-string">&quot;Hao&quot;</span>, <span class="hljs-string">&quot;Chen&quot;</span>, <span class="hljs-string">&quot;MegaEase&quot;</span>&#125;<br><br>x := MapStrToStr(list, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(s <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">return</span> strings.ToUpper(s)<br>&#125;)<br>fmt.Printf(<span class="hljs-string">&quot;%v\n&quot;</span>, x)<br><span class="hljs-comment">//[&quot;HAO&quot;, &quot;CHEN&quot;, &quot;MEGAEASE&quot;]</span><br><br>y := MapStrToInt(list, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(s <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(s)<br>&#125;)<br>fmt.Printf(<span class="hljs-string">&quot;%v\n&quot;</span>, y)<br><span class="hljs-comment">//[3, 4, 8]</span><br><br></code></pre></td></tr></table></figure>
+<p>可以看到，我们给第一个 <code>MapStrToStr()</code> 传了功能为“转大写”的函数，于是出来的数组就成了全大写的，给 <code>MapStrToInt()</code> 传的是计算长度，所以出来的数组是每个字符串的长度。</p>
+<p>我们再来看一下Reduce和Filter的函数是什么样的。</p>
+<h3 id="Reduce-示例"><a href="#Reduce-示例" class="headerlink" title="Reduce 示例"></a>Reduce 示例</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Reduce</span><span class="hljs-params">(arr []<span class="hljs-type">string</span>, fn <span class="hljs-keyword">func</span>(s <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">int</span>) <span class="hljs-type">int</span> &#123;<br>    sum := <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> _, it := <span class="hljs-keyword">range</span> arr &#123;<br>        sum += fn(it)<br>    &#125;<br>    <span class="hljs-keyword">return</span> sum<br>&#125;<br><br><span class="hljs-keyword">var</span> list = []<span class="hljs-type">string</span>&#123;<span class="hljs-string">&quot;Hao&quot;</span>, <span class="hljs-string">&quot;Chen&quot;</span>, <span class="hljs-string">&quot;MegaEase&quot;</span>&#125;<br><br>x := Reduce(list, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(s <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(s)<br>&#125;)<br>fmt.Printf(<span class="hljs-string">&quot;%v\n&quot;</span>, x)<br><span class="hljs-comment">// 15</span><br><br></code></pre></td></tr></table></figure>
+<h3 id="Filter示例"><a href="#Filter示例" class="headerlink" title="Filter示例"></a>Filter示例</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Filter</span><span class="hljs-params">(arr []<span class="hljs-type">int</span>, fn <span class="hljs-keyword">func</span>(n <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">bool</span>) []<span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">var</span> newArray = []<span class="hljs-type">int</span>&#123;&#125;<br>    <span class="hljs-keyword">for</span> _, it := <span class="hljs-keyword">range</span> arr &#123;<br>        <span class="hljs-keyword">if</span> fn(it) &#123;<br>            newArray = <span class="hljs-built_in">append</span>(newArray, it)<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> newArray<br>&#125;<br><br><span class="hljs-keyword">var</span> intset = []<span class="hljs-type">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>&#125;<br>out := Filter(intset, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(n <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">bool</span> &#123;<br>   <span class="hljs-keyword">return</span> n%<span class="hljs-number">2</span> == <span class="hljs-number">1</span><br>&#125;)<br>fmt.Printf(<span class="hljs-string">&quot;%v\n&quot;</span>, out)<br><br>out = Filter(intset, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(n <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">bool</span> &#123;<br>    <span class="hljs-keyword">return</span> n &gt; <span class="hljs-number">5</span><br>&#125;)<br>fmt.Printf(<span class="hljs-string">&quot;%v\n&quot;</span>, out)<br><br></code></pre></td></tr></table></figure>
+<p>为了方便你理解呢，我给你展示一张图，它形象地说明了Map-Reduce的业务语义，在数据处理中非常有用。</p>
+<p><img src="images/332606/1506b63044071bfa5c214a725a9caf56.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="业务示例"><a href="#业务示例" class="headerlink" title="业务示例"></a>业务示例</h2><p>通过刚刚的一些示例，你现在应该有点明白了，Map、Reduce、Filter只是一种控制逻辑，真正的业务逻辑是以传给它们的数据和函数来定义的。</p>
+<p>是的，这是一个很经典的“业务逻辑”和“控制逻辑”分离解耦的编程模式。</p>
+<p>接下来，我们来看一个有业务意义的代码，来进一步帮助你理解什么叫“控制逻辑”与“业务逻辑”分离。</p>
+<h3 id="员工信息"><a href="#员工信息" class="headerlink" title="员工信息"></a>员工信息</h3><p>首先，我们有一个员工对象和一些数据：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Employee</span> struct &#123;<br>    <span class="hljs-type">Name</span>     string<br>    <span class="hljs-type">Age</span>      int<br>    <span class="hljs-type">Vacation</span> int<br>    <span class="hljs-type">Salary</span>   int<br>&#125;<br><br><span class="hljs-title">var</span> list = []<span class="hljs-type">Employee</span>&#123;<br>    &#123;<span class="hljs-string">&quot;Hao&quot;</span>, <span class="hljs-number">44</span>, <span class="hljs-number">0</span>, <span class="hljs-number">8000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-number">34</span>, <span class="hljs-number">10</span>, <span class="hljs-number">5000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-number">23</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Jack&quot;</span>, <span class="hljs-number">26</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-number">48</span>, <span class="hljs-number">9</span>, <span class="hljs-number">7500</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Marry&quot;</span>, <span class="hljs-number">29</span>, <span class="hljs-number">0</span>, <span class="hljs-number">6000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Mike&quot;</span>, <span class="hljs-number">32</span>, <span class="hljs-number">8</span>, <span class="hljs-number">4000</span>&#125;,<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="相关的Reduce、Fitler函数"><a href="#相关的Reduce、Fitler函数" class="headerlink" title="相关的Reduce、Fitler函数"></a>相关的Reduce、Fitler函数</h3><p>然后，我们有下面的几个函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">EmployeeCountIf</span><span class="hljs-params">(list []Employee, fn <span class="hljs-keyword">func</span>(e *Employee)</span></span> <span class="hljs-type">bool</span>) <span class="hljs-type">int</span> &#123;<br>    count := <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i, _ := <span class="hljs-keyword">range</span> list &#123;<br>        <span class="hljs-keyword">if</span> fn(&amp;list[i]) &#123;<br>            count += <span class="hljs-number">1</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> count<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">EmployeeFilterIn</span><span class="hljs-params">(list []Employee, fn <span class="hljs-keyword">func</span>(e *Employee)</span></span> <span class="hljs-type">bool</span>) []Employee &#123;<br>    <span class="hljs-keyword">var</span> newList []Employee<br>    <span class="hljs-keyword">for</span> i, _ := <span class="hljs-keyword">range</span> list &#123;<br>        <span class="hljs-keyword">if</span> fn(&amp;list[i]) &#123;<br>            newList = <span class="hljs-built_in">append</span>(newList, list[i])<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> newList<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">EmployeeSumIf</span><span class="hljs-params">(list []Employee, fn <span class="hljs-keyword">func</span>(e *Employee)</span></span> <span class="hljs-type">int</span>) <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">var</span> sum = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i, _ := <span class="hljs-keyword">range</span> list &#123;<br>        sum += fn(&amp;list[i])<br>    &#125;<br>    <span class="hljs-keyword">return</span> sum<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>简单说明一下：</p>
+<ul>
+<li><code>EmployeeConutIf</code> 和 <code>EmployeeSumIf</code> 分别用于统计满足某个条件的个数或总数。它们都是Filter + Reduce的语义。</li>
+<li><code>EmployeeFilterIn</code> 就是按某种条件过滤，就是Fitler的语义。</li>
+</ul>
+<h3 id="各种自定义的统计示例"><a href="#各种自定义的统计示例" class="headerlink" title="各种自定义的统计示例"></a>各种自定义的统计示例</h3><p>于是，我们就可以有接下来的代码了。</p>
+<p><strong>1.统计有多少员工大于40岁</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go">old := EmployeeCountIf(list, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(e *Employee)</span></span> <span class="hljs-type">bool</span> &#123;<br>    <span class="hljs-keyword">return</span> e.Age &gt; <span class="hljs-number">40</span><br>&#125;)<br>fmt.Printf(<span class="hljs-string">&quot;old people: %d\n&quot;</span>, old)<br><span class="hljs-comment">//old people: 2</span><br><br></code></pre></td></tr></table></figure>
+<p><strong>2.统计有多少员工的薪水大于6000</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go">high_pay := EmployeeCountIf(list, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(e *Employee)</span></span> <span class="hljs-type">bool</span> &#123;<br>    <span class="hljs-keyword">return</span> e.Salary &gt; <span class="hljs-number">6000</span><br>&#125;)<br>fmt.Printf(<span class="hljs-string">&quot;High Salary people: %d\n&quot;</span>, high_pay)<br><span class="hljs-comment">//High Salary people: 4</span><br><br></code></pre></td></tr></table></figure>
+<p><strong>3.列出有没有休假的员工</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go">no_vacation := EmployeeFilterIn(list, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(e *Employee)</span></span> <span class="hljs-type">bool</span> &#123;<br>    <span class="hljs-keyword">return</span> e.Vacation == <span class="hljs-number">0</span><br>&#125;)<br>fmt.Printf(<span class="hljs-string">&quot;People no vacation: %v\n&quot;</span>, no_vacation)<br><span class="hljs-comment">//People no vacation: [&#123;Hao 44 0 8000&#125; &#123;Jack 26 0 4000&#125; &#123;Marry 29 0 6000&#125;]</span><br><br></code></pre></td></tr></table></figure>
+<p><strong>4.统计所有员工的薪资总和</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go">total_pay := EmployeeSumIf(list, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(e *Employee)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">return</span> e.Salary<br>&#125;)<br><br>fmt.Printf(<span class="hljs-string">&quot;Total Salary: %d\n&quot;</span>, total_pay)<br><span class="hljs-comment">//Total Salary: 43500</span><br><br></code></pre></td></tr></table></figure>
+<p><strong>5.统计30岁以下员工的薪资总和</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go">younger_pay := EmployeeSumIf(list, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(e *Employee)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">if</span> e.Age &lt; <span class="hljs-number">30</span> &#123;<br>        <span class="hljs-keyword">return</span> e.Salary<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>&#125;)<br><br></code></pre></td></tr></table></figure>
+<h2 id="泛型Map-Reduce"><a href="#泛型Map-Reduce" class="headerlink" title="泛型Map-Reduce"></a>泛型Map-Reduce</h2><p>刚刚的Map-Reduce都因为要处理数据的类型不同，而需要写出不同版本的Map-Reduce，虽然它们的代码看上去是很类似的。所以，这里就要提到泛型编程了。</p>
+<h3 id="简单版-Generic-Map"><a href="#简单版-Generic-Map" class="headerlink" title="简单版 Generic Map"></a>简单版 Generic Map</h3><p>我在写这节课的时候，Go语言还不支持泛型（注：Go开发团队技术负责人Russ Cox在2012年11月21golang-dev上的mail确认了Go泛型将在Go 1.18版本落地，时间是2022年2月）。所以，目前的Go语言的泛型只能用 <code>interface&#123;&#125;</code> + <code>reflect</code> 来完成。 <code>interface&#123;&#125;</code> 可以理解为C中的 <code>void*</code>、Java中的 <code>Object</code> ， <code>reflect</code> 是Go的反射机制包，作用是在运行时检查类型。</p>
+<p>下面，我们来看一下，一个非常简单的、不做任何类型检查的泛型的Map函数怎么写。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Map</span><span class="hljs-params">(data <span class="hljs-keyword">interface</span>&#123;&#125;, fn <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> []<span class="hljs-keyword">interface</span>&#123;&#125; &#123;<br>    vfn := reflect.ValueOf(fn)<br>    vdata := reflect.ValueOf(data)<br>    result := <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">interface</span>&#123;&#125;, vdata.Len())<br><br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; vdata.Len(); i++ &#123;<br>        result[i] = vfn.Call([]reflect.Value&#123;vdata.Index(i)&#125;)[<span class="hljs-number">0</span>].Interface()<br>    &#125;<br>    <span class="hljs-keyword">return</span> result<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>我来简单解释下这段代码。</p>
+<ul>
+<li>首先，我们通过 <code>reflect.ValueOf()</code> 获得 <code>interface&#123;&#125;</code> 的值，其中一个是数据 <code>vdata</code>，另一个是函数 <code>vfn</code>。</li>
+<li>然后，通过 <code>vfn.Call()</code> 方法调用函数，通过 <code>[]refelct.Value&#123;vdata.Index(i)&#125;</code> 获得数据。</li>
+</ul>
+<p>Go语言中的反射的语法有点令人费解，不过，简单看一下手册，还是能够读懂的。反射不是这节课的重点，我就不讲了。如果你还不太懂这些基础知识，课下可以学习下相关的教程。</p>
+<p>于是，我们就可以有下面的代码——不同类型的数据可以使用相同逻辑的 <code>Map()</code> 代码。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs go">square := <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(x <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>  <span class="hljs-keyword">return</span> x * x<br>&#125;<br>nums := []<span class="hljs-type">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;<br><br>squared_arr := Map(nums,square)<br>fmt.Println(squared_arr)<br><span class="hljs-comment">//[1 4 9 16]</span><br><br>upcase := <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(s <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">string</span> &#123;<br>  <span class="hljs-keyword">return</span> strings.ToUpper(s)<br>&#125;<br>strs := []<span class="hljs-type">string</span>&#123;<span class="hljs-string">&quot;Hao&quot;</span>, <span class="hljs-string">&quot;Chen&quot;</span>, <span class="hljs-string">&quot;MegaEase&quot;</span>&#125;<br>upstrs := Map(strs, upcase);<br>fmt.Println(upstrs)<br><span class="hljs-comment">//[HAO CHEN MEGAEASE]</span><br><br></code></pre></td></tr></table></figure>
+<p>但是，因为反射是运行时的事，所以，如果类型出问题的话，就会有运行时的错误。比如：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">x</span> := Map(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>)<br><span class="hljs-attribute">fmt</span>.Println(x)<br><br></code></pre></td></tr></table></figure>
+<p>代码可以很轻松地编译通过，但是在运行时却出问题了，而且还是panic错误……</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs awk">panic: reflect: call of reflect.Value.Len on int Value<br><br>goroutine <span class="hljs-number">1</span> [running]:<br>reflect.Value.Len(<span class="hljs-number">0</span>x10b5240, <span class="hljs-number">0</span>x10eeb58, <span class="hljs-number">0</span>x82, <span class="hljs-number">0</span>x10716bc)<br>        <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/Cellar/g</span>o<span class="hljs-regexp">/1.15.3/</span>libexec<span class="hljs-regexp">/src/</span>reflect/value.go:<span class="hljs-number">1162</span> +<span class="hljs-number">0</span>x185<br>main.Map(<span class="hljs-number">0</span>x10b5240, <span class="hljs-number">0</span>x10eeb58, <span class="hljs-number">0</span>x10b5240, <span class="hljs-number">0</span>x10eeb60, <span class="hljs-number">0</span>x1, <span class="hljs-number">0</span>x14, <span class="hljs-number">0</span>x0)<br>        <span class="hljs-regexp">/Users/</span>chenhao<span class="hljs-regexp">/.../m</span>ap.go:<span class="hljs-number">12</span> +<span class="hljs-number">0</span>x16b<br>main.main()<br>        <span class="hljs-regexp">/Users/</span>chenhao<span class="hljs-regexp">/.../m</span>ap.go:<span class="hljs-number">42</span> +<span class="hljs-number">0</span>x465<br><span class="hljs-keyword">exit</span> status <span class="hljs-number">2</span><br><br></code></pre></td></tr></table></figure>
+<h3 id="健壮版的Generic-Map"><a href="#健壮版的Generic-Map" class="headerlink" title="健壮版的Generic Map"></a>健壮版的Generic Map</h3><p>所以，如果要写一个健壮的程序，对于这种用 <code>interface&#123;&#125;</code> 的“过度泛型”，就需要我们自己来做类型检查。来看一个有类型检查的Map代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Transform</span><span class="hljs-params">(slice, function <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> <span class="hljs-keyword">interface</span>&#123;&#125; &#123;<br>  <span class="hljs-keyword">return</span> transform(slice, function, <span class="hljs-literal">false</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TransformInPlace</span><span class="hljs-params">(slice, function <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> <span class="hljs-keyword">interface</span>&#123;&#125; &#123;<br>  <span class="hljs-keyword">return</span> transform(slice, function, <span class="hljs-literal">true</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">transform</span><span class="hljs-params">(slice, function <span class="hljs-keyword">interface</span>&#123;&#125;, inPlace <span class="hljs-type">bool</span>)</span></span> <span class="hljs-keyword">interface</span>&#123;&#125; &#123;<br><br>  <span class="hljs-comment">//check the `slice` type is Slice</span><br>  sliceInType := reflect.ValueOf(slice)<br>  <span class="hljs-keyword">if</span> sliceInType.Kind() != reflect.Slice &#123;<br>    <span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;transform: not slice&quot;</span>)<br>  &#125;<br><br>  <span class="hljs-comment">//check the function signature</span><br>  fn := reflect.ValueOf(function)<br>  elemType := sliceInType.Type().Elem()<br>  <span class="hljs-keyword">if</span> !verifyFuncSignature(fn, elemType, <span class="hljs-literal">nil</span>) &#123;<br>    <span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;trasform: function must be of type func(&quot;</span> + sliceInType.Type().Elem().String() + <span class="hljs-string">&quot;) outputElemType&quot;</span>)<br>  &#125;<br><br>  sliceOutType := sliceInType<br>  <span class="hljs-keyword">if</span> !inPlace &#123;<br>    sliceOutType = reflect.MakeSlice(reflect.SliceOf(fn.Type().Out(<span class="hljs-number">0</span>)), sliceInType.Len(), sliceInType.Len())<br>  &#125;<br>  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; sliceInType.Len(); i++ &#123;<br>    sliceOutType.Index(i).Set(fn.Call([]reflect.Value&#123;sliceInType.Index(i)&#125;)[<span class="hljs-number">0</span>])<br>  &#125;<br>  <span class="hljs-keyword">return</span> sliceOutType.Interface()<br><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">verifyFuncSignature</span><span class="hljs-params">(fn reflect.Value, types ...reflect.Type)</span></span> <span class="hljs-type">bool</span> &#123;<br><br>  <span class="hljs-comment">//Check it is a funciton</span><br>  <span class="hljs-keyword">if</span> fn.Kind() != reflect.Func &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>  &#125;<br>  <span class="hljs-comment">// NumIn() - returns a function type&#x27;s input parameter count.</span><br>  <span class="hljs-comment">// NumOut() - returns a function type&#x27;s output parameter count.</span><br>  <span class="hljs-keyword">if</span> (fn.Type().NumIn() != <span class="hljs-built_in">len</span>(types)<span class="hljs-number">-1</span>) || (fn.Type().NumOut() != <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>  &#125;<br>  <span class="hljs-comment">// In() - returns the type of a function type&#x27;s i&#x27;th input parameter.</span><br>  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(types)<span class="hljs-number">-1</span>; i++ &#123;<br>    <span class="hljs-keyword">if</span> fn.Type().In(i) != types[i] &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>    &#125;<br>  &#125;<br>  <span class="hljs-comment">// Out() - returns the type of a function type&#x27;s i&#x27;th output parameter.</span><br>  outType := types[<span class="hljs-built_in">len</span>(types)<span class="hljs-number">-1</span>]<br>  <span class="hljs-keyword">if</span> outType != <span class="hljs-literal">nil</span> &amp;&amp; fn.Type().Out(<span class="hljs-number">0</span>) != outType &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>代码一下子就复杂起来了，可见，复杂的代码都是在处理异常的地方。我不打算Walk through 所有的代码，别看代码多，还是可以读懂的。</p>
+<p>我来列一下代码中的几个要点。</p>
+<ol>
+<li>代码中没有使用Map函数，因为和数据结构有含义冲突的问题，所以使用 <code>Transform</code>，这个来源于 C++ STL库中的命名。</li>
+<li>有两个版本的函数，一个是返回一个全新的数组 <code>Transform()</code>，一个是“就地完成” <code>TransformInPlace()</code>。</li>
+<li>在主函数中，用 <code>Kind()</code> 方法检查了数据类型是不是 Slice，函数类型是不是Func。</li>
+<li>检查函数的参数和返回类型是通过 <code>verifyFuncSignature()</code> 来完成的： <code>NumIn()</code> 用来检查函数的“入参”； <code>NumOut()</code> ：用来检查函数的“返回值”。</li>
+<li>如果需要新生成一个Slice，会使用 <code>reflect.MakeSlice()</code> 来完成。</li>
+</ol>
+<p>好了，有了这段代码，我们的代码就很可以很开心地使用了：</p>
+<p>1.可以用于字符串数组：</p>
+<figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nim">list := []<span class="hljs-type">string</span>&#123;<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>, <span class="hljs-string">&quot;5&quot;</span>, <span class="hljs-string">&quot;6&quot;</span>&#125;<br><span class="hljs-built_in">result</span> := <span class="hljs-type">Transform</span>(list, <span class="hljs-keyword">func</span>(a <span class="hljs-type">string</span>) <span class="hljs-type">string</span>&#123;<br>    <span class="hljs-keyword">return</span> a +a +a<br>&#125;)<br>//&#123;<span class="hljs-string">&quot;111&quot;</span>,<span class="hljs-string">&quot;222&quot;</span>,<span class="hljs-string">&quot;333&quot;</span>,<span class="hljs-string">&quot;444&quot;</span>,<span class="hljs-string">&quot;555&quot;</span>,<span class="hljs-string">&quot;666&quot;</span>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>2.可以用于整形数组：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go">list := []<span class="hljs-type">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>&#125;<br>TransformInPlace(list, <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(a <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>  <span class="hljs-keyword">return</span> a*<span class="hljs-number">3</span><br>&#125;)<br><span class="hljs-comment">//&#123;3, 6, 9, 12, 15, 18, 21, 24, 27&#125;</span><br><br></code></pre></td></tr></table></figure>
+<p>3.可以用于结构体：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-selector-tag">var</span> list = <span class="hljs-selector-attr">[]</span>Employee&#123;<br>    &#123;<span class="hljs-string">&quot;Hao&quot;</span>, <span class="hljs-number">44</span>, <span class="hljs-number">0</span>, <span class="hljs-number">8000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-number">34</span>, <span class="hljs-number">10</span>, <span class="hljs-number">5000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-number">23</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Jack&quot;</span>, <span class="hljs-number">26</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-number">48</span>, <span class="hljs-number">9</span>, <span class="hljs-number">7500</span>&#125;,<br>&#125;<br><br>result := <span class="hljs-built_in">TransformInPlace</span>(list, <span class="hljs-built_in">func</span>(e Employee) Employee &#123;<br>    e<span class="hljs-selector-class">.Salary</span> += <span class="hljs-number">1000</span><br>    e<span class="hljs-selector-class">.Age</span> += <span class="hljs-number">1</span><br>    return e<br>&#125;)<br><br></code></pre></td></tr></table></figure>
+<h3 id="健壮版的-Generic-Reduce"><a href="#健壮版的-Generic-Reduce" class="headerlink" title="健壮版的 Generic Reduce"></a>健壮版的 Generic Reduce</h3><p>同样，泛型版的 Reduce 代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Reduce</span><span class="hljs-params">(slice, pairFunc, zero <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> <span class="hljs-keyword">interface</span>&#123;&#125; &#123;<br>  sliceInType := reflect.ValueOf(slice)<br>  <span class="hljs-keyword">if</span> sliceInType.Kind() != reflect.Slice &#123;<br>    <span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;reduce: wrong type, not slice&quot;</span>)<br>  &#125;<br><br>  <span class="hljs-built_in">len</span> := sliceInType.Len()<br>  <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span> == <span class="hljs-number">0</span> &#123;<br>    <span class="hljs-keyword">return</span> zero<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span> == <span class="hljs-number">1</span> &#123;<br>    <span class="hljs-keyword">return</span> sliceInType.Index(<span class="hljs-number">0</span>)<br>  &#125;<br><br>  elemType := sliceInType.Type().Elem()<br>  fn := reflect.ValueOf(pairFunc)<br>  <span class="hljs-keyword">if</span> !verifyFuncSignature(fn, elemType, elemType, elemType) &#123;<br>    t := elemType.String()<br>    <span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;reduce: function must be of type func(&quot;</span> + t + <span class="hljs-string">&quot;, &quot;</span> + t + <span class="hljs-string">&quot;) &quot;</span> + t)<br>  &#125;<br><br>  <span class="hljs-keyword">var</span> ins [<span class="hljs-number">2</span>]reflect.Value<br>  ins[<span class="hljs-number">0</span>] = sliceInType.Index(<span class="hljs-number">0</span>)<br>  ins[<span class="hljs-number">1</span>] = sliceInType.Index(<span class="hljs-number">1</span>)<br>  out := fn.Call(ins[:])[<span class="hljs-number">0</span>]<br><br>  <span class="hljs-keyword">for</span> i := <span class="hljs-number">2</span>; i &lt; <span class="hljs-built_in">len</span>; i++ &#123;<br>    ins[<span class="hljs-number">0</span>] = out<br>    ins[<span class="hljs-number">1</span>] = sliceInType.Index(i)<br>    out = fn.Call(ins[:])[<span class="hljs-number">0</span>]<br>  &#125;<br>  <span class="hljs-keyword">return</span> out.Interface()<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="健壮版的-Generic-Filter"><a href="#健壮版的-Generic-Filter" class="headerlink" title="健壮版的 Generic Filter"></a>健壮版的 Generic Filter</h3><p>同样，泛型版的 Filter 代码如下（同样分是否“就地计算”的两个版本）：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Filter</span><span class="hljs-params">(slice, function <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> <span class="hljs-keyword">interface</span>&#123;&#125; &#123;<br>  result, _ := filter(slice, function, <span class="hljs-literal">false</span>)<br>  <span class="hljs-keyword">return</span> result<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">FilterInPlace</span><span class="hljs-params">(slicePtr, function <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>  in := reflect.ValueOf(slicePtr)<br>  <span class="hljs-keyword">if</span> in.Kind() != reflect.Ptr &#123;<br>    <span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;FilterInPlace: wrong type, &quot;</span> +<br>      <span class="hljs-string">&quot;not a pointer to slice&quot;</span>)<br>  &#125;<br>  _, n := filter(in.Elem().Interface(), function, <span class="hljs-literal">true</span>)<br>  in.Elem().SetLen(n)<br>&#125;<br><br><span class="hljs-keyword">var</span> boolType = reflect.ValueOf(<span class="hljs-literal">true</span>).Type()<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">filter</span><span class="hljs-params">(slice, function <span class="hljs-keyword">interface</span>&#123;&#125;, inPlace <span class="hljs-type">bool</span>)</span></span> (<span class="hljs-keyword">interface</span>&#123;&#125;, <span class="hljs-type">int</span>) &#123;<br><br>  sliceInType := reflect.ValueOf(slice)<br>  <span class="hljs-keyword">if</span> sliceInType.Kind() != reflect.Slice &#123;<br>    <span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;filter: wrong type, not a slice&quot;</span>)<br>  &#125;<br><br>  fn := reflect.ValueOf(function)<br>  elemType := sliceInType.Type().Elem()<br>  <span class="hljs-keyword">if</span> !verifyFuncSignature(fn, elemType, boolType) &#123;<br>    <span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;filter: function must be of type func(&quot;</span> + elemType.String() + <span class="hljs-string">&quot;) bool&quot;</span>)<br>  &#125;<br><br>  <span class="hljs-keyword">var</span> which []<span class="hljs-type">int</span><br>  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; sliceInType.Len(); i++ &#123;<br>    <span class="hljs-keyword">if</span> fn.Call([]reflect.Value&#123;sliceInType.Index(i)&#125;)[<span class="hljs-number">0</span>].Bool() &#123;<br>      which = <span class="hljs-built_in">append</span>(which, i)<br>    &#125;<br>  &#125;<br><br>  out := sliceInType<br><br>  <span class="hljs-keyword">if</span> !inPlace &#123;<br>    out = reflect.MakeSlice(sliceInType.Type(), <span class="hljs-built_in">len</span>(which), <span class="hljs-built_in">len</span>(which))<br>  &#125;<br>  <span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> which &#123;<br>    out.Index(i).Set(sliceInType.Index(which[i]))<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> out.Interface(), <span class="hljs-built_in">len</span>(which)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>最后，还有几个未尽事宜：</p>
+<ol>
+<li>使用反射来做这些东西会有一个问题， <strong>那就是代码的性能会很差。所以，上面的代码不能用在需要高性能的地方</strong>。怎么解决这个问题，我会在下节课给你介绍下。</li>
+<li>这节课中的代码大量地参考了 Rob Pike的版本，你可以点击这个链接查看： <a target="_blank" rel="noopener" href="https://github.com/robpike/filter">https://github.com/robpike/filter</a>。</li>
+<li>其实，在全世界范围内，有大量的程序员都在问Go语言官方什么时候在标准库中支持 Map、Reduce。Rob Pike说，这种东西难写吗？还要我们官方来帮你们写吗？这种代码我多少年前就写过了，但是，我一次都没有用过，我还是喜欢用“For循环”，我觉得你最好也跟我一起用 “For循环”。</li>
+</ol>
+<p>我个人觉得，Map、Reduce在数据处理的时候还是很有用的，Rob Pike可能平时也不怎么写“业务逻辑”的代码，所以，他可能也不太了解业务的变化有多么频繁……</p>
+<p>当然，好还是不好，由你来判断，但多学一些编程模式，一定是对自己很有帮助的。</p>
+<p>好了，这节课就到这里。如果你觉得今天的内容对你有所帮助，欢迎你帮我分享给更多人。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>http://example.com/2023/05/16/111-Go编程模式：Map-Reduce/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 16, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/16/112-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9AGoGeneration/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/16/110-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A7%94%E6%89%98%E5%92%8C%E5%8F%8D%E8%BD%AC%E6%8E%A7%E5%88%B6/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

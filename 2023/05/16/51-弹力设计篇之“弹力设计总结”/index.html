@@ -1,0 +1,735 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="51 | 弹力设计篇之“弹力设计总结”你好，我是陈皓，网名左耳朵耗子。 我们前面讲了那么多的弹力设计的设计模式，这里做个总结。 弹力设计总图首先，我们的服务不能是单点，所以，我们需要在架构中冗余服务，也就是说有多个服务的副本。这需要使用到的具体技术有：  负载均衡 + 服务健康检查–可以使用像Nginx或HAProxy这样的技术； 服务发现 + 动态路由 + 服务健康检查，比如Consul或Zoo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WYX同学的Blog">
+<meta property="og:url" content="http://example.com/2023/05/16/51-%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E7%AF%87%E4%B9%8B%E2%80%9C%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93%E2%80%9D/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="51 | 弹力设计篇之“弹力设计总结”你好，我是陈皓，网名左耳朵耗子。 我们前面讲了那么多的弹力设计的设计模式，这里做个总结。 弹力设计总图首先，我们的服务不能是单点，所以，我们需要在架构中冗余服务，也就是说有多个服务的副本。这需要使用到的具体技术有：  负载均衡 + 服务健康检查–可以使用像Nginx或HAProxy这样的技术； 服务发现 + 动态路由 + 服务健康检查，比如Consul或Zoo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/05/16/51-%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E7%AF%87%E4%B9%8B%E2%80%9C%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93%E2%80%9D/images/4253/a7f9e41b0457326e08ffc93e319d352f.jpg">
+<meta property="og:image" content="http://example.com/2023/05/16/51-%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E7%AF%87%E4%B9%8B%E2%80%9C%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93%E2%80%9D/images/4253/35cd0722f99f91c904944ac1bbdd56f4.png">
+<meta property="og:image" content="http://example.com/2023/05/16/51-%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E7%AF%87%E4%B9%8B%E2%80%9C%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93%E2%80%9D/images/4253/dcab89f031d1a7083b4f0b3091873caf.png">
+<meta property="og:image" content="http://example.com/2023/05/16/51-%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E7%AF%87%E4%B9%8B%E2%80%9C%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93%E2%80%9D/images/4253/41e9f7a084e6c81fcb3bb42d43b0076a.png">
+<meta property="article:published_time" content="2023-05-16T07:44:43.539Z">
+<meta property="article:modified_time" content="2023-05-16T07:44:43.539Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/05/16/51-%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E7%AF%87%E4%B9%8B%E2%80%9C%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93%E2%80%9D/images/4253/a7f9e41b0457326e08ffc93e319d352f.jpg">
+  
+  
+  
+  <title>WYX同学的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-16 15:44" pubdate>
+          May 16, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="51-弹力设计篇之“弹力设计总结”"><a href="#51-弹力设计篇之“弹力设计总结”" class="headerlink" title="51 | 弹力设计篇之“弹力设计总结”"></a>51 | 弹力设计篇之“弹力设计总结”</h1><p>你好，我是陈皓，网名左耳朵耗子。</p>
+<p>我们前面讲了那么多的弹力设计的设计模式，这里做个总结。</p>
+<h1 id="弹力设计总图"><a href="#弹力设计总图" class="headerlink" title="弹力设计总图"></a>弹力设计总图</h1><p>首先，我们的服务不能是单点，所以，我们需要在架构中冗余服务，也就是说有多个服务的副本。这需要使用到的具体技术有：</p>
+<ul>
+<li>负载均衡 + 服务健康检查–可以使用像Nginx或HAProxy这样的技术；</li>
+<li>服务发现 + 动态路由 + 服务健康检查，比如Consul或ZooKeeper；</li>
+<li>自动化运维，Kubernetes 服务调度、伸缩和故障迁移。</li>
+</ul>
+<p>然后，我们需要隔离我们的业务，要隔离我们的服务我们就需要对服务进行解耦和拆分，这需要使用到以前的相关技术。</p>
+<ul>
+<li><p>bulkheads模式：业务分片 、用户分片、数据库拆分。</p>
+</li>
+<li><p>自包含系统：所谓自包含的系统是从单体到微服务的中间状态，其把一组密切相关的微服务给拆分出来，只需要做到没有外部依赖就行。</p>
+</li>
+<li><p>异步通讯：服务发现、事件驱动、消息队列、业务工作流。</p>
+</li>
+<li><p>自动化运维：需要一个服务调用链和性能监控的监控系统。</p>
+</li>
+</ul>
+<p>然后，接下来，我们就要进行能让整个架构接受失败的相关处理设计，也就是所谓的容错设计。这会用到下面的这些技术。</p>
+<ul>
+<li><p>错误方面：调用重试 + 熔断 + 服务的幂等性设计。</p>
+</li>
+<li><p>一致性方面：强一致性使用两阶段提交、最终一致性使用异步通讯方式。</p>
+</li>
+<li><p>流控方面：使用限流 + 降级技术。</p>
+</li>
+<li><p>自动化运维方面：网关流量调度，服务监控。</p>
+</li>
+</ul>
+<p>我不敢保证上面这些技术可以解决所有的问题，但是，只要我们设计得当，绝大多数的问题应该是可以扛得住的了。</p>
+<p>下面我画一个图来表示一下。</p>
+<p><img src="images/4253/a7f9e41b0457326e08ffc93e319d352f.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>在上面这个图上，我们可以看到，有三大块的东西。</p>
+<ul>
+<li><p>冗余服务。通过冗余服务的复本数可以消除单点故障。这需要服务发现，负载均衡，动态路由和健康检查四个功能或组件。</p>
+</li>
+<li><p>服务解耦。通过解耦可以做到把业务隔离开来，不让服务受影响，这样就可以有更好的稳定性。在水平层面上，需要把业务或用户分片分区（业分做隔离，用户做多租户）。在垂直层面上，需要异步通讯机制。因为应用被分解成了一个一个的服务，所以在服务的编排和聚合上，需要有工作流（像Spring的Stream或Akka的flow或是AWS的Simple Workflow）来把服务给串联起来。而一致性的问题又需要业务补偿机制来做反向交易。</p>
+</li>
+<li><p>服务容错。服务容错方面，需要有重试机制，重试机制会带来幂等操作，对于服务保护来说，熔断，限流，降级都是为了保护整个系统的稳定性，并在可用性和一致性方面在出错的情况下做一部分的妥协。</p>
+</li>
+</ul>
+<p>当然，除了这一切的架构设计外，你还需要一个或多个自动运维的工具，否则，如果是人肉运维的话，那么在故障发生的时候，不能及时地做出运维决定，也就空有这些弹力设计了。比如：监控到服务性能不够了，就自动或半自动地开始进行限流或降级。</p>
+<h1 id="弹力设计开发和运维"><a href="#弹力设计开发和运维" class="headerlink" title="弹力设计开发和运维"></a>弹力设计开发和运维</h1><p>对于运维工具来说，你至少需要两个系统：</p>
+<ul>
+<li>一个是像APM这样的服务监控；</li>
+<li>另一个是服务调度的系统，如：Docker + Kubernetes。</li>
+</ul>
+<p>此外，如果你需要一个开发架构来让整个开发团队在同一个标准下开发上面的这些东西，这里，Spring Cloud就是不二之选了。</p>
+<p>关于Spring Cloud和Kubernetes，它们都是为了微服务而生，但它们没有什么可比性，因为，前者偏开发，后者偏运维。我们来看一下它们的差别。</p>
+<p><img src="images/4253/35cd0722f99f91c904944ac1bbdd56f4.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>（图片来自：Deploying Microservices: Spring Cloud vs Kubernetes）</p>
+<p>从上表我们可以得知：</p>
+<ul>
+<li><p>Spring Cloud有一套丰富且集成良好的Java库，作为应用栈的一部分解决所有运行时问题。因此，微服务本身可以通过库和运行时代理解决客户端服务发现、负载均衡、配置更新、统计跟踪等。工作模式就像单实例服务集群。（译者注：集群中master节点工作：当master挂掉后，slave节点被选举顶替。）并且一批工作也是在JVM中被管理。</p>
+</li>
+<li><p>Kubernetes不是针对语言的，而是针对容器的，所以，它是以通用的方式为所有语言解决分布式计算问题。Kubernetes提供了配置管理、服务发现、负载均衡、跟踪、统计、单实例、平台级和应用栈之外的调度工作。该应用不需要任何客户端逻辑的库或代理程序，可以用任何语言编写。</p>
+</li>
+</ul>
+<p>下图是微服务所需的关键技术，以及这些技术中在Spring Cloud和Kubernetes的涵盖面。</p>
+<p><img src="images/4253/dcab89f031d1a7083b4f0b3091873caf.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>（图片来自：Deploying Microservices: Spring Cloud vs Kubernetes）</p>
+<p>两个平台依靠相似的第三方工具，如ELK和EFK stacks, tracing libraries等。Hystrix和Spring Boot等库，在两个环境中都表现良好。很多情况下，Spring Cloud和Kubernetes可以形成互补，组建出更强大的解决方案（例如KubeFlix和Spring Cloud Kubernetes）。</p>
+<p>下图是在Kubernetes上使用Spring Cloud可以表现出来的整体特性。要做出一个可运维的分布式系统，除了在架构上的设计之外，还需要一整套的用来支撑分布式系统的管控系统，也就是所谓的运维系统。要做到这些，不是靠几个人几天就可以完成的。这需要我们根据自己的业务特点来规划相关的实施路径。</p>
+<p><img src="images/4253/41e9f7a084e6c81fcb3bb42d43b0076a.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>（图片来自：Deploying Microservices: Spring Cloud vs Kubernetes）</p>
+<p>上面这张图中，对于所有的特性，都列举了一些相关的软件和一些设计的重点，其中红色的是运维层面的和Spring Cloud和Kubernetes不相关的，绿色的Spring Cloud提供的开发框架，蓝色的是Kubernetes相关的重要功能。</p>
+<p>从今天看下来，微服务的最佳实践在未来有可能会成为SpringCloud和Kubernetes的天下了。这个让我们拭目以待。</p>
+<p>我在本篇文章中总结了整个弹力设计，提供了一张总图，并介绍了开发运维的实践。希望对你有帮助。</p>
+<p>也欢迎你分享一下你对弹力设计和弹力设计系列文章的感想。</p>
+<p>文末给出了《分布式系统设计模式》系列文章的目录，希望你能在这个列表里找到自己感兴趣的内容。</p>
+<ul>
+<li>弹力设计篇<ul>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/3912">认识故障和弹力设计</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/3917">隔离设计Bulkheads</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/3926">异步通讯设计Asynchronous</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/4050">幂等性设计Idempotency</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/4086">服务的状态State</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/4087">补偿事务Compensating Transaction</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/4121">重试设计Retry</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/4241">熔断设计Circuit Breaker</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/4245">限流设计Throttle</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/4252">降级设计degradation</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/4253">弹力设计总结</a></li>
+</ul>
+</li>
+<li>管理设计篇<ul>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/5175">分布式锁Distributed Lock</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/5819">配置中心Configuration Management</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/5909">边车模式Sidecar</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/5920">服务网格Service Mesh</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/6086">网关模式Gateway</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/6283">部署升级策略</a></li>
+</ul>
+</li>
+<li>性能设计篇<ul>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/6282">缓存Cache</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/7036">异步处理Asynchronous</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/7045">数据库扩展</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/7047">秒杀Flash Sales</a></li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/7086">边缘计算Edge Computing</a></li>
+</ul>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>http://example.com/2023/05/16/51-弹力设计篇之“弹力设计总结”/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 16, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/16/52-%E7%AE%A1%E7%90%86%E8%AE%BE%E8%AE%A1%E7%AF%87%E4%B9%8B%E2%80%9C%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E2%80%9D/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/16/112-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9AGoGeneration/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,712 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="112 | Go 编程模式：Go Generation你好，我是陈皓，网名左耳朵耗子。 这节课，我们来学习一下Go语言的代码生成的玩法。 Go语言的代码生成主要还是用来解决编程泛型的问题。泛型编程主要是解决这样一个问题：因为静态类型语言有类型，所以，相关的算法或是对数据处理的程序会因为类型不同而需要复制一份，这样会导致数据类型和算法功能耦合。 我之所以说泛型编程可以解决这样的问题，就是说，在写代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WYX同学的Blog">
+<meta property="og:url" content="http://example.com/2023/05/16/112-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9AGoGeneration/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="112 | Go 编程模式：Go Generation你好，我是陈皓，网名左耳朵耗子。 这节课，我们来学习一下Go语言的代码生成的玩法。 Go语言的代码生成主要还是用来解决编程泛型的问题。泛型编程主要是解决这样一个问题：因为静态类型语言有类型，所以，相关的算法或是对数据处理的程序会因为类型不同而需要复制一份，这样会导致数据类型和算法功能耦合。 我之所以说泛型编程可以解决这样的问题，就是说，在写代码">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-16T07:44:41.887Z">
+<meta property="article:modified_time" content="2023-05-16T07:44:41.887Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>WYX同学的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-16 15:44" pubdate>
+          May 16, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          65 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="112-Go-编程模式：Go-Generation"><a href="#112-Go-编程模式：Go-Generation" class="headerlink" title="112 | Go 编程模式：Go Generation"></a>112 | Go 编程模式：Go Generation</h1><p>你好，我是陈皓，网名左耳朵耗子。</p>
+<p>这节课，我们来学习一下Go语言的代码生成的玩法。</p>
+<p>Go语言的代码生成主要还是用来解决编程泛型的问题。泛型编程主要是解决这样一个问题：因为静态类型语言有类型，所以，相关的算法或是对数据处理的程序会因为类型不同而需要复制一份，这样会导致数据类型和算法功能耦合。</p>
+<p>我之所以说泛型编程可以解决这样的问题，就是说，在写代码的时候，不用关心处理数据的类型，只需要关心相关的处理逻辑。</p>
+<p>泛型编程是静态语言中非常非常重要的特征，如果没有泛型，我们就很难做到多态，也很难完成抽象，这就会导致我们的代码冗余量很大。</p>
+<h2 id="现实中的类比"><a href="#现实中的类比" class="headerlink" title="现实中的类比"></a>现实中的类比</h2><p>为了帮你更好地理解，我举个现实当中的例子。我们用螺丝刀来做打比方，螺丝刀本来只有一个拧螺丝的作用，但是因为螺丝的类型太多，有平口的，有十字口的，有六角的……螺丝还有不同的尺寸，这就导致我们的螺丝刀为了要适配各种千奇百怪的螺丝类型（样式和尺寸），也是各种样式的。</p>
+<p>而真正的抽象是，螺丝刀不应该关心螺丝的类型，它只要关注自己的功能是不是完备，并且让自己可以适配不同类型的螺丝就行了，这就是所谓的泛型编程要解决的实际问题。</p>
+<h2 id="Go语方的类型检查"><a href="#Go语方的类型检查" class="headerlink" title="Go语方的类型检查"></a>Go语方的类型检查</h2><p>因为Go语言目前并不支持真正的泛型，所以，只能用 <code>interface&#123;&#125;</code> 这样的类似于 <code>void*</code> 的过度泛型来玩，这就导致我们要在实际过程中进行类型检查。</p>
+<p>Go语言的类型检查有两种技术，一种是 Type Assert，一种是Reflection。</p>
+<h3 id="Type-Assert"><a href="#Type-Assert" class="headerlink" title="Type Assert"></a>Type Assert</h3><p>这种技术，一般是对某个变量进行 <code>.(type)</code> 的转型操作，它会返回两个值，分别是variable和error。 variable是被转换好的类型，error表示如果不能转换类型，则会报错。</p>
+<p>在下面的示例中，我们有一个通用类型的容器，可以进行 <code>Put(val)</code> 和 <code>Get()</code>，注意，这里使用了 <code>interface&#123;&#125;</code> 做泛型。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//Container is a generic container, accepting anything.</span><br><span class="hljs-keyword">type</span> Container []<span class="hljs-keyword">interface</span>&#123;&#125;<br><br><span class="hljs-comment">//Put adds an element to the container.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *Container)</span></span> Put(elem <span class="hljs-keyword">interface</span>&#123;&#125;) &#123;<br>    *c = <span class="hljs-built_in">append</span>(*c, elem)<br>&#125;<br><span class="hljs-comment">//Get gets an element from the container.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *Container)</span></span> Get() <span class="hljs-keyword">interface</span>&#123;&#125; &#123;<br>    elem := (*c)[<span class="hljs-number">0</span>]<br>    *c = (*c)[<span class="hljs-number">1</span>:]<br>    <span class="hljs-keyword">return</span> elem<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>我们可以这样使用：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span>Container := &amp;Container&#123;&#125;<br><span class="hljs-built_in">int</span>Container.Put(<span class="hljs-number">7</span>)<br><span class="hljs-built_in">int</span>Container.Put(<span class="hljs-number">42</span>)<br><br></code></pre></td></tr></table></figure>
+<p>但是，在把数据取出来时，因为类型是 <code>interface&#123;&#125;</code> ，所以，你还要做一个转型，只有转型成功，才能进行后续操作（因为 <code>interface&#123;&#125;</code> 太泛了，泛到什么类型都可以放）。</p>
+<p>下面是一个Type Assert的示例：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">// <span class="hljs-keyword">assert</span> that the actual <span class="hljs-keyword">type</span> <span class="hljs-keyword">is</span> <span class="hljs-type">int</span><br>elem, ok := intContainer.<span class="hljs-keyword">Get</span>().(<span class="hljs-type">int</span>)<br><span class="hljs-keyword">if</span> !ok &#123;<br>    fmt.Println(&quot;Unable to read an int from intContainer&quot;)<br>&#125;<br><br>fmt.Printf(&quot;assertExample: %d (%T)\n&quot;, elem, elem)<br><br></code></pre></td></tr></table></figure>
+<h3 id="Reflection"><a href="#Reflection" class="headerlink" title="Reflection"></a>Reflection</h3><p>对于Reflection，我们需要把上面的代码修改如下：</p>
+<figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs roboconf">type Container struct &#123;<br>    <span class="hljs-attribute">s reflect.Value</span><br><span class="hljs-attribute">&#125;</span><br><span class="hljs-attribute">func NewContainer(t reflect.Type, size int) *Container &#123;</span><br><span class="hljs-attribute">    if size &lt;=0  &#123; size=64 &#125;</span><br><span class="hljs-attribute">    return &amp;Container&#123;</span><br><span class="hljs-attribute">        s</span>: reflect<span class="hljs-variable">.MakeSlice</span>(reflect<span class="hljs-variable">.SliceOf</span>(t), 0, size),<br>    &#125;<br>&#125;<br>func (c *Container) Put(val interface&#123;&#125;)  error &#123;<br>    if reflect<span class="hljs-variable">.ValueOf</span>(val)<span class="hljs-variable">.Type</span>() != c<span class="hljs-variable">.s</span><span class="hljs-variable">.Type</span>()<span class="hljs-variable">.Elem</span>() &#123;<br>        return fmt<span class="hljs-variable">.Errorf</span>(“Put: cannot put a %T into a slice of %s&quot;,<br>            val, c<span class="hljs-variable">.s</span><span class="hljs-variable">.Type</span>()<span class="hljs-variable">.Elem</span>()))<br>    &#125;<br>    c<span class="hljs-variable">.s</span> = reflect<span class="hljs-variable">.Append</span>(c<span class="hljs-variable">.s</span>, reflect<span class="hljs-variable">.ValueOf</span>(val))<br>    return nil<br>&#125;<br>func (c *Container) Get(refval interface&#123;&#125;) error &#123;<br>    if reflect<span class="hljs-variable">.ValueOf</span>(refval)<span class="hljs-variable">.Kind</span>() != reflect<span class="hljs-variable">.Ptr</span> ||<br>        reflect<span class="hljs-variable">.ValueOf</span>(refval)<span class="hljs-variable">.Elem</span>()<span class="hljs-variable">.Type</span>() != c<span class="hljs-variable">.s</span><span class="hljs-variable">.Type</span>()<span class="hljs-variable">.Elem</span>() &#123;<br>        return fmt<span class="hljs-variable">.Errorf</span>(&quot;Get: needs *%s but got %T&quot;, c<span class="hljs-variable">.s</span><span class="hljs-variable">.Type</span>()<span class="hljs-variable">.Elem</span>(), refval)<br>    &#125;<br>    reflect<span class="hljs-variable">.ValueOf</span>(refval)<span class="hljs-variable">.Elem</span>()<span class="hljs-variable">.Set</span>( c<span class="hljs-variable">.s</span><span class="hljs-variable">.Index</span>(0) )<br>    c<span class="hljs-variable">.s</span> = c<span class="hljs-variable">.s</span><span class="hljs-variable">.Slice</span>(1, c<span class="hljs-variable">.s</span><span class="hljs-variable">.Len</span>())<br>    return nil<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>这里的代码并不难懂，这是完全使用 Reflection的玩法，我简单解释下。</p>
+<ul>
+<li>在 <code>NewContainer()</code> 时，会根据参数的类型初始化一个Slice。</li>
+<li>在 <code>Put()</code> 时，会检查 <code>val</code> 是否和Slice的类型一致。</li>
+<li>在 <code>Get()</code> 时，我们需要用一个入参的方式，因为我们没有办法返回 <code>reflect.Value</code> 或 <code>interface&#123;&#125;</code>，不然还要做Type Assert。</li>
+<li>不过有类型检查，所以，必然会有检查不对的时候，因此，需要返回 <code>error</code>。</li>
+</ul>
+<p>于是，在使用这段代码的时候，会是下面这个样子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs go">f1 := <span class="hljs-number">3.1415926</span><br>f2 := <span class="hljs-number">1.41421356237</span><br><br>c := NewMyContainer(reflect.TypeOf(f1), <span class="hljs-number">16</span>)<br><br><span class="hljs-keyword">if</span> err := c.Put(f1); err != <span class="hljs-literal">nil</span> &#123;<br>  <span class="hljs-built_in">panic</span>(err)<br>&#125;<br><span class="hljs-keyword">if</span> err := c.Put(f2); err != <span class="hljs-literal">nil</span> &#123;<br>  <span class="hljs-built_in">panic</span>(err)<br>&#125;<br><br>g := <span class="hljs-number">0.0</span><br><br><span class="hljs-keyword">if</span> err := c.Get(&amp;g); err != <span class="hljs-literal">nil</span> &#123;<br>  <span class="hljs-built_in">panic</span>(err)<br>&#125;<br>fmt.Printf(<span class="hljs-string">&quot;%v (%T)\n&quot;</span>, g, g) <span class="hljs-comment">//3.1415926 (float64)</span><br>fmt.Println(c.s.Index(<span class="hljs-number">0</span>)) <span class="hljs-comment">//1.4142135623</span><br><br></code></pre></td></tr></table></figure>
+<p>可以看到，Type Assert是不用了，但是用反射写出来的代码还是有点复杂的。那么，有没有什么好的方法？</p>
+<h2 id="他山之石"><a href="#他山之石" class="headerlink" title="他山之石"></a>他山之石</h2><p>对于泛型编程最牛的语言 C++ 来说，这类问题都是使用 Template解决的。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-comment">//用&lt;class T&gt;来描述泛型</span><br>template &lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">T</span>&gt;<br><span class="hljs-symbol">T</span> <span class="hljs-symbol">GetMax</span> (<span class="hljs-symbol">T</span> <span class="hljs-symbol">a, <span class="hljs-symbol">T</span></span> <span class="hljs-symbol">b</span>)  &#123;<br>    T result;<br>    result = (a&gt;b)? a : b;<br>    <span class="hljs-keyword">return</span> (result);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-type">int</span> i=<span class="hljs-number">5</span>, j=<span class="hljs-number">6</span>, k;<br><span class="hljs-comment">//生成int类型的函数</span><br>k=<span class="hljs-built_in">GetMax</span>&lt;<span class="hljs-type">int</span>&gt;(i,j);<br><br><span class="hljs-type">long</span> l=<span class="hljs-number">10</span>, m=<span class="hljs-number">5</span>, n;<br><span class="hljs-comment">//生成long类型的函数</span><br>n=<span class="hljs-built_in">GetMax</span>&lt;<span class="hljs-type">long</span>&gt;(l,m);<br><br></code></pre></td></tr></table></figure>
+<p>C++的编译器会在编译时分析代码，根据不同的变量类型来自动化生成相关类型的函数或类，在C++里，叫模板的具体化。</p>
+<p>这个技术是编译时的问题，所以，我们不需要在运行时进行任何的类型识别，我们的程序也会变得比较干净。</p>
+<p>那么，我们是否可以在Go中使用C++的这种技术呢？答案是肯定的，只是Go的编译器不会帮你干，你需要自己动手。</p>
+<h2 id="Go-Generator"><a href="#Go-Generator" class="headerlink" title="Go Generator"></a>Go Generator</h2><p>要玩 Go的代码生成，你需要三个东西：</p>
+<ol>
+<li>一个函数模板，在里面设置好相应的占位符；</li>
+<li>一个脚本，用于按规则来替换文本并生成新的代码；</li>
+<li>一行注释代码。</li>
+</ol>
+<h3 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h3><p>我们把之前的示例改成模板，取名为 <code>container.tmp.go</code> 放在 <code>./template/</code> 下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> PACKAGE_NAME<br><span class="hljs-keyword">type</span> GENERIC_NAMEContainer <span class="hljs-keyword">struct</span> &#123;<br>    s []GENERIC_TYPE<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewGENERIC_NAMEContainer</span><span class="hljs-params">()</span></span> *GENERIC_NAMEContainer &#123;<br>    <span class="hljs-keyword">return</span> &amp;GENERIC_NAMEContainer&#123;s: []GENERIC_TYPE&#123;&#125;&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *GENERIC_NAMEContainer)</span></span> Put(val GENERIC_TYPE) &#123;<br>    c.s = <span class="hljs-built_in">append</span>(c.s, val)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *GENERIC_NAMEContainer)</span></span> Get() GENERIC_TYPE &#123;<br>    r := c.s[<span class="hljs-number">0</span>]<br>    c.s = c.s[<span class="hljs-number">1</span>:]<br>    <span class="hljs-keyword">return</span> r<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>可以看到，函数模板中我们有如下的占位符：</p>
+<ul>
+<li><code>PACKAGE_NAME</code>：包名</li>
+<li><code>GENERIC_NAME</code> ：名字</li>
+<li><code>GENERIC_TYPE</code> ：实际的类型</li>
+</ul>
+<p>其它的代码都是一样的。</p>
+<h3 id="函数生成脚本"><a href="#函数生成脚本" class="headerlink" title="函数生成脚本"></a>函数生成脚本</h3><p>然后，我们有一个叫 <code>gen.sh</code> 的生成脚本，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-built_in">set</span> -e<br><br>SRC_FILE=<span class="hljs-variable">$&#123;1&#125;</span><br>PACKAGE=<span class="hljs-variable">$&#123;2&#125;</span><br>TYPE=<span class="hljs-variable">$&#123;3&#125;</span><br>DES=<span class="hljs-variable">$&#123;4&#125;</span><br><span class="hljs-comment">#uppcase the first char</span><br>PREFIX=<span class="hljs-string">&quot;<span class="hljs-subst">$(tr &#x27;[:lower:]&#x27; &#x27;[:upper:]&#x27; &lt;&lt;&lt; $&#123;TYPE:0:1&#125;)</span><span class="hljs-variable">$&#123;TYPE:1&#125;</span>&quot;</span><br><br>DES_FILE=$(<span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;TYPE&#125;</span>| <span class="hljs-built_in">tr</span> <span class="hljs-string">&#x27;[:upper:]&#x27;</span> <span class="hljs-string">&#x27;[:lower:]&#x27;</span>)_<span class="hljs-variable">$&#123;DES&#125;</span>.go<br><br>sed <span class="hljs-string">&#x27;s/PACKAGE_NAME/&#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$&#123;PACKAGE&#125;</span>&quot;</span><span class="hljs-string">&#x27;/g&#x27;</span> <span class="hljs-variable">$&#123;SRC_FILE&#125;</span> | \<br>    sed <span class="hljs-string">&#x27;s/GENERIC_TYPE/&#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$&#123;TYPE&#125;</span>&quot;</span><span class="hljs-string">&#x27;/g&#x27;</span> | \<br>    sed <span class="hljs-string">&#x27;s/GENERIC_NAME/&#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$&#123;PREFIX&#125;</span>&quot;</span><span class="hljs-string">&#x27;/g&#x27;</span> &gt; <span class="hljs-variable">$&#123;DES_FILE&#125;</span><br><br></code></pre></td></tr></table></figure>
+<p>这里需要4个参数：</p>
+<ul>
+<li>模板源文件；</li>
+<li>包名；</li>
+<li>实际需要具体化的类型；</li>
+<li>用于构造目标文件名的后缀。</li>
+</ul>
+<p>然后，我们用 <code>sed</code> 命令去替换刚刚的函数模板，并生成到目标文件中（关于sed命令，我给你推荐一篇文章：《 <a target="_blank" rel="noopener" href="https://coolshell.cn/articles/9104.html">sed 简明教程</a>》）。</p>
+<h3 id="生成代码"><a href="#生成代码" class="headerlink" title="生成代码"></a>生成代码</h3><p>接下来，我们只需要在代码中打一个特殊的注释：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//go:generate ./gen.sh ./template/container.tmp.go gen uint32 container</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">generateUint32Example</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">var</span> u <span class="hljs-type">uint32</span> = <span class="hljs-number">42</span><br>    c := NewUint32Container()<br>    c.Put(u)<br>    v := c.Get()<br>    fmt.Printf(<span class="hljs-string">&quot;generateExample: %d (%T)\n&quot;</span>, v, v)<br>&#125;<br><br><span class="hljs-comment">//go:generate ./gen.sh ./template/container.tmp.go gen string container</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">generateStringExample</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">var</span> s <span class="hljs-type">string</span> = <span class="hljs-string">&quot;Hello&quot;</span><br>    c := NewStringContainer()<br>    c.Put(s)<br>    v := c.Get()<br>    fmt.Printf(<span class="hljs-string">&quot;generateExample: %s (%T)\n&quot;</span>, v, v)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>其中，</p>
+<ul>
+<li>第一个注释是生成包名gen，类型是uint32，目标文件名以container为后缀。</li>
+<li>第二个注释是生成包名gen，类型是string，目标文件名是以container为后缀。</li>
+</ul>
+<p>然后，在工程目录中直接执行 <code>go generate</code> 命令，就会生成两份代码：</p>
+<p>一份文件名为uint32_container.go：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> gen<br><br><span class="hljs-keyword">type</span> Uint32Container <span class="hljs-keyword">struct</span> &#123;<br>    s []<span class="hljs-type">uint32</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewUint32Container</span><span class="hljs-params">()</span></span> *Uint32Container &#123;<br>    <span class="hljs-keyword">return</span> &amp;Uint32Container&#123;s: []<span class="hljs-type">uint32</span>&#123;&#125;&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *Uint32Container)</span></span> Put(val <span class="hljs-type">uint32</span>) &#123;<br>    c.s = <span class="hljs-built_in">append</span>(c.s, val)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *Uint32Container)</span></span> Get() <span class="hljs-type">uint32</span> &#123;<br>    r := c.s[<span class="hljs-number">0</span>]<br>    c.s = c.s[<span class="hljs-number">1</span>:]<br>    <span class="hljs-keyword">return</span> r<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>另一份的文件名为 string_container.go：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> gen<br><br><span class="hljs-keyword">type</span> StringContainer <span class="hljs-keyword">struct</span> &#123;<br>    s []<span class="hljs-type">string</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewStringContainer</span><span class="hljs-params">()</span></span> *StringContainer &#123;<br>    <span class="hljs-keyword">return</span> &amp;StringContainer&#123;s: []<span class="hljs-type">string</span>&#123;&#125;&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *StringContainer)</span></span> Put(val <span class="hljs-type">string</span>) &#123;<br>    c.s = <span class="hljs-built_in">append</span>(c.s, val)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *StringContainer)</span></span> Get() <span class="hljs-type">string</span> &#123;<br>    r := c.s[<span class="hljs-number">0</span>]<br>    c.s = c.s[<span class="hljs-number">1</span>:]<br>    <span class="hljs-keyword">return</span> r<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>这两份代码可以让我们的代码完全编译通过，付出的代价就是需要多执行一步 <code>go generate</code> 命令。</p>
+<h2 id="新版Filter"><a href="#新版Filter" class="headerlink" title="新版Filter"></a>新版Filter</h2><p>现在我们再回头看看上节课里的那些用反射整出来的例子，你就会发现，有了这样的技术，我们就不用在代码里，用那些晦涩难懂的反射来做运行时的类型检查了。我们可以写出很干净的代码，让编译器在编译时检查类型对不对。</p>
+<p>下面是一个Fitler的模板文件 <code>filter.tmp.go</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> PACKAGE_NAME<br><br><span class="hljs-keyword">type</span> GENERIC_NAMEList []GENERIC_TYPE<br><br><span class="hljs-keyword">type</span> GENERIC_NAMEToBool <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(*GENERIC_TYPE)</span></span> <span class="hljs-type">bool</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(al GENERIC_NAMEList)</span></span> Filter(f GENERIC_NAMEToBool) GENERIC_NAMEList &#123;<br>    <span class="hljs-keyword">var</span> ret GENERIC_NAMEList<br>    <span class="hljs-keyword">for</span> _, a := <span class="hljs-keyword">range</span> al &#123;<br>        <span class="hljs-keyword">if</span> f(&amp;a) &#123;<br>            ret = <span class="hljs-built_in">append</span>(ret, a)<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ret<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>这样，我们可以在需要使用这个的地方，加上相关的 Go Generate 的注释：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Employee <span class="hljs-keyword">struct</span> &#123;<br>  Name     <span class="hljs-type">string</span><br>  Age      <span class="hljs-type">int</span><br>  Vacation <span class="hljs-type">int</span><br>  Salary   <span class="hljs-type">int</span><br>&#125;<br><br><span class="hljs-comment">//go:generate ./gen.sh ./template/filter.tmp.go gen Employee filter</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">filterEmployeeExample</span><span class="hljs-params">()</span></span> &#123;<br><br>  <span class="hljs-keyword">var</span> list = EmployeeList&#123;<br>    &#123;<span class="hljs-string">&quot;Hao&quot;</span>, <span class="hljs-number">44</span>, <span class="hljs-number">0</span>, <span class="hljs-number">8000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-number">34</span>, <span class="hljs-number">10</span>, <span class="hljs-number">5000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-number">23</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Jack&quot;</span>, <span class="hljs-number">26</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4000</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-number">48</span>, <span class="hljs-number">9</span>, <span class="hljs-number">7500</span>&#125;,<br>  &#125;<br><br>  <span class="hljs-keyword">var</span> filter EmployeeList<br>  filter = list.Filter(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(e *Employee)</span></span> <span class="hljs-type">bool</span> &#123;<br>    <span class="hljs-keyword">return</span> e.Age &gt; <span class="hljs-number">40</span><br>  &#125;)<br><br>  fmt.Println(<span class="hljs-string">&quot;----- Employee.Age &gt; 40 ------&quot;</span>)<br>  <span class="hljs-keyword">for</span> _, e := <span class="hljs-keyword">range</span> filter &#123;<br>    fmt.Println(e)<br>  &#125;<br><br>  filter = list.Filter(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(e *Employee)</span></span> <span class="hljs-type">bool</span> &#123;<br>    <span class="hljs-keyword">return</span> e.Salary &lt;= <span class="hljs-number">5000</span><br>  &#125;)<br><br>  fmt.Println(<span class="hljs-string">&quot;----- Employee.Salary &lt;= 5000 ------&quot;</span>)<br>  <span class="hljs-keyword">for</span> _, e := <span class="hljs-keyword">range</span> filter &#123;<br>    fmt.Println(e)<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="第三方工具"><a href="#第三方工具" class="headerlink" title="第三方工具"></a>第三方工具</h2><p>我们并不需要自己手写 <code>gen.sh</code> 这样的工具类，我们可以直接使用第三方已经写好的工具。我给你提供一个列表。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/cheekybits/genny">Genny</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/taylorchu/generic">Generic</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/joeshaw/gengen">GenGen</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/clipperhouse/gen">Gen</a></li>
+</ul>
+<p>好了，这节课就到这里。如果你觉得今天的内容对你有所帮助，欢迎你帮我分享给更多人。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>http://example.com/2023/05/16/112-Go编程模式：GoGeneration/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 16, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/16/51-%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E7%AF%87%E4%B9%8B%E2%80%9C%E5%BC%B9%E5%8A%9B%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93%E2%80%9D/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/16/111-Go%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9AMap-Reduce/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
