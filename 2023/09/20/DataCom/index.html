@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="DataCom IEEE802.1Q定义的VLAN帧格式中VLAN ID总共12bit  RSTP BPDU报文中的Flag字段的总长度是8bit  以太网交换机工作在OSI参考模型的数据链路层  WLAN的二层组网指的是STA将AC作为网关 FALSE  FIT AP可以不依赖AC独立进行工作FALSE   把R1的接口网络恢复为默认的广播类型，同时调整hello时间为10s。R1和R2即可建立">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DataCom">
+<meta property="og:url" content="http://example.com/2023/09/20/DataCom/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="DataCom IEEE802.1Q定义的VLAN帧格式中VLAN ID总共12bit  RSTP BPDU报文中的Flag字段的总长度是8bit  以太网交换机工作在OSI参考模型的数据链路层  WLAN的二层组网指的是STA将AC作为网关 FALSE  FIT AP可以不依赖AC独立进行工作FALSE   把R1的接口网络恢复为默认的广播类型，同时调整hello时间为10s。R1和R2即可建立">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230920150458127.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230920161314527.png">
+<meta property="article:published_time" content="2023-09-20T07:00:50.000Z">
+<meta property="article:modified_time" content="2023-09-20T09:25:31.115Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230920150458127.png">
+  
+  
+  
+  <title>DataCom - WYX同学的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="DataCom"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-20 15:00" pubdate>
+          September 20, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">DataCom</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="DataCom"><a href="#DataCom" class="headerlink" title="DataCom"></a>DataCom</h1><ol>
+<li><p>IEEE802.1Q定义的VLAN帧格式中VLAN ID总共12bit</p>
+</li>
+<li><p>RSTP BPDU报文中的Flag字段的总长度是8bit</p>
+</li>
+<li><p>以太网交换机工作在OSI参考模型的数据链路层</p>
+</li>
+<li><p><del>WLAN的二层组网指的是STA将AC作为网关</del> FALSE</p>
+</li>
+<li><p><del>FIT AP可以不依赖AC独立进行工作</del>FALSE</p>
+</li>
+<li><p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230920150458127.png" srcset="/img/loading.gif" lazyload alt="image-20230920150458127" style="zoom: 67%;" /></p>
+<p>把R1的接口网络恢复为默认的广播类型，同时调整hello时间为10s。R1和R2即可建立稳定的邻居关系</p>
+</li>
+<li><p>关于静态MAC地址表：</p>
+</li>
+</ol>
+<ul>
+<li>接口和MAC地址静态绑定后，其他接口收到源MAC是该MAC地址的报文将会丢弃</li>
+<li>一条静态MAC地址表项，只能绑定一个出接口</li>
+<li>在系统复位、接口板热插或接口板复位后，保存的表项不会丢失</li>
+</ul>
+<ol>
+<li>网络中部署了一台DHCP服务器，但是管理员发现部分主机并没有正确获取到该DHCP服务器所指定的地址，可能原因：</li>
+</ol>
+<ul>
+<li>网络中存在另一台工作效率更高的DHCP服务器</li>
+<li>部分主机无法与该DHCP服务器正常通信</li>
+<li>DHCP服务器的地址池已经全部分配完毕</li>
+</ul>
+<ol>
+<li>SA安全联盟由以下哪些参数标识：</li>
+</ol>
+<ul>
+<li>安全参数索引SPI</li>
+<li>目的IP地址</li>
+<li>安全协议（AH或者ESP）</li>
+</ul>
+<ol>
+<li><del>运行OSPF协议的路由器先达到FULL状态，然后进行LSDB同步</del>FALSE</li>
+<li><del>AP的一个射频只能绑定一个SSID</del>FALSE</li>
+<li>dhcp select  relay可以开启路由器接口的DHCP中继功能</li>
+<li>SNMP协议管理网络设备，出现异常时，会收到trap报文</li>
+<li><del>AAA协议是RADIUS协议</del></li>
+<li><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/image-20230920161314527.png" srcset="/img/loading.gif" lazyload alt="image-20230920161314527"></li>
+</ol>
+<ul>
+<li>路由器A和路由器B学习不到对方接口的MAC地址</li>
+<li>两台路由器可以建立OSPF邻接关系</li>
+<li>网络中不存在DR和BDR</li>
+</ul>
+<ol>
+<li><p>VLAN部署用户认证的方式有</p>
+<ul>
+<li>MAC认证</li>
+<li>Portal认证</li>
+</ul>
+</li>
+<li><p>ARG3系列路由器和X7系列交换机上一个Eth-Trunk接口最多可以加入8个成员端口</p>
+</li>
+<li><p>缺省情况下，广播网络上OSPF协议RouterDeadInterval是40s</p>
+</li>
+<li><p>IEEE802.1Q定义的TPID的值是0x8100</p>
+</li>
+<li>PPP帧格式中的Protocol1字段为0xC023，表示该协议是PAP</li>
+<li>静态NAT只能实现私有地址和公有地址的一对一映射</li>
+<li>PPP协议中的LCP协议支持的功能：<ul>
+<li>协商最大接收单元MRU</li>
+<li>协商认证协议</li>
+<li>检测链路环路</li>
+</ul>
+</li>
+<li><p>正确环路命令：[Huawei]ip route-static 0.0.0.0 0.0.0.0 192.168.1.1</p>
+</li>
+<li><p>IPv6链路范围内的组播地址：</p>
+<ul>
+<li>FF02::2</li>
+<li>FF02::1</li>
+<li>FF12:1</li>
+<li>FF12::2</li>
+</ul>
+</li>
+<li><p>MPLS头部字段：</p>
+<ul>
+<li>Label</li>
+<li>TTL</li>
+<li>EXP</li>
+</ul>
+</li>
+<li><p>生成树协议根桥选举：桥优先级数值较小的设备成为根桥</p>
+</li>
+<li><p>Alternate端口提供了从指定桥到根的另一条可切换路径，作为根端口的备份端口</p>
+</li>
+<li><p>OSPF协议在以下哪种网络类型中选举DB和BDR</p>
+<ul>
+<li>点到点</li>
+<li>NMBA</li>
+</ul>
+</li>
+<li><p>192.168.1.127/25代表的是广播地址</p>
+<ul>
+<li>192.168.1.127是192.168.1.0 ～ 192.168.1.127/25的广播地址</li>
+</ul>
+</li>
+<li><p>AAA支持哪些授权模式</p>
+<ul>
+<li>RADIUS认证成功后授权</li>
+<li>HWTACACS授权</li>
+<li>本地授权</li>
+</ul>
+</li>
+<li><p>IPv6任播地址说法正确的有：</p>
+<ul>
+<li>目标地址是任播地址的数据包将发送给其中路由意义上最近的一个网络接口</li>
+<li>为服务提供冗余功能</li>
+<li>实现服务的负载分担</li>
+<li>任播地址和单播地址使用相同的地址空间</li>
+</ul>
+</li>
+<li><p>DHCP可以分配到哪些网络参数：</p>
+<ul>
+<li><del>操作系统名称</del></li>
+<li>DNS地址</li>
+<li>网管地址</li>
+<li>IP地址</li>
+</ul>
+</li>
+<li><p>OSPF优先级：10</p>
+</li>
+<li><p>IPv4网络层首部不包含Sequence Number</p>
+</li>
+<li></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/HCIA/" class="category-chain-item">HCIA</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>DataCom</div>
+      <div>http://example.com/2023/09/20/DataCom/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 20, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/20/2-2THREADS/" title="2-2THREADS">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2-2THREADS</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/19/560-%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/" title="560.和为K的子数组">
+                        <span class="hidden-mobile">560.和为K的子数组</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

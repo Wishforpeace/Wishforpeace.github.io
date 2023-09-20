@@ -1,0 +1,699 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WYX ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="木犀后端学习路线说在前面的话 🎉大家好，这里是木犀后端。木犀团队不是一个培训机构，也不是一个实质意义的社团，我们是一群志同道合的伙伴组成的团体。在这里，这里没有对考试的疲于应对，没有对名利的醉心追求，有的只有对技术纯粹的热爱和你追我赶的互帮互助。在木犀的学习，是一个半自学的过程，我们会为大家提供资源，也会为大家提供力所能及的辅导，但是我们更鼓励自我的探索和无限的可能。只要你有热情，有恒心，有毅力">
+<meta property="og:type" content="article">
+<meta property="og:title" content="木犀后端学习路线">
+<meta property="og:url" content="http://example.com/2023/08/23/%E6%9C%A8%E7%8A%80%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/index.html">
+<meta property="og:site_name" content="WYX同学的Blog">
+<meta property="og:description" content="木犀后端学习路线说在前面的话 🎉大家好，这里是木犀后端。木犀团队不是一个培训机构，也不是一个实质意义的社团，我们是一群志同道合的伙伴组成的团体。在这里，这里没有对考试的疲于应对，没有对名利的醉心追求，有的只有对技术纯粹的热爱和你追我赶的互帮互助。在木犀的学习，是一个半自学的过程，我们会为大家提供资源，也会为大家提供力所能及的辅导，但是我们更鼓励自我的探索和无限的可能。只要你有热情，有恒心，有毅力">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/1200px-Visual_Studio_Code_1.35_icon.svg.png">
+<meta property="og:image" content="https://www.edureka.co/blog/wp-content/uploads/2018/09/Golang-Logo-Golang-Tutorial-Edureka.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/19525-www.runoob.com.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/go-7-20230823205704087.jpg">
+<meta property="article:published_time" content="2023-08-23T12:56:43.000Z">
+<meta property="article:modified_time" content="2023-08-23T15:16:28.757Z">
+<meta property="article:author" content="WYX ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/1200px-Visual_Studio_Code_1.35_icon.svg.png">
+  
+  
+  
+  <title>木犀后端学习路线 - WYX同学的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>WYX&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="木犀后端学习路线"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-23 20:56" pubdate>
+          August 23, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">木犀后端学习路线</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="木犀后端学习路线"><a href="#木犀后端学习路线" class="headerlink" title="木犀后端学习路线"></a>木犀后端学习路线</h1><h2 id="说在前面的话"><a href="#说在前面的话" class="headerlink" title="说在前面的话"></a>说在前面的话</h2><blockquote>
+<p>🎉大家好，这里是木犀后端。木犀团队不是一个培训机构，也不是一个实质意义的社团，我们是一群志同道合的伙伴组成的团体。在这里，这里没有对考试的疲于应对，没有对名利的醉心追求，有的只有对技术纯粹的热爱和你追我赶的互帮互助。在木犀的学习，是一个半自学的过程，我们会为大家提供资源，也会为大家提供力所能及的辅导，但是我们更鼓励自我的探索和无限的可能。只要你有热情，有恒心，有毅力，欢迎加入我们，木犀一定会在未来持续照亮你的前途。🌟</p>
+</blockquote>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="安装VSCode"><a href="#安装VSCode" class="headerlink" title="安装VSCode"></a>安装VSCode<img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/1200px-Visual_Studio_Code_1.35_icon.svg.png" srcset="/img/loading.gif" lazyload alt="Visual Studio Code - Wikiversity" style="zoom:5%;" /></h3><blockquote>
+<p>VSCode是Visual Studio Code的简称，它是一款由微软开发的免费、开源的代码编辑器。</p>
+<p>VSCode具有许多功能，包括代码自动完成、内置Git支持、多窗口编辑、语法高亮、代码片段、智能代码导航等等。由于其轻量级、高度可定制和社区驱动的特性，VSCode已经成为了许多开发人员首选的代码编辑器之一</p>
+</blockquote>
+<p>1.进⼊vscode官⽹下载 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VSCode官⽹</a>(可能需要科学上网，下载如果过慢，可以<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1zSKgO7SpzMbRziUnDvMXXA?pwd=5tsj">此处下载</a>)</p>
+<p>​    ⾃⾏安装vscode时请<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/264785441"><u>参考此⽂</u></a></p>
+<ol>
+<li>设置为中⽂ VSCode<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/263036716">如何设置中⽂</a></li>
+</ol>
+<h2 id="Golang环境搭建"><a href="#Golang环境搭建" class="headerlink" title="Golang环境搭建"></a>Golang环境搭建<img src="https://www.edureka.co/blog/wp-content/uploads/2018/09/Golang-Logo-Golang-Tutorial-Edureka.jpg" srcset="/img/loading.gif" lazyload alt="Golang Tutorial - Learn Golang by Examples | Fundamentals of Golang |  Edureka" style="zoom:15%;" /></h2><blockquote>
+<p>Golang，是一门由Google开发的开源编程语言。Go的设计目标是提供一种简单、高效、可靠的编程语言，如今已经在许多领域得到广泛应用，包括Web开发（使用框架如Gin、Echo等）、后端开发、云计算、容器编排（如Docker和Kubernetes都是使用Go编写的）、系统编程等。由于其简单性、并发性和性能优势，Go已成为一种受欢迎的编程语言，特别适合构建大规模、高性能的应用程序。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48956318/article/details/123985828">完整安装教程链接</a></p>
+<p>1.<a target="_blank" rel="noopener" href="https://studygolang.com/dl">Go语言下载</a></p>
+<p>2.配置环境变量</p>
+<p>3.配置vscode扩展</p>
+<p>4.环境测试</p>
+<p>5.编写第一段go语言代码</p>
+<p>文件名<code>helloworld.go</code></p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;Hello, World!&quot;</span>)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>6.运行代码(两种方式)</p>
+<p>(1)命令行输入(注意一定要在文件对应的文件夹下运行)</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> run helloworld.<span class="hljs-keyword">go</span><br></code></pre></td></tr></table></figure>
+<p>(2)命令行输入一下命令</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> build helloworld.<span class="hljs-keyword">go</span><br></code></pre></td></tr></table></figure>
+<p>生成<code>helloworld.exe</code>的可执行文件</p>
+<p>命令行输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./helloworld<br></code></pre></td></tr></table></figure>
+<p>以上两种方式均可以看到命令行输出<code>Hello, World!</code></p>
+<p>🎉恭喜大家！已经打开了golang的大门，下面我们就可以继续探索golang的世界了。🎆</p>
+<h2 id="进阶学习"><a href="#进阶学习" class="headerlink" title="进阶学习"></a>进阶学习</h2><p>1.首推<a target="_blank" rel="noopener" href="https://www.runoob.com/go/go-tutorial.html">菜鸟教程</a><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/19525-www.runoob.com.png" srcset="/img/loading.gif" lazyload alt="菜鸟教程-36k导航" style="zoom:15%;" />，名副其实的“程序员菜鸟教程”</p>
+<p>2.<a target="_blank" rel="noopener" href="https://books.studygolang.com/gopl-zh/">The Go Programming Language</a>，Go语言圣经，非常全面的入门教材</p>
+<p>3.B站大学😏,都是差不多的入门课，挑一门，学完语法，就可以了</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ME411Y71o/?spm_id_from=333.337.search-card.all.click&amp;vd_source=4e8099fd300e942508c2dbc9e0ae0c16">【尚硅谷】Golang入门到实战教程丨一套精通GO语言</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1zR4y1t7Wj/?spm_id_from=333.337.search-card.all.click&amp;vd_source=4e8099fd300e942508c2dbc9e0ae0c16">golang入门到项目实战 [2022最新Go语言教程，没有废话，纯干货！]</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV17Q4y1P7n9/?spm_id_from=333.337.search-card.all.click&amp;vd_source=4e8099fd300e942508c2dbc9e0ae0c16">Go语言（基础+进阶+就业）</a></p>
+<h2 id="Golang学习路线"><a href="#Golang学习路线" class="headerlink" title="Golang学习路线"></a>Golang学习路线</h2><p>佛说：前世五百次的回眸，才换来今生的擦肩而过。</p>
+<p>🙏遇见便是缘分，也许我们未来未必会有共事的机会，但有缘至此，希望为大家未来的长足发展提供一份帮助，Go开发者成长路线图敬上。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Hyeonwuu/Image/go-7-20230823205704087.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="用奶奶也听得懂的话了解后端"><a href="#用奶奶也听得懂的话了解后端" class="headerlink" title="用奶奶也听得懂的话了解后端"></a>用奶奶也听得懂的话了解后端</h2><p>后端开发是指创建和维护网络应用程序背后的技术部分。</p>
+<p>想象一下，当你使用手机或电脑上的应用时，比如社交媒体、在线购物或银行应用，这些应用的背后都有一个特殊的部分，就好像是应用的大脑和内部工厂一样。<strong>这个特殊的部分就是后端。</strong></p>
+<p>后端开发人员是负责构建这些应用的“大脑”和“内部工厂”的人。他们使用各种编程语言（比如Python、Java、Golang等）和技术来编写代码，<strong>处理数据、管理用户账户、存储信息以及许多其他重要的任务</strong>。他们确保应用程序能够正确地接收来自前端（用户界面）的请求，进行逻辑处理，然后将必要的信息返回给前端，以便用户可以在应用中执行各种操作。</p>
+<p>一个好的比喻是想象一个冰淇淋店🍦：<strong>前端就像是展示在柜台上的各种美味冰淇淋，而后端就像是制作冰淇淋所需的厨房，包括冰淇淋机、配料、储存冷冻的地方等等。</strong></p>
+<p>后端开发人员就是那些负责确保冰淇淋店正常运作的人，虽然顾客主要看到的是前台的冰淇淋，但后台的工作同样重要，它使整个店铺能够运转起来。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%A8%E7%8A%80/" class="category-chain-item">木犀</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>木犀后端学习路线</div>
+      <div>http://example.com/2023/08/23/木犀后端学习路线/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>WYX </div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 23, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/13/42-%E6%8E%A5%E9%9B%A8%E6%B0%B4/" title="42. 接雨水">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">42. 接雨水</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/19/2023%E6%9C%A8%E7%8A%80%E7%A7%8B%E6%8B%9B%E4%BA%8B%E5%AE%9C/" title="2023木犀秋招事宜">
+                        <span class="hidden-mobile">2023木犀秋招事宜</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
